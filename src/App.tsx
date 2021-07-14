@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AuthPages from "./Pages/Auth.page";
+import LandingPage from "./Pages/Landing.page";
+import MainDisplayPage from "./Pages/MainDisplay.page";
 
-function App() {
+interface Props {}
+
+const App: React.FC<Props> = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route exact path={["/login", "/signup"]}>
+            <AuthPages />
+          </Route>
+          <Route
+            exact
+            path={[
+              "/dashboard",
+              "/batch/:batchNumber/recording/:recordingNumber",
+            ]}
+          >
+            <MainDisplayPage />
+          </Route>
+          <Route>
+            Page Not Found 404 Error
+            {/* <Redirect to="/login" /> */}
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
-}
+};
 
-export default App;
+App.defaultProps = {};
+
+export default React.memo(App);
