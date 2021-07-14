@@ -7,8 +7,6 @@ import AuthHero from "../Components/AuthHero";
 interface Props {}
 
 const AuthPages: React.FC<Props> = () => {
-  console.log("Auth page rendering");
-
   return (
     <div className="flex h-screen">
       <Switch>
