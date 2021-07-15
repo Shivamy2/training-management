@@ -18,7 +18,7 @@ const Direction: React.FC<Props> = ({ path, text, className }) => {
 };
 
 Direction.defaultProps = {
-  className: "text-blue-500 underline",
+  className: "text-primary underline",
 };
 
 export default React.memo(Direction);

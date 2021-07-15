@@ -11,10 +11,12 @@ const InputField: React.FC<Props> = ({ children, className, ...rest }) => {
       {children}
       <label>
         <input
+          {...rest}
           type={rest.type}
           name={rest.name}
           placeholder={rest.placeholder}
           className="pb-4 pl-4 focus:outline-none"
+          required
         />
       </label>
     </div>
