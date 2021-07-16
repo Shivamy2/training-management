@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputField from "../Components/Forms/InputField";
 import Switch from "@material-ui/core/Switch";
 import Direction from "../Components/Direction";
-import { ImSpinner9 } from "react-icons/all";
+import { ImSpinner9, IoWarningOutline } from "react-icons/all";
 import { useHistory } from "react-router-dom";
 
 interface Props {}
@@ -26,8 +26,8 @@ const Login: React.FC<Props> = () => {
     setIsSendingData(true);
     setTimeout(() => {
       console.log(formData);
-      redirectHistory.push("/dashboard");
       setIsSendingData(false);
+      redirectHistory.push("/dashboard");
     }, 5000);
   };
 
@@ -74,7 +74,6 @@ const Login: React.FC<Props> = () => {
                 value={formData.email}
                 onChange={handleFormDataChange}
                 onBlur={handleFocusBlur}
-                autoComplete="email"
                 placeholder="Username or email"
                 name="email"
                 type="text"
@@ -95,10 +94,12 @@ const Login: React.FC<Props> = () => {
               </InputField>
               <hr className="w-full bg-black" />
               {isFormTouched.email && (
-                <div className="text-red-500">{emailError}</div>
+                <div className="flex mt-2 text-yellow-500">
+                  {emailError && <IoWarningOutline className={"my-auto"} />}
+                  <p className="ml-2 text-xs">{emailError}</p>
+                </div>
               )}
               <InputField
-                autoComplete="current-password"
                 value={formData.password}
                 onChange={handleFormDataChange}
                 onBlur={handleFocusBlur}
@@ -130,7 +131,10 @@ const Login: React.FC<Props> = () => {
               </InputField>
               <hr className="w-full bg-black" />
               {isFormTouched.password && (
-                <div className="text-red-500">{passwordError}</div>
+                <div className="flex mt-2 text-yellow-500">
+                  {passwordError && <IoWarningOutline className="my-auto" />}
+                  <p className="ml-2 text-xs">{passwordError}</p>
+                </div>
               )}
             </div>
             <div className="flex flex-col mt-8 md:flex-row md:justify-between">
@@ -149,13 +153,9 @@ const Login: React.FC<Props> = () => {
               <button
                 disabled={isSendingData}
                 type="submit"
-                className={`px-4 mt-3 md:mt-0 py-2 w-24 duration-500 ease-in-out rounded-md shadow-xl hover:shadow-none ${
-                  !emailError && !passwordError && !isSendingData
-                    ? "bg-primary"
-                    : "bg-blue-400"
-                } `}
+                className={`px-4 mt-3 md:mt-0 py-2 w-24 duration-500 ease-in-out rounded-md shadow-xl hover:shadow-none bg-primary`}
               >
-                <p className="text-sm text-center text-white">
+                <p className="text-sm font-semibold text-center text-white">
                   {isSendingData ? (
                     <ImSpinner9 className="mx-auto animate-spin" />
                   ) : (
@@ -165,7 +165,10 @@ const Login: React.FC<Props> = () => {
               </button>
             </div>
             <div className="flex justify-center mt-14">
-              <input className="my-auto" type="checkbox" />
+              <input
+                className="my-auto rounded-sm outline-none focus:outline-none text-primary"
+                type="checkbox"
+              />
               <p className="ml-3 font-semibold text-gray-400">
                 Keep me logged in
               </p>

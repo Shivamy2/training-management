@@ -21,10 +21,7 @@ module.exports = {
         },
     },
     variants: {
-        extend: {
-            backgroundColor: ['checked'],
-            borderColor: ['checked'],
-        },
+        extend: {},
     },
     plugins: [],
 }

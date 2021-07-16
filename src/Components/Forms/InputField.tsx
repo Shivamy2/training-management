@@ -21,7 +21,7 @@ const InputField: React.FC<Props> = ({
           type={rest.type}
           name={name}
           placeholder={rest.placeholder}
-          className="pb-5 pl-4 bg-white border-white placeholder-opacity-60 focus:outline-none"
+          className="pb-5 pl-4 font-semibold border-white border-none outline-none"
           required
         />
       </label>
