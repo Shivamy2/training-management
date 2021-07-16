@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import InputField from "../Components/Forms/InputField";
 import Switch from "@material-ui/core/Switch";
 import Direction from "../Components/Direction";
+import { ImSpinner9 } from "react-icons/all";
+import { useHistory } from "react-router-dom";
 
 interface Props {}
 
 const Login: React.FC<Props> = () => {
+  const redirectHistory = useHistory();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [isFormTouched, setIsFormTouched] = useState({
     email: false,
     password: false,
   });
+  const [isSendingData, setIsSendingData] = useState(false);
 
   const handleFormDataChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputFieldName = event.target.name;
@@ -18,12 +22,23 @@ const Login: React.FC<Props> = () => {
   };
 
   const formSubmitAction = (event: any) => {
-    console.log(formData);
     event.preventDefault();
+    setIsSendingData(true);
+    setTimeout(() => {
+      console.log(formData);
+      redirectHistory.push("/dashboard");
+      setIsSendingData(false);
+    }, 5000);
   };
 
   const handleFocusBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     setIsFormTouched({ ...isFormTouched, [event.target.name]: true });
+  };
+
+  const [isSwitchChecked, setIsSwitchChecked] = useState(false);
+
+  const handleSwitchChange = () => {
+    setIsSwitchChecked(!isSwitchChecked);
   };
 
   let emailError = "";
@@ -90,7 +105,7 @@ const Login: React.FC<Props> = () => {
                 className="mt-5"
                 placeholder="Password"
                 name="password"
-                type="password"
+                type={isSwitchChecked ? "text" : "password"}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -122,6 +137,8 @@ const Login: React.FC<Props> = () => {
               <div className="flex">
                 <p className="my-auto">Show Password</p>
                 <Switch
+                  checked={isSwitchChecked}
+                  onChange={handleSwitchChange}
                   name="checkedB"
                   className="ml-2 text-primary"
                   color="primary"
@@ -130,10 +147,18 @@ const Login: React.FC<Props> = () => {
               <button
                 type="submit"
                 className={`px-6 py-3 duration-500 ease-in-out rounded-md shadow-2xl ${
-                  !emailError && !passwordError ? "bg-primary" : "bg-blue-300"
+                  !emailError && !passwordError && !isSendingData
+                    ? "bg-primary"
+                    : "bg-blue-300"
                 } hover:shadow-none}`}
               >
-                <p className="text-sm text-center text-white">Log In</p>
+                <p className="text-sm text-center text-white">
+                  {isSendingData ? (
+                    <ImSpinner9 className="animate-spin" />
+                  ) : (
+                    "Log In"
+                  )}
+                </p>
               </button>
             </div>
             <div className="flex justify-center my-6">
