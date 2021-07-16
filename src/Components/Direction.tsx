@@ -4,21 +4,27 @@ import { Link } from "react-router-dom";
 interface Props {
   path: string;
   text: string;
+  textClassName?: string;
   className?: string;
 }
 
-const Direction: React.FC<Props> = ({ path, text, className }) => {
+const Direction: React.FC<Props> = ({
+  path,
+  text,
+  textClassName,
+  className,
+}) => {
   return (
-    <div>
+    <div className={`${className}`}>
       <Link to={path}>
-        <span className={`${className}`}>{text}</span>
+        <span className={`${textClassName}`}>{text}</span>
       </Link>
     </div>
   );
 };
 
 Direction.defaultProps = {
-  className: "text-primary underline",
+  textClassName: "text-primary underline",
 };
 
 export default React.memo(Direction);

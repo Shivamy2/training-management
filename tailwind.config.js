@@ -5,11 +5,20 @@ module.exports = {
         extend: {
             colors: {
                 primary: "#476AEE",
+            },
+            fontSize: {
+                "4.5xl": "2.5rem",
+            },
+            fontWeight: {
+                "medium-semi": "570",
             }
         },
     },
     variants: {
-        extend: {},
+        extend: {
+            backgroundColor: ['checked'],
+            borderColor: ['checked'],
+        },
     },
     plugins: [],
 }

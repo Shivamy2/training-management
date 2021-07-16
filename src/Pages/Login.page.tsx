@@ -56,20 +56,20 @@ const Login: React.FC<Props> = () => {
 
   return (
     <div className="w-screen h-screen md:flex md:flex-1">
-      <div className="w-full mx-32 my-auto">
-        <div>
-          <p className="text-4xl">
+      <div className="max-w-md px-10 mx-auto my-auto">
+        <div className="pb-4">
+          <p className="tracking-wider font-medium-semi text-4.5xl">
             Log In to
-            <span className="uppercase text-primary"> Training Portal</span>
+            <span className="font-bold uppercase text-primary"> Portal</span>
           </p>
-          <div className="flex">
+          <div className="flex mt-2 text-sm font-semibold tracking-wider">
             <p>New Here?&nbsp;</p>
             <Direction text="Create an account" path="/signup" />
           </div>
         </div>
-        <div>
+        <div className="w-full text-sm tracking-wider">
           <form onSubmit={formSubmitAction} method="POST">
-            <div className="mt-8">
+            <div className="w-full mt-12">
               <InputField
                 value={formData.email}
                 onChange={handleFormDataChange}
@@ -83,7 +83,7 @@ const Login: React.FC<Props> = () => {
                   className="w-6 h-6 text-primary"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  fill="none"
+                  fill="rgba(27, 85, 226, 0.24)"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
@@ -102,7 +102,7 @@ const Login: React.FC<Props> = () => {
                 value={formData.password}
                 onChange={handleFormDataChange}
                 onBlur={handleFocusBlur}
-                className="mt-5"
+                className="mt-10"
                 placeholder="Password"
                 name="password"
                 type={isSwitchChecked ? "text" : "password"}
@@ -110,7 +110,7 @@ const Login: React.FC<Props> = () => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  fill="none"
+                  fill="rgba(27, 85, 226, 0.24)"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
@@ -133,44 +133,57 @@ const Login: React.FC<Props> = () => {
                 <div className="text-red-500">{passwordError}</div>
               )}
             </div>
-            <div className="flex justify-between mt-8">
+            <div className="flex flex-col mt-8 md:flex-row md:justify-between">
               <div className="flex">
-                <p className="my-auto">Show Password</p>
+                <p className="my-auto font-semibold tracking-wider">
+                  Show Password
+                </p>
                 <Switch
                   checked={isSwitchChecked}
                   onChange={handleSwitchChange}
                   name="checkedB"
-                  className="ml-2 text-primary"
+                  className="ml-1 text-primary"
                   color="primary"
                 />
               </div>
               <button
+                disabled={isSendingData}
                 type="submit"
-                className={`px-6 py-3 duration-500 ease-in-out rounded-md shadow-2xl ${
+                className={`px-4 mt-3 md:mt-0 py-2 w-24 duration-500 ease-in-out rounded-md shadow-xl hover:shadow-none ${
                   !emailError && !passwordError && !isSendingData
                     ? "bg-primary"
-                    : "bg-blue-300"
-                } hover:shadow-none}`}
+                    : "bg-blue-400"
+                } `}
               >
                 <p className="text-sm text-center text-white">
                   {isSendingData ? (
-                    <ImSpinner9 className="animate-spin" />
+                    <ImSpinner9 className="mx-auto animate-spin" />
                   ) : (
                     "Log In"
                   )}
                 </p>
               </button>
             </div>
-            <div className="flex justify-center my-6">
+            <div className="flex justify-center mt-14">
               <input className="my-auto" type="checkbox" />
-              <p className="ml-5">Keep me logged in</p>
+              <p className="ml-3 font-semibold text-gray-400">
+                Keep me logged in
+              </p>
             </div>
           </form>
           <Direction
-            className="text-center underline text-primary"
+            className="mt-5 text-center"
+            textClassName="text-center text-base tracking-widest font-semibold text-primary"
             text="Forgot Password?"
             path="/login"
           />
+          <p className="mt-16 font-semibold text-gray-700">
+            &copy; 2020 All Rights Reserved.{" "}
+            <span className="text-primary"> PORTAL </span> is a product of
+            Designreset.{" "}
+            <span className="text-primary">Cookie Preferences, Privacy</span>,
+            and <span className="text-primary">Terms.</span>
+          </p>
         </div>
       </div>
     </div>
