@@ -11,6 +11,12 @@ module.exports = {
             },
             fontWeight: {
                 "medium-semi": "570",
+            },
+            backgroundImage: (theme) => ({
+                authHero: "url('./Images/AuthHero.webp')",
+            }),
+            backgroundSize: {
+                heroSize: "75%",
             }
         },
     },
