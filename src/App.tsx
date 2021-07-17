@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import AuthPages from "./Pages/Auth.page";
 import LandingPage from "./Pages/Landing.page";
 import MainDisplayPage from "./Pages/MainDisplay.page";
@@ -11,6 +16,9 @@ const App: React.FC<Props> = () => {
     <div>
       <Router>
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/login" />
+          </Route>
           <Route exact path="/">
             <LandingPage />
           </Route>
@@ -26,10 +34,7 @@ const App: React.FC<Props> = () => {
           >
             <MainDisplayPage />
           </Route>
-          <Route>
-            Page Not Found 404 Error
-            {/* <Redirect to="/login" /> */}
-          </Route>
+          <Route path="/">Page Not Found 404 Error</Route>
         </Switch>
       </Router>
     </div>

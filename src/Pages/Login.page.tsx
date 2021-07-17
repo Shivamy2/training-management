@@ -2,58 +2,45 @@ import React, { useState } from "react";
 import InputField from "../Components/Forms/InputField";
 import Switch from "@material-ui/core/Switch";
 import Direction from "../Components/Direction";
-import { ImSpinner9, IoWarningOutline } from "react-icons/all";
 import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import Button from "../Components/Forms/Button";
 
 interface Props {}
 
 const Login: React.FC<Props> = () => {
   const redirectHistory = useHistory();
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [isFormTouched, setIsFormTouched] = useState({
-    email: false,
-    password: false,
-  });
-  const [isSendingData, setIsSendingData] = useState(false);
 
-  const handleFormDataChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputFieldName = event.target.name;
-    setFormData({ ...formData, [inputFieldName]: event.target.value });
-  };
-
-  const formSubmitAction = (event: any) => {
-    event.preventDefault();
-    setIsSendingData(true);
-    setTimeout(() => {
-      console.log(formData);
-      setIsSendingData(false);
-      redirectHistory.push("/dashboard");
-    }, 5000);
-  };
-
-  const handleFocusBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    setIsFormTouched({ ...isFormTouched, [event.target.name]: true });
-  };
-
+  const { handleSubmit, errors, touched, isSubmitting, getFieldProps } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+      },
+      validationSchema: yup.object().shape({
+        email: yup
+          .string()
+          .required("Email is required field!")
+          .email(() => "Email is invalid"),
+        password: yup
+          .string()
+          .required("Password is required field!")
+          .min(6, ({ min }) => `Password must be atlease ${min} chars`),
+      }),
+      onSubmit: (data, { setSubmitting }) => {
+        setTimeout(() => {
+          console.log(data);
+          setSubmitting(false);
+          redirectHistory.push("/dashboard");
+        }, 5000);
+      },
+    });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
 
   const handleSwitchChange = () => {
     setIsSwitchChecked(!isSwitchChecked);
   };
-
-  let emailError = "";
-  let passwordError = "";
-  const formEmail = formData.email;
-  const formPassword = formData.password;
-
-  if (!formEmail) emailError = "Email is required field!";
-  else if (!formEmail.endsWith("@gmail.com"))
-    emailError = "Please enter a valid email id";
-
-  if (!formPassword) passwordError = "Password is required field!";
-  else if (formPassword.length < 8)
-    passwordError = "Please enter more than 8 characters";
-
   return (
     <div className="w-screen h-screen md:flex md:flex-1">
       <div className="max-w-md px-10 mx-auto my-auto">
@@ -68,15 +55,16 @@ const Login: React.FC<Props> = () => {
           </div>
         </div>
         <div className="w-full text-sm tracking-wider">
-          <form onSubmit={formSubmitAction} method="POST">
+          <form onSubmit={handleSubmit} method="POST">
             <div className="w-full mt-12">
               <InputField
-                value={formData.email}
-                onChange={handleFormDataChange}
-                onBlur={handleFocusBlur}
+                {...getFieldProps("email")}
                 placeholder="Username or email"
                 name="email"
                 type="text"
+                touched={touched.email}
+                errorMessage={errors.email}
+                required
               >
                 <svg
                   className="w-6 h-6 text-primary"
@@ -92,21 +80,16 @@ const Login: React.FC<Props> = () => {
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg>
               </InputField>
-              <hr className="w-full bg-black" />
-              {isFormTouched.email && (
-                <div className="flex mt-2 text-yellow-500">
-                  {emailError && <IoWarningOutline className={"my-auto"} />}
-                  <p className="ml-2 text-xs">{emailError}</p>
-                </div>
-              )}
+
               <InputField
-                value={formData.password}
-                onChange={handleFormDataChange}
-                onBlur={handleFocusBlur}
+                {...getFieldProps("password")}
                 className="mt-10"
                 placeholder="Password"
                 name="password"
                 type={isSwitchChecked ? "text" : "password"}
+                touched={touched.password}
+                errorMessage={errors.password}
+                required
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -129,17 +112,10 @@ const Login: React.FC<Props> = () => {
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
               </InputField>
-              <hr className="w-full bg-black" />
-              {isFormTouched.password && (
-                <div className="flex mt-2 text-yellow-500">
-                  {passwordError && <IoWarningOutline className="my-auto" />}
-                  <p className="ml-2 text-xs">{passwordError}</p>
-                </div>
-              )}
             </div>
             <div className="flex flex-col mt-8 md:flex-row md:justify-between">
               <div className="flex">
-                <p className="my-auto font-semibold tracking-wider">
+                <p className="my-auto font-semibold tracking-wider text-gray-600">
                   Show Password
                 </p>
                 <Switch
@@ -150,19 +126,7 @@ const Login: React.FC<Props> = () => {
                   color="primary"
                 />
               </div>
-              <button
-                disabled={isSendingData}
-                type="submit"
-                className={`px-4 mt-3 md:mt-0 py-2 w-24 duration-500 ease-in-out rounded-md shadow-xl hover:shadow-none bg-primary`}
-              >
-                <p className="text-sm font-semibold text-center text-white">
-                  {isSendingData ? (
-                    <ImSpinner9 className="mx-auto animate-spin" />
-                  ) : (
-                    "Log In"
-                  )}
-                </p>
-              </button>
+              <Button submissionInProgress={isSubmitting} />
             </div>
             <div className="flex justify-center mt-14">
               <input
