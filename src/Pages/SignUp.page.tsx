@@ -73,6 +73,7 @@ const SignUp: React.FC<Props> = () => {
                 required
               >
                 <svg
+                  className="w-6 h-6 text-primary"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="rgba(27, 85, 226, 0.24)"
@@ -80,10 +81,9 @@ const SignUp: React.FC<Props> = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="w-6 h-6 text-primary"
                 >
-                  <circle cx="12" cy="12" r="4"></circle>
-                  <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
                 </svg>
               </InputField>
 
@@ -98,7 +98,6 @@ const SignUp: React.FC<Props> = () => {
                 required
               >
                 <svg
-                  className="w-6 h-6 text-primary"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="rgba(27, 85, 226, 0.24)"
@@ -106,9 +105,10 @@ const SignUp: React.FC<Props> = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  className="w-6 h-6 text-primary"
                 >
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
                 </svg>
               </InputField>
 
