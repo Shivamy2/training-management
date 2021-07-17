@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "../Components/Forms/Button";
+import Copyright from "../Components/Copyright";
 
 interface Props {}
 
@@ -126,7 +127,7 @@ const Login: React.FC<Props> = () => {
                   color="primary"
                 />
               </div>
-              <Button submissionInProgress={isSubmitting} />
+              <Button text="Log in" submissionInProgress={isSubmitting} />
             </div>
             <div className="flex justify-center mt-14">
               <input
@@ -144,13 +145,7 @@ const Login: React.FC<Props> = () => {
             text="Forgot Password?"
             path="/login"
           />
-          <p className="mt-16 font-semibold text-gray-700">
-            &copy; 2020 All Rights Reserved.{" "}
-            <span className="text-primary"> PORTAL </span> is a product of
-            Designreset.{" "}
-            <span className="text-primary">Cookie Preferences, Privacy</span>,
-            and <span className="text-primary">Terms.</span>
-          </p>
+          <Copyright />
         </div>
       </div>
     </div>
