@@ -7,6 +7,7 @@ import * as yup from "yup";
 import InputField from "../Components/Forms/InputField";
 import Switch from "@material-ui/core/Switch";
 import Button from "../Components/Forms/Button";
+import { IoWarningOutline } from "react-icons/io5";
 
 interface Props {}
 
@@ -19,6 +20,7 @@ const SignUp: React.FC<Props> = () => {
         username: "",
         email: "",
         password: "",
+        acceptTerms: false,
       },
       validationSchema: yup.object().shape({
         username: yup
@@ -33,6 +35,10 @@ const SignUp: React.FC<Props> = () => {
           .string()
           .required("Password is required field!")
           .min(6, ({ min }) => `Password must be atlease ${min} chars`),
+        acceptTerms: yup
+          .bool()
+          .required("Accept Terms is required field")
+          .oneOf([true], "Accept Terms before submit"),
       }),
       onSubmit: (data, { setSubmitting }) => {
         setTimeout(() => {
@@ -148,15 +154,27 @@ const SignUp: React.FC<Props> = () => {
               <input
                 className="my-auto rounded-sm outline-none focus:outline-none text-primary"
                 type="checkbox"
+                {...getFieldProps("acceptTerms")}
               />
-              <p className="ml-3 font-semibold text-gray-400">
+              <label
+                className="ml-3 font-semibold text-gray-400"
+                htmlFor="acceptTerms"
+              >
                 I agree to the
                 <Link className="text-primary" to="https://devslane.com">
                   {" "}
                   terms and conditions
                 </Link>
-              </p>
+              </label>
             </div>
+            {touched.acceptTerms && (
+              <div className="flex mt-2 text-yellow-500">
+                {errors.acceptTerms && (
+                  <IoWarningOutline className={"my-auto"} />
+                )}
+                <p className="ml-2 text-xs">{errors.acceptTerms}</p>
+              </div>
+            )}
             <div className="flex flex-col mt-8 md:flex-row md:justify-between">
               <div className="flex">
                 <p className="my-auto font-semibold tracking-wider text-gray-600">
