@@ -20,19 +20,20 @@ const InputField: React.FC<Props> = ({
   const [isInputFieldClicked, setIsInputFieldClicked] = useState(false);
 
   return (
-    <div>
-      <div className={`flex ${className}`}>
+    <div className="w-full pt-4 pb-6">
+      <div className={`flex relative w-full ${className}`}>
         {children}
         <label htmlFor={name}>
           <input
             {...rest}
+            size={100}
             onFocus={() => {
               setIsInputFieldClicked(true);
             }}
             type={rest.type}
             name={name}
             placeholder={rest.placeholder}
-            className="pb-5 pl-4 font-semibold border-white border-none outline-none"
+            className="w-full pt-1 pb-4 my-auto font-semibold tracking-wider placeholder-gray-300 border-white border-none outline-none pl-9 "
           />
         </label>
       </div>

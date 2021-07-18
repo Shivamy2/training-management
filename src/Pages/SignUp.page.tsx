@@ -76,7 +76,7 @@ const SignUp: React.FC<Props> = () => {
                 required
               >
                 <svg
-                  className="w-6 h-6 text-primary"
+                  className="absolute w-6 h-6 text-primary"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="rgba(27, 85, 226, 0.24)"
@@ -93,7 +93,6 @@ const SignUp: React.FC<Props> = () => {
               <InputField
                 {...getFieldProps("email")}
                 placeholder="Email"
-                className="mt-10"
                 name="email"
                 type="text"
                 touched={touched.email}
@@ -108,7 +107,7 @@ const SignUp: React.FC<Props> = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="w-6 h-6 text-primary"
+                  className="absolute w-6 h-6 text-primary"
                 >
                   <circle cx="12" cy="12" r="4"></circle>
                   <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
@@ -117,7 +116,6 @@ const SignUp: React.FC<Props> = () => {
 
               <InputField
                 {...getFieldProps("password")}
-                className="mt-10"
                 placeholder="Password"
                 name="password"
                 type={isSwitchChecked ? "text" : "password"}
@@ -133,7 +131,7 @@ const SignUp: React.FC<Props> = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="w-6 h-6 text-primary"
+                  className="absolute w-6 h-6 text-primary"
                 >
                   <rect
                     x="3"
@@ -147,7 +145,7 @@ const SignUp: React.FC<Props> = () => {
                 </svg>
               </InputField>
             </div>
-            <div className="flex mt-10">
+            <div className="flex mt-2">
               <input
                 className="my-auto rounded-sm outline-none focus:outline-none text-primary"
                 type="checkbox"
@@ -172,7 +170,7 @@ const SignUp: React.FC<Props> = () => {
                 <p className="ml-2 text-xs">{errors.acceptTerms}</p>
               </div>
             )}
-            <div className="flex flex-col mt-8 md:flex-row md:justify-between">
+            <div className="flex flex-col mt-10 md:flex-row md:justify-between">
               <Switch.Group>
                 <div className="flex">
                   <Switch.Label className="mr-2 font-semibold text-gray-600">

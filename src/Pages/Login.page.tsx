@@ -66,7 +66,7 @@ const Login: React.FC<Props> = () => {
                 required
               >
                 <svg
-                  className="w-6 h-6 text-primary"
+                  className="absolute top-0 w-6 h-6 text-primary"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="rgba(27, 85, 226, 0.24)"
@@ -82,7 +82,6 @@ const Login: React.FC<Props> = () => {
 
               <InputField
                 {...getFieldProps("password")}
-                className="mt-10"
                 placeholder="Password"
                 name="password"
                 type={isSwitchChecked ? "text" : "password"}
@@ -98,7 +97,7 @@ const Login: React.FC<Props> = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="w-6 h-6 text-primary"
+                  className="absolute w-6 h-6 text-primary"
                 >
                   <rect
                     x="3"
