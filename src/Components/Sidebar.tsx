@@ -4,7 +4,7 @@ interface Props {}
 
 const Sidebar: React.FC<Props> = () => {
   return (
-    <div className="flex w-1/4 h-screen text-white bg-blue-500">
+    <div className="hidden w-1/4 h-screen text-white bg-blue-500 md-lg:flex">
       <p className="m-auto">This is Sidebar</p>
     </div>
   );
