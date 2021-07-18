@@ -5,9 +5,10 @@ import Copyright from "../Components/Copyright";
 import Direction from "../Components/Direction";
 import * as yup from "yup";
 import InputField from "../Components/Forms/InputField";
-import Switch from "@material-ui/core/Switch";
+import { Switch } from "@headlessui/react";
 import Button from "../Components/Forms/Button";
 import { IoWarningOutline } from "react-icons/io5";
+import FormSwitch from "../Components/Forms/FormSwitch";
 
 interface Props {}
 
@@ -49,10 +50,6 @@ const SignUp: React.FC<Props> = () => {
       },
     });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
-
-  const handleSwitchChange = () => {
-    setIsSwitchChecked(!isSwitchChecked);
-  };
 
   return (
     <div className="w-screen h-screen md:flex md:flex-1">
@@ -176,18 +173,20 @@ const SignUp: React.FC<Props> = () => {
               </div>
             )}
             <div className="flex flex-col mt-8 md:flex-row md:justify-between">
-              <div className="flex">
-                <p className="my-auto font-semibold tracking-wider text-gray-600">
-                  Show Password
-                </p>
-                <Switch
-                  checked={isSwitchChecked}
-                  onChange={handleSwitchChange}
-                  name="checkedB"
-                  className="ml-1 text-primary"
-                  color="primary"
-                />
-              </div>
+              <Switch.Group>
+                <div className="flex">
+                  <Switch.Label className="mr-2 font-semibold text-gray-600">
+                    Show Password
+                  </Switch.Label>
+                  <FormSwitch
+                    checked={isSwitchChecked}
+                    setCheckedStatus={() =>
+                      setIsSwitchChecked(!isSwitchChecked)
+                    }
+                  />
+                </div>
+              </Switch.Group>
+              <div className="flex"></div>
               <Button text="Get Started!" submissionInProgress={isSubmitting} />
             </div>
           </form>

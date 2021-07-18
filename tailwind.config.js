@@ -5,6 +5,7 @@ module.exports = {
         extend: {
             colors: {
                 primary: "#476AEE",
+                "primary-light": "#E7E8EF",
             },
             fontSize: {
                 "4.5xl": "2.5rem",

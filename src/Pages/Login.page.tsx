@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import InputField from "../Components/Forms/InputField";
-import Switch from "@material-ui/core/Switch";
+import { Switch } from "@headlessui/react";
 import Direction from "../Components/Direction";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "../Components/Forms/Button";
 import Copyright from "../Components/Copyright";
+import FormSwitch from "../Components/Forms/FormSwitch";
 
 interface Props {}
 
@@ -39,9 +40,6 @@ const Login: React.FC<Props> = () => {
     });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
 
-  const handleSwitchChange = () => {
-    setIsSwitchChecked(!isSwitchChecked);
-  };
   return (
     <div className="w-screen h-screen md:flex md:flex-1">
       <div className="max-w-md px-10 mx-auto my-auto">
@@ -115,18 +113,19 @@ const Login: React.FC<Props> = () => {
               </InputField>
             </div>
             <div className="flex flex-col mt-8 md:flex-row md:justify-between">
-              <div className="flex">
-                <p className="my-auto font-semibold tracking-wider text-gray-600">
-                  Show Password
-                </p>
-                <Switch
-                  checked={isSwitchChecked}
-                  onChange={handleSwitchChange}
-                  name="checkedB"
-                  className="ml-1 text-primary"
-                  color="primary"
-                />
-              </div>
+              <Switch.Group>
+                <div className="flex">
+                  <Switch.Label className="mr-2 font-semibold text-gray-600">
+                    Show Password
+                  </Switch.Label>
+                  <FormSwitch
+                    checked={isSwitchChecked}
+                    setCheckedStatus={() =>
+                      setIsSwitchChecked(!isSwitchChecked)
+                    }
+                  />
+                </div>
+              </Switch.Group>
               <Button text="Log in" submissionInProgress={isSubmitting} />
             </div>
             <div className="flex justify-center mt-14">
