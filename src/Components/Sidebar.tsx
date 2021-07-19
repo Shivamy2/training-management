@@ -1,10 +1,11 @@
-import React from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import React, { Fragment } from "react";
 
 interface Props {}
 
 const Sidebar: React.FC<Props> = () => {
   return (
-    <div className="hidden w-1/4 h-screen text-white bg-blue-500 md-lg:flex">
+    <div className="hidden h-screen text-white bg-blue-500 w-255 md-lg:flex">
       <p className="m-auto">This is Sidebar</p>
     </div>
   );

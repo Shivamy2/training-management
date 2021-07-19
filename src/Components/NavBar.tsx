@@ -56,7 +56,7 @@ const NavBar: React.FC<Props> = () => {
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
             <form className="relative hidden ml-12 rounded-md md:block place-self-center bg-search-box w-370 h-9">
-              <div className="absolute top-2 left-2">
+              <div className="absolute flex top-2 left-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -72,6 +72,12 @@ const NavBar: React.FC<Props> = () => {
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
+                {/* <label
+                  className="absolute text-sm tracking-wider left-6 text-search-icon"
+                  htmlFor="search"
+                >
+                  Search...
+                </label> */}
               </div>
               <input
                 type="text"
