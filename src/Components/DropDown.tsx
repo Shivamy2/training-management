@@ -18,7 +18,7 @@ const DropDown: React.FC<Props> = ({
   return (
     <Menu as="div">
       <div className="bg-white">
-        <Menu.Button className="relative flex pt-10 border rounded-lg pb-9 pl-15 pr-35 w-115 focus:outline-none border-button-border">
+        <Menu.Button className="relative flex border rounded-lg pt-10px pb-9px pl-15px pr-35px w-115 focus:outline-none border-button-border">
           <p className="mr-5 text-13">
             {title ? title : itemsToBeShown[selectedDropdown]}
           </p>

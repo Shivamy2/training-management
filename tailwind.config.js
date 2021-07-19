@@ -52,10 +52,10 @@ module.exports = {
                 "255": "255px"
             },
             padding: {
-                "10": "10px",
-                "15": "15px",
-                "9": "9px",
-                "35": "35px",
+                "10px": "10px",
+                "15px": "15px",
+                "9px": "9px",
+                "35px": "35px",
             },
             screens: {
                 "md-lg": "990px",
