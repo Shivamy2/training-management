@@ -11,9 +11,17 @@ module.exports = {
                 "online-status": "rgb(26, 188, 156)",
                 "search-icon": "#888ea8",
                 "search-box": "#202737",
+                "hamburger": "#3b3f5c",
+                "header": "#FAFAFA",
+                "body": "#E2E5EB",
+                "button-border": "rgb(211, 211, 211)",
+                "hamburger-down": "rgb(136, 142, 168)"
             },
             fontSize: {
                 "4.5xl": "2.5rem",
+                "15": "15px",
+                "13": "13px",
+                "14": "14px"
             },
             fontWeight: {
                 "medium-semi": "580",
@@ -27,17 +35,23 @@ module.exports = {
             height: {
                 "130": "105vh",
                 "navbar": "54.1719px",
+                "header": "54px"
             },
             spacing: {
                 "online-status": "5px",
                 "online-right": "2px",
+                "dropdown": "6px"
+            },
+            lineHeight: {
+                "0": "0px"
             },
             width: {
                 "180": "180px",
                 "370": "370px",
             },
             screens: {
-                "md-lg": "990px"
+                "md-lg": "990px",
+                "sm-md": "576px"
             }
         },
     },

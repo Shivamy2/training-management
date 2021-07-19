@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import Header from "../Components/Header";
 import NavBar from "../Components/NavBar";
 import Sidebar from "../Components/Sidebar";
 import DashboardPage from "./Dashboard.page";
@@ -11,6 +12,7 @@ const MainDisplay: React.FC<Props> = () => {
   return (
     <div>
       <NavBar />
+      <Header />
       <div className="flex">
         <Sidebar />
         <Switch>

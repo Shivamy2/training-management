@@ -41,7 +41,7 @@ const Login: React.FC<Props> = () => {
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
 
   return (
-    <div className="w-screen h-screen md:flex md:flex-1">
+    <div className="w-screen h-screen bg-white md:flex md:flex-1">
       <div className="max-w-md px-10 mx-auto my-auto">
         <div className="pb-4">
           <p className="tracking-wider font-medium-semi text-4.5xl">
