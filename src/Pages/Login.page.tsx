@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import InputField from "../Components/Forms/Input/InputField";
+import InputField from "../Components/Input/InputField";
 import { Switch } from "@headlessui/react";
 import Direction from "../Components/Direction";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import Button from "../Components/Forms/Button/Button";
+import Button from "../Components/Button/Button";
 import Copyright from "../Components/Copyright";
-import FormSwitch from "../Components/Forms/FormSwitch";
+import FormSwitch from "../Components/FormSwitch";
 
 interface Props {}
 

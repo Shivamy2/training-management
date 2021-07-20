@@ -13,16 +13,16 @@ const Alert: React.FC<Props> = ({ title, alertType }) => {
 
   if (alertType === "primary") {
     alertTypeText = "Primary!";
-    extraClassOnAlertButton = " text-primary ";
-    extraClassOnOuterBox = " text-primary bg-primary-lite ";
+    extraClassOnAlertButton += " text-primary ";
+    extraClassOnOuterBox += " text-primary bg-primary-lite ";
   } else if (alertType === "success") {
     alertTypeText = "Success!";
-    extraClassOnAlertButton = " text-online-status ";
-    extraClassOnOuterBox = " text-online-status bg-success-light ";
+    extraClassOnAlertButton += " text-online-status ";
+    extraClassOnOuterBox += " text-online-status bg-success-light ";
   } else {
     alertTypeText = "Warning!";
-    extraClassOnAlertButton = " text-warning ";
-    extraClassOnOuterBox = " text-warning bg-warning-light ";
+    extraClassOnAlertButton += " text-warning ";
+    extraClassOnOuterBox += " text-warning bg-warning-light ";
   }
 
   return (

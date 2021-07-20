@@ -1,5 +1,5 @@
 import Button from "./Button";
-import "../../../index.css";
+import "../../index.css";
 
 export default {
   title: "Buttons",

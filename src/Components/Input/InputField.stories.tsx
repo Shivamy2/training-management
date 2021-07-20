@@ -1,5 +1,5 @@
 import InputField from "./InputField";
-import "../../../index.css";
+import "../../index.css";
 
 export default {
   title: "Input Field",

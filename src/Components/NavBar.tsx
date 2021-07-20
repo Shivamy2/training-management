@@ -1,6 +1,7 @@
 import React from "react";
 import CanadaFlag from "../Images/canada.png";
 import DisplayPicture from "../Images/displayImage.jpeg";
+import Avatar from "./Avatar/Avatar";
 
 interface Props {}
 
@@ -131,10 +132,16 @@ const NavBar: React.FC<Props> = () => {
             <span className="absolute rounded-full right-online-right -top-1 h-online-status w-online-status bg-online-status"></span>
           </li>
           <li className="my-auto">
-            <img
+            {/* <img
               className="rounded h-7 w-7"
               src={DisplayPicture}
               alt="display profile"
+            /> */}
+            <Avatar
+              size="small"
+              src={DisplayPicture}
+              isOnline={true}
+              circular={false}
             />
           </li>
         </ul>

@@ -20,12 +20,13 @@ module.exports = {
                 "success-light": "#DDF5F0",
                 "primary-lite": "#EAF1FF",
                 "warning-light": "#FFF9ED",
+                "progress-bar": "#EBEDF2",
             },
             boxShadow: {
                 success: '0 10px 15px -3px #D3F2EC, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
                 primary: '0 10px 15px -3px #C3CDFA, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
                 warning: '0 10px 15px -3px #F6E1C2, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-
+                progress: 'rgb(241, 242, 243) 1px 3px 20px 3px',
             },
             outline: {
                 "button-success": ['2px solid rgb(26, 188, 156)', '1px'],
