@@ -15,7 +15,19 @@ module.exports = {
                 "header": "#FAFAFA",
                 "body": "#E2E5EB",
                 "button-border": "rgb(211, 211, 211)",
-                "hamburger-down": "rgb(136, 142, 168)"
+                "hamburger-down": "rgb(136, 142, 168)",
+                "warning": "#E2A03F",
+            },
+            boxShadow: {
+                success: '0 10px 15px -3px #D3F2EC, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                primary: '0 10px 15px -3px #C3CDFA, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                warning: '0 10px 15px -3px #F6E1C2, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+
+            },
+            outline: {
+                "button-success": ['2px solid rgb(26, 188, 156)', '1px'],
+                "button-primary": ['2px solid #4361EE', '1px'],
+                "button-warning": ['2px solid #E2A03F', '1px'],
             },
             fontSize: {
                 "4.5xl": "2.5rem",
@@ -64,7 +76,7 @@ module.exports = {
         },
     },
     variants: {
-        extend: {},
+        extend: { outline: ['hover', 'active'], },
     },
     plugins: [],
 }

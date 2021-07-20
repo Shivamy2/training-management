@@ -6,7 +6,7 @@ import Direction from "../Components/Direction";
 import * as yup from "yup";
 import InputField from "../Components/Forms/InputField";
 import { Switch } from "@headlessui/react";
-import Button from "../Components/Forms/Button";
+import Button from "../Components/Forms/Button/Button";
 import { IoWarningOutline } from "react-icons/io5";
 import FormSwitch from "../Components/Forms/FormSwitch";
 
@@ -15,40 +15,45 @@ interface Props {}
 const SignUp: React.FC<Props> = () => {
   const redirectHistory = useHistory();
 
-  const { handleSubmit, errors, touched, isSubmitting, getFieldProps } =
-    useFormik({
-      initialValues: {
-        username: "",
-        email: "",
-        password: "",
-        acceptTerms: false,
-      },
-      validationSchema: yup.object().shape({
-        username: yup
-          .string()
-          .required("Username is required field!")
-          .min(8, ({ min }) => `Username must be ${min} chars`),
-        email: yup
-          .string()
-          .required("Email is required field!")
-          .email(() => "Email is invalid"),
-        password: yup
-          .string()
-          .required("Password is required field!")
-          .min(6, ({ min }) => `Password must be atlease ${min} chars`),
-        acceptTerms: yup
-          .bool()
-          .required("Accept Terms is required field")
-          .oneOf([true], "Accept Terms before submit"),
-      }),
-      onSubmit: (data, { setSubmitting }) => {
-        setTimeout(() => {
-          console.log(data);
-          setSubmitting(false);
-          redirectHistory.push("/login");
-        }, 5000);
-      },
-    });
+  const {
+    handleSubmit,
+    errors,
+    touched,
+    isSubmitting,
+    getFieldProps,
+  } = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+      acceptTerms: false,
+    },
+    validationSchema: yup.object().shape({
+      username: yup
+        .string()
+        .required("Username is required field!")
+        .min(8, ({ min }) => `Username must be ${min} chars`),
+      email: yup
+        .string()
+        .required("Email is required field!")
+        .email(() => "Email is invalid"),
+      password: yup
+        .string()
+        .required("Password is required field!")
+        .min(6, ({ min }) => `Password must be atlease ${min} chars`),
+      acceptTerms: yup
+        .bool()
+        .required("Accept Terms is required field")
+        .oneOf([true], "Accept Terms before submit"),
+    }),
+    onSubmit: (data, { setSubmitting }) => {
+      setTimeout(() => {
+        console.log(data);
+        setSubmitting(false);
+        redirectHistory.push("/login");
+      }, 5000);
+    },
+  });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
 
   return (
@@ -185,7 +190,12 @@ const SignUp: React.FC<Props> = () => {
                 </div>
               </Switch.Group>
               <div className="flex"></div>
-              <Button text="Get Started!" submissionInProgress={isSubmitting} />
+              <Button
+                buttonType="primary"
+                theme="solid"
+                text="Get Started!"
+                submissionInProgress={isSubmitting}
+              />
             </div>
           </form>
           <Copyright />

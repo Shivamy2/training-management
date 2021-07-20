@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoWarningOutline } from "react-icons/io5";
 
-interface Props extends React.HTMLProps<HTMLInputElement> {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   children?: React.ReactElement;
   className?: string;

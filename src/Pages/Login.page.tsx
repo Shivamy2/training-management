@@ -5,7 +5,7 @@ import Direction from "../Components/Direction";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import Button from "../Components/Forms/Button";
+import Button from "../Components/Forms/Button/Button";
 import Copyright from "../Components/Copyright";
 import FormSwitch from "../Components/Forms/FormSwitch";
 
@@ -14,30 +14,35 @@ interface Props {}
 const Login: React.FC<Props> = () => {
   const redirectHistory = useHistory();
 
-  const { handleSubmit, errors, touched, isSubmitting, getFieldProps } =
-    useFormik({
-      initialValues: {
-        email: "",
-        password: "",
-      },
-      validationSchema: yup.object().shape({
-        email: yup
-          .string()
-          .required("Email is required field!")
-          .email(() => "Email is invalid"),
-        password: yup
-          .string()
-          .required("Password is required field!")
-          .min(6, ({ min }) => `Password must be atlease ${min} chars`),
-      }),
-      onSubmit: (data, { setSubmitting }) => {
-        setTimeout(() => {
-          console.log(data);
-          setSubmitting(false);
-          redirectHistory.push("/dashboard");
-        }, 5000);
-      },
-    });
+  const {
+    handleSubmit,
+    errors,
+    touched,
+    isSubmitting,
+    getFieldProps,
+  } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: yup.object().shape({
+      email: yup
+        .string()
+        .required("Email is required field!")
+        .email(() => "Email is invalid"),
+      password: yup
+        .string()
+        .required("Password is required field!")
+        .min(6, ({ min }) => `Password must be atlease ${min} chars`),
+    }),
+    onSubmit: (data, { setSubmitting }) => {
+      setTimeout(() => {
+        console.log(data);
+        setSubmitting(false);
+        redirectHistory.push("/dashboard");
+      }, 5000);
+    },
+  });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
 
   return (
@@ -125,7 +130,12 @@ const Login: React.FC<Props> = () => {
                   />
                 </div>
               </Switch.Group>
-              <Button text="Log in" submissionInProgress={isSubmitting} />
+              <Button
+                buttonType="primary"
+                theme="solid"
+                text="Log in"
+                submissionInProgress={isSubmitting}
+              />
             </div>
             <div className="flex justify-center mt-14">
               <input
