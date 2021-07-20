@@ -69,6 +69,9 @@ const Button: React.FC<Props> = ({
 
 Button.defaultProps = {
   submissionInProgress: false,
+  theme: "solid",
+  buttonType: "primary",
+  text: "button",
 };
 
 export default React.memo(Button);

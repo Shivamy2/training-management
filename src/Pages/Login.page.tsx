@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputField from "../Components/Forms/InputField";
+import InputField from "../Components/Forms/Input/InputField";
 import { Switch } from "@headlessui/react";
 import Direction from "../Components/Direction";
 import { useHistory } from "react-router-dom";

@@ -17,6 +17,9 @@ module.exports = {
                 "button-border": "rgb(211, 211, 211)",
                 "hamburger-down": "rgb(136, 142, 168)",
                 "warning": "#E2A03F",
+                "success-light": "#DDF5F0",
+                "primary-lite": "#EAF1FF",
+                "warning-light": "#FFF9ED",
             },
             boxShadow: {
                 success: '0 10px 15px -3px #D3F2EC, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
@@ -47,7 +50,8 @@ module.exports = {
             height: {
                 "130": "105vh",
                 "navbar": "54.1719px",
-                "header": "54px"
+                "header": "54px",
+                "51": "51px"
             },
             spacing: {
                 "online-status": "5px",
