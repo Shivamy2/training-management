@@ -6,12 +6,7 @@ export default {
   component: Button,
 };
 
-export const Solid = (args: any) => <Button {...args}></Button>;
-export const Outline = (args: any) => <Button {...args}></Button>;
-Solid.args = {
-  className: "",
-};
-
-Outline.args = {
+export const Main = (args: any) => <Button {...args}></Button>;
+Main.args = {
   className: "",
 };

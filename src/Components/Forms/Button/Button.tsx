@@ -2,11 +2,11 @@ import React from "react";
 import { ImSpinner9 } from "react-icons/im";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonType: "primary" | "success" | "warning" | undefined;
-  theme: "solid" | "outline";
+  buttonType?: "primary" | "success" | "warning" | undefined;
+  theme?: "solid" | "outline";
   submissionInProgress?: boolean;
   className?: string;
-  text: string;
+  text?: string;
 }
 
 const Button: React.FC<Props> = ({
@@ -23,13 +23,13 @@ const Button: React.FC<Props> = ({
     case "outline":
       if (buttonType === "success") {
         extraClassesOnButton +=
-          " bg-white border shadow-success border-online-status text-online-status hover:text-white hover:bg-online-status ";
+          " bg-white border hover:shadow-success border-online-status text-online-status hover:text-white hover:bg-online-status ";
       } else if (buttonType === "primary") {
         extraClassesOnButton +=
-          " bg-white border shadow-primary border-primary text-primary hover:bg-primary hover:text-white ";
+          " bg-white border hover:shadow-primary border-primary text-primary hover:bg-primary hover:text-white ";
       } else if (buttonType === "warning") {
         extraClassesOnButton +=
-          " bg-white border border-warning shadow-warning text-warning hover:bg-warning hover:text-white ";
+          " bg-white border border-warning hover:shadow-warning text-warning hover:bg-warning hover:text-white ";
       }
       break;
 
