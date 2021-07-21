@@ -9,4 +9,5 @@ export default {
 export const Main = (args: any) => <Button {...args}></Button>;
 Main.args = {
   className: "",
+  text: "Log in",
 };

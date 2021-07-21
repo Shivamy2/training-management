@@ -9,4 +9,5 @@ export default {
 export const Main = (args: any) => <Alert {...args}></Alert>;
 Main.args = {
   className: "",
+  title: "This is my alert box",
 };

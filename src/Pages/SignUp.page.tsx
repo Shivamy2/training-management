@@ -57,7 +57,7 @@ const SignUp: React.FC<Props> = () => {
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
 
   return (
-    <div className="w-screen h-screen bg-white md:flex md:flex-1">
+    <div className="w-screen h-screen bg-white md:w-1/2">
       <div className="max-w-md px-10 mx-auto my-auto">
         <div className="pb-4">
           <p className="tracking-wider font-medium text-4.5xl">
@@ -99,7 +99,7 @@ const SignUp: React.FC<Props> = () => {
                 {...getFieldProps("email")}
                 placeholder="Email"
                 name="email"
-                type="text"
+                type="email"
                 touched={touched.email}
                 errorMessage={errors.email}
                 required
@@ -191,8 +191,8 @@ const SignUp: React.FC<Props> = () => {
               </Switch.Group>
               <div className="flex"></div>
               <Button
-                buttonType="primary"
-                theme="solid"
+                buttonType="solid"
+                theme="primary"
                 text="Get Started!"
                 submissionInProgress={isSubmitting}
               />

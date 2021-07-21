@@ -3,7 +3,7 @@ import { IoWarningOutline } from "react-icons/io5";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  children?: React.ReactElement;
+  children?: React.ReactNode;
   className?: string;
   touched?: boolean;
   errorMessage?: string;

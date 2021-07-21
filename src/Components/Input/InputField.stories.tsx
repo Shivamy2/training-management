@@ -1,5 +1,8 @@
 import InputField from "./InputField";
 import "../../index.css";
+import * as icons from "react-icons/io5";
+
+const iconPack = { ...icons };
 
 export default {
   title: "Input Field",
@@ -9,4 +12,5 @@ export default {
 export const Main = (args: any) => <InputField {...args}></InputField>;
 Main.args = {
   className: "",
+  errorMessage: "This is requried field!",
 };

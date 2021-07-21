@@ -2,8 +2,8 @@ import React from "react";
 import { ImSpinner9 } from "react-icons/im";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonType?: "primary" | "success" | "warning" | undefined;
-  theme?: "solid" | "outline";
+  theme?: "primary" | "success" | "warning" | undefined;
+  buttonType?: "solid" | "outline";
   submissionInProgress?: boolean;
   className?: string;
   text?: string;
@@ -19,15 +19,15 @@ const Button: React.FC<Props> = ({
 }) => {
   let extraClassesOnButton = "";
 
-  switch (theme) {
+  switch (buttonType) {
     case "outline":
-      if (buttonType === "success") {
+      if (theme === "success") {
         extraClassesOnButton +=
           " bg-white border hover:shadow-success border-online-status text-online-status hover:text-white hover:bg-online-status ";
-      } else if (buttonType === "primary") {
+      } else if (theme === "primary") {
         extraClassesOnButton +=
           " bg-white border hover:shadow-primary border-primary text-primary hover:bg-primary hover:text-white ";
-      } else if (buttonType === "warning") {
+      } else if (theme === "warning") {
         extraClassesOnButton +=
           " bg-white border border-warning hover:shadow-warning text-warning hover:bg-warning hover:text-white ";
       }
@@ -35,12 +35,12 @@ const Button: React.FC<Props> = ({
 
     case "solid":
       extraClassesOnButton += " text-white ";
-      if (buttonType === "success") {
+      if (theme === "success") {
         extraClassesOnButton +=
           " shadow-success bg-online-status  hover:shadow-none ";
-      } else if (buttonType === "primary") {
+      } else if (theme === "primary") {
         extraClassesOnButton += " hover:shadow-none bg-primary shadow-primary ";
-      } else if (buttonType === "warning") {
+      } else if (theme === "warning") {
         extraClassesOnButton += " hover:shadow-none bg-warning shadow-warning ";
       }
       break;
@@ -69,8 +69,8 @@ const Button: React.FC<Props> = ({
 
 Button.defaultProps = {
   submissionInProgress: false,
-  theme: "solid",
-  buttonType: "primary",
+  buttonType: "solid",
+  theme: "primary",
   text: "button",
 };
 

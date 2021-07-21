@@ -46,7 +46,7 @@ const Login: React.FC<Props> = () => {
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
 
   return (
-    <div className="w-screen h-screen bg-white md:flex md:flex-1">
+    <div className="w-screen h-screen bg-white md:w-1/2">
       <div className="max-w-md px-10 mx-auto my-auto">
         <div className="pb-4">
           <p className="tracking-wider font-medium-semi text-4.5xl">
@@ -65,7 +65,7 @@ const Login: React.FC<Props> = () => {
                 {...getFieldProps("email")}
                 placeholder="Username or email"
                 name="email"
-                type="text"
+                type="email"
                 touched={touched.email}
                 errorMessage={errors.email}
                 required
@@ -131,8 +131,8 @@ const Login: React.FC<Props> = () => {
                 </div>
               </Switch.Group>
               <Button
-                buttonType="primary"
-                theme="solid"
+                buttonType="solid"
+                theme="primary"
                 text="Log in"
                 submissionInProgress={isSubmitting}
               />
