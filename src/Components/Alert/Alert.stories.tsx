@@ -4,6 +4,7 @@ import "../../index.css";
 export default {
   title: "Alert",
   component: Alert,
+  argTypes: { onClick: { action: "clicked" } },
 };
 
 export const Main = (args: any) => <Alert {...args}></Alert>;

@@ -1,8 +1,6 @@
 import InputField from "./InputField";
 import "../../index.css";
-import * as icons from "react-icons/io5";
-
-const iconPack = { ...icons };
+// import * as icons from "react-icons/io5";
 
 export default {
   title: "Input Field",
