@@ -11,8 +11,10 @@ interface Props {}
 const MainDisplay: React.FC<Props> = () => {
   return (
     <div>
-      <NavBar />
-      <Header />
+      <div className="sticky top-0">
+        <NavBar />
+        <Header />
+      </div>
       <div className="flex">
         <Sidebar />
         <Switch>

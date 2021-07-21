@@ -7,7 +7,7 @@ interface Props {}
 
 const NavBar: React.FC<Props> = () => {
   return (
-    <div className="sticky top-0 bg-navBar h-navbar">
+    <div className="bg-navBar h-navbar">
       <div className="flex justify-between w-full h-full">
         <ul className="pl-3 my-auto">
           <li className="flex">

@@ -12,4 +12,28 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.translating__div img:hover {
+    transform: translateY(-7px) scale(1.02);
+}
+
+.translating__div img {
+    transition: all 0.35s ease;
+}
+
+.translating__div img:first-child {
+    z-index: 1;
+}
+
+.translating__div img:nth-child(2) {
+    z-index: 2;
+}
+
+.translating__div img:nth-child(3) {
+    z-index: 3;
+}
+
+.translating__div img:nth-child(4) {
+    z-index: 4;
+}
+
 @tailwind utilities;

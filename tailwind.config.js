@@ -27,6 +27,8 @@ module.exports = {
                 primary: '0 10px 15px -3px #C3CDFA, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
                 warning: '0 10px 15px -3px #F6E1C2, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
                 progress: 'rgb(241, 242, 243) 1px 3px 20px 3px',
+                stacked: '0px 0px 15px 1px rgb(113 106 202 / 10%)',
+                "more-button": 'rgb(208, 208, 208) 0px 0px 20px 0px',
             },
             outline: {
                 "button-success": ['2px solid rgb(26, 188, 156)', '1px'],
