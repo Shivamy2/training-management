@@ -1,5 +1,4 @@
 import Alert from "./Alert";
-import "../../index.css";
 
 export default {
   title: "Alert",

@@ -1,5 +1,4 @@
 import InputField from "./InputField";
-import "../../index.css";
 // import * as icons from "react-icons/io5";
 
 export default {
