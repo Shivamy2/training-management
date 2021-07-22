@@ -25,7 +25,7 @@ const StackingAvatar: React.FC<Props> = ({
               key={index}
               {...rest}
               className={
-                "rounded-full ring-2 ring-white inline-block shadow-more-button " +
+                "rounded-full ring-2 object-cover ring-white inline-block shadow-more-button " +
                 sizeClass
               }
               src={items}
