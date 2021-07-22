@@ -4,7 +4,7 @@ import DisplayImage from "../../Images/displayImage.jpeg";
 interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
   size: "small" | "large";
   src?: string;
-  isOnline?: boolean;
+  isOnline?: boolean | "none";
   className?: string;
   circular?: boolean;
 }
@@ -54,19 +54,22 @@ const Avatar: React.FC<Props> = ({
         className={className + " " + avatarClass + " " + avatarSize}
         alt="display profile"
       />
-      <span
-        className={
-          "absolute w-3 h-3 border-2 border-white rounded-full " +
-          onlineCircleClass +
-          (isOnline ? " bg-online-status " : " bg-gray-300 ")
-        }
-      ></span>
+      {isOnline !== "none" && (
+        <span
+          className={
+            "absolute w-3 h-3 border-2 border-white rounded-full " +
+            onlineCircleClass +
+            (isOnline ? " bg-online-status " : " bg-gray-300 ")
+          }
+        ></span>
+      )}
     </div>
   );
 };
 
 Avatar.defaultProps = {
   size: "small",
+  isOnline: "none",
   circular: false,
   className: " h-7 w-7 ",
   src: DisplayImage,

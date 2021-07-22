@@ -4,6 +4,15 @@ import InputField from "./InputField";
 export default {
   title: "Input Field",
   component: InputField,
+  // argTypes: {
+  //   icon: {
+  //     options: Object.keys(icons),
+  //     mapping: icons,
+  //     control: {
+  //       type: "select",
+  //     },
+  //   },
+  // },
 };
 
 export const Main = (args: any) => <InputField {...args}></InputField>;

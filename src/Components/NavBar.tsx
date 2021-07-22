@@ -130,11 +130,6 @@ const NavBar: React.FC<Props> = () => {
             <span className="absolute rounded-full right-online-right -top-1 h-online-status w-online-status bg-online-status"></span>
           </li>
           <li className="my-auto">
-            {/* <img
-              className="rounded h-7 w-7"
-              src={DisplayPicture}
-              alt="display profile"
-            /> */}
             <Avatar size="small" src={DisplayPicture} circular={false} />
           </li>
         </ul>
