@@ -44,9 +44,11 @@ const InputField: React.FC<Props> = ({
         }
       />
       {touched && (
-        <div className="flex mt-2 text-yellow-500">
-          {errorMessage && <IoWarningOutline className={"my-auto"} />}
-          <p className="ml-2 text-xs">{errorMessage}</p>
+        <div className="relative">
+          <div className="absolute flex mt-2 text-yellow-500">
+            {errorMessage && <IoWarningOutline className={"my-auto"} />}
+            <p className="ml-2 text-xs">{errorMessage}</p>
+          </div>
         </div>
       )}
     </div>

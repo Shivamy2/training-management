@@ -1,7 +1,5 @@
 import React from "react";
 import Direction from "../Components/Direction";
-import StackingAvatar from "../Components/StackingAvatar/StackingAvatar";
-import DisplayImage from "../.../../Images/displayImage.jpeg";
 
 interface Props {}
 
