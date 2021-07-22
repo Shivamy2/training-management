@@ -8,4 +8,5 @@ export default {
 export const Main = (args: any) => <Avatar {...args}></Avatar>;
 Main.args = {
   className: "",
+  circular: true,
 };

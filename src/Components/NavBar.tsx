@@ -135,12 +135,7 @@ const NavBar: React.FC<Props> = () => {
               src={DisplayPicture}
               alt="display profile"
             /> */}
-            <Avatar
-              size="small"
-              src={DisplayPicture}
-              isOnline={true}
-              circular={false}
-            />
+            <Avatar size="small" src={DisplayPicture} circular={false} />
           </li>
         </ul>
       </div>
