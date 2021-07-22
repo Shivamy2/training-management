@@ -16,9 +16,18 @@ export default {
   },
 };
 
-export const Main = (args: any) => <Avatar {...args}></Avatar>;
-Main.args = {
+export const Rounded = (args: any) => (
+  <Avatar circular={false} {...args}></Avatar>
+);
+export const Circular = (args: any) => (
+  <Avatar circular={true} {...args}></Avatar>
+);
+Rounded.args = {
   className: "",
-  circular: true,
+  isOnline: "none",
+};
+
+Circular.args = {
+  className: "",
   isOnline: "none",
 };
