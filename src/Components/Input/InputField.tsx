@@ -20,7 +20,7 @@ const InputField: React.FC<Props> = ({
   const [isInputFieldClicked, setIsInputFieldClicked] = useState(false);
 
   return (
-    <div className="w-full pt-4 pb-6">
+    <div className="w-full pt-6 pb-6">
       <div className={`flex relative w-full ${className}`}>
         {children}
         <label htmlFor={name}>
@@ -45,7 +45,7 @@ const InputField: React.FC<Props> = ({
       />
       {touched && (
         <div className="relative">
-          <div className="absolute flex mt-2 text-yellow-500">
+          <div className="absolute flex mt-2 text-yellow-600">
             {errorMessage && <IoWarningOutline className={"my-auto"} />}
             <p className="ml-2 text-xs">{errorMessage}</p>
           </div>

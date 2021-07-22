@@ -4,7 +4,7 @@ import DisplayImage from "../../Images/displayImage.jpeg";
 interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
   size: "small" | "large";
   src?: string;
-  isOnline: boolean;
+  isOnline: boolean | undefined;
   className?: string;
   circular?: boolean;
 }
@@ -67,8 +67,8 @@ const Avatar: React.FC<Props> = ({
 
 Avatar.defaultProps = {
   size: "small",
-  isOnline: true,
   circular: false,
+  isOnline: undefined,
   className: " h-7 w-7 ",
   src: DisplayImage,
 };

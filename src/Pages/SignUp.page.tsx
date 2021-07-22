@@ -150,7 +150,7 @@ const SignUp: React.FC<Props> = () => {
                 </svg>
               </InputField>
             </div>
-            <div className="flex mt-2">
+            <div className="flex mt-6">
               <input
                 className="my-auto rounded-sm outline-none focus:outline-none text-primary"
                 type="checkbox"
@@ -168,11 +168,13 @@ const SignUp: React.FC<Props> = () => {
               </label>
             </div>
             {touched.acceptTerms && (
-              <div className="flex mt-2 text-yellow-500">
-                {errors.acceptTerms && (
-                  <IoWarningOutline className={"my-auto"} />
-                )}
-                <p className="ml-2 text-xs">{errors.acceptTerms}</p>
+              <div className="relative">
+                <div className="absolute flex mt-2 text-yellow-600">
+                  {errors.acceptTerms && (
+                    <IoWarningOutline className={"my-auto"} />
+                  )}
+                  <p className="ml-2 text-xs">{errors.acceptTerms}</p>
+                </div>
               </div>
             )}
             <div className="flex flex-col mt-10 md:flex-row md:justify-between">
