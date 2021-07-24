@@ -13,7 +13,7 @@ interface Props {}
 
 const App: React.FC<Props> = () => {
   return (
-    <div className="">
+    <div>
       <Router>
         <Switch>
           <Route exact path="/">

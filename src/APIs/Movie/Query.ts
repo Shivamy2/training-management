@@ -5,7 +5,7 @@ interface MovieGroupRequest {
 }
 
 interface MovieResponse {
-  d: MovieDetails[];
+  d?: MovieDetails[];
 }
 
 export interface MovieDetails {
