@@ -4,6 +4,8 @@ import Header from "../Components/Header";
 import NavBar from "../Components/NavBar";
 import Sidebar from "../Components/Sidebar";
 import DashboardPage from "./Dashboard.page";
+import MovieGroupPage from "./MovieGroup.page";
+import MovieGroupButtonPage from "./MovieGroupButton.page";
 import RecordingPage from "./Recording.page";
 
 interface Props {}
@@ -11,7 +13,7 @@ interface Props {}
 const MainDisplay: React.FC<Props> = () => {
   return (
     <div>
-      <div className="sticky top-0">
+      <div className="sticky top-0 z-20">
         <NavBar />
         <Header />
       </div>
@@ -20,6 +22,12 @@ const MainDisplay: React.FC<Props> = () => {
         <Switch>
           <Route path="/dashboard">
             <DashboardPage />
+          </Route>
+          <Route path="/movie-group">
+            <MovieGroupPage />
+          </Route>
+          <Route path="/movie-group-button">
+            <MovieGroupButtonPage />
           </Route>
           <Route path="/batch/:batchNumber/recording/:recordingNumber">
             <RecordingPage />

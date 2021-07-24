@@ -13,7 +13,7 @@ interface Props {}
 
 const App: React.FC<Props> = () => {
   return (
-    <div className="bg-body">
+    <div className="">
       <Router>
         <Switch>
           <Route exact path="/">
@@ -30,6 +30,8 @@ const App: React.FC<Props> = () => {
             path={[
               "/dashboard",
               "/batch/:batchNumber/recording/:recordingNumber",
+              "/movie-group",
+              "/movie-group-button",
             ]}
           >
             <MainDisplayPage />

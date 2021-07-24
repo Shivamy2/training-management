@@ -5,7 +5,7 @@ interface Props {}
 
 const Header: React.FC<Props> = () => {
   return (
-    <div className="w-full bg-header h-header">
+    <div className="z-30 w-full bg-header h-header">
       <div className="flex justify-between h-full px-4">
         <div className="flex my-auto">
           <svg

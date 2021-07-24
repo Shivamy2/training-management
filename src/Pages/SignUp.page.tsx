@@ -193,6 +193,7 @@ const SignUp: React.FC<Props> = () => {
               </Switch.Group>
               <div className="flex"></div>
               <Button
+                className="mt-3 md:mt-0"
                 buttonType="solid"
                 theme="primary"
                 text="Get Started!"

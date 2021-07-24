@@ -21,6 +21,7 @@ module.exports = {
                 "primary-lite": "#EAF1FF",
                 "warning-light": "#FFF9ED",
                 "progress-bar": "#EBEDF2",
+                "list-group": "#888ea8",
             },
             boxShadow: {
                 success: '0 10px 15px -3px #D3F2EC, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
@@ -56,10 +57,17 @@ module.exports = {
                 "header": "54px",
                 "51": "51px"
             },
+            maxWidth: {
+                "list-group": "42px"
+            },
+            minHeight: {
+                "16": "16px"
+            },
             spacing: {
                 "online-status": "5px",
                 "online-right": "2px",
-                "dropdown": "6px"
+                "dropdown": "6px",
+                "list-group": "42px"
             },
             lineHeight: {
                 "0": "0px"

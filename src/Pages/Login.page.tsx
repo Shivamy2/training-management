@@ -8,12 +8,12 @@ import * as yup from "yup";
 import Button from "../Components/Button/Button";
 import Copyright from "../Components/Copyright";
 import FormSwitch from "../Components/FormSwitch";
+import login from "../APIs/Auth/login";
 
 interface Props {}
 
 const Login: React.FC<Props> = () => {
   const redirectHistory = useHistory();
-
   const {
     handleSubmit,
     errors,
@@ -36,11 +36,15 @@ const Login: React.FC<Props> = () => {
         .min(6, ({ min }) => `Password must be atlease ${min} chars`),
     }),
     onSubmit: (data, { setSubmitting }) => {
-      setTimeout(() => {
-        console.log(data);
-        setSubmitting(false);
-        redirectHistory.push("/dashboard");
-      }, 5000);
+      login(data)
+        .then((response) => {
+          console.log(response);
+          setSubmitting(false);
+          redirectHistory.push("/dashboard");
+        })
+        .catch((error) => {
+          console.error("Not able to login", error);
+        });
     },
   });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
@@ -131,9 +135,11 @@ const Login: React.FC<Props> = () => {
                 </div>
               </Switch.Group>
               <Button
+                type="submit"
                 buttonType="solid"
                 theme="primary"
                 text="Log in"
+                className="mt-3 md:mt-0"
                 submissionInProgress={isSubmitting}
               />
             </div>

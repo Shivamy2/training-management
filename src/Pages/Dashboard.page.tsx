@@ -13,6 +13,11 @@ const Dashboard: React.FC<Props> = () => {
             text="Go to recordings page"
             path="/batch/1/recording/15"
           />
+          <Direction
+            text="Groups page using button"
+            path="/movie-group-button"
+          />
+          <Direction text="Groups page without button" path="/movie-group" />
         </div>
       </div>
     </div>

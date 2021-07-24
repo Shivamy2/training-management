@@ -55,13 +55,17 @@ const Button: React.FC<Props> = ({
         {...rest}
         disabled={submissionInProgress}
         type="submit"
-        className={`px-6 mt-3 md:mt-0 py-2 duration-500 ease-in-out rounded-md focus:outline-none text-sm font-semibold text-center   ${className} ${extraClassesOnButton} `}
+        className={`px-6 py-2 relative duration-500 ease-in-out rounded-md focus:outline-none text-sm font-semibold text-center   ${className} ${extraClassesOnButton} `}
       >
-        {submissionInProgress ? (
-          <ImSpinner9 className="mx-auto animate-spin" />
-        ) : (
-          text
-        )}
+        <ImSpinner9
+          className={
+            "absolute inset-x-0 mx-auto w-14 top-2.5 animate-spin " +
+            (submissionInProgress ? "block" : "hidden")
+          }
+        />
+        <p className={submissionInProgress ? "opacity-0" : "opacity-100"}>
+          {text}
+        </p>
       </button>
     </div>
   );
