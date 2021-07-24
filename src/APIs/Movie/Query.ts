@@ -24,7 +24,7 @@ export const MovieGroupFetch = async (data: MovieGroupRequest) => {
         {
           headers: {
             "x-rapidapi-key":
-              "84e84770b9msh59a96d8b03cb4aap1615a1jsn1cd0efaeedfe",
+              "a76c84d4b1msh17e93f060a0ddc0p14d487jsn12f74717aed9",
             "x-rapidapi-host": "imdb8.p.rapidapi.com",
           },
           params: { q: data.query },
