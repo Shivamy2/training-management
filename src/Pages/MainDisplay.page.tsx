@@ -1,5 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import GroupData from "../Components/GroupData/GroupData";
+import GroupDataButton from "../Components/GroupData/GroupDataButton";
 import Header from "../Components/Header";
 import NavBar from "../Components/NavBar";
 import Sidebar from "../Components/Sidebar";
@@ -28,6 +30,12 @@ const MainDisplay: React.FC<Props> = () => {
           </Route>
           <Route path="/movie-group-button">
             <MovieGroupButtonPage />
+          </Route>
+          <Route exact path="/groups">
+            <GroupData />
+          </Route>
+          <Route exact path="/groups/button">
+            <GroupDataButton />
           </Route>
           <Route path="/batch/:batchNumber/recording/:recordingNumber">
             <RecordingPage />

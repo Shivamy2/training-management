@@ -1,4 +1,4 @@
-import { Menu, Transition } from "@headlessui/react";
+import { Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 
 interface Props {
@@ -7,6 +7,7 @@ interface Props {
   className?: string;
   children: React.ReactNode;
   containsDirection?: boolean;
+  onClick?: () => void;
 }
 
 const SideBarElement: React.FC<Props> = ({
@@ -15,12 +16,13 @@ const SideBarElement: React.FC<Props> = ({
   children,
   containsDirection,
   title,
+  onClick,
 }) => {
   return (
-    <Menu>
-      {({ open }) => (
+    <div onClick={onClick}>
+      <div>
         <div className="flex flex-col">
-          <Menu.Button>
+          <div>
             <div
               className={
                 "flex cursor-pointer focus:outline-none hover:bg-gray-300 justify-between rounded-lg mb-3 py-2.5 px-3.5 h-list-group w-menu " +
@@ -53,7 +55,7 @@ const SideBarElement: React.FC<Props> = ({
                 </svg>
               )}
             </div>
-          </Menu.Button>
+          </div>
           <Transition
             show={false}
             as={Fragment}
@@ -64,37 +66,32 @@ const SideBarElement: React.FC<Props> = ({
             leaveFrom="h-20 opacity-100"
             leaveTo="h-0 opacity-0"
           >
-            <Menu.Items className={"bg-red-400 focus:outline-none "} static>
+            <div className={"bg-red-400 focus:outline-none "}>
               <ul className="flex flex-col text-sm text-black ml-9">
-                <Menu.Item>
-                  <li className="py-2.5 relative pl-6 pr-3">
-                    <span
-                      aria-disabled="true"
-                      className="absolute w-1 h-1 rounded-full left-13px top-17.5 bg-primary"
-                    ></span>
-                    <button className="">
-                      <p>Item1</p>
-                    </button>
-                  </li>
-                </Menu.Item>
-
-                <Menu.Item>
-                  <li className="py-2.5 relative pl-6 pr-3">
-                    <span
-                      aria-disabled="true"
-                      className="absolute w-1 h-1 rounded-full left-13px top-17.5 bg-primary"
-                    ></span>
-                    <button className="">
-                      <p>Item2</p>
-                    </button>
-                  </li>
-                </Menu.Item>
+                <li className="py-2.5 relative pl-6 pr-3">
+                  <span
+                    aria-disabled="true"
+                    className="absolute w-1 h-1 rounded-full left-13px top-17.5 bg-primary"
+                  ></span>
+                  <button className="">
+                    <p>Item1</p>
+                  </button>
+                </li>
+                <li className="py-2.5 relative pl-6 pr-3">
+                  <span
+                    aria-disabled="true"
+                    className="absolute w-1 h-1 rounded-full left-13px top-17.5 bg-primary"
+                  ></span>
+                  <button className="">
+                    <p>Item2</p>
+                  </button>
+                </li>
               </ul>
-            </Menu.Items>
+            </div>
           </Transition>
         </div>
-      )}
-    </Menu>
+      </div>
+    </div>
   );
 };
 

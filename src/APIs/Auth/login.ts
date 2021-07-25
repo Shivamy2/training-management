@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../../Axios/baseUrl";
+import { BASE_URL } from "../../Constants/constants";
 import { LS_LOGIN_TOKEN } from "../../Constants/constants";
 
 interface LoginCredentialsRequest {

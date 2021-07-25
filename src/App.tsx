@@ -37,6 +37,8 @@ const App: React.FC<Props> = () => {
               "/batch/:batchNumber/recording/:recordingNumber",
               "/movie-group",
               "/movie-group-button",
+              "/groups",
+              "/groups/button",
             ]}
           >
             <MainDisplayPage />

@@ -40,4 +40,8 @@ code {
     height: calc(100vh - 108px);
 }
 
+.minimum__height {
+    min-height: calc(100vh - 108px);
+}
+
 @tailwind utilities;

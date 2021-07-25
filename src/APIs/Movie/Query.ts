@@ -1,16 +1,4 @@
 import axios from "axios";
-
-axios.interceptors.request.use((config) => {
-  return {
-    ...config,
-    headers: {
-      ...config.headers,
-      "x-rapidapi-key": "a76c84d4b1msh17e93f060a0ddc0p14d487jsn12f74717aed9",
-      "x-rapidapi-host": "imdb8.p.rapidapi.com",
-    },
-  };
-});
-
 interface MovieGroupRequest {
   query: string;
 }
@@ -34,6 +22,11 @@ export const MovieGroupFetch = async (data: MovieGroupRequest) => {
         `https://imdb8.p.rapidapi.com/auto-complete/`,
         {
           params: { q: data.query },
+          headers: {
+            "x-rapidapi-key":
+              "a76c84d4b1msh17e93f060a0ddc0p14d487jsn12f74717aed9",
+            "x-rapidapi-host": "imdb8.p.rapidapi.com",
+          },
         }
       );
       console.log(response);

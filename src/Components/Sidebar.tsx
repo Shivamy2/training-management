@@ -5,7 +5,9 @@ import {
   GrGroup,
   GiExplosiveMeeting,
   FaChild,
+  BiLogOut,
 } from "react-icons/all";
+import { LS_LOGIN_TOKEN } from "../Constants/constants";
 
 interface Props {}
 
@@ -45,6 +47,16 @@ const Sidebar: React.FC<Props> = () => {
       </SideBarElement>
       <SideBarElement title="Student Report">
         <FaChild className="w-5 h-5 text-sidebar-elements " />
+      </SideBarElement>
+
+      <SideBarElement
+        onClick={() => {
+          localStorage.removeItem(LS_LOGIN_TOKEN);
+          window.location.href = "/login";
+        }}
+        title="Logout"
+      >
+        <BiLogOut className="w-5 h-5 text-sidebar-elements " />
       </SideBarElement>
     </div>
   );
