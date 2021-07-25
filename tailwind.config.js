@@ -13,7 +13,7 @@ module.exports = {
                 "search-box": "#202737",
                 "hamburger": "#3b3f5c",
                 "header": "#FAFAFA",
-                "body": "#E2E5EB",
+                "body": "#f1f2f3",
                 "button-border": "rgb(211, 211, 211)",
                 "hamburger-down": "rgb(136, 142, 168)",
                 "warning": "#E2A03F",
@@ -21,7 +21,7 @@ module.exports = {
                 "primary-lite": "#EAF1FF",
                 "warning-light": "#FFF9ED",
                 "progress-bar": "#EBEDF2",
-                "list-group": "#888ea8",
+                "sidebar-elements": "rgb(3, 3, 5)"
             },
             boxShadow: {
                 success: '0 10px 15px -3px #D3F2EC, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
@@ -30,6 +30,7 @@ module.exports = {
                 progress: 'rgb(241, 242, 243) 1px 3px 20px 3px',
                 stacked: '0px 0px 15px 1px rgb(113 106 202 / 10%)',
                 "more-button": 'rgb(208, 208, 208) 0px 0px 20px 0px',
+                "sidebar-elements": "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
             },
             outline: {
                 "button-success": ['2px solid rgb(26, 188, 156)', '1px'],
@@ -40,7 +41,7 @@ module.exports = {
                 "4.5xl": "2.5rem",
                 "15": "15px",
                 "13": "13px",
-                "14": "14px"
+                "14": "14px",
             },
             fontWeight: {
                 "medium-semi": "580",
@@ -67,7 +68,10 @@ module.exports = {
                 "online-status": "5px",
                 "online-right": "2px",
                 "dropdown": "6px",
-                "list-group": "42px"
+                "list-group": "42px",
+                "menu": "189px",
+                "17.5": "17.5px",
+                "13px": "13px"
             },
             lineHeight: {
                 "0": "0px"
@@ -76,7 +80,7 @@ module.exports = {
                 "180": "180px",
                 "370": "370px",
                 "115": "115px",
-                "255": "255px"
+                "228": "228px"
             },
             padding: {
                 "10px": "10px",

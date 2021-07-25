@@ -52,14 +52,12 @@ const DropDown: React.FC<Props> = ({
             <div className="py-1">
               {itemsToBeShown.map((item, index) => (
                 <Menu.Item key={index}>
-                  {({ active }) => (
-                    <button
-                      onClick={() => setSelectedDropdown(index)}
-                      className="flex items-center w-full px-2 py-2 text-sm hover:text-blue-500 hover:bg-gray-50"
-                    >
-                      {active ? <p>{item}</p> : <p>{item}</p>}
-                    </button>
-                  )}
+                  <button
+                    onClick={() => setSelectedDropdown(index)}
+                    className="flex items-center w-full px-2 py-2 text-sm hover:text-blue-500 hover:bg-gray-50"
+                  >
+                    <p>{item}</p>
+                  </button>
                 </Menu.Item>
               ))}
             </div>

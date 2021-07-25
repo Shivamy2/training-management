@@ -39,17 +39,17 @@ const MovieGroup: React.FC<Props> = () => {
           <div className="">
             <ImSpinner9 className="w-12 h-12 mx-auto animate-spin" />
           </div>
-        ) : (
-          movieData?.map((item, index) => {
+        ) : movieData ? (
+          movieData.map((item, index) => {
             let listExtraStyling = "";
             if (index === 0) listExtraStyling += " rounded-t-md ";
             else if (index === movieData.length - 1) {
               listExtraStyling += " rounded-b-md ";
             }
-            return index & 1 ? (
+            return (index & 1) === 1 ? (
               <ListGroup
                 className={
-                  "bg-list-group shadow-stacked hover:shadow-none " +
+                  "bg-search-icon shadow-stacked hover:shadow-none " +
                   listExtraStyling
                 }
                 infoClassName="text-white"
@@ -79,6 +79,15 @@ const MovieGroup: React.FC<Props> = () => {
               />
             );
           })
+        ) : query ? (
+          <ListGroup
+            className={"hover:bg-gray-100 bg-white hover:shadow-stacked "}
+            title="Not Found"
+            description="Seems input field doesn't exist"
+            url="https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+          />
+        ) : (
+          <div></div>
         )}
       </div>
     </div>

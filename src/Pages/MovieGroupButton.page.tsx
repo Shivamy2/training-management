@@ -59,7 +59,7 @@ const MovieGroupButton: React.FC<Props> = () => {
             return (index & 1) === 1 ? (
               <ListGroup
                 className={
-                  "bg-list-group shadow-stacked hover:shadow-none " +
+                  "bg-search-icon shadow-stacked hover:shadow-none " +
                   listExtraStyling
                 }
                 infoClassName="text-white"

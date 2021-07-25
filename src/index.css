@@ -36,4 +36,8 @@ code {
     z-index: 4;
 }
 
+.sidebar {
+    height: calc(100vh - 108px);
+}
+
 @tailwind utilities;
