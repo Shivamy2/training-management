@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import InputField from "../Components/Input/InputField";
 import { Switch } from "@headlessui/react";
 import Direction from "../Components/Direction";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "../Components/Button/Button";
 import Copyright from "../Components/Copyright";
 import FormSwitch from "../Components/FormSwitch";
 import login from "../APIs/Auth/login";
+import Alert from "../Components/Alert/Alert";
+import { LS_LOGIN_TOKEN } from "../Constants/constants";
 
 interface Props {}
 
 const Login: React.FC<Props> = () => {
   const redirectHistory = useHistory();
+  const [loginFailedMessage, setLoginFailedMessage] = useState("");
   const {
     handleSubmit,
     errors,
@@ -36,11 +39,18 @@ const Login: React.FC<Props> = () => {
         .min(6, ({ min }) => `Password must be atlease ${min} chars`),
     }),
     onSubmit: (data, { setSubmitting }) => {
+      setLoginFailedMessage("");
       login(data)
         .then((response) => {
-          console.log(response);
           setSubmitting(false);
-          redirectHistory.push("/dashboard");
+          if (response?.status === 200) {
+            console.log(response);
+            localStorage.setItem(LS_LOGIN_TOKEN, response.data.token);
+            redirectHistory.push("/dashboard");
+          } else {
+            console.log("Error", response?.statusText);
+            setLoginFailedMessage("User not Found!");
+          }
         })
         .catch((error) => {
           console.error("Not able to login", error);
@@ -48,8 +58,9 @@ const Login: React.FC<Props> = () => {
     },
   });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
+  const loginToken = localStorage.getItem(LS_LOGIN_TOKEN);
 
-  return (
+  return !loginToken ? (
     <div className="w-screen h-screen bg-white md:w-1/2">
       <div className="max-w-md px-10 mx-auto my-auto">
         <div className="pb-4">
@@ -62,6 +73,15 @@ const Login: React.FC<Props> = () => {
             <Direction text="Create an account" path="/signup" />
           </div>
         </div>
+        {loginFailedMessage && (
+          <div className="relative">
+            <Alert
+              className="absolute "
+              title={loginFailedMessage}
+              alertType="error"
+            />
+          </div>
+        )}
         <div className="w-full text-sm tracking-wider">
           <form onSubmit={handleSubmit} method="POST">
             <div className="w-full mt-12">
@@ -163,6 +183,8 @@ const Login: React.FC<Props> = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <Redirect to="/dashboard" />
   );
 };
 

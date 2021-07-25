@@ -1,10 +1,14 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Direction from "../Components/Direction";
+import { LS_LOGIN_TOKEN } from "../Constants/constants";
 
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
-  return (
+  const loginToken = localStorage.getItem(LS_LOGIN_TOKEN);
+
+  return loginToken ? (
     <div className="flex flex-1 h-screen">
       <div className="m-auto">
         <div className="text-center">
@@ -21,6 +25,8 @@ const Dashboard: React.FC<Props> = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <Redirect to="/login" />
   );
 };
 

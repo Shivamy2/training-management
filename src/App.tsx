@@ -5,6 +5,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
+import { LS_LOGIN_TOKEN } from "./Constants/constants";
 import AuthPages from "./Pages/Auth.page";
 import LandingPage from "./Pages/Landing.page";
 import MainDisplayPage from "./Pages/MainDisplay.page";
@@ -17,7 +18,11 @@ const App: React.FC<Props> = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Redirect to="/login" />
+            {localStorage.getItem(LS_LOGIN_TOKEN) ? (
+              <Redirect to="/dashboard" />
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
           <Route exact path="/">
             <LandingPage />

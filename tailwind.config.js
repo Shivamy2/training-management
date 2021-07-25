@@ -56,13 +56,14 @@ module.exports = {
                 "130": "105vh",
                 "navbar": "54.1719px",
                 "header": "54px",
-                "51": "51px"
+                "51": "51px",
             },
             maxWidth: {
                 "list-group": "42px"
             },
             minHeight: {
-                "16": "16px"
+                "16": "16px",
+                "51": "51px",
             },
             spacing: {
                 "online-status": "5px",

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 
 interface Props {
   title: string;
-  alertType?: "primary" | "success" | "warning";
+  alertType?: "primary" | "success" | "warning" | "error";
+  className?: string;
 }
 
-const Alert: React.FC<Props> = ({ title, alertType }) => {
+const Alert: React.FC<Props> = ({ title, alertType, className }) => {
   const [isHidden, setIsHidden] = useState(false);
   let alertTypeText = "Primary!";
   let extraClassOnAlertButton = "";
@@ -19,6 +20,10 @@ const Alert: React.FC<Props> = ({ title, alertType }) => {
     alertTypeText = "Success!";
     extraClassOnAlertButton += " text-online-status ";
     extraClassOnOuterBox += " text-online-status bg-success-light ";
+  } else if (alertType === "error") {
+    alertTypeText = "Failed!";
+    extraClassOnAlertButton += " text-red-500 ";
+    extraClassOnOuterBox += " text-red-500 bg-red-50 ";
   } else {
     alertTypeText = "Warning!";
     extraClassOnAlertButton += " text-warning ";
@@ -28,9 +33,11 @@ const Alert: React.FC<Props> = ({ title, alertType }) => {
   return (
     <div
       className={
-        "w-full h-51 bg-primary-lite rounded-md " +
+        "w-full min-h-51 rounded-md transition ease-in-out duration-300 transform " +
         (isHidden ? "hidden " : "block ") +
-        extraClassOnOuterBox
+        extraClassOnOuterBox +
+        " " +
+        className
       }
     >
       <div className="flex justify-between w-full px-4">

@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import Copyright from "../Components/Copyright";
 import Direction from "../Components/Direction";
 import * as yup from "yup";
@@ -9,6 +9,7 @@ import { Switch } from "@headlessui/react";
 import Button from "../Components/Button/Button";
 import { IoWarningOutline } from "react-icons/io5";
 import FormSwitch from "../Components/FormSwitch";
+import { LS_LOGIN_TOKEN } from "../Constants/constants";
 
 interface Props {}
 
@@ -55,8 +56,9 @@ const SignUp: React.FC<Props> = () => {
     },
   });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
+  const loginToken = localStorage.getItem(LS_LOGIN_TOKEN);
 
-  return (
+  return !loginToken ? (
     <div className="w-screen h-screen bg-white md:w-1/2">
       <div className="max-w-md px-10 mx-auto my-auto">
         <div className="pb-4">
@@ -205,6 +207,8 @@ const SignUp: React.FC<Props> = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <Redirect to="/dashboard" />
   );
 };
 
