@@ -1,10 +1,11 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import GroupData from "../Components/GroupData/GroupData";
 import GroupDataButton from "../Components/GroupData/GroupDataButton";
 import Header from "../Components/Header";
 import NavBar from "../Components/NavBar";
 import Sidebar from "../Components/Sidebar";
+import { loginToken } from "../Constants/constants";
 import DashboardPage from "./Dashboard.page";
 import MovieGroupPage from "./MovieGroup.page";
 import MovieGroupButtonPage from "./MovieGroupButton.page";
@@ -13,7 +14,7 @@ import RecordingPage from "./Recording.page";
 interface Props {}
 
 const MainDisplay: React.FC<Props> = () => {
-  return (
+  return loginToken ? (
     <div>
       <div className="sticky top-0 z-20">
         <NavBar />
@@ -43,6 +44,8 @@ const MainDisplay: React.FC<Props> = () => {
         </Switch>
       </div>
     </div>
+  ) : (
+    <Redirect to="/login" />
   );
 };
 

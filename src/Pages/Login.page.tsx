@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputField from "../Components/Input/InputField";
 import { Switch } from "@headlessui/react";
 import Direction from "../Components/Direction";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "../Components/Button/Button";
@@ -10,12 +10,11 @@ import Copyright from "../Components/Copyright";
 import FormSwitch from "../Components/FormSwitch";
 import login from "../APIs/Auth/login";
 import Alert from "../Components/Alert/Alert";
-import { LS_LOGIN_TOKEN } from "../Constants/constants";
+import { loginToken, LS_LOGIN_TOKEN } from "../Constants/constants";
 
 interface Props {}
 
 const Login: React.FC<Props> = () => {
-  const redirectHistory = useHistory();
   const [loginFailedMessage, setLoginFailedMessage] = useState("");
   const {
     handleSubmit,
@@ -46,7 +45,7 @@ const Login: React.FC<Props> = () => {
           if (response?.status === 200) {
             console.log(response);
             localStorage.setItem(LS_LOGIN_TOKEN, response.data.token);
-            redirectHistory.push("/dashboard");
+            window.location.href = "/dashboard";
           } else {
             console.log("Error", response?.statusText);
             setLoginFailedMessage("User not Found!");
@@ -58,7 +57,6 @@ const Login: React.FC<Props> = () => {
     },
   });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
-  const loginToken = localStorage.getItem(LS_LOGIN_TOKEN);
 
   return !loginToken ? (
     <div className="w-screen h-screen bg-white md:w-1/2">

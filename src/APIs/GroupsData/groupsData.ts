@@ -1,7 +1,9 @@
 import axios from "axios";
-import { BASE_URL, LS_LOGIN_TOKEN } from "../../Constants/constants";
-
-const loginToken = localStorage.getItem(LS_LOGIN_TOKEN);
+import {
+  BASE_URL,
+  loginToken,
+  LS_LOGIN_TOKEN,
+} from "../../Constants/constants";
 
 axios.interceptors.request.use((config) => {
   if (!loginToken) return config;
@@ -10,6 +12,14 @@ axios.interceptors.request.use((config) => {
     ...config,
     headers: { ...config.headers, Authorization: loginToken },
   };
+});
+
+axios.interceptors.response.use(undefined, (error) => {
+  if ((error.response.data.code = 9101)) {
+    localStorage.removeItem(LS_LOGIN_TOKEN);
+    window.location.href = "/login";
+  }
+  return Promise.reject(error);
 });
 
 export interface GroupResponse {

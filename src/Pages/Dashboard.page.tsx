@@ -1,14 +1,10 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import Direction from "../Components/Direction";
-import { LS_LOGIN_TOKEN } from "../Constants/constants";
 
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
-  const loginToken = localStorage.getItem(LS_LOGIN_TOKEN);
-
-  return loginToken ? (
+  return (
     <div className="flex flex-1 h-screen">
       <div className="m-auto">
         <div className="text-center">
@@ -17,16 +13,11 @@ const Dashboard: React.FC<Props> = () => {
             text="Go to recordings page"
             path="/batch/1/recording/15"
           />
-          <Direction
-            text="Groups page using button"
-            path="/movie-group-button"
-          />
-          <Direction text="Groups page without button" path="/movie-group" />
+          <Direction text="Groups page using button" path="/groups/button" />
+          <Direction text="Groups page without button" path="/groups" />
         </div>
       </div>
     </div>
-  ) : (
-    <Redirect to="/login" />
   );
 };
 

@@ -9,7 +9,7 @@ import { Switch } from "@headlessui/react";
 import Button from "../Components/Button/Button";
 import { IoWarningOutline } from "react-icons/io5";
 import FormSwitch from "../Components/FormSwitch";
-import { LS_LOGIN_TOKEN } from "../Constants/constants";
+import { loginToken } from "../Constants/constants";
 
 interface Props {}
 
@@ -56,7 +56,6 @@ const SignUp: React.FC<Props> = () => {
     },
   });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
-  const loginToken = localStorage.getItem(LS_LOGIN_TOKEN);
 
   return !loginToken ? (
     <div className="w-screen h-screen bg-white md:w-1/2">

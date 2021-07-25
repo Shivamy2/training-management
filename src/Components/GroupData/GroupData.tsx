@@ -14,21 +14,24 @@ const GroupData: React.FC<Props> = () => {
   const [groupData, setGroupData] = useState<GroupDataStream[]>();
 
   useEffect(() => {
-    setIsLoading(true);
+    if (query !== "") {
+      setIsLoading(true);
 
-    fetchGroupData({ query: query, status: "all-groups" })
-      .then((response) => {
-        if (response?.status === 200) {
-          console.log(response);
-          setGroupData(response?.data.data);
-          setIsLoading(false);
-        } else {
-          console.log("Error while fetching data", response?.status);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      fetchGroupData({ query: query, status: "all-groups" })
+        .then((response) => {
+          if (response?.status === 200) {
+            console.log(response);
+            setGroupData(response?.data.data);
+            setIsLoading(false);
+          } else {
+            console.log("Error while fetching data", response?.status);
+            setIsLoading(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, [query]);
 
   return (
