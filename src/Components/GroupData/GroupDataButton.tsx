@@ -1,9 +1,8 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import fetchGroupData, {
   GroupDataStream,
 } from "../../APIs/GroupsData/groupsData";
-import { MovieGroupFetch } from "../../APIs/Movie/Query";
 import Button from "../Button/Button";
 import ListGroup from "../ListGroup/ListGroup";
 import Search from "../Search/Search";
