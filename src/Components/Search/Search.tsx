@@ -10,7 +10,7 @@ const Search: React.FC<Props> = ({ className, onSubmit, ...rest }) => {
   return (
     <form
       className={
-        "relative rounded-md place-self-center bg-search-box w-370 h-9 " +
+        "relative rounded-md place-self-center bg-search-box max-w-420 h-9 " +
         className
       }
       onSubmit={onSubmit}

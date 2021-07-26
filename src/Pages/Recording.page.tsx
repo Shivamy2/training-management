@@ -7,7 +7,7 @@ interface Props {}
 const Recordings: React.FC<Props> = () => {
   const { batchNumber, recordingNumber } = useParams<any>();
   return (
-    <div className="flex flex-1 h-screen">
+    <div className="flex min-h-full bg-white">
       <div className="m-auto text-center">
         <h1>This is Recording Page.</h1>
         <p>Having Batch Number: {batchNumber}</p>

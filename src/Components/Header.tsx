@@ -1,14 +1,17 @@
 import React from "react";
 import DropDown from "./DropDown";
 
-interface Props {}
+interface Props {
+  onHamburgerClick?: () => void;
+}
 
-const Header: React.FC<Props> = () => {
+const Header: React.FC<Props> = ({ onHamburgerClick }) => {
   return (
     <div className="z-30 w-full bg-header h-header">
       <div className="flex justify-between h-full px-4">
         <div className="flex my-auto">
           <svg
+            onClick={onHamburgerClick}
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
@@ -18,7 +21,7 @@ const Header: React.FC<Props> = () => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="cursor-pointer text-hamburger"
+            className="rounded-full cursor-pointer text-hamburger hover:bg-gray-200"
           >
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>

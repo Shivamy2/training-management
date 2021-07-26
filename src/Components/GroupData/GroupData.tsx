@@ -35,7 +35,7 @@ const GroupData: React.FC<Props> = () => {
   }, [query]);
 
   return (
-    <div className="w-full minimum__height">
+    <div className="w-full h-full">
       <div>
         <div className="flex justify-center mt-3">
           <Search

@@ -14,7 +14,7 @@ const ListGroup: React.FC<Props> = ({
   className,
   infoClassName,
 }) => {
-  const addDefaultSrc = (event: any) => {
+  const handleBrokenLink = (event: any) => {
     event.target.src =
       "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80";
   };
@@ -24,7 +24,7 @@ const ListGroup: React.FC<Props> = ({
       <div className="py-2.5 flex px-3">
         <div className="mr-3 w-list-group">
           <img
-            onError={addDefaultSrc}
+            onError={handleBrokenLink}
             src={url}
             alt="group profile"
             className="object-cover max-w-full rounded-full w-list-group h-list-group"

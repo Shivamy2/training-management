@@ -35,7 +35,7 @@ const GroupDataButton: React.FC<Props> = () => {
   };
 
   return (
-    <div className="w-full minimum__height">
+    <div className="w-full h-full">
       <div>
         <div>
           <div className="flex justify-center mt-3">

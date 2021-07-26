@@ -25,7 +25,7 @@ const MovieGroupButton: React.FC<Props> = () => {
   };
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full min-h-full">
       <div>
         <div className="flex justify-center mt-3">
           <Search

@@ -167,4 +167,9 @@ const login = async (data: LoginCredentialsRequest) => {
   }
 };
 
-export default login;
+const logout = () => {
+  localStorage.removeItem(LS_LOGIN_TOKEN);
+  window.location.href = "/login";
+};
+
+export { login, logout };

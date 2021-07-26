@@ -21,7 +21,7 @@ const MovieGroup: React.FC<Props> = () => {
   }, [query]);
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-full">
       <div className="flex justify-center mt-3">
         <Search
           onSubmit={(event) => {

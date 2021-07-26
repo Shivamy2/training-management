@@ -72,7 +72,8 @@ module.exports = {
                 "list-group": "42px",
                 "menu": "189px",
                 "17.5": "17.5px",
-                "13px": "13px"
+                "13px": "13px",
+                "228": "228px"
             },
             lineHeight: {
                 "0": "0px"
@@ -81,7 +82,9 @@ module.exports = {
                 "180": "180px",
                 "370": "370px",
                 "115": "115px",
-                "228": "228px"
+            },
+            maxWidth: {
+                "420": "420px",
             },
             padding: {
                 "10px": "10px",

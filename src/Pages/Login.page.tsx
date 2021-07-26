@@ -8,7 +8,7 @@ import * as yup from "yup";
 import Button from "../Components/Button/Button";
 import Copyright from "../Components/Copyright";
 import FormSwitch from "../Components/FormSwitch";
-import login from "../APIs/Auth/login";
+import { login } from "../APIs/Auth/login";
 import Alert from "../Components/Alert/Alert";
 import { loginToken, LS_LOGIN_TOKEN } from "../Constants/constants";
 
@@ -139,7 +139,7 @@ const Login: React.FC<Props> = () => {
               </InputField>
             </div>
             <div className="flex flex-col mt-8 md:flex-row md:justify-between">
-              <Switch.Group>
+              <Switch.Group as="button" type="button">
                 <div className="flex">
                   <Switch.Label className="mr-2 font-semibold text-gray-600">
                     Show Password
