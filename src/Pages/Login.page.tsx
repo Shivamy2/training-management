@@ -139,7 +139,7 @@ const Login: React.FC<Props> = () => {
               </InputField>
             </div>
             <div className="flex flex-col mt-8 md:flex-row md:justify-between">
-              <Switch.Group as="button" type="button">
+              <Switch.Group>
                 <div className="flex">
                   <Switch.Label className="mr-2 font-semibold text-gray-600">
                     Show Password

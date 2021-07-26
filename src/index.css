@@ -37,11 +37,21 @@ code {
 }
 
 .sidebar {
-    height: calc(100vh - 108px);
+    min-height: calc(100vh - 108px);
 }
 
 .minimum__height {
     min-height: calc(100vh - 108px);
+}
+
+.main__width {
+    width: 100vw;
+}
+
+@media screen and (min-width: 990px) {
+    .main__width {
+        width: calc(100vw - 228px + 32px);
+    }
 }
 
 @tailwind utilities;

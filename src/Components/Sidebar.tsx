@@ -8,12 +8,17 @@ import {
   BiLogOut,
 } from "react-icons/all";
 import { logout } from "../APIs/Auth/login";
+import { useHistory } from "react-router-dom";
 
 interface Props {
   open?: boolean;
 }
 
 const Sidebar: React.FC<Props> = ({ open }) => {
+  console.log("Sidebar called!");
+
+  const history = useHistory();
+
   return (
     <div
       className={
@@ -21,9 +26,10 @@ const Sidebar: React.FC<Props> = ({ open }) => {
         (open ? "md-lg:block" : "md-lg:hidden")
       }
     >
-      <div className="fixed hidden pl-4 pr-4 text-white transition duration-500 ease-in-out border-r border-gray-300 w-228 md-lg:flex sidebar">
+      <div className="fixed hidden px-4 text-white transition duration-500 ease-in-out border-r border-gray-300 md-lg:flex sidebar">
         <div>
           <SideBarElement
+            onClick={() => history.push("/dashboard")}
             containsDirection={true}
             title="Dashboard"
             theme="fill"
@@ -45,16 +51,34 @@ const Sidebar: React.FC<Props> = ({ open }) => {
               <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
           </SideBarElement>
-          <SideBarElement title="Recordings">
+          <SideBarElement
+            onClick={() => history.push("/batch/1/recording/15")}
+            title="Recordings"
+          >
             <BiVideoRecording className="w-5 h-5 text-sidebar-elements " />
           </SideBarElement>
-          <SideBarElement title="Groups">
+          <SideBarElement
+            onClick={() => history.push("/groups")}
+            title="Groups"
+          >
             <GrGroup className="w-5 h-5 text-sidebar-elements " />
           </SideBarElement>
-          <SideBarElement title="Meetings">
+          <SideBarElement
+            onClick={() => history.push("/groups/button")}
+            title="Groups Button"
+          >
+            <GrGroup className="w-5 h-5 text-sidebar-elements " />
+          </SideBarElement>
+          <SideBarElement
+            title="Meetings"
+            onClick={() => history.push("/not-found")}
+          >
             <GiExplosiveMeeting className="w-5 h-5 text-sidebar-elements " />
           </SideBarElement>
-          <SideBarElement title="Student Report">
+          <SideBarElement
+            title="Student Report"
+            onClick={() => history.push("/not-found")}
+          >
             <FaChild className="w-5 h-5 text-sidebar-elements " />
           </SideBarElement>
 

@@ -11,6 +11,7 @@ interface Props {}
 
 const GroupData: React.FC<Props> = () => {
   const [query, setQuery] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
   const [groupData, setGroupData] = useState<GroupDataStream[]>();
 
@@ -20,8 +21,8 @@ const GroupData: React.FC<Props> = () => {
     fetchGroupData({ query: query, status: "all-groups" })
       .then((response) => {
         if (response?.status === 200) {
-          console.log(response);
           setGroupData(response?.data.data);
+
           setIsLoading(false);
         } else {
           console.log("Error while fetching data", response?.status);
@@ -44,7 +45,6 @@ const GroupData: React.FC<Props> = () => {
             value={query}
             onChange={(event) => {
               setQuery(event.target.value);
-              console.log(query);
             }}
           />
         </div>

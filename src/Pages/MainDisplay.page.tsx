@@ -27,7 +27,7 @@ const MainDisplay: React.FC<Props> = () => {
       </div>
       <div className="flex">
         <Sidebar open={isMenuOpen} />
-        <div className="w-screen minimum__height">
+        <div className="main__width minimum__height">
           <Switch>
             <Route path="/dashboard">
               <DashboardPage />
