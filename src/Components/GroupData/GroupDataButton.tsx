@@ -1,8 +1,8 @@
 import React, { FormEvent, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
-import fetchGroupData, {
-  GroupDataStream,
-} from "../../APIs/GroupsData/groupsData";
+import fetchGroupData from "../../APIs/GroupsData/groupsData";
+import { GroupDataStream } from "../../Models/Groups";
+import Alert from "../Alert/Alert";
 import Button from "../Button/Button";
 import ListGroup from "../ListGroup/ListGroup";
 import Search from "../Search/Search";
@@ -60,7 +60,7 @@ const GroupDataButton: React.FC<Props> = () => {
             <div className="">
               <ImSpinner9 className="w-12 h-12 mx-auto animate-spin" />
             </div>
-          ) : groupData ? (
+          ) : groupData && groupData.length > 0 ? (
             groupData.map((item, index) => {
               let listExtraStyling = "";
               if (index === 0) listExtraStyling += " rounded-t-md ";
@@ -101,12 +101,7 @@ const GroupDataButton: React.FC<Props> = () => {
               );
             })
           ) : isSubmitClicked ? (
-            <ListGroup
-              className={"hover:bg-gray-100 bg-white hover:shadow-stacked "}
-              title="Not Found"
-              description="Seems input field doesn't exist"
-              url="https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-            />
+            <Alert title="0 Results Found!" alertType="error" />
           ) : (
             <div></div>
           )}
