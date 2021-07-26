@@ -25,7 +25,7 @@ const SideBarElement: React.FC<Props> = ({
           <div>
             <div
               className={
-                "flex cursor-pointer focus:outline-none hover:bg-gray-300 justify-between rounded-lg mb-3 py-2.5 px-3.5 h-list-group w-menu " +
+                "flex cursor-pointer focus:outline-none hover:bg-gray-300 transition ease-in-out duration-200 justify-between rounded-lg mb-3 py-2.5 px-3.5 h-list-group w-menu " +
                 (theme === "solid"
                   ? " bg-transparent hover:shadow-sidebar-elements "
                   : " bg-white hover:shadow-none shadow-sidebar-elements ") +

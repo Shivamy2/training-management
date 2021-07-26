@@ -22,11 +22,11 @@ const Sidebar: React.FC<Props> = ({ open }) => {
   return (
     <div
       className={
-        " md-lg:w-228 md-lg:sidebar transition-transform ease-in-out duration-1000 " +
-        (open ? "md-lg:block" : "md-lg:hidden")
+        " relative md-lg:w-228 md-lg:sidebar transition-transform duration-500 ease-in-out  border-r border-gray-300 " +
+        (open ? "md-lg:flex" : "md-lg:hidden")
       }
     >
-      <div className="fixed hidden px-4 text-white transition duration-500 ease-in-out border-r border-gray-300 md-lg:flex sidebar">
+      <div className="fixed hidden px-4 text-white md-lg:block sidebar">
         <div>
           <SideBarElement
             onClick={() => history.push("/dashboard")}
@@ -71,13 +71,13 @@ const Sidebar: React.FC<Props> = ({ open }) => {
           </SideBarElement>
           <SideBarElement
             title="Meetings"
-            onClick={() => history.push("/not-found")}
+            onClick={() => history.push("/meetings")}
           >
             <GiExplosiveMeeting className="w-5 h-5 text-sidebar-elements " />
           </SideBarElement>
           <SideBarElement
             title="Student Report"
-            onClick={() => history.push("/not-found")}
+            onClick={() => history.push("/report")}
           >
             <FaChild className="w-5 h-5 text-sidebar-elements " />
           </SideBarElement>

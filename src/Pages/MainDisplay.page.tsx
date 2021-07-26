@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import GroupData from "../Components/GroupData/GroupData";
-import GroupDataButton from "../Components/GroupData/GroupDataButton";
+import GroupData from "./GroupData";
+import GroupDataButton from "./GroupDataButton";
 import Header from "../Components/Header";
 import NavBar from "../Components/NavBar";
 import Sidebar from "../Components/Sidebar";
@@ -27,7 +27,7 @@ const MainDisplay: React.FC<Props> = () => {
       </div>
       <div className="flex">
         <Sidebar open={isMenuOpen} />
-        <div className="main__width minimum__height">
+        <div className={"flex flex-1 minimum__height "}>
           <Switch>
             <Route path="/dashboard">
               <DashboardPage />
