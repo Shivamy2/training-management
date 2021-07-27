@@ -15,8 +15,6 @@ interface Props {
 }
 
 const Sidebar: React.FC<Props> = ({ open }) => {
-  console.log("Sidebar called!");
-
   const history = useHistory();
 
   return (

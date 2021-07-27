@@ -7,7 +7,7 @@ import {
   Switch,
 } from "react-router-dom";
 import { me } from "./APIs/Auth/auth";
-import { loginToken, LS_LOGIN_TOKEN } from "./Constants/constants";
+import { loginToken } from "./Constants/constants";
 import { User } from "./Models/User";
 import AuthLazy from "./Pages/Auth/Auth.lazy";
 import MainDisplayLazy from "./Pages/MainContent/MainDisplay.lazy";
@@ -20,9 +20,18 @@ const App: React.FC<Props> = () => {
   useEffect(() => {
     if (!loginToken) return;
 
-    me().then((response) => setUser(response));
+    me().then((userResponse) => {
+      setUser(userResponse);
+    });
   }, []);
 
+  if (!user && loginToken) {
+    return (
+      <div className="w-screen h-screen">
+        <ImSpinner9 className="w-12 h-full m-auto animate-spin" />
+      </div>
+    );
+  }
   return (
     <Suspense
       fallback={
@@ -35,11 +44,7 @@ const App: React.FC<Props> = () => {
         <Router>
           <Switch>
             <Route exact path="/">
-              {localStorage.getItem(LS_LOGIN_TOKEN) ? (
-                <Redirect to="/dashboard" />
-              ) : (
-                <Redirect to="/login" />
-              )}
+              {user ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
             </Route>
             <Route exact path={["/login", "/signup"]}>
               <AuthLazy onLogin={setUser} />
@@ -55,7 +60,11 @@ const App: React.FC<Props> = () => {
                 "/groups/button",
               ]}
             >
-              <MainDisplayLazy data={user} />
+              {user ? (
+                <MainDisplayLazy data={user} />
+              ) : (
+                <Redirect to="/login" />
+              )}
             </Route>
             <Route path="/">Page Not Found 404 Error</Route>
           </Switch>

@@ -1,7 +1,16 @@
 import axios from "axios";
-import { BASE_URL } from "../../Constants/constants";
+import { BASE_URL, loginToken } from "../../Constants/constants";
 import { LS_LOGIN_TOKEN } from "../../Constants/constants";
 import { User } from "../../Models/User";
+
+axios.interceptors.request.use((config) => {
+  if (!loginToken) return config;
+
+  return {
+    ...config,
+    headers: { ...config.headers, Authorization: loginToken },
+  };
+});
 
 interface LoginCredentialsRequest {
   email: string;

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import GroupData from "./GroupData";
 import GroupDataButton from "./GroupDataButton";
 import Header from "../../Components/Header";
 import NavBar from "../../Components/NavBar";
 import Sidebar from "../../Components/Sidebar";
-import { loginToken } from "../../Constants/constants";
 import DashboardPage from "./Dashboard.page";
 import MovieGroupPage from "./MovieGroup.page";
 import MovieGroupButtonPage from "./MovieGroupButton.page";
@@ -18,7 +17,7 @@ interface Props {
 
 const MainDisplay: React.FC<Props> = ({ data }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
-  return loginToken ? (
+  return (
     <div>
       <div className="sticky top-0 z-20">
         <NavBar imgUrl={data?.profile_pic_url} />
@@ -54,8 +53,6 @@ const MainDisplay: React.FC<Props> = ({ data }) => {
         </div>
       </div>
     </div>
-  ) : (
-    <Redirect to="/login" />
   );
 };
 
