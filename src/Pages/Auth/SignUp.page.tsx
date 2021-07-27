@@ -1,15 +1,15 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
-import Copyright from "../Components/Copyright";
-import Direction from "../Components/Direction";
+import Copyright from "../../Components/Copyright";
+import Direction from "../../Components/Direction";
 import * as yup from "yup";
-import InputField from "../Components/Input/InputField";
+import InputField from "../../Components/Input/InputField";
 import { Switch } from "@headlessui/react";
-import Button from "../Components/Button/Button";
+import Button from "../../Components/Button/Button";
 import { IoWarningOutline } from "react-icons/io5";
-import FormSwitch from "../Components/FormSwitch";
-import { loginToken } from "../Constants/constants";
+import FormSwitch from "../../Components/FormSwitch";
+import { loginToken } from "../../Constants/constants";
 
 interface Props {}
 

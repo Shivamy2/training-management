@@ -1,20 +1,23 @@
 import React, { useState } from "react";
-import InputField from "../Components/Input/InputField";
+import InputField from "../../Components/Input/InputField";
 import { Switch } from "@headlessui/react";
-import Direction from "../Components/Direction";
+import Direction from "../../Components/Direction";
 import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import Button from "../Components/Button/Button";
-import Copyright from "../Components/Copyright";
-import FormSwitch from "../Components/FormSwitch";
-import { login } from "../APIs/Auth/auth";
-import Alert from "../Components/Alert/Alert";
-import { loginToken, LS_LOGIN_TOKEN } from "../Constants/constants";
+import Button from "../../Components/Button/Button";
+import Copyright from "../../Components/Copyright";
+import FormSwitch from "../../Components/FormSwitch";
+import { login } from "../../APIs/Auth/auth";
+import Alert from "../../Components/Alert/Alert";
+import { loginToken, LS_LOGIN_TOKEN } from "../../Constants/constants";
+import { User } from "../../Models/User";
 
-interface Props {}
+interface Props {
+  onLogin?: (data: User) => void;
+}
 
-const Login: React.FC<Props> = () => {
+const Login: React.FC<Props> = ({ onLogin }) => {
   const [loginFailedMessage, setLoginFailedMessage] = useState("");
   const {
     handleSubmit,
@@ -44,6 +47,7 @@ const Login: React.FC<Props> = () => {
           setSubmitting(false);
           if (response?.status === 200) {
             console.log(response);
+            onLogin && onLogin(response.data.user);
             localStorage.setItem(LS_LOGIN_TOKEN, response.data.token);
             window.location.href = "/dashboard";
           } else {

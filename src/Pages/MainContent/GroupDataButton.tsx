@@ -1,52 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
-import fetchGroupData from "../APIs/GroupsData/groupsData";
-import { GroupDataStream } from "../Models/Groups";
-import Alert from "../Components/Alert/Alert";
-
-import ListGroup from "../Components/ListGroup/ListGroup";
-import Search from "../Components/Search/Search";
+import fetchGroupData from "../../APIs/GroupsData/groupsData";
+import { GroupDataStream } from "../../Models/Groups";
+import Alert from "../../Components/Alert/Alert";
+import Button from "../../Components/Button/Button";
+import ListGroup from "../../Components/ListGroup/ListGroup";
+import Search from "../../Components/Search/Search";
 
 interface Props {}
 
-const GroupData: React.FC<Props> = () => {
+const GroupDataButton: React.FC<Props> = () => {
   const [query, setQuery] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
   const [groupData, setGroupData] = useState<GroupDataStream[]>();
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false);
 
-  useEffect(() => {
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
     setIsLoading(true);
-
     fetchGroupData({ query: query, status: "all-groups" })
       .then((response) => {
+        setIsSubmitClicked(true);
         if (response?.status === 200) {
+          console.log(response);
           setGroupData(response?.data.data);
-
           setIsLoading(false);
         } else {
           console.log("Error while fetching data", response?.status);
-          setIsLoading(false);
         }
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [query]);
+  };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full min-h-full">
       <div>
-        <div className="flex justify-center pt-3">
-          <Search
-            onSubmit={(event) => {
-              event.preventDefault();
-            }}
-            value={query}
-            onChange={(event) => {
-              setQuery(event.target.value);
-            }}
-          />
+        <div>
+          <div className="flex justify-center pt-3">
+            <Search
+              onSubmit={handleFormSubmit}
+              className="rounded-r-none"
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+              }}
+            />
+            <Button
+              onClick={handleFormSubmit}
+              type="submit"
+              text="Search"
+              className="rounded-l-none"
+            />
+          </div>
         </div>
         <div className="max-w-md mx-auto mt-12">
           {isLoading && query ? (
@@ -93,7 +100,7 @@ const GroupData: React.FC<Props> = () => {
                 />
               );
             })
-          ) : query ? (
+          ) : isSubmitClicked ? (
             <Alert title="0 Results Found!" alertType="error" />
           ) : (
             <div></div>
@@ -104,6 +111,6 @@ const GroupData: React.FC<Props> = () => {
   );
 };
 
-GroupData.defaultProps = {};
+GroupDataButton.defaultProps = {};
 
-export default React.memo(GroupData);
+export default React.memo(GroupDataButton);

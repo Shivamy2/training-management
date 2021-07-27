@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "../Models/User";
+import { User } from "../../Models/User";
 import { ImSpinner9 } from "react-icons/im";
 
 interface Props {

@@ -1,38 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { MovieGroupFetch } from "../APIs/Movie/Query";
-import ListGroup from "../Components/ListGroup/ListGroup";
-import { MovieDetails } from "../APIs/Movie/Query";
-import Search from "../Components/Search/Search";
+import React, { FormEvent, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
+import { MovieDetails, MovieGroupFetch } from "../../APIs/Movie/Query";
+import Button from "../../Components/Button/Button";
+import ListGroup from "../../Components/ListGroup/ListGroup";
+import Search from "../../Components/Search/Search";
 
 interface Props {}
 
-const MovieGroup: React.FC<Props> = () => {
+const MovieGroupButton: React.FC<Props> = () => {
   const [movieData, setMovieData] = useState<MovieDetails[]>();
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false);
 
-  useEffect(() => {
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
     setIsLoading(true);
     MovieGroupFetch({ query: query }).then((response) => {
       setMovieData(response);
+      setIsSubmitClicked(true);
+      console.log("Data submitting!!");
       setIsLoading(false);
     });
-  }, [query]);
+  };
 
   return (
-    <div className="w-full h-full">
-      <div className="flex justify-center mt-3">
-        <Search
-          onSubmit={(event) => {
-            event.preventDefault();
-          }}
-          value={query}
-          onChange={(event) => {
-            setQuery(event.target.value);
-            console.log(query);
-          }}
-        />
+    <div className="w-full min-h-full">
+      <div>
+        <div className="flex justify-center mt-3">
+          <Search
+            onSubmit={handleFormSubmit}
+            className="rounded-r-none"
+            value={query}
+            onChange={(event) => {
+              setQuery(event.target.value);
+            }}
+          />
+          <Button
+            onClick={handleFormSubmit}
+            type="submit"
+            text="Search"
+            className="rounded-l-none"
+          />
+        </div>
       </div>
       <div className="max-w-md mx-auto mt-12">
         {isLoading && query ? (
@@ -79,7 +89,7 @@ const MovieGroup: React.FC<Props> = () => {
               />
             );
           })
-        ) : query ? (
+        ) : isSubmitClicked ? (
           <ListGroup
             className={"hover:bg-gray-100 bg-white hover:shadow-stacked "}
             title="Not Found"
@@ -94,6 +104,6 @@ const MovieGroup: React.FC<Props> = () => {
   );
 };
 
-MovieGroup.defaultProps = {};
+MovieGroupButton.defaultProps = {};
 
-export default React.memo(MovieGroup);
+export default React.memo(MovieGroupButton);

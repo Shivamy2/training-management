@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import GroupData from "./GroupData";
 import GroupDataButton from "./GroupDataButton";
-import Header from "../Components/Header";
-import NavBar from "../Components/NavBar";
-import Sidebar from "../Components/Sidebar";
-import { loginToken } from "../Constants/constants";
+import Header from "../../Components/Header";
+import NavBar from "../../Components/NavBar";
+import Sidebar from "../../Components/Sidebar";
+import { loginToken } from "../../Constants/constants";
 import DashboardPage from "./Dashboard.page";
 import MovieGroupPage from "./MovieGroup.page";
 import MovieGroupButtonPage from "./MovieGroupButton.page";
 import RecordingPage from "./Recording.page";
-import { User } from "../Models/User";
+import { User } from "../../Models/User";
 
 interface Props {
   data?: User;
