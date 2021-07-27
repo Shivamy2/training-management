@@ -8,7 +8,7 @@ import * as yup from "yup";
 import Button from "../Components/Button/Button";
 import Copyright from "../Components/Copyright";
 import FormSwitch from "../Components/FormSwitch";
-import { login } from "../APIs/Auth/login";
+import { login } from "../APIs/Auth/auth";
 import Alert from "../Components/Alert/Alert";
 import { loginToken, LS_LOGIN_TOKEN } from "../Constants/constants";
 
@@ -59,8 +59,8 @@ const Login: React.FC<Props> = () => {
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
 
   return !loginToken ? (
-    <div className="w-screen h-screen bg-white md:w-1/2">
-      <div className="max-w-md px-10 mx-auto my-auto">
+    <div className="w-screen min-h-screen bg-white md:w-1/2">
+      <div className="max-w-md min-h-full px-10 py-4 mx-auto">
         <div className="pb-4">
           <p className="tracking-wider font-medium-semi text-4.5xl">
             Log In to

@@ -37,7 +37,7 @@ code {
 }
 
 .sidebar {
-    min-height: calc(100vh - 108px);
+    height: calc(100vh - 108px);
 }
 
 .minimum__height {

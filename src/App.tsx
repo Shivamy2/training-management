@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
 } from "react-router-dom";
-import { LS_LOGIN_TOKEN } from "./Constants/constants";
+import { me } from "./APIs/Auth/auth";
+import { loginToken, LS_LOGIN_TOKEN } from "./Constants/constants";
+import { User } from "./Models/User";
 import AuthPages from "./Pages/Auth.page";
 import LandingPage from "./Pages/Landing.page";
 import MainDisplayPage from "./Pages/MainDisplay.page";
@@ -13,6 +15,14 @@ import MainDisplayPage from "./Pages/MainDisplay.page";
 interface Props {}
 
 const App: React.FC<Props> = () => {
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    if (!loginToken) return;
+
+    me().then((response) => setUser(response));
+  }, []);
+
   return (
     <div className="bg-body">
       <Router>
@@ -41,7 +51,7 @@ const App: React.FC<Props> = () => {
               "/groups/button",
             ]}
           >
-            <MainDisplayPage />
+            <MainDisplayPage data={user} />
           </Route>
           <Route path="/">Page Not Found 404 Error</Route>
         </Switch>

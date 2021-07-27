@@ -1,12 +1,13 @@
 import React from "react";
 import CanadaFlag from "../Images/canada.png";
-import DisplayPicture from "../Images/displayImage.jpeg";
 import Avatar from "./Avatar/Avatar";
 import Search from "./Search/Search";
 
-interface Props {}
+interface Props {
+  imgUrl?: string;
+}
 
-const NavBar: React.FC<Props> = () => {
+const NavBar: React.FC<Props> = ({ imgUrl }) => {
   return (
     <div className="bg-navBar h-navbar">
       <div className="flex justify-between w-full h-full">
@@ -102,7 +103,7 @@ const NavBar: React.FC<Props> = () => {
             <span className="absolute rounded-full right-online-right -top-1 h-online-status w-online-status bg-online-status"></span>
           </li>
           <li className="my-auto">
-            <Avatar size="small" src={DisplayPicture} circular={false} />
+            <Avatar size="small" src={imgUrl} circular={false} />
           </li>
         </ul>
       </div>

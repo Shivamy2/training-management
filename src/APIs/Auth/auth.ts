@@ -34,4 +34,14 @@ const logout = () => {
   window.location.href = "/login";
 };
 
-export { login, logout };
+interface MeResponse {
+  data: User;
+}
+
+const me = () => {
+  return axios
+    .get<MeResponse>(`${BASE_URL}/me`)
+    .then((response) => response.data.data);
+};
+
+export { login, logout, me };

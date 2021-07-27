@@ -1,5 +1,5 @@
 import React from "react";
-import DisplayImage from "../../Images/displayImage.jpeg";
+import { ImSpinner9 } from "react-icons/im";
 
 interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
   size: "small" | "large";
@@ -14,6 +14,7 @@ const Avatar: React.FC<Props> = ({
   isOnline,
   circular,
   size,
+  src,
   ...rest
 }) => {
   let avatarSize = " h-7 w-7 ";
@@ -48,12 +49,20 @@ const Avatar: React.FC<Props> = ({
   }
   return (
     <div className="relative w-10">
-      <img
-        {...rest}
-        src={DisplayImage}
-        className={className + " " + avatarClass + " " + avatarSize}
-        alt="display profile"
-      />
+      {src ? (
+        <img
+          onError={(event: any) =>
+            (event.target.src =
+              "https://images.unsplash.com/photo-1558898479-33c0057a5d12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80")
+          }
+          {...rest}
+          src={src}
+          className={className + " " + avatarClass + " " + avatarSize}
+          alt="display profile"
+        />
+      ) : (
+        <ImSpinner9 className="text-white animate-spin" />
+      )}
       {isOnline !== "none" && (
         <span
           className={
@@ -72,7 +81,6 @@ Avatar.defaultProps = {
   isOnline: "none",
   circular: false,
   className: " h-7 w-7 ",
-  src: DisplayImage,
 };
 
 export default React.memo(Avatar);

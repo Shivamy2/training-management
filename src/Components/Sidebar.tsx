@@ -7,7 +7,7 @@ import {
   FaChild,
   BiLogOut,
 } from "react-icons/all";
-import { logout } from "../APIs/Auth/login";
+import { logout } from "../APIs/Auth/auth";
 import { useHistory } from "react-router-dom";
 
 interface Props {
@@ -22,11 +22,10 @@ const Sidebar: React.FC<Props> = ({ open }) => {
   return (
     <div
       className={
-        " relative md-lg:w-228 md-lg:sidebar transition-transform duration-500 ease-in-out  border-r border-gray-300 " +
-        (open ? "md-lg:flex" : "md-lg:hidden")
+        " md-lg:flex md-lg:w-228 sidebar transform duration-500 ease-in-out border-r border-gray-300 "
       }
     >
-      <div className="fixed hidden px-4 text-white md-lg:block sidebar">
+      <div className="fixed hidden min-h-full px-4 text-white md-lg:block">
         <div>
           <SideBarElement
             onClick={() => history.push("/dashboard")}
