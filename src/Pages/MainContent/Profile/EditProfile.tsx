@@ -13,15 +13,21 @@ const EditProfile: React.FC<Props> = () => {
   const { user } = useContext(UserContext);
   let date: string[] = [];
   for (let index = 1; index <= 31; index++) {
-    date.push("0" + index);
+    if (index >= 10) {
+      date.push(index.toString());
+    } else date.push("0" + index);
   }
   let month: string[] = [];
   for (let index = 1; index <= 12; index++) {
-    month.push("0" + index);
+    if (index >= 10) {
+      month.push(index.toString());
+    } else month.push("0" + index);
   }
   let year: string[] = [];
   for (let index = 2018; index >= 1990; index--) {
-    year.push(index.toString());
+    if (index >= 10) {
+      year.push(index.toString());
+    } else year.push("0" + index);
   }
 
   const {
@@ -49,18 +55,18 @@ const EditProfile: React.FC<Props> = () => {
         .string()
         .required("Email is required field!")
         .email(() => "Email is invalid"),
-      firstName: yup
+      first_name: yup
         .string()
         .required("First Name is required Field!")
         .max(20, ({ max }) => `First Name must be of ${max} chars`),
-      middleName: yup
+      middle_name: yup
         .string()
         .max(20, ({ max }) => `Middle Name must be of ${max} chars`),
       education: yup
         .string()
         .required()
         .max(40, ({ max }) => `School/College name must be of ${max} chars`),
-      lastName: yup
+      last_name: yup
         .string()
         .required("First Name is required Field!")
         .max(20, ({ max }) => `Last Name must be of ${max} chars`),
@@ -90,38 +96,38 @@ const EditProfile: React.FC<Props> = () => {
               <div className="space-y-3 md-lg:space-y-0 md-lg:flex-1 md-lg:pr-20">
                 <div className="mt-3 md:flex">
                   <EditInput
-                    {...getFieldProps("first_name")}
                     className="mt-9 md-lg:mt-0 md:flex-1"
                     labelText="First Name*"
                     type="text"
-                    name="first_name"
                     touched={touched.first_name}
                     errorMessage={errors.first_name}
+                    placeholder="First Name"
+                    {...getFieldProps("first_name")}
                   />
                   <EditInput
-                    {...getFieldProps("middle_name")}
-                    className="mt-3 md:ml-3 md-lg:mt-0 md:flex-1 md:mt-9"
+                    className="mt-6 md:ml-3 md-lg:mt-0 md:flex-1 md:mt-9"
                     type="text"
-                    name="middle_name"
                     labelText="Middle Name"
                     touched={touched.middle_name}
                     errorMessage={errors.middle_name}
+                    placeholder="Middle Name"
+                    {...getFieldProps("middle_name")}
                   />
                 </div>
                 <EditInput
-                  {...getFieldProps("last_name")}
-                  className="md-lg:pt-3"
+                  className="pt-3 md-lg:pt-6"
                   type="text"
-                  name="last_name"
                   labelText="Last Name*"
                   touched={touched.last_name}
                   errorMessage={errors.last_name}
+                  placeholder="Last Name"
+                  {...getFieldProps("last_name")}
                 />
               </div>
             </div>
             <div>
               <div className="space-y-3 md:flex">
-                <div className="mt-3 md:flex-1 md:mr-3">
+                <div className="mt-6 md:flex-1 md:mr-3">
                   <div className="col-sm-6">
                     <label className="mt-3 text-sm font-medium tracking-wide text-gray-500">
                       Date of Birth*
@@ -165,21 +171,22 @@ const EditProfile: React.FC<Props> = () => {
                 </div>
                 <div className="justify-between space-y-3 md:flex md:flex-col md:flex-1 md:mt-4 md:ml-3">
                   <EditInput
-                    {...getFieldProps("email")}
-                    className="md:mt-1"
-                    name="email"
+                    className="md:mt-4"
                     type="email"
                     labelText="Email*"
                     touched={touched.email}
                     errorMessage={errors.email}
+                    placeholder="Email"
+                    {...getFieldProps("email")}
                   />
                   <EditInput
-                    {...getFieldProps("education")}
+                    className="pt-3"
                     type="text"
-                    name="education"
                     labelText="Education*"
                     touched={touched.education}
                     errorMessage={errors.education}
+                    placeholder="Education"
+                    {...getFieldProps("education")}
                   />
                 </div>
               </div>

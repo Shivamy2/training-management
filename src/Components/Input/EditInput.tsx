@@ -6,11 +6,9 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   labelText: string;
   errorMessage?: string;
   touched?: boolean;
-  name?: string;
 }
 
 const EditInput: React.FC<Props> = ({
-  name,
   className,
   labelText,
   touched,
@@ -20,19 +18,21 @@ const EditInput: React.FC<Props> = ({
   return (
     <div className={className + " flex flex-col"}>
       <label
-        htmlFor={name}
+        htmlFor={rest.name}
         className="text-sm font-medium tracking-wide text-gray-500"
       >
         {labelText}
       </label>
       <input
         {...rest}
-        name={name}
+        name={rest.name}
+        type={rest.type}
+        placeholder={rest.placeholder}
         className="p-2 mt-2 transition duration-200 ease-in-out border border-gray-400 rounded-lg focus:border-primary focus:shadow-primary focus:outline-none"
       />
       {touched && (
         <div className="relative">
-          <div className="absolute flex mt-2 text-yellow-600">
+          <div className="absolute flex text-yellow-600">
             {errorMessage && <IoWarningOutline className={"my-auto"} />}
             <p className="ml-2 text-xs">{errorMessage}</p>
           </div>
