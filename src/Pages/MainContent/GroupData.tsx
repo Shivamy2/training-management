@@ -35,7 +35,7 @@ const GroupData: React.FC<Props> = () => {
   }, [query]);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full bg-white">
       <div>
         <div className="flex justify-center pt-3">
           <Search

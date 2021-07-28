@@ -54,4 +54,14 @@ code {
     }
 }
 
+.profile-submit {
+    min-width: calc(100vw - 56px);
+}
+
+@media (min-width: 990px) {
+    .profile-submit {
+        min-width: calc(100vw - 284px);
+    }
+}
+
 @tailwind utilities;

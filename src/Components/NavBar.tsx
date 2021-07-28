@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import CanadaFlag from "../Images/canada.png";
-import Avatar from "./Avatar/Avatar";
+import UserContext from "../User.context";
+import DropDown from "./DropDown";
 import Search from "./Search/Search";
 
-interface Props {
-  imgUrl?: string;
-}
+interface Props {}
 
-const NavBar: React.FC<Props> = ({ imgUrl }) => {
+const NavBar: React.FC<Props> = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <div className="bg-navBar h-navbar">
       <div className="flex justify-between w-full h-full">
@@ -103,7 +104,14 @@ const NavBar: React.FC<Props> = ({ imgUrl }) => {
             <span className="absolute rounded-full right-online-right -top-1 h-online-status w-online-status bg-online-status"></span>
           </li>
           <li className="my-auto">
-            <Avatar size="small" src={imgUrl} circular={false} />
+            <DropDown
+              containsImage={true}
+              image={user!.profile_pic_url}
+              itemsToBeShown={[
+                { name: "Profile", path: "/profile" },
+                { name: "Sign Out", path: "/login" },
+              ]}
+            />
           </li>
         </ul>
       </div>

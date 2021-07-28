@@ -11,14 +11,16 @@ import FormSwitch from "../../Components/FormSwitch";
 import { login } from "../../APIs/Auth/auth";
 import Alert from "../../Components/Alert/Alert";
 import { loginToken, LS_LOGIN_TOKEN } from "../../Constants/constants";
-import { User } from "../../Models/User";
+import { useContext } from "react";
+import UserContext from "../../User.context";
 
-interface Props {
-  onLogin?: (data: User) => void;
-}
+interface Props {}
 
-const Login: React.FC<Props> = ({ onLogin }) => {
+const Login: React.FC<Props> = () => {
   const [loginFailedMessage, setLoginFailedMessage] = useState("");
+
+  const { setUser } = useContext(UserContext);
+
   const {
     handleSubmit,
     errors,
@@ -38,7 +40,7 @@ const Login: React.FC<Props> = ({ onLogin }) => {
       password: yup
         .string()
         .required("Password is required field!")
-        .min(6, ({ min }) => `Password must be atlease ${min} chars`),
+        .min(6, ({ min }) => `Password must be atleast ${min} chars`),
     }),
     onSubmit: (data, { setSubmitting }) => {
       setLoginFailedMessage("");
@@ -47,7 +49,7 @@ const Login: React.FC<Props> = ({ onLogin }) => {
           setSubmitting(false);
           if (response?.status === 200) {
             console.log(response);
-            onLogin && onLogin(response.data.user);
+            setUser(response.data.user);
             localStorage.setItem(LS_LOGIN_TOKEN, response.data.token);
             window.location.href = "/dashboard";
           } else {

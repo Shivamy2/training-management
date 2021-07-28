@@ -9,18 +9,16 @@ import DashboardPage from "./Dashboard.page";
 import MovieGroupPage from "./MovieGroup.page";
 import MovieGroupButtonPage from "./MovieGroupButton.page";
 import RecordingPage from "./Recording.page";
-import { User } from "../../Models/User";
+import EditProfile from "./Profile/EditProfile";
 
-interface Props {
-  data?: User;
-}
+interface Props {}
 
-const MainDisplay: React.FC<Props> = ({ data }) => {
+const MainDisplay: React.FC<Props> = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   return (
     <div>
       <div className="sticky top-0 z-20">
-        <NavBar imgUrl={data?.profile_pic_url} />
+        <NavBar />
         <Header
           onHamburgerClick={() => {
             setIsMenuOpen(!isMenuOpen);
@@ -28,11 +26,13 @@ const MainDisplay: React.FC<Props> = ({ data }) => {
         />
       </div>
       <div className="flex">
-        <Sidebar open={isMenuOpen} />
-        <div className={"flex flex-1 minimum__height "}>
+        <div className={" md-lg:w-228 border-r border-gray-300 "}>
+          <Sidebar open={isMenuOpen} />
+        </div>
+        <div className={"flex flex-1 minimum__height"}>
           <Switch>
             <Route path="/dashboard">
-              <DashboardPage data={data} />
+              <DashboardPage />
             </Route>
             <Route path="/movie-group">
               <MovieGroupPage />
@@ -45,6 +45,9 @@ const MainDisplay: React.FC<Props> = ({ data }) => {
             </Route>
             <Route exact path="/groups/button">
               <GroupDataButton />
+            </Route>
+            <Route exact path="/profile">
+              <EditProfile />
             </Route>
             <Route path="/batch/:batchNumber/recording/:recordingNumber">
               <RecordingPage />

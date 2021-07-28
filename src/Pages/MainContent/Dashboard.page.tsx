@@ -1,20 +1,20 @@
-import React from "react";
-import { User } from "../../Models/User";
+import React, { useContext } from "react";
 import { ImSpinner9 } from "react-icons/im";
+import UserContext from "../../User.context";
 
-interface Props {
-  data?: User;
-}
+interface Props {}
 
-const Dashboard: React.FC<Props> = ({ data }) => {
+const Dashboard: React.FC<Props> = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <div className="flex flex-1 w-full h-full bg-white">
       <div className="m-auto">
         <div className="text-center">
           <h1>Welcome</h1>
-          {data ? (
+          {user ? (
             <p>
-              {data.first_name} {data.last_name}
+              {user.first_name} {user.last_name}
             </p>
           ) : (
             <ImSpinner9 className="mx-auto animate-spin" />

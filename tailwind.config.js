@@ -21,12 +21,13 @@ module.exports = {
                 "primary-lite": "#EAF1FF",
                 "warning-light": "#FFF9ED",
                 "progress-bar": "#EBEDF2",
-                "sidebar-elements": "rgb(3, 3, 5)"
+                "sidebar-elements": "rgb(3, 3, 5)",
+                "input": "rgb(59, 63, 92)"
             },
             boxShadow: {
-                success: '0 10px 15px -3px #D3F2EC, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                primary: '0 10px 15px -3px #C3CDFA, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                warning: '0 10px 15px -3px #F6E1C2, 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                success: '0 10px 15px -3px #D3F2EC, 0 4px 6px -2px rgba(0, 0, 0, 0)',
+                primary: '0 10px 15px -3px #C3CDFA, 0 4px 6px -2px rgba(0, 0, 0, 0)',
+                warning: '0 10px 15px -3px #F6E1C2, 0 4px 6px -2px rgba(0, 0, 0, 0)',
                 progress: 'rgb(241, 242, 243) 1px 3px 20px 3px',
                 stacked: '0px 0px 15px 1px rgb(113 106 202 / 10%)',
                 "more-button": 'rgb(208, 208, 208) 0px 0px 20px 0px',
@@ -59,7 +60,12 @@ module.exports = {
                 "51": "51px",
             },
             maxWidth: {
-                "list-group": "42px"
+                "list-group": "42px",
+                "avatar-size": "120px",
+                "420": "420px",
+            },
+            maxHeight: {
+                "avatar-size": "120px",
             },
             minHeight: {
                 "16": "16px",
@@ -73,7 +79,7 @@ module.exports = {
                 "menu": "189px",
                 "17.5": "17.5px",
                 "13px": "13px",
-                "228": "228px"
+                "228": "228px",
             },
             lineHeight: {
                 "0": "0px"
@@ -83,9 +89,6 @@ module.exports = {
                 "370": "370px",
                 "115": "115px",
                 "260": "260px"
-            },
-            maxWidth: {
-                "420": "420px",
             },
             padding: {
                 "10px": "10px",

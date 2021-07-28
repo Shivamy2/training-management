@@ -31,14 +31,23 @@ const Header: React.FC<Props> = ({ onHamburgerClick }) => {
             Sales
           </h2>
           <h2 className="hidden ml-6 tracking-wider sm-md:block text-14 text-hamburger">
-            Dashboard <span className="font-bold"> / Sales</span>
+            {window.location.href !== "/profile" ? (
+              <div>
+                Dashboard <span className="font-bold"> / Sales</span>
+              </div>
+            ) : (
+              <span className="font-bold">Account Settings</span>
+            )}
           </h2>
         </div>
 
-        <div className="my-auto">
+        <div className="hidden my-auto md-lg:block">
           <DropDown
             initialButtonValue={0}
-            itemsToBeShown={["Settings", "Mail", "Print", "Donwload", "Share"]}
+            itemsToBeShown={[
+              { name: "Settings", path: "/settings" },
+              { name: "Share", path: "/share" },
+            ]}
           />
         </div>
       </div>

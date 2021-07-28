@@ -29,18 +29,18 @@ const Avatar: React.FC<Props> = ({
         avatarClass += " rounded-full ";
       } else {
         onlineCircleClass += " right-2";
-        avatarClass += " rounded ";
+        avatarClass += " rounded-md ";
       }
       break;
     case "large":
-      avatarSize = " h-10 w-10 ";
+      avatarSize = " max-h-avatar-size max-w-avatar-size ";
       onlineCircleClass += " right-0 h-4 w-4 ";
       if (circular) {
         onlineCircleClass += " top-6 ";
         avatarClass += " rounded-full ";
       } else {
         onlineCircleClass += " top-7 ";
-        avatarClass += " rounded ";
+        avatarClass += " rounded-md ";
       }
       break;
 
@@ -48,7 +48,7 @@ const Avatar: React.FC<Props> = ({
       break;
   }
   return (
-    <div className="relative w-10">
+    <div className="relative">
       {src ? (
         <img
           onError={(event: any) =>
@@ -80,7 +80,6 @@ Avatar.defaultProps = {
   size: "small",
   isOnline: "none",
   circular: false,
-  className: " h-7 w-7 ",
 };
 
 export default React.memo(Avatar);
