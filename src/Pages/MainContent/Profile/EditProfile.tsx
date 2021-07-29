@@ -73,7 +73,7 @@ const EditProfile: React.FC<Props> = () => {
         .required("Last Name is required Field!")
         .max(20, ({ max }) => `Last Name must be of ${max} chars`),
     }),
-    onSubmit: (data, { setSubmitting }) => {
+    onSubmit: (data) => {
       console.log(data);
     },
   });
