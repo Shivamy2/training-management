@@ -5,11 +5,12 @@ import { User } from "../../Models/User";
 
 axios.interceptors.request.use((config) => {
   if (!loginToken) return config;
-
-  return {
+  const newConfig = {
     ...config,
     headers: { ...config.headers, Authorization: loginToken },
   };
+  console.log(newConfig);
+  return newConfig;
 });
 
 interface LoginCredentialsRequest {

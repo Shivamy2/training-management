@@ -37,6 +37,7 @@ const EditProfile: React.FC<Props> = () => {
     errors,
     touched,
     getFieldProps,
+    isSubmitting,
   } = useFormik({
     initialValues: {
       birth_date: user?.birth_date,
@@ -49,9 +50,6 @@ const EditProfile: React.FC<Props> = () => {
       education: user?.education,
     },
     validationSchema: yup.object().shape({
-      birth_date: yup.string().required("Date of birth is required!"),
-      bith_month: yup.string().required("Month of birth is required!"),
-      birth_year: yup.number().required("Year of birth is required!"),
       email: yup
         .string()
         .required("Email is required field!")
@@ -59,10 +57,12 @@ const EditProfile: React.FC<Props> = () => {
       first_name: yup
         .string()
         .required("First Name is required Field!")
-        .max(20, ({ max }) => `First Name must be of ${max} chars`),
+        .max(20, ({ max }) => `First Name must be of ${max} chars`)
+        .min(3, ({ min }) => `Must be more than ${min} chars`),
       middle_name: yup
         .string()
-        .max(20, ({ max }) => `Middle Name must be of ${max} chars`),
+        .max(20, ({ max }) => `Middle Name must be of ${max} chars`)
+        .min(3, ({ min }) => `Must be more than ${min} chars`),
       education: yup
         .string()
         .required()
@@ -70,10 +70,12 @@ const EditProfile: React.FC<Props> = () => {
       last_name: yup
         .string()
         .required("Last Name is required Field!")
-        .max(20, ({ max }) => `Last Name must be of ${max} chars`),
+        .max(20, ({ max }) => `Last Name must be of ${max} chars`)
+        .min(3, ({ min }) => `Must be more than ${min} chars`),
     }),
     onSubmit: (data) => {
       console.log(data);
+      window.location.href = "/dashboard";
     },
   });
 
@@ -97,32 +99,32 @@ const EditProfile: React.FC<Props> = () => {
               <div className="space-y-3 md-lg:space-y-0 md-lg:flex-1 md-lg:pr-20">
                 <div className="mt-3 md:flex">
                   <EditInput
+                    {...getFieldProps("first_name")}
                     className="mt-9 md-lg:mt-0 md:flex-1"
                     labelText="First Name*"
                     type="text"
                     touched={touched.first_name}
                     errorMessage={errors.first_name}
                     placeholder="First Name"
-                    {...getFieldProps("first_name")}
                   />
                   <EditInput
+                    {...getFieldProps("middle_name")}
                     className="mt-6 md:ml-3 md-lg:mt-0 md:flex-1 md:mt-9"
                     type="text"
                     labelText="Middle Name"
                     touched={touched.middle_name}
                     errorMessage={errors.middle_name}
                     placeholder="Middle Name"
-                    {...getFieldProps("middle_name")}
                   />
                 </div>
                 <EditInput
+                  {...getFieldProps("last_name")}
                   className="pt-3 md-lg:pt-6"
                   type="text"
                   labelText="Last Name*"
                   touched={touched.last_name}
                   errorMessage={errors.last_name}
                   placeholder="Last Name"
-                  {...getFieldProps("last_name")}
                 />
               </div>
             </div>
@@ -196,7 +198,12 @@ const EditProfile: React.FC<Props> = () => {
         </div>
         <div className="fixed bottom-0 h-16 bg-gray-900 profile-submit rounded-t-md">
           <div className="flex justify-between px-5 py-3">
-            <Button text="Save Changes" theme="success" type="submit" />
+            <Button
+              text="Save Changes"
+              theme="success"
+              type="submit"
+              submissionInProgress={isSubmitting}
+            />
             <Button
               onClick={handleReset.bind(null, resetForm)}
               text="Reset All"
