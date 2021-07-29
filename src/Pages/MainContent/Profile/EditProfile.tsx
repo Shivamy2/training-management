@@ -36,7 +36,6 @@ const EditProfile: React.FC<Props> = () => {
     handleReset,
     errors,
     touched,
-    isSubmitting,
     getFieldProps,
   } = useFormik({
     initialValues: {
