@@ -32,6 +32,8 @@ const EditProfile: React.FC<Props> = () => {
 
   const {
     handleSubmit,
+    resetForm,
+    handleReset,
     errors,
     touched,
     isSubmitting,
@@ -68,7 +70,7 @@ const EditProfile: React.FC<Props> = () => {
         .max(40, ({ max }) => `School/College name must be of ${max} chars`),
       last_name: yup
         .string()
-        .required("First Name is required Field!")
+        .required("Last Name is required Field!")
         .max(20, ({ max }) => `Last Name must be of ${max} chars`),
     }),
     onSubmit: (data, { setSubmitting }) => {
@@ -196,7 +198,11 @@ const EditProfile: React.FC<Props> = () => {
         <div className="fixed bottom-0 h-16 bg-gray-900 profile-submit rounded-t-md">
           <div className="flex justify-between px-5 py-3">
             <Button text="Save Changes" theme="success" type="submit" />
-            <Button text="Reset All" type="reset" />
+            <Button
+              onClick={handleReset.bind(null, resetForm)}
+              text="Reset All"
+              type="reset"
+            />
           </div>
         </div>
       </form>

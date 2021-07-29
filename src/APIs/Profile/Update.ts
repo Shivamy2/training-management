@@ -23,7 +23,9 @@ export interface UpdateProfile {
 const updateData = async (data: UpdateProfile) => {
   try {
     return axios.patch(`${BASE_URL}/me/update`);
-  } catch (error) {}
+  } catch (error) {
+    console.log("Not able to patch the information!");
+  }
 };
 
 export default updateData;
