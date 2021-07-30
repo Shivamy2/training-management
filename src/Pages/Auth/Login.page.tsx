@@ -11,15 +11,14 @@ import FormSwitch from "../../Components/FormSwitch";
 import { login } from "../../APIs/Auth/auth";
 import Alert from "../../Components/Alert/Alert";
 import { loginToken, LS_LOGIN_TOKEN } from "../../Constants/constants";
-import { useContext } from "react";
-import UserContext from "../../User.context";
+import { useDispatch } from "react-redux";
+import { meFetchAction } from "../../Store/store";
 
 interface Props {}
 
 const Login: React.FC<Props> = () => {
   const [loginFailedMessage, setLoginFailedMessage] = useState("");
-
-  const { setUser } = useContext(UserContext);
+  const dispatch = useDispatch();
 
   const {
     handleSubmit,
@@ -49,7 +48,7 @@ const Login: React.FC<Props> = () => {
           setSubmitting(false);
           if (response?.status === 200) {
             console.log(response);
-            setUser(response.data.user);
+            dispatch(meFetchAction(response.data.user));
             localStorage.setItem(LS_LOGIN_TOKEN, response.data.token);
             window.location.href = "/dashboard";
           } else {

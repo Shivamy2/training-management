@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import CanadaFlag from "../Images/canada.png";
-import UserContext from "../User.context";
+import { useAppSelector } from "../Store/store";
 import DropDown from "./DropDown";
 import Search from "./Search/Search";
 
 interface Props {}
 
 const NavBar: React.FC<Props> = () => {
-  const { user } = useContext(UserContext);
+  const user = useAppSelector((state) => state.me);
 
   return (
     <div className="bg-navBar h-navbar">

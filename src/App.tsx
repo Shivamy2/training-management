@@ -1,5 +1,6 @@
-import React, { useEffect, useState, Suspense, lazy } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { ImSpinner9 } from "react-icons/im";
+import { useDispatch } from "react-redux";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -8,8 +9,7 @@ import {
 } from "react-router-dom";
 import { me } from "./APIs/Auth/auth";
 import { loginToken } from "./Constants/constants";
-import { User } from "./Models/User";
-import UserContext from "./User.context";
+import { meLoginAction, useAppSelector } from "./Store/store";
 
 const AuthLazy = lazy(() => import("./Pages/Auth/Auth.page"));
 const MainDisplayLazy = lazy(
@@ -19,16 +19,16 @@ const MainDisplayLazy = lazy(
 interface Props {}
 
 const App: React.FC<Props> = () => {
-  const [user, setUser] = useState<User>();
-
+  const user = useAppSelector((state) => state.me);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!loginToken) return;
 
     me().then((userResponse) => {
       console.log(userResponse);
-      setUser(userResponse);
+      dispatch(meLoginAction(userResponse));
     });
-  }, []);
+  }, []); // eslint-disable-line
 
   if (!user && loginToken) {
     return (
@@ -39,43 +39,41 @@ const App: React.FC<Props> = () => {
   }
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <Suspense
-        fallback={
-          <div className="w-screen h-screen">
-            <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
-          </div>
-        }
-      >
-        <div className="bg-body">
-          <Router>
-            <Switch>
-              <Route exact path="/">
-                {user ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
-              </Route>
-              <Route exact path={["/login", "/signup"]}>
-                <AuthLazy />
-              </Route>
-              <Route
-                exact
-                path={[
-                  "/dashboard",
-                  "/batch/:batchNumber/recording/:recordingNumber",
-                  "/movie-group",
-                  "/movie-group-button",
-                  "/groups",
-                  "/groups/button",
-                  "/profile",
-                ]}
-              >
-                {user ? <MainDisplayLazy /> : <Redirect to="/login" />}
-              </Route>
-              <Route path="/">Page Not Found 404 Error</Route>
-            </Switch>
-          </Router>
+    <Suspense
+      fallback={
+        <div className="w-screen h-screen">
+          <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
         </div>
-      </Suspense>
-    </UserContext.Provider>
+      }
+    >
+      <div className="bg-body">
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              {user ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+            </Route>
+            <Route exact path={["/login", "/signup"]}>
+              <AuthLazy />
+            </Route>
+            <Route
+              exact
+              path={[
+                "/dashboard",
+                "/batch/:batchNumber/recording/:recordingNumber",
+                "/movie-group",
+                "/movie-group-button",
+                "/groups",
+                "/groups/button",
+                "/profile",
+              ]}
+            >
+              {user ? <MainDisplayLazy /> : <Redirect to="/login" />}
+            </Route>
+            <Route path="/">Page Not Found 404 Error</Route>
+          </Switch>
+        </Router>
+      </div>
+    </Suspense>
   );
 };
 

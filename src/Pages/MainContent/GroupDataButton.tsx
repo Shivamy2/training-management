@@ -1,19 +1,21 @@
 import React, { FormEvent, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import fetchGroupData from "../../APIs/GroupsData/groupsData";
-import { GroupDataStream } from "../../Models/Groups";
 import Alert from "../../Components/Alert/Alert";
 import Button from "../../Components/Button/Button";
 import ListGroup from "../../Components/ListGroup/ListGroup";
 import Search from "../../Components/Search/Search";
+import { useDispatch } from "react-redux";
+import { groupsFetchAction, useAppSelector } from "../../Store/store";
 
 interface Props {}
 
 const GroupDataButton: React.FC<Props> = () => {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [groupData, setGroupData] = useState<GroupDataStream[]>();
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+  const groupData = useAppSelector((state) => state.groups);
+  const dispatch = useDispatch();
 
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -23,7 +25,7 @@ const GroupDataButton: React.FC<Props> = () => {
         setIsSubmitClicked(true);
         if (response?.status === 200) {
           console.log(response);
-          setGroupData(response?.data.data);
+          dispatch(groupsFetchAction(response.data.data));
           setIsLoading(false);
         } else {
           console.log("Error while fetching data", response?.status);

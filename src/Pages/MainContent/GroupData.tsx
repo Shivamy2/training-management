@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import fetchGroupData from "../../APIs/GroupsData/groupsData";
-import { GroupDataStream } from "../../Models/Groups";
 import Alert from "../../Components/Alert/Alert";
 
 import ListGroup from "../../Components/ListGroup/ListGroup";
 import Search from "../../Components/Search/Search";
+import { useDispatch } from "react-redux";
+import { groupsFetchAction, useAppSelector } from "../../Store/store";
 
 interface Props {}
 
@@ -13,15 +14,15 @@ const GroupData: React.FC<Props> = () => {
   const [query, setQuery] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
-  const [groupData, setGroupData] = useState<GroupDataStream[]>();
-
+  const groupData = useAppSelector((state) => state.groups);
+  const dispatch = useDispatch();
   useEffect(() => {
     setIsLoading(true);
 
     fetchGroupData({ query: query, status: "all-groups" })
       .then((response) => {
         if (response?.status === 200) {
-          setGroupData(response?.data.data);
+          dispatch(groupsFetchAction(response.data.data));
 
           setIsLoading(false);
         } else {
@@ -32,7 +33,7 @@ const GroupData: React.FC<Props> = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [query]);
+  }, [query]); //eslint-disable-line
 
   return (
     <div className="w-full h-full bg-white">

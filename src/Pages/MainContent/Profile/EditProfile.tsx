@@ -1,16 +1,15 @@
 import { useFormik } from "formik";
 import React from "react";
-import { useContext } from "react";
 import Avatar from "../../../Components/Avatar/Avatar";
 import Button from "../../../Components/Button/Button";
 import EditInput from "../../../Components/Input/EditInput";
-import UserContext from "../../../User.context";
 import * as yup from "yup";
+import { useAppSelector } from "../../../Store/store";
 
 interface Props {}
 
 const EditProfile: React.FC<Props> = () => {
-  const { user } = useContext(UserContext);
+  const user = useAppSelector((state) => state.me);
   let date: string[] = [];
   for (let index = 1; index <= 31; index++) {
     if (index >= 10) {

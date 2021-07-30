@@ -1,8 +1,8 @@
 import { Menu, Transition } from "@headlessui/react";
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { logout } from "../APIs/Auth/auth";
-import UserContext from "../User.context";
+import { useAppSelector } from "../Store/store";
 import Avatar from "./Avatar/Avatar";
 
 interface Props {
@@ -16,14 +16,13 @@ interface Props {
 
 const DropDown: React.FC<Props> = ({
   itemsToBeShown,
-  image,
   initialButtonValue,
   title,
   containsImage,
   className,
 }) => {
   const [selectedDropdown, setSelectedDropdown] = useState(initialButtonValue);
-  const { user } = useContext(UserContext);
+  const user = useAppSelector((state) => state.me);
   const history = useHistory();
 
   return (

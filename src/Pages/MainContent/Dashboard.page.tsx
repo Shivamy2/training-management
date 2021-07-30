@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ImSpinner9 } from "react-icons/im";
-import UserContext from "../../User.context";
+import { useAppSelector } from "../../Store/store";
 
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
-  const { user } = useContext(UserContext);
+  const user = useAppSelector((state) => state.me);
 
   return (
     <div className="flex flex-1 w-full h-full bg-white">
