@@ -14,20 +14,15 @@ import EditProfile from "./Profile/EditProfile";
 interface Props {}
 
 const MainDisplay: React.FC<Props> = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
   return (
     <div>
       <div className="sticky top-0 z-20">
         <NavBar />
-        <Header
-          onHamburgerClick={() => {
-            setIsMenuOpen(!isMenuOpen);
-          }}
-        />
+        <Header />
       </div>
       <div className="flex">
         <div className={" md-lg:w-228 border-r border-gray-300 "}>
-          <Sidebar open={isMenuOpen} />
+          <Sidebar />
         </div>
         <div className={"flex flex-1 minimum__height"}>
           <Switch>

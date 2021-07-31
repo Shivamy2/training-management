@@ -10,11 +10,9 @@ import {
 import { logout } from "../APIs/Auth/auth";
 import { useHistory } from "react-router-dom";
 
-interface Props {
-  open?: boolean;
-}
+interface Props {}
 
-const Sidebar: React.FC<Props> = ({ open }) => {
+const Sidebar: React.FC<Props> = () => {
   const history = useHistory();
 
   return (
