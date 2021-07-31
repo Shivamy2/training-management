@@ -6,6 +6,7 @@ import { User } from "../Models/User";
 const ME_FETCH = "me/fetch";
 const ME_LOGIN = "me/login";
 const GROUPS_FETCH = "groups/fetch";
+const SIDEBAR_STATUS = "sidebar/open";
 
 export interface AppState {
   me?: User;
@@ -29,6 +30,8 @@ const reducer: Reducer<AppState> = (
       return { ...currentState, me: dispatchedAction.payload };
     case GROUPS_FETCH:
       return { ...currentState, groups: dispatchedAction.payload };
+    case SIDEBAR_STATUS:
+      return { ...currentState, isSidebarOpen: dispatchedAction.payload };
     default:
       return currentState;
   }
@@ -47,6 +50,10 @@ export const meLoginAction = (user: User) => ({
 export const groupsFetchAction = (groupData: GroupDataStream[]) => ({
   type: GROUPS_FETCH,
   payload: groupData,
+});
+export const sidebarOpen = (status: boolean) => ({
+  type: SIDEBAR_STATUS,
+  payload: status,
 });
 
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;

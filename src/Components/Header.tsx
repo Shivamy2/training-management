@@ -1,17 +1,22 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { sidebarOpen, useAppSelector } from "../Store/store";
 import DropDown from "./DropDown";
 
-interface Props {
-  onHamburgerClick?: () => void;
-}
+interface Props {}
 
-const Header: React.FC<Props> = ({ onHamburgerClick }) => {
+const Header: React.FC<Props> = () => {
+  const dispatch = useDispatch();
+  const sidebarOpenStatus = useAppSelector((state) => state.isSidebarOpen);
   return (
     <div className="z-30 w-full bg-header h-header">
       <div className="flex justify-between h-full px-4">
         <div className="flex my-auto">
           <svg
-            onClick={onHamburgerClick}
+            onClick={() => {
+              console.log(sidebarOpenStatus);
+              dispatch(sidebarOpen(!sidebarOpenStatus));
+            }}
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
