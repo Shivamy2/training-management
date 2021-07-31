@@ -18,7 +18,7 @@ const Sidebar: React.FC<Props> = ({ open }) => {
   const history = useHistory();
 
   return (
-    <div className="fixed hidden min-h-full px-4 text-white md-lg:block">
+    <nav className="fixed hidden min-h-full px-4 text-white md-lg:block">
       <div>
         <SideBarElement
           onClick={() => history.push("/dashboard")}
@@ -80,7 +80,7 @@ const Sidebar: React.FC<Props> = ({ open }) => {
           <BiLogOut className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
       </div>
-    </div>
+    </nav>
   );
 };
 
