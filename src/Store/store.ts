@@ -7,6 +7,14 @@ const ME_FETCH = "me/fetch";
 const ME_LOGIN = "me/login";
 const GROUPS_FETCH = "groups/fetch";
 const SIDEBAR_STATUS = "sidebar/open";
+const NEW_QUERY = "query/update";
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
 
 declare global {
   interface Window {
@@ -16,30 +24,45 @@ declare global {
 
 export interface AppState {
   me?: User;
-  groups: GroupDataStream[];
+  query: string;
+  groupIds: {[keyword: string]: number[]};
+  groupKeyMappedData: {[id: number]: GroupDataStream};
   isSidebarOpen: boolean;
 }
 
 const initialState: AppState = {
   me: undefined,
-  groups: [],
+  groupIds: {},
+  query: "",
+  groupKeyMappedData: {},
   isSidebarOpen: true,
 };
 
 const reducer: Reducer<AppState> = (
-  currentState = initialState,
-  dispatchedAction: AnyAction
+  state = initialState,
+  action: AnyAction
 ) => {
-  switch (dispatchedAction.type) {
+  switch (action.type) {
     case ME_FETCH:
     case ME_LOGIN:
-      return { ...currentState, me: dispatchedAction.payload };
+      return { ...state, me: action.payload };
+
     case GROUPS_FETCH:
-      return { ...currentState, groups: dispatchedAction.payload };
+      const groups = action.payload.groupData as GroupDataStream[];
+      const groupIds = groups.map((items) => items.id);
+      const groupsIdReference = groups.reduce((previous, item) => {
+        return {...previous, [item.id]: item}
+      }, {});
+      return {...state, groupIds: {...state.groupIds, [action.payload.keyword]: groupIds},
+      groupKeyMappedData: {...state.groupKeyMappedData, ...groupsIdReference}};
+
+    case NEW_QUERY:
+      return {...state, query: action.payload};
+
     case SIDEBAR_STATUS:
-      return { ...currentState, isSidebarOpen: dispatchedAction.payload };
+      return { ...state, isSidebarOpen: action.payload };
     default:
-      return currentState;
+      return state;
   }
 };
 
@@ -55,9 +78,13 @@ export const meLoginAction = (user: User) => ({
   type: ME_LOGIN,
   payload: user,
 });
-export const groupsFetchAction = (groupData: GroupDataStream[]) => ({
+export const groupsFetchAction = (groupData: GroupDataStream[], keyword: string) => ({
   type: GROUPS_FETCH,
-  payload: groupData,
+  payload: {groupData, keyword},
+});
+export const updateQuery = (query: string) => ({
+  type: NEW_QUERY,
+  payload: query,
 });
 export const sidebarOpen = (status: boolean) => ({
   type: SIDEBAR_STATUS,

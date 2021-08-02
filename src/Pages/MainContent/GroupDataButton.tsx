@@ -6,16 +6,24 @@ import Button from "../../Components/Button/Button";
 import ListGroup from "../../Components/ListGroup/ListGroup";
 import Search from "../../Components/Search/Search";
 import { useDispatch } from "react-redux";
-import { groupsFetchAction, useAppSelector } from "../../Store/store";
+import { groupsFetchAction, updateQuery, useAppSelector } from "../../Store/store";
+
+console.log("Groups Button is rerendering");
+
 
 interface Props {}
 
 const GroupDataButton: React.FC<Props> = () => {
-  const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
-  const groupData = useAppSelector((state) => state.groups);
+  const query = useAppSelector((state) => state.query);
   const dispatch = useDispatch();
+  const groupData = useAppSelector(state => {
+    const groupIds = state.groupIds[state.query] || [];
+    const group = groupIds!.map((id) => state.groupKeyMappedData[id]);
+    return group;
+  });
+
 
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -25,7 +33,7 @@ const GroupDataButton: React.FC<Props> = () => {
         setIsSubmitClicked(true);
         if (response?.status === 200) {
           console.log(response);
-          dispatch(groupsFetchAction(response.data.data));
+          dispatch(groupsFetchAction(response.data.data, query));
           setIsLoading(false);
         } else {
           console.log("Error while fetching data", response?.status);
@@ -46,7 +54,7 @@ const GroupDataButton: React.FC<Props> = () => {
               className="rounded-r-none"
               value={query}
               onChange={(event) => {
-                setQuery(event.target.value);
+                dispatch(updateQuery(event.target.value));
               }}
             />
             <Button

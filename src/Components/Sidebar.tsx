@@ -9,14 +9,20 @@ import {
 } from "react-icons/all";
 import { logout } from "../APIs/Auth/auth";
 import { useHistory } from "react-router-dom";
+import { useAppSelector } from "../Store/store";
 
 interface Props {}
 
 const Sidebar: React.FC<Props> = () => {
   const history = useHistory();
+  const isSideBarOpen = useAppSelector((state) => state.isSidebarOpen);
 
   return (
-    <nav className="fixed hidden min-h-full px-4 text-white md-lg:block">
+    <nav
+      className={`fixed hidden transition-transform duration-500 ease-in-out min-h-full px-4 text-white transform md-lg:block ${
+        isSideBarOpen ? "" : "-translate-x-full"
+      }`}
+    >
       <div>
         <SideBarElement
           onClick={() => history.push("/dashboard")}
