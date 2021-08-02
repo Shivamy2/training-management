@@ -1,5 +1,5 @@
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { Reducer, AnyAction, createStore } from "redux";
+import { Reducer, AnyAction, createStore, compose } from "redux";
 import { GroupDataStream } from "../Models/Groups";
 import { User } from "../Models/User";
 
@@ -7,6 +7,12 @@ const ME_FETCH = "me/fetch";
 const ME_LOGIN = "me/login";
 const GROUPS_FETCH = "groups/fetch";
 const SIDEBAR_STATUS = "sidebar/open";
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
 
 export interface AppState {
   me?: User;
@@ -37,7 +43,9 @@ const reducer: Reducer<AppState> = (
   }
 };
 
-export const store = createStore(reducer);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export const store = createStore(reducer, composeEnhancers());
 
 export const meFetchAction = (user: User) => ({
   type: ME_FETCH,
