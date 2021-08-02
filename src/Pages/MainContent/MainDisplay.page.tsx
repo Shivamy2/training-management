@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import GroupData from "./GroupData";
 import GroupDataButton from "./GroupDataButton";
@@ -10,10 +10,12 @@ import MovieGroupPage from "./MovieGroup.page";
 import MovieGroupButtonPage from "./MovieGroupButton.page";
 import RecordingPage from "./Recording.page";
 import EditProfile from "./Profile/EditProfile";
+import { useAppSelector } from "../../Store/store";
 
 interface Props {}
 
 const MainDisplay: React.FC<Props> = () => {
+  const isSideBarOpen = useAppSelector((state) => state.isSidebarOpen);
   return (
     <div>
       <div className="sticky top-0 z-20">
@@ -21,7 +23,11 @@ const MainDisplay: React.FC<Props> = () => {
         <Header />
       </div>
       <div className="flex">
-        <div className={" md-lg:w-228 border-r border-gray-300 "}>
+        <div
+          className={` border-r border-gray-300 transition-width duration-500 ${
+            isSideBarOpen ? "md-lg:w-228" : "w-0"
+          }`}
+        >
           <Sidebar />
         </div>
         <div className={"flex flex-1 minimum__height"}>

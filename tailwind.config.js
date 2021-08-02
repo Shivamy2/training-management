@@ -81,6 +81,9 @@ module.exports = {
                 "13px": "13px",
                 "228": "228px",
             },
+            transitionProperty: {
+                'width': 'width',
+            },
             lineHeight: {
                 "0": "0px"
             },
