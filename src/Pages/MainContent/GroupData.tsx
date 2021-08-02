@@ -6,24 +6,28 @@ import Alert from "../../Components/Alert/Alert";
 import ListGroup from "../../Components/ListGroup/ListGroup";
 import Search from "../../Components/Search/Search";
 import { useDispatch } from "react-redux";
-import { groupsFetchAction, useAppSelector } from "../../Store/store";
+import { groupsFetchAction, updateQuery, useAppSelector } from "../../Store/store";
 
 interface Props {}
 
 const GroupData: React.FC<Props> = () => {
-  const [query, setQuery] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
-  const groupData = useAppSelector((state) => state.groups);
+  const query = useAppSelector((state) => state.query);
   const dispatch = useDispatch();
+  const groupData = useAppSelector(state => {
+    const groupIds = state.groupIds[state.query] || [];
+    const group = groupIds!.map((id) => state.groupKeyMappedData[id]);
+    return group;
+  });
+
   useEffect(() => {
     setIsLoading(true);
 
     fetchGroupData({ query: query, status: "all-groups" })
       .then((response) => {
         if (response?.status === 200) {
-          dispatch(groupsFetchAction(response.data.data));
-
+          dispatch(groupsFetchAction(response.data.data, query));
           setIsLoading(false);
         } else {
           console.log("Error while fetching data", response?.status);
@@ -36,7 +40,7 @@ const GroupData: React.FC<Props> = () => {
   }, [query]); //eslint-disable-line
 
   return (
-    <div className="w-full h-full bg-white">
+    <div className="w-full h-full">
       <div>
         <div className="flex justify-center pt-3">
           <Search
@@ -45,7 +49,7 @@ const GroupData: React.FC<Props> = () => {
             }}
             value={query}
             onChange={(event) => {
-              setQuery(event.target.value);
+             dispatch(updateQuery(event.target.value));
             }}
           />
         </div>
