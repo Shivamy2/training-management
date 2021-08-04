@@ -15,7 +15,7 @@ interface Props {}
 
 const Sidebar: React.FC<Props> = () => {
   const history = useHistory();
-  const isSideBarOpen = useAppSelector((state) => state.isSidebarOpen);
+  const isSideBarOpen = useAppSelector((state) => state.sidebar.isSidebarOpen);
 
   return (
     <nav

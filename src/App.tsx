@@ -1,15 +1,15 @@
 import React, { useEffect, Suspense, lazy } from "react";
 import { ImSpinner9 } from "react-icons/im";
-import { useDispatch } from "react-redux";
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
 } from "react-router-dom";
+import { authActions } from "./actions/action.constants";
 import { me } from "./APIs/Auth/auth";
 import { loginToken } from "./Constants/constants";
-import { meLoginAction, useAppSelector } from "./Store/store";
+import { useAppSelector } from "./Store/store";
 
 const AuthLazy = lazy(() => import("./Pages/Auth/Auth.page"));
 const MainDisplayLazy = lazy(
@@ -19,14 +19,13 @@ const MainDisplayLazy = lazy(
 interface Props {}
 
 const App: React.FC<Props> = () => {
-  const user = useAppSelector((state) => state.me);
-  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.auth.id && state.users.byId[state.auth.id]);
   useEffect(() => {
     if (!loginToken) return;
 
     me().then((userResponse) => {
       console.log(userResponse);
-      dispatch(meLoginAction(userResponse));
+      authActions.fetch(userResponse);
     });
   }, []); // eslint-disable-line
 

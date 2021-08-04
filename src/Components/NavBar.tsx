@@ -7,7 +7,7 @@ import Search from "./Search/Search";
 interface Props {}
 
 const NavBar: React.FC<Props> = () => {
-  const user = useAppSelector((state) => state.me);
+  const userDP = useAppSelector((state) => state.users.byId[state.auth.id!].profile_pic_url);
 
   return (
     <div className="bg-navBar h-navbar">
@@ -106,7 +106,7 @@ const NavBar: React.FC<Props> = () => {
           <li className="my-auto">
             <DropDown
               containsImage={true}
-              image={user!.profile_pic_url}
+              image={userDP}
               itemsToBeShown={[
                 { name: "Profile", path: "/profile" },
                 { name: "Sign Out", path: "/login" },

@@ -1,12 +1,12 @@
 import React, { FormEvent, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
+import { groupActions } from "../../actions/action.constants";
 import fetchGroupData from "../../APIs/GroupsData/groupsData";
 import Alert from "../../Components/Alert/Alert";
 import Button from "../../Components/Button/Button";
 import ListGroup from "../../Components/ListGroup/ListGroup";
 import Search from "../../Components/Search/Search";
-import { useDispatch } from "react-redux";
-import { groupsFetchAction, updateQuery, useAppSelector } from "../../Store/store";
+import { useAppSelector } from "../../Store/store";
 
 console.log("Groups Button is rerendering");
 
@@ -16,11 +16,10 @@ interface Props {}
 const GroupDataButton: React.FC<Props> = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
-  const query = useAppSelector((state) => state.query);
-  const dispatch = useDispatch();
+  const query = useAppSelector((state) => state.groups.query);
   const groupData = useAppSelector(state => {
-    const groupIds = state.groupIds[state.query] || [];
-    const group = groupIds!.map((id) => state.groupKeyMappedData[id]);
+    const groupIds = state.groups.byId[state.groups.query] || [];
+    const group = groupIds!.map((id) => state.groups.mappedData[id]);
     return group;
   });
 
@@ -33,7 +32,7 @@ const GroupDataButton: React.FC<Props> = () => {
         setIsSubmitClicked(true);
         if (response?.status === 200) {
           console.log(response);
-          dispatch(groupsFetchAction(response.data.data, query));
+          groupActions.groups(response.data.data, query);
           setIsLoading(false);
         } else {
           console.log("Error while fetching data", response?.status);
@@ -54,7 +53,7 @@ const GroupDataButton: React.FC<Props> = () => {
               className="rounded-r-none"
               value={query}
               onChange={(event) => {
-                dispatch(updateQuery(event.target.value));
+                groupActions.query(event.target.value);
               }}
             />
             <Button

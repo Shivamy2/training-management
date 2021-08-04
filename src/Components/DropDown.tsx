@@ -2,7 +2,6 @@ import { Menu, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { logout } from "../APIs/Auth/auth";
-import { useAppSelector } from "../Store/store";
 import Avatar from "./Avatar/Avatar";
 
 interface Props {
@@ -20,9 +19,9 @@ const DropDown: React.FC<Props> = ({
   title,
   containsImage,
   className,
+  image
 }) => {
   const [selectedDropdown, setSelectedDropdown] = useState(initialButtonValue);
-  const user = useAppSelector((state) => state.me);
   const history = useHistory();
 
   return (
@@ -34,7 +33,7 @@ const DropDown: React.FC<Props> = ({
               size="small"
               src={
                 "https://images.unsplash.com/photo-1558898479-33c0057a5d12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80" &&
-                user?.profile_pic_url
+                image
               }
               circular={false}
             />

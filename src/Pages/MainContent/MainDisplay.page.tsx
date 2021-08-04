@@ -15,7 +15,7 @@ import { useAppSelector } from "../../Store/store";
 interface Props {}
 
 const MainDisplay: React.FC<Props> = () => {
-  const isSideBarOpen = useAppSelector((state) => state.isSidebarOpen);
+  const isSideBarOpen = useAppSelector((state) => state.sidebar.isSidebarOpen);
   return (
     <div>
       <div className="sticky top-0 z-20">

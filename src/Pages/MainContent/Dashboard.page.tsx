@@ -5,7 +5,7 @@ import { useAppSelector } from "../../Store/store";
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
-  const user = useAppSelector((state) => state.me);
+  const user = useAppSelector(state => state.users.byId[state.auth.id!])
 
   return (
     <div className="flex flex-1 w-full h-full bg-white">

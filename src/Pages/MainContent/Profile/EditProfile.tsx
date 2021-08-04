@@ -9,7 +9,7 @@ import { useAppSelector } from "../../../Store/store";
 interface Props {}
 
 const EditProfile: React.FC<Props> = () => {
-  const user = useAppSelector((state) => state.me);
+  const user = useAppSelector((state) => state.users.byId[state.auth.id!]);
   let date: string[] = [];
   for (let index = 1; index <= 31; index++) {
     if (index >= 10) {

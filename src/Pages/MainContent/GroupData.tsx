@@ -5,21 +5,22 @@ import Alert from "../../Components/Alert/Alert";
 
 import ListGroup from "../../Components/ListGroup/ListGroup";
 import Search from "../../Components/Search/Search";
-import { useDispatch } from "react-redux";
-import { groupsFetchAction, updateQuery, useAppSelector } from "../../Store/store";
+import { groupActions } from "../../actions/action.constants";
+import { useAppSelector } from "../../Store/store";
 
 interface Props {}
 
 const GroupData: React.FC<Props> = () => {
 
   const [isLoading, setIsLoading] = useState(false);
-  const query = useAppSelector((state) => state.query);
-  const dispatch = useDispatch();
+  const query = useAppSelector((state) => state.groups.query);
   const groupData = useAppSelector(state => {
-    const groupIds = state.groupIds[state.query] || [];
-    const group = groupIds!.map((id) => state.groupKeyMappedData[id]);
+    const groupIds = state.groups.byId[state.groups.query] || [];
+    const group = groupIds!.map((id) => state.groups.mappedData[id]);
     return group;
   });
+  console.log(groupData);
+  
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,7 +28,7 @@ const GroupData: React.FC<Props> = () => {
     fetchGroupData({ query: query, status: "all-groups" })
       .then((response) => {
         if (response?.status === 200) {
-          dispatch(groupsFetchAction(response.data.data, query));
+          groupActions.groups(response.data.data, query);
           setIsLoading(false);
         } else {
           console.log("Error while fetching data", response?.status);
@@ -49,7 +50,7 @@ const GroupData: React.FC<Props> = () => {
             }}
             value={query}
             onChange={(event) => {
-             dispatch(updateQuery(event.target.value));
+              groupActions.query(event.target.value);
             }}
           />
         </div>
