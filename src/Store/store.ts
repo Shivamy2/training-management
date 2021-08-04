@@ -15,13 +15,6 @@ declare global {
   }
 }
 
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
-
 export interface AppState {
   me?: User;
   query: string;
