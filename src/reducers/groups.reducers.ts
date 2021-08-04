@@ -22,7 +22,7 @@ export const groupsReducer: Reducer<GroupState> = (
 ) => {
   switch (action.type) {
     case GROUP_QUERY:
-      return { ...state, query: action.payload.query};
+      return { ...state, query: action.payload};
     case GROUPS_FETCH:
       const groupData: GroupDataStream[] = action.payload.groupData;
       const groupIds = groupData.map((user) => user.id);

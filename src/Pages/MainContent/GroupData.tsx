@@ -24,7 +24,8 @@ const GroupData: React.FC<Props> = () => {
 
   useEffect(() => {
     setIsLoading(true);
-
+    console.log(query);
+    
     fetchGroupData({ query: query, status: "all-groups" })
       .then((response) => {
         if (response?.status === 200) {
