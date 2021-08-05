@@ -19,8 +19,7 @@ const reducer = combineReducers({
   sidebar: sidebarReducer
 });
 
-type AppState = ReturnType<typeof store.getState>;
-
+export type AppState = ReturnType<typeof store.getState>;
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
