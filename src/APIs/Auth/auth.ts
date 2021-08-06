@@ -9,7 +9,6 @@ axios.interceptors.request.use((config) => {
     ...config,
     headers: { ...config.headers, Authorization: loginToken },
   };
-  console.log(newConfig);
   return newConfig;
 });
 

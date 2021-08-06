@@ -7,22 +7,23 @@ import ListGroup from "../../Components/ListGroup/ListGroup";
 import Search from "../../Components/Search/Search";
 import { groupActions } from "../../actions/action.constants";
 import { useAppSelector } from "../../Store/store";
-import { groupDataSelector, groupQuerySelector } from "../../selectors/groups.selectors";
+import {
+  groupDataSelector,
+  groupQuerySelector,
+} from "../../selectors/groups.selectors";
+import { useHistory } from "react-router-dom";
 
 interface Props {}
 
 const GroupData: React.FC<Props> = () => {
-
   const [isLoading, setIsLoading] = useState(false);
   const query = useAppSelector(groupQuerySelector);
   const groupData = useAppSelector(groupDataSelector);
-  console.log(groupData);
-  
+  const history = useHistory();
 
   useEffect(() => {
     setIsLoading(true);
-    console.log(query);
-    
+
     fetchGroupData({ query: query, status: "all-groups" })
       .then((response) => {
         if (response?.status === 200) {
@@ -64,8 +65,11 @@ const GroupData: React.FC<Props> = () => {
               else if (index === groupData.length - 1) {
                 listExtraStyling += " rounded-b-md ";
               }
+              const groupParam = () =>
+                history.push(`/groups/detail/${item.id}`);
               return (index & 1) === 1 ? (
                 <ListGroup
+                  onClick={groupParam}
                   className={
                     "bg-search-icon shadow-stacked hover:shadow-none " +
                     listExtraStyling
@@ -82,6 +86,7 @@ const GroupData: React.FC<Props> = () => {
                 />
               ) : (
                 <ListGroup
+                  onClick={groupParam}
                   className={
                     "hover:bg-gray-100 bg-white hover:shadow-stacked " +
                     listExtraStyling

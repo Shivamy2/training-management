@@ -57,7 +57,9 @@ const Avatar: React.FC<Props> = ({
           }
           {...rest}
           src={src}
-          className={className + " " + avatarClass + " " + avatarSize}
+          className={
+            className + " " + avatarClass + " " + avatarSize + " object-cover"
+          }
           alt="display profile"
         />
       ) : (

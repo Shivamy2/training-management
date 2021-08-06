@@ -5,6 +5,7 @@ import Button from "../../../Components/Button/Button";
 import EditInput from "../../../Components/Input/EditInput";
 import * as yup from "yup";
 import { useAppSelector } from "../../../Store/store";
+import updateData from "../../../APIs/Profile/Update";
 
 interface Props {}
 
@@ -39,14 +40,14 @@ const EditProfile: React.FC<Props> = () => {
     isSubmitting,
   } = useFormik({
     initialValues: {
-      birth_date: user?.birth_date,
-      birth_month: user?.birth_month,
-      birth_year: user?.birth_year,
-      first_name: user?.first_name,
-      middle_name: user?.middle_name,
-      last_name: user?.last_name,
-      email: user?.email,
-      education: user?.education,
+      birth_date: user.birth_date ? user.birth_date : "Day",
+      birth_month: user.birth_month ? user.birth_month : "Month",
+      birth_year: user.birth_year ? user.birth_year : "Year",
+      first_name: user.first_name ? user.first_name : "",
+      middle_name: user.middle_name ? user.middle_name : "",
+      last_name: user.last_name ? user.last_name : "",
+      email: user.email ? user.email : "",
+      education: user.education ? user.education : "",
     },
     validationSchema: yup.object().shape({
       email: yup
@@ -74,7 +75,9 @@ const EditProfile: React.FC<Props> = () => {
     }),
     onSubmit: (data) => {
       console.log(data);
-      window.location.href = "/dashboard";
+      updateData(data).then((response) => {
+        console.log(response?.data);
+      });
     },
   });
 

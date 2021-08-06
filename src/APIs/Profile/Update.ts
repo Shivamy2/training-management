@@ -15,14 +15,15 @@ export interface UpdateProfile {
   last_name: string;
   middle_name: string;
   education: string;
-  birth_date: number;
+  birth_date: string;
   birth_month: string;
-  birth_year: number;
+  birth_year: string;
 }
 
 const updateData = async (data: UpdateProfile) => {
   try {
-    return axios.patch(`${BASE_URL}/me/update`);
+    const update = await axios.post(`${BASE_URL}/me/update`, data);
+    return update;
   } catch (error) {
     console.log("Not able to patch the information!");
   }

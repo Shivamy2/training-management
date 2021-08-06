@@ -10,12 +10,14 @@ import MovieGroupButtonPage from "./MovieGroupButton.page";
 import RecordingPage from "./Recording.page";
 import EditProfile from "./Profile/EditProfile";
 import { useAppSelector } from "../../Store/store";
-import { GroupDetailsPage } from "./GroupDetails.page";
+import GroupDetailsPage from "./GroupDetails.page";
+// import { groupSelectedSelector } from "../../selectors/groups.selectors";
 
 interface Props {}
 
 const MainDisplay: React.FC<Props> = () => {
   const isSideBarOpen = useAppSelector((state) => state.sidebar.isSidebarOpen);
+  // const selectedGroupId = useAppSelector(groupSelectedSelector);
   return (
     <div>
       <div className="sticky top-0 z-20">
@@ -44,7 +46,7 @@ const MainDisplay: React.FC<Props> = () => {
             <Route exact path="/groups">
               <GroupData />
             </Route>
-            <Route exact path="/groups/detail">
+            <Route exact path="/groups/detail/:selectedGroupId">
               <GroupDetailsPage />
             </Route>
             <Route exact path="/profile">

@@ -1,13 +1,18 @@
 import { bindActionCreators } from "redux";
 import { store } from "../Store/store";
 import { meFetchAction, meLoginAction } from "./auth.actions";
-import { groupsFetchAction, updateQuery } from "./groups.actions";
+import {
+  groupsFetchAction,
+  selectedIdAction,
+  updateQueryAction,
+} from "./groups.actions";
 import { sidebarOpen } from "./sidebar.action";
 
 export const groupActions = bindActionCreators(
   {
-    query: updateQuery,
+    query: updateQueryAction,
     groups: groupsFetchAction,
+    selectedId: selectedIdAction,
   },
   store.dispatch
 );

@@ -50,7 +50,11 @@ const App: React.FC<Props> = () => {
         <Router>
           <Switch>
             <Route exact path="/">
-              {authUser ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+              {authUser ? (
+                <Redirect to="/dashboard" />
+              ) : (
+                <Redirect to="/login" />
+              )}
             </Route>
             <Route exact path={["/login", "/signup"]}>
               <AuthLazy />
@@ -65,7 +69,7 @@ const App: React.FC<Props> = () => {
                 "/groups",
                 "/groups/button",
                 "/profile",
-                "/groups/detail"
+                "/groups/detail/:selectedGroupId",
               ]}
             >
               {authUser ? <MainDisplayLazy /> : <Redirect to="/login" />}

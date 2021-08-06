@@ -5,9 +5,11 @@ interface Props {
   url: string;
   className?: string;
   infoClassName?: string;
+  onClick?: () => void;
 }
 
 const ListGroup: React.FC<Props> = ({
+  onClick,
   title,
   description,
   url,
@@ -20,7 +22,10 @@ const ListGroup: React.FC<Props> = ({
   };
 
   return (
-    <div className={"min-h-16 ring-1 ring-gray-200 " + className}>
+    <div
+      onClick={onClick}
+      className={"min-h-16 ring-1 ring-gray-200 cursor-pointer " + className}
+    >
       <div className="py-2.5 flex px-3">
         <div className="mr-3 w-list-group">
           <img

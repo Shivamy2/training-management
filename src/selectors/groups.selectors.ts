@@ -40,3 +40,20 @@ export const groupDataSelector = createSelector(
     return mappedData;
   }
 );
+
+// 10: {id:, }
+
+export const groupSelectedIdSelector = createSelector(
+  [groupStateSelector],
+  (groups) => {
+    return groups.selectedId;
+  }
+);
+
+export const groupSelectedSelector = createSelector(
+  [groupSelectedIdSelector, groupMappedData],
+  (selectedId, idMappedGroups) => {
+    const groupSelected = idMappedGroups[selectedId] || [];
+    return groupSelected;
+  }
+);
