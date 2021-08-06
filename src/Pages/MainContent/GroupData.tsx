@@ -7,18 +7,15 @@ import ListGroup from "../../Components/ListGroup/ListGroup";
 import Search from "../../Components/Search/Search";
 import { groupActions } from "../../actions/action.constants";
 import { useAppSelector } from "../../Store/store";
+import { groupDataSelector, groupQuerySelector } from "../../selectors/groups.selectors";
 
 interface Props {}
 
 const GroupData: React.FC<Props> = () => {
 
   const [isLoading, setIsLoading] = useState(false);
-  const query = useAppSelector((state) => state.groups.query);
-  const groupData = useAppSelector(state => {
-    const groupIds = state.groups.byId[state.groups.query] || [];
-    const group = groupIds!.map((id) => state.groups.mappedData[id]);
-    return group;
-  });
+  const query = useAppSelector(groupQuerySelector);
+  const groupData = useAppSelector(groupDataSelector);
   console.log(groupData);
   
 

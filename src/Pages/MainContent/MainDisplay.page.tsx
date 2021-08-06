@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import GroupData from "./GroupData";
-import GroupDataButton from "./GroupDataButton";
 import Header from "../../Components/Header";
 import NavBar from "../../Components/NavBar";
 import Sidebar from "../../Components/Sidebar";
@@ -11,6 +10,7 @@ import MovieGroupButtonPage from "./MovieGroupButton.page";
 import RecordingPage from "./Recording.page";
 import EditProfile from "./Profile/EditProfile";
 import { useAppSelector } from "../../Store/store";
+import { GroupDetailsPage } from "./GroupDetails.page";
 
 interface Props {}
 
@@ -44,8 +44,8 @@ const MainDisplay: React.FC<Props> = () => {
             <Route exact path="/groups">
               <GroupData />
             </Route>
-            <Route exact path="/groups/button">
-              <GroupDataButton />
+            <Route exact path="/groups/detail">
+              <GroupDetailsPage />
             </Route>
             <Route exact path="/profile">
               <EditProfile />

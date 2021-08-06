@@ -56,12 +56,7 @@ const Sidebar: React.FC<Props> = () => {
         <SideBarElement onClick={() => history.push("/groups")} title="Groups">
           <GrGroup className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
-        <SideBarElement
-          onClick={() => history.push("/groups/button")}
-          title="Groups Button"
-        >
-          <GrGroup className="w-5 h-5 text-sidebar-elements " />
-        </SideBarElement>
+        
         <SideBarElement
           title="Meetings"
           onClick={() => history.push("/meetings")}

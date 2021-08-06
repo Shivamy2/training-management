@@ -9,6 +9,7 @@ import {
 import { authActions } from "./actions/action.constants";
 import { me } from "./APIs/Auth/auth";
 import { loginToken } from "./Constants/constants";
+import { authSelector } from "./selectors/auth.selectors";
 import { useAppSelector } from "./Store/store";
 
 const AuthLazy = lazy(() => import("./Pages/Auth/Auth.page"));
@@ -19,7 +20,7 @@ const MainDisplayLazy = lazy(
 interface Props {}
 
 const App: React.FC<Props> = () => {
-  const user = useAppSelector((state) => state.auth.id && state.users.byId[state.auth.id]);
+  const authUser = useAppSelector(authSelector);
   useEffect(() => {
     if (!loginToken) return;
 
@@ -29,7 +30,7 @@ const App: React.FC<Props> = () => {
     });
   }, []); // eslint-disable-line
 
-  if (!user && loginToken) {
+  if (!authUser && loginToken) {
     return (
       <div className="w-screen h-screen">
         <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
@@ -49,7 +50,7 @@ const App: React.FC<Props> = () => {
         <Router>
           <Switch>
             <Route exact path="/">
-              {user ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+              {authUser ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
             </Route>
             <Route exact path={["/login", "/signup"]}>
               <AuthLazy />
@@ -64,9 +65,10 @@ const App: React.FC<Props> = () => {
                 "/groups",
                 "/groups/button",
                 "/profile",
+                "/groups/detail"
               ]}
             >
-              {user ? <MainDisplayLazy /> : <Redirect to="/login" />}
+              {authUser ? <MainDisplayLazy /> : <Redirect to="/login" />}
             </Route>
             <Route path="/">Page Not Found 404 Error</Route>
           </Switch>
