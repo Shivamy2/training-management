@@ -10,7 +10,7 @@ import Avatar from "../../Components/Avatar/Avatar";
 import Button from "../../Components/Button/Button";
 import { brokenImageReplacement } from "../../Constants/constants";
 import {
-  groupIdSelector,
+  groupMappedData,
   groupSelectedSelector,
 } from "../../selectors/groups.selectors";
 import { useAppSelector } from "../../Store/store";
@@ -27,6 +27,8 @@ const GroupDetailsPage: React.FC<Props> = () => {
   const history = useHistory();
 
   useEffect(() => {
+    console.log("useEffect1 is running");
+
     fetchGroupData({
       status: "all-groups",
       query: searchedQuery,
@@ -41,7 +43,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
       .catch((error) => console.error("Can't fetch group Data", error));
   }, [searchedQuery]);
 
-  const groupIds = useAppSelector(groupIdSelector);
+  const groupIds = useAppSelector(groupMappedData);
   // console.log(
   //   "Group Ids at index and selected Group Id",
   //   groupIds[searchedQuery]?.indexOf(+selectedGroupId),
@@ -65,6 +67,8 @@ const GroupDetailsPage: React.FC<Props> = () => {
     prevButtonStatus = false;
   }
   useEffect(() => {
+    console.log("useEffect2 is running");
+
     setIsLoading(true);
     groupActions.selectedId(+selectedGroupId);
 
@@ -115,7 +119,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
               <div className="mt-3 md:flex">
                 <p className="font-bold">Name: &nbsp;</p>
                 {groupSelected.name}
-                <p className="font-bold md-lg:ml-5 mt-5 md-lg:mt-0">
+                <p className="font-bold md:ml-5 mt-5 md:mt-0">
                   Description: &nbsp;
                 </p>
                 {groupSelected.description}

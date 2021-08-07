@@ -68,7 +68,7 @@ const GroupData: React.FC<Props> = () => {
               return (index & 1) === 1 ? (
                 <ListGroup
                   onClick={() => {
-                    if (!query) history.push(`/groups/${item.name}/${item.id}`);
+                    if (!query) history.push(`/groups/%20/${item.id}`);
                     else history.push(`/groups/${query}/${item.id}`);
                   }}
                   className={
@@ -88,7 +88,7 @@ const GroupData: React.FC<Props> = () => {
               ) : (
                 <ListGroup
                   onClick={() => {
-                    if (!query) history.push(`/groups/${item.name}/${item.id}`);
+                    if (!query) history.push(`/groups/%20/${item.id}`);
                     else history.push(`/groups/${query}/${item.id}`);
                   }}
                   className={

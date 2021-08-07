@@ -6,13 +6,11 @@ import {
   GROUP_SELECTED_ID,
 } from "../actions/groups.actions";
 import { GroupDataStream } from "../Models/Groups";
+import { EntityState } from "./entity.reducers";
 
-export interface GroupState {
-  byId: {
-    [keyword: string]: number[];
-  };
+export interface GroupState extends EntityState<GroupDataStream> {
   query: string;
-  mappedData: { [id: number]: GroupDataStream };
+  mappedData: { [keyword: string]: number[] };
   selectedId: number;
 }
 
@@ -41,16 +39,16 @@ export const groupsReducer: Reducer<GroupState> = (
 
       return {
         ...state,
-        byId: { ...state.byId, [action.payload.keyword]: groupIds },
-        mappedData: { ...state.mappedData, ...groupMapping },
+        mappedData: { ...state.mappedData, [action.payload.keyword]: groupIds },
+        byId: { ...state.byId, ...groupMapping },
       };
     case GROUP_SELECTED_ID:
       return { ...state, selectedId: action.payload };
     case GROUP_SELECTED:
       return {
         ...state,
-        mappedData: {
-          ...state.mappedData,
+        byId: {
+          ...state.byId,
           [action.payload.id]: action.payload.group,
         },
       };

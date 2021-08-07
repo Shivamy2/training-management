@@ -33,7 +33,7 @@ export const groupDataSelector = (state:AppState) => {
 } */
 
 export const groupDataSelector = createSelector(
-  [groupQuerySelector, groupMappedData, groupIdSelector],
+  [groupQuerySelector, groupIdSelector, groupMappedData],
   (query, groupMapped, ids) => {
     const groupIds = ids[query] || [];
     const mappedData = groupIds.map((id) => groupMapped[id]);
@@ -53,8 +53,8 @@ export const groupSelectedIdSelector = createSelector(
 export const groupSelectedSelector = createSelector(
   [
     groupSelectedIdSelector,
-    groupMappedData,
     groupIdSelector,
+    groupMappedData,
     groupQuerySelector,
   ],
   (selectedId, idMappedGroups, queryIds, query) => {
