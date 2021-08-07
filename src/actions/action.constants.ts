@@ -3,6 +3,7 @@ import { store } from "../Store/store";
 import { meFetchAction, meLoginAction } from "./auth.actions";
 import {
   groupsFetchAction,
+  selectedGroupAction,
   selectedIdAction,
   updateQueryAction,
 } from "./groups.actions";
@@ -13,6 +14,7 @@ export const groupActions = bindActionCreators(
     query: updateQueryAction,
     groups: groupsFetchAction,
     selectedId: selectedIdAction,
+    selectedGroup: selectedGroupAction,
   },
   store.dispatch
 );

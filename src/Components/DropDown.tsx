@@ -19,7 +19,7 @@ const DropDown: React.FC<Props> = ({
   title,
   containsImage,
   className,
-  image
+  image,
 }) => {
   const [selectedDropdown, setSelectedDropdown] = useState(initialButtonValue);
   const history = useHistory();
@@ -81,8 +81,7 @@ const DropDown: React.FC<Props> = ({
                       setSelectedDropdown(index);
                       if (item.name === "Sign Out") {
                         logout();
-                      }
-                      item.path && history.push(item.path);
+                      } else item.path && history.push(item.path);
                     }}
                     className="flex items-center w-full px-2 py-2 text-sm hover:text-blue-500 hover:bg-gray-50"
                   >

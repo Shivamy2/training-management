@@ -34,13 +34,30 @@ interface GroupRequest {
   limit?: number;
 }
 
+export interface SelectedGroupResponse {
+  data: GroupDataStream;
+}
+
 const fetchGroupData = async (data: GroupRequest) => {
   try {
     const response = await axios.get<GroupResponse>(`${BASE_URL}/groups`, {
       params: data,
     });
     return response;
-  } catch (error) {}
+  } catch (error) {
+    console.log("Not able to fetch groups data");
+  }
 };
 
-export default fetchGroupData;
+const fetchSelectedGroup = async (id: string) => {
+  try {
+    const response = await axios.get<SelectedGroupResponse>(
+      `${BASE_URL}/groups/${id}`
+    );
+    return response;
+  } catch (error) {
+    console.log("Not able to send fetch selected group request");
+  }
+};
+
+export { fetchGroupData, fetchSelectedGroup };

@@ -46,7 +46,7 @@ const MainDisplay: React.FC<Props> = () => {
             <Route exact path="/groups">
               <GroupData />
             </Route>
-            <Route exact path="/groups/detail/:selectedGroupId">
+            <Route exact path="/groups/:searchedQuery/:selectedGroupId">
               <GroupDetailsPage />
             </Route>
             <Route exact path="/profile">

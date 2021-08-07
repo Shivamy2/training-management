@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
-import fetchGroupData from "../../APIs/GroupsData/groupsData";
+import { fetchGroupData } from "../../APIs/GroupsData/groupsData";
 import Alert from "../../Components/Alert/Alert";
 
 import ListGroup from "../../Components/ListGroup/ListGroup";
@@ -26,6 +26,8 @@ const GroupData: React.FC<Props> = () => {
 
     fetchGroupData({ query: query, status: "all-groups" })
       .then((response) => {
+        console.log(response);
+
         if (response?.status === 200) {
           groupActions.groups(response.data.data, query);
           setIsLoading(false);
@@ -66,7 +68,7 @@ const GroupData: React.FC<Props> = () => {
                 listExtraStyling += " rounded-b-md ";
               }
               const groupParam = () =>
-                history.push(`/groups/detail/${item.id}`);
+                history.push(`/groups/${query}/${item.id}`);
               return (index & 1) === 1 ? (
                 <ListGroup
                   onClick={groupParam}

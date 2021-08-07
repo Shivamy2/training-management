@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import { groupActions } from "../../actions/action.constants";
-import fetchGroupData from "../../APIs/GroupsData/groupsData";
+import { fetchGroupData } from "../../APIs/GroupsData/groupsData";
 import Alert from "../../Components/Alert/Alert";
 import Button from "../../Components/Button/Button";
 import ListGroup from "../../Components/ListGroup/ListGroup";
@@ -10,19 +10,17 @@ import { useAppSelector } from "../../Store/store";
 
 console.log("Groups Button is rerendering");
 
-
 interface Props {}
 
 const GroupDataButton: React.FC<Props> = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
   const query = useAppSelector((state) => state.groups.query);
-  const groupData = useAppSelector(state => {
+  const groupData = useAppSelector((state) => {
     const groupIds = state.groups.byId[state.groups.query] || [];
     const group = groupIds!.map((id) => state.groups.mappedData[id]);
     return group;
   });
-
 
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();

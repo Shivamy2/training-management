@@ -22,7 +22,7 @@ export interface UpdateProfile {
 
 const updateData = async (data: UpdateProfile) => {
   try {
-    const update = await axios.post(`${BASE_URL}/me/update`, data);
+    const update = await axios.put(`${BASE_URL}/me`, data);
     return update;
   } catch (error) {
     console.log("Not able to patch the information!");

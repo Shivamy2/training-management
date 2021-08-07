@@ -2,6 +2,7 @@ import { Reducer } from "redux";
 import {
   GROUPS_FETCH,
   GROUP_QUERY,
+  GROUP_SELECTED,
   GROUP_SELECTED_ID,
 } from "../actions/groups.actions";
 import { GroupDataStream } from "../Models/Groups";
@@ -45,6 +46,14 @@ export const groupsReducer: Reducer<GroupState> = (
       };
     case GROUP_SELECTED_ID:
       return { ...state, selectedId: action.payload };
+    case GROUP_SELECTED:
+      return {
+        ...state,
+        mappedData: {
+          ...state.mappedData,
+          [action.payload.id]: action.payload.group,
+        },
+      };
     default:
       return state;
   }

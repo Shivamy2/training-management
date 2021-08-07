@@ -1,5 +1,6 @@
 import React from "react";
 import CanadaFlag from "../Images/canada.png";
+import { authSelector } from "../selectors/auth.selectors";
 import { useAppSelector } from "../Store/store";
 import DropDown from "./DropDown";
 import Search from "./Search/Search";
@@ -7,7 +8,7 @@ import Search from "./Search/Search";
 interface Props {}
 
 const NavBar: React.FC<Props> = () => {
-  const userDP = useAppSelector((state) => state.users.byId[state.auth.id!].profile_pic_url);
+  const userDP = useAppSelector(authSelector)?.profile_pic_url;
 
   return (
     <div className="bg-navBar h-navbar">
@@ -109,6 +110,8 @@ const NavBar: React.FC<Props> = () => {
               image={userDP}
               itemsToBeShown={[
                 { name: "Profile", path: "/profile" },
+                { name: "Groups", path: "/groups" },
+                { name: "Recordings", path: "/batch/2/recording/15" },
                 { name: "Sign Out", path: "/login" },
               ]}
             />

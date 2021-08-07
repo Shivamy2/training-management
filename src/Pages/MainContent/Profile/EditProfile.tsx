@@ -6,11 +6,12 @@ import EditInput from "../../../Components/Input/EditInput";
 import * as yup from "yup";
 import { useAppSelector } from "../../../Store/store";
 import updateData from "../../../APIs/Profile/Update";
+import { authSelector } from "../../../selectors/auth.selectors";
 
 interface Props {}
 
 const EditProfile: React.FC<Props> = () => {
-  const user = useAppSelector((state) => state.users.byId[state.auth.id!]);
+  const user = useAppSelector(authSelector);
   let date: string[] = [];
   for (let index = 1; index <= 31; index++) {
     if (index >= 10) {
@@ -40,14 +41,14 @@ const EditProfile: React.FC<Props> = () => {
     isSubmitting,
   } = useFormik({
     initialValues: {
-      birth_date: user.birth_date ? user.birth_date : "Day",
-      birth_month: user.birth_month ? user.birth_month : "Month",
-      birth_year: user.birth_year ? user.birth_year : "Year",
-      first_name: user.first_name ? user.first_name : "",
-      middle_name: user.middle_name ? user.middle_name : "",
-      last_name: user.last_name ? user.last_name : "",
-      email: user.email ? user.email : "",
-      education: user.education ? user.education : "",
+      birth_date: user?.birth_date ? user.birth_date : "Day",
+      birth_month: user?.birth_month ? user.birth_month : "Month",
+      birth_year: user?.birth_year ? user.birth_year : "Year",
+      first_name: user?.first_name ? user.first_name : "",
+      middle_name: user?.middle_name ? user.middle_name : "",
+      last_name: user?.last_name ? user.last_name : "",
+      email: user?.email ? user.email : "",
+      education: user?.education ? user.education : "",
     },
     validationSchema: yup.object().shape({
       email: yup
@@ -77,6 +78,7 @@ const EditProfile: React.FC<Props> = () => {
       console.log(data);
       updateData(data).then((response) => {
         console.log(response?.data);
+        window.location.href = "/dashboard";
       });
     },
   });
