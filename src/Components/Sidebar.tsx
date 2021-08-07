@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import SideBarElement from "./SideBarElement/SideBarElement";
 import {
   BiVideoRecording,
@@ -25,7 +25,7 @@ const Sidebar: React.FC<Props> = () => {
     >
       <div>
         <SideBarElement
-          onClick={() => history.push("/dashboard")}
+          onClick={useCallback(() => history.push("/dashboard"), [])} // eslint-disable-line
           containsDirection={true}
           title="Dashboard"
           theme="fill"
@@ -48,15 +48,18 @@ const Sidebar: React.FC<Props> = () => {
           </svg>
         </SideBarElement>
         <SideBarElement
-          onClick={() => history.push("/batch/1/recording/15")}
+          onClick={useCallback(() => history.push("/batch/1/recording/15"), [])} // eslint-disable-line
           title="Recordings"
         >
           <BiVideoRecording className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
-        <SideBarElement onClick={() => history.push("/groups")} title="Groups">
+        <SideBarElement
+          onClick={useCallback(() => history.push("/groups"), [])} // eslint-disable-line
+          title="Groups"
+        >
           <GrGroup className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
-        
+
         <SideBarElement
           title="Meetings"
           onClick={() => history.push("/meetings")}

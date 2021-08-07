@@ -54,7 +54,7 @@ const Button: React.FC<Props> = ({
       <button
         {...rest}
         disabled={submissionInProgress}
-        className={`px-6 py-2 relative duration-500 ease-in-out rounded-md focus:outline-none text-sm font-semibold text-center  ${className} ${extraClassesOnButton} `}
+        className={`px-5 py-2 relative duration-500 ease-in-out rounded-md focus:outline-none text-sm font-semibold text-center  ${className} ${extraClassesOnButton} `}
       >
         <ImSpinner9
           className={
@@ -62,7 +62,7 @@ const Button: React.FC<Props> = ({
             (submissionInProgress ? "block" : "hidden")
           }
         />
-        <p className={submissionInProgress ? "opacity-0" : "opacity-100"}>
+        <p className={`${submissionInProgress ? "opacity-0" : "opacity-100"} `}>
           {text}
         </p>
       </button>

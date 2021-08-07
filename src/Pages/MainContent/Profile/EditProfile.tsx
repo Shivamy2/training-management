@@ -86,7 +86,7 @@ const EditProfile: React.FC<Props> = () => {
   return (
     <div className="w-full h-full p-5 pb-20">
       <form method="POST" onSubmit={handleSubmit}>
-        <div className="bg-white border border-gray-300 rounded-md">
+        <div className="bg-white border border-gray-300 rounded-t-md">
           <div className="p-4">
             <div className="mt-1 mb-10 ml-2">
               <h2 className="text-base font-bold tracking-wider uppercase text-input">
@@ -200,17 +200,19 @@ const EditProfile: React.FC<Props> = () => {
             </div>
           </div>
         </div>
-        <div className="fixed bottom-0 h-16 bg-gray-900 profile-submit rounded-t-md">
+        <div className="min-h-16 bg-gray-900 profile-submit rounded-b-md">
           <div className="flex justify-between px-5 py-3">
             <Button
               text="Save Changes"
               theme="success"
               type="submit"
+              buttonType="outline"
               submissionInProgress={isSubmitting}
             />
             <Button
               onClick={handleReset.bind(null, resetForm)}
               text="Reset All"
+              buttonType="outline"
               type="reset"
             />
           </div>
