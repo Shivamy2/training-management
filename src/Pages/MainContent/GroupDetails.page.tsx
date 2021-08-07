@@ -185,7 +185,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
     </div>
   ) : (
     <div className="h-full w-full">
-      <ImSpinner className="animate-spin h-6 w-6" />
+      <ImSpinner className="animate-spin h-6 w-6 m-auto" />
     </div>
   );
 };

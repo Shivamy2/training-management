@@ -65,11 +65,12 @@ const GroupData: React.FC<Props> = () => {
               else if (index === groupData.length - 1) {
                 listExtraStyling += " rounded-b-md ";
               }
-              const groupParam = () =>
-                history.push(`/groups/${query}/${item.id}`);
               return (index & 1) === 1 ? (
                 <ListGroup
-                  onClick={groupParam}
+                  onClick={() => {
+                    if (!query) history.push(`/groups/${item.name}/${item.id}`);
+                    else history.push(`/groups/${query}/${item.id}`);
+                  }}
                   className={
                     "bg-search-icon shadow-stacked hover:shadow-none " +
                     listExtraStyling
@@ -86,7 +87,10 @@ const GroupData: React.FC<Props> = () => {
                 />
               ) : (
                 <ListGroup
-                  onClick={groupParam}
+                  onClick={() => {
+                    if (!query) history.push(`/groups/${item.name}/${item.id}`);
+                    else history.push(`/groups/${query}/${item.id}`);
+                  }}
                   className={
                     "hover:bg-gray-100 bg-white hover:shadow-stacked " +
                     listExtraStyling
