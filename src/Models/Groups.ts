@@ -1,5 +1,6 @@
-export interface GroupDataStream {
-  id: number;
+import { Entity } from "./Entity";
+
+export interface GroupDataStream extends Entity {
   name: string;
   is_private: boolean;
   description: string;
@@ -17,9 +18,8 @@ export interface GroupDataStream {
   advocatePage: AdvocatePage | null;
 }
 
-export interface AdvocatePage {
+export interface AdvocatePage extends Entity {
   __type: Role;
-  id: number;
   name: string;
   type: string;
   about: string;
@@ -52,8 +52,7 @@ export interface AutomatedReply {
   message: string;
 }
 
-export interface Issue {
-  id: number;
+export interface Issue extends Entity {
   code: string;
   title_one_word: string;
   title_short: string;
@@ -63,9 +62,8 @@ export interface Issue {
   updated_at: Date;
 }
 
-export interface Creator {
+export interface Creator extends Entity {
   __type: Type;
-  id: number;
   guid: null;
   first_name: string;
   middle_name: null | string;
@@ -135,8 +133,7 @@ export interface Video {
   video_format?: string;
 }
 
-export interface State {
-  id: number;
+export interface State extends Entity {
   title: string;
   state_code: string;
   created_at: Date;

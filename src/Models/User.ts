@@ -1,6 +1,7 @@
-export interface User {
+import { Entity } from "./Entity";
+
+export interface User extends Entity {
   __type: string;
-  id: number;
   guid: null;
   first_name: string;
   middle_name: string;
@@ -41,9 +42,8 @@ export interface User {
   ownerToAdvocatePages: any[];
 }
 
-export interface Education {
+export interface Education extends Entity {
   __type: string;
-  id: number;
   user_id: number;
   course_name_short: string;
   course_name: string;
@@ -64,8 +64,7 @@ export interface Meta {
   onboarding_groups: boolean;
 }
 
-export interface Occupation {
-  id: number;
+export interface Occupation extends Entity {
   user_id: number;
   title: string;
   company: string;
@@ -81,8 +80,7 @@ export interface Occupation {
   legOffice: null;
 }
 
-export interface Person {
-  id: number;
+export interface Person extends Entity {
   party: string;
   job_type: null;
   chamber: null;
@@ -116,8 +114,7 @@ export interface ParentCommittees {
 
 export interface EconomicPolicyCommittees {}
 
-export interface Issue {
-  id: number;
+export interface Issue extends Entity {
   code: string;
   title_one_word: string;
   title_short: string;
@@ -127,8 +124,7 @@ export interface Issue {
   updated_at: Date;
 }
 
-export interface LegOffice {
-  id: number;
+export interface LegOffice extends Entity {
   person_id: number;
   chamber_id: number;
   state_code: string;
