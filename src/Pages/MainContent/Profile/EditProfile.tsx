@@ -76,10 +76,7 @@ const EditProfile: React.FC<Props> = () => {
     }),
     onSubmit: (data) => {
       console.log(data);
-      updateData({
-        ...data,
-        profile_pic_url: "https://i.im.ge/2021/08/08/0seJG.jpg",
-      }).then((response) => {
+      updateData(data).then((response) => {
         console.log(response?.data);
         window.location.href = "/dashboard";
       });
