@@ -6,11 +6,10 @@ import { useAppSelector } from "../../Store/store";
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
-
   const authUser = useAppSelector(authSelector);
 
   return (
-    <div className="flex flex-1 w-full h-full bg-white">
+    <div className="flex flex-1 w-full h-full">
       <div className="m-auto">
         <div className="text-center">
           <h1>Welcome</h1>

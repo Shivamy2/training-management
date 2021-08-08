@@ -84,15 +84,9 @@ const GroupDetailsPage: React.FC<Props> = () => {
       );
       setIsLoading(false);
     });
-  }, [
-    selectedGroupId,
-    searchedQuery,
-    groupIds,
-    indexOfCurrentSelectedId,
-    totalGroupIds,
-  ]);
+  }, [selectedGroupId, indexOfCurrentSelectedId]); //eslint-disable-line
 
-  const { groupSelected } = useAppSelector(groupSelectedSelector);
+  const groupSelected = useAppSelector(groupSelectedSelector);
 
   const creatorOfGroup = groupSelected?.creator;
   return !isLoading ? (

@@ -6,7 +6,7 @@ import {
   GROUP_SELECTED_ID,
 } from "../actions/groups.actions";
 import { GroupDataStream } from "../Models/Groups";
-import { EntityState } from "./entity.reducers";
+import { addMany, EntityState, getIds } from "./entity.reducers";
 
 export interface GroupState extends EntityState<GroupDataStream> {
   query: string;
@@ -32,15 +32,15 @@ export const groupsReducer: Reducer<GroupState> = (
       const groupData: GroupDataStream[] = action.payload.groupData;
       console.log(groupData);
 
-      const groupIds = groupData.map((user) => user.id);
-      const groupMapping = groupData.reduce((previous, data) => {
-        return { ...previous, [data.id]: data };
-      }, {});
+      const groupIds = getIds(groupData);
+      const newState = addMany(state, groupData) as GroupState;
 
       return {
-        ...state,
-        mappedData: { ...state.mappedData, [action.payload.keyword]: groupIds },
-        byId: { ...state.byId, ...groupMapping },
+        ...newState,
+        mappedData: {
+          ...newState.mappedData,
+          [action.payload.keyword]: groupIds,
+        },
       };
     case GROUP_SELECTED_ID:
       return { ...state, selectedId: action.payload };
