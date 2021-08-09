@@ -42,11 +42,11 @@ const GroupDetailsPage: React.FC<Props> = () => {
   }, [searchedQuery]);
 
   const groupIds = useAppSelector(groupMappedData);
-  console.log(
-    "Group Ids at index and selected Group Id",
-    groupIds[searchedQuery]?.indexOf(+selectedGroupId),
-    +selectedGroupId
-  );
+  // console.log(
+  //   "Group Ids at index and selected Group Id",
+  //   groupIds[searchedQuery]?.indexOf(+selectedGroupId),
+  //   +selectedGroupId
+  // );
   // console.log(groupIds[searchedQuery]?.indexOf(+selectedGroupId));
 
   const indexOfCurrentSelectedId = groupIds[searchedQuery]?.indexOf(
