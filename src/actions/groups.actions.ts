@@ -1,7 +1,7 @@
 import { GroupDataStream } from "../Models/Groups";
 
 export const GROUP_QUERY = "query/update";
-export const GROUPS_FETCH = "groups/fetch";
+export const GROUPS_QUERY_COMPLETED = "groups/fetch";
 export const GROUP_SELECTED_ID = "groups/selected_id";
 export const GROUP_SELECTED = "groups/selected";
 
@@ -9,13 +9,13 @@ export const groupsFetchAction = (
   groupData: GroupDataStream[],
   keyword: string
 ) => ({
-  type: GROUPS_FETCH,
+  type: GROUPS_QUERY_COMPLETED,
   payload: { groupData, keyword },
 });
 
-export const updateQueryAction = (query: string) => ({
+export const updateQueryAction = (query: string, loading: boolean) => ({
   type: GROUP_QUERY,
-  payload: query,
+  payload: { query, loading },
 });
 export const selectedIdAction = (id: number) => ({
   type: GROUP_SELECTED_ID,

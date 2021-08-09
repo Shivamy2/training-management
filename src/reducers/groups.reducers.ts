@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import {
-  GROUPS_FETCH,
+  GROUPS_QUERY_COMPLETED,
   GROUP_QUERY,
   GROUP_SELECTED,
   GROUP_SELECTED_ID,
@@ -12,6 +12,7 @@ export interface GroupState extends EntityState<GroupDataStream> {
   query: string;
   mappedData: { [keyword: string]: number[] };
   selectedId: number;
+  loadingQuery: { [query: string]: boolean };
 }
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   mappedData: {},
   query: "",
   selectedId: -1,
+  loadingQuery: {},
 };
 
 export const groupsReducer: Reducer<GroupState> = (
@@ -27,8 +29,16 @@ export const groupsReducer: Reducer<GroupState> = (
 ) => {
   switch (action.type) {
     case GROUP_QUERY:
-      return { ...state, query: action.payload };
-    case GROUPS_FETCH:
+      const { query, loading } = action.payload;
+      return {
+        ...state,
+        query: query,
+        loadingQuery: {
+          ...state.loadingQuery,
+          [query]: loading,
+        },
+      };
+    case GROUPS_QUERY_COMPLETED:
       const groupData: GroupDataStream[] = action.payload.groupData;
       console.log(groupData);
 
@@ -40,6 +50,10 @@ export const groupsReducer: Reducer<GroupState> = (
         mappedData: {
           ...newState.mappedData,
           [action.payload.keyword]: groupIds,
+        },
+        loadingQuery: {
+          ...state.loadingQuery,
+          [action.payload.keyword]: false,
         },
       };
     case GROUP_SELECTED_ID:
