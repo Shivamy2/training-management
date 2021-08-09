@@ -49,10 +49,7 @@ const Header: React.FC<Props> = () => {
         <div className="hidden my-auto md-lg:block">
           <DropDown
             initialButtonValue={0}
-            itemsToBeShown={[
-              { name: "Settings", path: "/settings" },
-              { name: "Share", path: "/share" },
-            ]}
+            itemsToBeShown={[{ name: "Settings" }, { name: "Share" }]}
           />
         </div>
       </div>
