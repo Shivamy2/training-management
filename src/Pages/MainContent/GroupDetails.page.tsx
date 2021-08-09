@@ -27,8 +27,6 @@ const GroupDetailsPage: React.FC<Props> = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("useEffect1 is running");
-
     fetchGroupData({
       status: "all-groups",
       query: searchedQuery,
@@ -44,21 +42,26 @@ const GroupDetailsPage: React.FC<Props> = () => {
   }, [searchedQuery]);
 
   const groupIds = useAppSelector(groupMappedData);
-  // console.log(
-  //   "Group Ids at index and selected Group Id",
-  //   groupIds[searchedQuery]?.indexOf(+selectedGroupId),
-  //   +selectedGroupId
-  // );
+  console.log(
+    "Group Ids at index and selected Group Id",
+    groupIds[searchedQuery]?.indexOf(+selectedGroupId),
+    +selectedGroupId
+  );
+  // console.log(groupIds[searchedQuery]?.indexOf(+selectedGroupId));
+
   const indexOfCurrentSelectedId = groupIds[searchedQuery]?.indexOf(
     +selectedGroupId
   );
+  // const [indexOfCurrentSelectedId, setIndexOfCurrentSelectedId] = useState(
+  //   groupIds[searchedQuery]?.indexOf(+selectedGroupId)
+  // );
   // console.log("Index of Selected Group is: ", indexOfCurrentSelectedId);
   let totalGroupIds = groupIds[searchedQuery];
 
   let prevButtonStatus = true,
     nextButtonStatus = true;
   const groupIdsLength = totalGroupIds?.length;
-  // console.log("Length of Id Array", groupIdsLength);
+  console.log("Length of Id Array", groupIdsLength);
 
   if (indexOfCurrentSelectedId >= groupIdsLength - 1) {
     nextButtonStatus = false;
@@ -67,8 +70,6 @@ const GroupDetailsPage: React.FC<Props> = () => {
     prevButtonStatus = false;
   }
   useEffect(() => {
-    console.log("useEffect2 is running");
-
     setIsLoading(true);
     groupActions.selectedId(+selectedGroupId);
 
@@ -146,7 +147,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
           </div>
         </div>
       </div>
-      <div className="h-16 bg-gray-900 profile-submit rounded-b-md">
+      <div className="min-h-16 bg-gray-900 profile-submit rounded-b-md">
         <div className="flex justify-between px-5 py-3">
           {prevButtonStatus && (
             <Button

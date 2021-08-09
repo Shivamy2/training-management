@@ -6,14 +6,15 @@ import DropDown from "./DropDown";
 interface Props {}
 
 const Header: React.FC<Props> = () => {
-  const sidebarOpenStatus = useAppSelector((state) => state.sidebar.isSidebarOpen);
+  const sidebarOpenStatus = useAppSelector(
+    (state) => state.sidebar.isSidebarOpen
+  );
   return (
     <div className="z-30 w-full bg-header h-header">
       <div className="flex justify-between h-full px-4">
         <div className="flex my-auto">
           <svg
             onClick={() => {
-              console.log(sidebarOpenStatus);
               sidebarActions.sidebar(!sidebarOpenStatus);
             }}
             xmlns="http://www.w3.org/2000/svg"
