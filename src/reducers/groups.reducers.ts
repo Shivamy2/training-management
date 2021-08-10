@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 import {
   GROUPS_QUERY_COMPLETED,
-  GROUP_QUERY,
+  GROUP_QUERY_CHANGED,
   GROUP_SELECTED,
   GROUP_SELECTED_ID,
 } from "../actions/action.constants";
@@ -28,16 +28,16 @@ export const groupsReducer: Reducer<GroupState> = (
   action
 ) => {
   switch (action.type) {
-    case GROUP_QUERY:
-      const { query, loading } = action.payload;
+    case GROUP_QUERY_CHANGED:
       return {
         ...state,
-        query: query,
+        query: action.payload,
         loadingQuery: {
           ...state.loadingQuery,
-          [query]: loading,
+          [action.payload]: true,
         },
       };
+
     case GROUPS_QUERY_COMPLETED:
       const groupData: GroupDataStream[] = action.payload.groupData;
       console.log(groupData);
@@ -56,8 +56,10 @@ export const groupsReducer: Reducer<GroupState> = (
           [action.payload.keyword]: false,
         },
       };
+
     case GROUP_SELECTED_ID:
       return { ...state, selectedId: action.payload };
+
     case GROUP_SELECTED:
       return {
         ...state,
@@ -66,6 +68,7 @@ export const groupsReducer: Reducer<GroupState> = (
           [action.payload.id]: action.payload.group,
         },
       };
+
     default:
       return state;
   }
