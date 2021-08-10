@@ -1,18 +1,21 @@
+import axios, { Canceler } from "axios";
 import { groupActions } from "../actions/action.constants";
 import { GroupRequest, fetchGroupData } from "../APIs/GroupsData/groupsData";
-import { groupMappedData } from "../selectors/groups.selectors";
-import { store } from "../Store/store";
+
+let canceller: Canceler | undefined;
 
 export const fetchGroups = (request: GroupRequest) => {
-  const queryMap = groupMappedData(store.getState());
   const query = request.query;
-  const groupIds = queryMap[query];
-  groupActions.query(query, !groupIds);
-  if (groupIds) {
-    return;
-  }
 
-  fetchGroupData(request).then((groups) => {
+  groupActions.query(query);
+
+  canceller && canceller();
+  const { cancel, token } = axios.CancelToken.source();
+
+  canceller = cancel;
+
+  fetchGroupData(request, token).then((groups) => {
     groupActions.groups(groups?.data.data!, query);
+    canceller = undefined;
   });
 };

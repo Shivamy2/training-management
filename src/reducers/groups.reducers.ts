@@ -12,7 +12,7 @@ export interface GroupState extends EntityState<GroupDataStream> {
   query: string;
   mappedData: { [keyword: string]: number[] };
   selectedId: number;
-  loadingQuery: { [query: string]: boolean };
+  loadingQuery: boolean;
 }
 
 const initialState = {
@@ -20,7 +20,7 @@ const initialState = {
   mappedData: {},
   query: "",
   selectedId: -1,
-  loadingQuery: {},
+  loadingQuery: false,
 };
 
 export const groupsReducer: Reducer<GroupState> = (
@@ -29,14 +29,11 @@ export const groupsReducer: Reducer<GroupState> = (
 ) => {
   switch (action.type) {
     case GROUP_QUERY:
-      const { query, loading } = action.payload;
+      const query = action.payload;
       return {
         ...state,
         query: query,
-        loadingQuery: {
-          ...state.loadingQuery,
-          [query]: loading,
-        },
+        loadingQuery: true,
       };
     case GROUPS_QUERY_COMPLETED:
       const groupData: GroupDataStream[] = action.payload.groupData;
@@ -51,10 +48,7 @@ export const groupsReducer: Reducer<GroupState> = (
           ...newState.mappedData,
           [action.payload.keyword]: groupIds,
         },
-        loadingQuery: {
-          ...state.loadingQuery,
-          [action.payload.keyword]: false,
-        },
+        loadingQuery: false,
       };
     case GROUP_SELECTED_ID:
       return { ...state, selectedId: action.payload };

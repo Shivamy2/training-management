@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { CancelToken } from "axios";
 import {
   BASE_URL,
   loginToken,
@@ -16,7 +16,9 @@ axios.interceptors.request.use((config) => {
 });
 
 axios.interceptors.response.use(undefined, (error) => {
-  if ((error.response.data.code = 9101)) {
+  console.error("Error", error);
+
+  if (error.response?.data?.code === 9101) {
     localStorage.removeItem(LS_LOGIN_TOKEN);
     window.location.href = "/login";
   }
@@ -38,10 +40,11 @@ export interface SelectedGroupResponse {
   data: GroupDataStream;
 }
 
-const fetchGroupData = async (data: GroupRequest) => {
+const fetchGroupData = async (data: GroupRequest, token?: CancelToken) => {
   try {
     const response = await axios.get<GroupResponse>(`${BASE_URL}/groups`, {
       params: data,
+      cancelToken: token,
     });
     return response;
   } catch (error) {

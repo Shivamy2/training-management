@@ -19,13 +19,6 @@ export const groupLoadingStatusSelector = createSelector(
   (group) => group.loadingQuery
 );
 
-export const groupLoadingSelector = createSelector(
-  [groupLoadingStatusSelector, groupQuerySelector],
-  (loadingMap, query) => {
-    return loadingMap[query];
-  }
-);
-
 /* const groupMappedData = (state: AppState) => {
   const groupState = groupSelector(state);
   return groupState.mappedData;
