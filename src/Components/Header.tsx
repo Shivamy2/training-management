@@ -1,12 +1,14 @@
 import React from "react";
-import { sidebarActions } from "../actions/action.constants";
+import { sidebarActions } from "../actions/sidebar.action";
 import { useAppSelector } from "../Store/store";
 import DropDown from "./DropDown";
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
-  const sidebarOpenStatus = useAppSelector((state) => state.sidebar.isSidebarOpen);
+  const sidebarOpenStatus = useAppSelector(
+    (state) => state.sidebar.isSidebarOpen
+  );
   return (
     <div className="z-30 w-full bg-header h-header">
       <div className="flex justify-between h-full px-4">

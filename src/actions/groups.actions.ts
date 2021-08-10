@@ -1,9 +1,12 @@
+import { bindActionCreators } from "redux";
 import { GroupDataStream } from "../Models/Groups";
-
-export const GROUP_QUERY = "query/update";
-export const GROUPS_QUERY_COMPLETED = "groups/fetch";
-export const GROUP_SELECTED_ID = "groups/selected_id";
-export const GROUP_SELECTED = "groups/selected";
+import { store } from "../Store/store";
+import {
+  GROUPS_QUERY_COMPLETED,
+  GROUP_QUERY,
+  GROUP_SELECTED,
+  GROUP_SELECTED_ID,
+} from "./action.constants";
 
 export const groupsFetchAction = (
   groupData: GroupDataStream[],
@@ -29,3 +32,13 @@ export const selectedGroupAction = (
   type: GROUP_SELECTED,
   payload: { group, id, query },
 });
+
+export const groupActions = bindActionCreators(
+  {
+    query: updateQueryAction,
+    groups: groupsFetchAction,
+    selectedId: selectedIdAction,
+    selectedGroup: selectedGroupAction,
+  },
+  store.dispatch
+);

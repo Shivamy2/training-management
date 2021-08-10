@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ImSpinner } from "react-icons/im";
 import { useHistory, useParams } from "react-router-dom";
-import { groupActions } from "../../actions/action.constants";
+import { groupActions } from "../../actions/groups.actions";
 import {
   fetchGroupData,
   fetchSelectedGroup,

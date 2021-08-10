@@ -4,7 +4,7 @@ import {
   GROUP_QUERY,
   GROUP_SELECTED,
   GROUP_SELECTED_ID,
-} from "../actions/groups.actions";
+} from "../actions/action.constants";
 import { GroupDataStream } from "../Models/Groups";
 import { addMany, EntityState, getIds } from "./entity.reducers";
 

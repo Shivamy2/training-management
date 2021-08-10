@@ -6,7 +6,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import { authActions } from "./actions/action.constants";
+import { authActions } from "./actions/auth.actions";
 import { me } from "./APIs/Auth/auth";
 import { loginToken } from "./Constants/constants";
 import { authSelector } from "./selectors/auth.selectors";
