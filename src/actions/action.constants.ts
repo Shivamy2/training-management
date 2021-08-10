@@ -1,35 +1,12 @@
-import { bindActionCreators } from "redux";
-import { store } from "../Store/store";
-import { meFetchAction, meLoginAction } from "./auth.actions";
-import {
-  groupsFetchAction,
-  selectedGroupAction,
-  selectedIdAction,
-  updateQueryAction,
-} from "./groups.actions";
-import { sidebarOpen } from "./sidebar.action";
+//auth
+export const ME_FETCH = "me/fetch";
+export const ME_LOGIN = "me/login";
 
-export const groupActions = bindActionCreators(
-  {
-    query: updateQueryAction,
-    groups: groupsFetchAction,
-    selectedId: selectedIdAction,
-    selectedGroup: selectedGroupAction,
-  },
-  store.dispatch
-);
+//groups
+export const GROUP_QUERY_CHANGED = "query/change";
+export const GROUPS_QUERY_COMPLETED = "groups/fetch";
+export const GROUP_SELECTED_ID = "groups/selected_id";
+export const GROUP_SELECTED = "groups/selected";
 
-export const authActions = bindActionCreators(
-  {
-    fetch: meFetchAction,
-    login: meLoginAction,
-  },
-  store.dispatch
-);
-
-export const sidebarActions = bindActionCreators(
-  {
-    sidebar: sidebarOpen,
-  },
-  store.dispatch
-);
+//sidebar
+export const SIDEBAR_STATUS = "sidebar/open";

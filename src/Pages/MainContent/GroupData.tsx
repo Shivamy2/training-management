@@ -1,43 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ImSpinner9 } from "react-icons/im";
-import { fetchGroupData } from "../../APIs/GroupsData/groupsData";
 import Alert from "../../Components/Alert/Alert";
 
 import ListGroup from "../../Components/ListGroup/ListGroup";
 import Search from "../../Components/Search/Search";
-import { groupActions } from "../../actions/action.constants";
-import { useAppSelector } from "../../Store/store";
+import { store, useAppSelector } from "../../Store/store";
 import {
   groupDataSelector,
+  groupLoadingSelector,
   groupQuerySelector,
 } from "../../selectors/groups.selectors";
 import { useHistory } from "react-router-dom";
+import { updateQueryAction } from "../../actions/groups.actions";
 
 interface Props {}
 
 const GroupData: React.FC<Props> = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useAppSelector(groupLoadingSelector);
   const query = useAppSelector(groupQuerySelector);
   const groupData = useAppSelector(groupDataSelector);
   const history = useHistory();
-
-  useEffect(() => {
-    setIsLoading(true);
-
-    fetchGroupData({ query: query, status: "all-groups" })
-      .then((response) => {
-        if (response?.status === 200) {
-          groupActions.groups(response.data.data, query);
-          setIsLoading(false);
-        } else {
-          console.log("Error while fetching data", response?.status);
-          setIsLoading(false);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [query]); //eslint-disable-line
 
   return (
     <div className="w-full h-full">
@@ -49,7 +31,7 @@ const GroupData: React.FC<Props> = () => {
             }}
             value={query}
             onChange={(event) => {
-              groupActions.query(event.target.value);
+              store.dispatch(updateQueryAction(event.target.value));
             }}
           />
         </div>

@@ -6,10 +6,10 @@ export interface EntityState<T extends Entity = Entity> {
   };
 }
 
-export const getIds = (entities: Entity[]) => entities.map((e) => e.id);
+export const getIds = (entities: Entity[]) => entities?.map((e) => e.id);
 
 export const addMany = (state: EntityState, entities: Entity[]) => {
-  const entityMap = entities.reduce((previous, entity) => {
+  const entityMap = entities?.reduce((previous, entity) => {
     return { ...previous, [entity.id]: entity };
   }, {});
   return { ...state, byId: { ...state.byId, ...entityMap } };

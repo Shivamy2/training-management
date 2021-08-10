@@ -11,7 +11,7 @@ import FormSwitch from "../../Components/FormSwitch";
 import { login } from "../../APIs/Auth/auth";
 import Alert from "../../Components/Alert/Alert";
 import { loginToken, LS_LOGIN_TOKEN } from "../../Constants/constants";
-import { authActions } from "../../actions/action.constants";
+import { authActions } from "../../actions/auth.actions";
 
 interface Props {}
 

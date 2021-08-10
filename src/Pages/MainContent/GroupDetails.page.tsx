@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ImSpinner } from "react-icons/im";
 import { useHistory, useParams } from "react-router-dom";
-import { groupActions } from "../../actions/action.constants";
+import {
+  groupsFetchAction,
+  selectedGroupAction,
+  selectedIdAction,
+} from "../../actions/groups.actions";
 import {
   fetchGroupData,
   fetchSelectedGroup,
@@ -33,7 +37,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
     })
       .then((response) => {
         if (response?.status === 200) {
-          groupActions.groups(response.data.data, searchedQuery);
+          groupsFetchAction(response.data.data, searchedQuery);
         } else {
           console.error("Error Occured while fetching group data");
         }
@@ -71,18 +75,13 @@ const GroupDetailsPage: React.FC<Props> = () => {
   }
   useEffect(() => {
     setIsLoading(true);
-    groupActions.selectedId(+selectedGroupId);
-
+    selectedIdAction(+selectedGroupId);
     const value =
       totalGroupIds && totalGroupIds[indexOfCurrentSelectedId]
         ? totalGroupIds[indexOfCurrentSelectedId].toString()
         : "234";
     fetchSelectedGroup(value).then((response) => {
-      groupActions.selectedGroup(
-        response?.data.data!,
-        selectedGroupId,
-        searchedQuery
-      );
+      selectedGroupAction(response?.data.data!, selectedGroupId, searchedQuery);
       setIsLoading(false);
     });
   }, [selectedGroupId, indexOfCurrentSelectedId]); //eslint-disable-line

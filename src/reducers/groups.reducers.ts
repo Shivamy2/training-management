@@ -1,10 +1,10 @@
 import { Reducer } from "redux";
 import {
-  GROUPS_FETCH,
-  GROUP_QUERY,
+  GROUPS_QUERY_COMPLETED,
+  GROUP_QUERY_CHANGED,
   GROUP_SELECTED,
   GROUP_SELECTED_ID,
-} from "../actions/groups.actions";
+} from "../actions/action.constants";
 import { GroupDataStream } from "../Models/Groups";
 import { addMany, EntityState, getIds } from "./entity.reducers";
 
@@ -12,6 +12,7 @@ export interface GroupState extends EntityState<GroupDataStream> {
   query: string;
   mappedData: { [keyword: string]: number[] };
   selectedId: number;
+  loadingQuery: { [query: string]: boolean };
 }
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   mappedData: {},
   query: "",
   selectedId: -1,
+  loadingQuery: {},
 };
 
 export const groupsReducer: Reducer<GroupState> = (
@@ -26,9 +28,17 @@ export const groupsReducer: Reducer<GroupState> = (
   action
 ) => {
   switch (action.type) {
-    case GROUP_QUERY:
-      return { ...state, query: action.payload };
-    case GROUPS_FETCH:
+    case GROUP_QUERY_CHANGED:
+      return {
+        ...state,
+        query: action.payload,
+        loadingQuery: {
+          ...state.loadingQuery,
+          [action.payload]: true,
+        },
+      };
+
+    case GROUPS_QUERY_COMPLETED:
       const groupData: GroupDataStream[] = action.payload.groupData;
       console.log(groupData);
 
@@ -41,9 +51,15 @@ export const groupsReducer: Reducer<GroupState> = (
           ...newState.mappedData,
           [action.payload.keyword]: groupIds,
         },
+        loadingQuery: {
+          ...state.loadingQuery,
+          [action.payload.keyword]: false,
+        },
       };
+
     case GROUP_SELECTED_ID:
       return { ...state, selectedId: action.payload };
+
     case GROUP_SELECTED:
       return {
         ...state,
@@ -52,6 +68,7 @@ export const groupsReducer: Reducer<GroupState> = (
           [action.payload.id]: action.payload.group,
         },
       };
+
     default:
       return state;
   }

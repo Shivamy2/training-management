@@ -27,8 +27,8 @@ export interface GroupResponse {
   data: GroupDataStream[];
 }
 
-interface GroupRequest {
-  query?: string;
+export interface GroupRequest {
+  query: string;
   status: "all-groups";
   offset?: number;
   limit?: number;

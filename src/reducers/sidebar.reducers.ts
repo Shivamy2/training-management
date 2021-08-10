@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { SIDEBAR_STATUS } from "../actions/sidebar.action";
+import { SIDEBAR_STATUS } from "../actions/action.constants";
 
 export interface SidebarReducer {
   isSidebarOpen: boolean;
