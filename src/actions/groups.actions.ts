@@ -13,9 +13,9 @@ export const groupsFetchAction = (
   payload: { groupData, keyword },
 });
 
-export const updateQueryAction = (query: string, loading: boolean) => ({
+export const updateQueryAction = (query: string) => ({
   type: GROUP_QUERY,
-  payload: { query, loading },
+  payload: query,
 });
 export const selectedIdAction = (id: number) => ({
   type: GROUP_SELECTED_ID,

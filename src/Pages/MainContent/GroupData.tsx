@@ -21,24 +21,6 @@ const GroupData: React.FC<Props> = () => {
   const groupData = useAppSelector(groupDataSelector);
   const history = useHistory();
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-
-  //   fetchGroupData({ query: query, status: "all-groups" })
-  //     .then((response) => {
-  //       if (response?.status === 200) {
-  //         groupActions.groups(response.data.data, query);
-  //         setIsLoading(false);
-  //       } else {
-  //         console.log("Error while fetching data", response?.status);
-  //         setIsLoading(false);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [query]); //eslint-disable-line
-
   return (
     <div className="w-full h-full">
       <div>

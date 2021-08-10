@@ -29,13 +29,12 @@ export const groupsReducer: Reducer<GroupState> = (
 ) => {
   switch (action.type) {
     case GROUP_QUERY:
-      const { query, loading } = action.payload;
       return {
         ...state,
-        query: query,
+        query: action.payload,
         loadingQuery: {
           ...state.loadingQuery,
-          [query]: loading,
+          [action.payload]: true,
         },
       };
     case GROUPS_QUERY_COMPLETED:
