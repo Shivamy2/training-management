@@ -6,14 +6,14 @@ import { fetchGroupData } from "../APIs/GroupsData/groupsData";
 import { store } from "../Store/store";
 
 export function* fetchGroups(action: AnyAction): Generator<any> {
-  yield delay(300);
-  const groups: any = yield call(fetchGroupData, {
+  yield delay(200);
+  const groupsResponse: any = yield call(fetchGroupData, {
     status: "all-groups",
     query: action.payload,
   });
 
   yield put(
-    store.dispatch(groupsFetchAction(groups?.data.data!, action.payload))
+    store.dispatch(groupsFetchAction(groupsResponse.data.data, action.payload))
   );
 }
 

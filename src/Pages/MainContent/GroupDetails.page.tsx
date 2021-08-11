@@ -36,7 +36,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
     fetchGroupData({
       status: "all-groups",
       query: searchedQuery,
-    })
+    })!
       .then((response) => {
         if (response?.status === 200) {
           store.dispatch(groupsFetchAction(response.data.data, searchedQuery));
