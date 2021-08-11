@@ -17,7 +17,7 @@ import {
   groupMappedData,
   groupSelectedSelector,
 } from "../../selectors/groups.selectors";
-import { useAppSelector } from "../../Store/store";
+import { store, useAppSelector } from "../../Store/store";
 
 interface Props {}
 interface Params {
@@ -39,7 +39,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
     })
       .then((response) => {
         if (response?.status === 200) {
-          groupsFetchAction(response.data.data, searchedQuery);
+          store.dispatch(groupsFetchAction(response.data.data, searchedQuery));
         } else {
           console.error("Error Occured while fetching group data");
         }
@@ -74,13 +74,19 @@ const GroupDetailsPage: React.FC<Props> = () => {
     console.log("useEffect2 is running");
 
     setIsLoading(true);
-    selectedIdAction(+selectedGroupId);
+    store.dispatch(selectedIdAction(+selectedGroupId));
     const value =
       totalGroupIds && totalGroupIds[indexOfCurrentSelectedId]
         ? totalGroupIds[indexOfCurrentSelectedId].toString()
         : "234";
     fetchSelectedGroup(value).then((response) => {
-      selectedGroupAction(response?.data.data!, selectedGroupId, searchedQuery);
+      store.dispatch(
+        selectedGroupAction(
+          response?.data.data!,
+          selectedGroupId,
+          searchedQuery
+        )
+      );
       setIsLoading(false);
     });
   }, [selectedGroupId, indexOfCurrentSelectedId]); //eslint-disable-line
