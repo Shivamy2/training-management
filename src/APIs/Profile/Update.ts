@@ -1,13 +1,9 @@
 import axios from "axios";
-import { BASE_URL, loginToken } from "../../Constants/constants";
+import { BASE_URL } from "../../Constants/constants";
+import { axiosRequest, axiosResponse } from "../base";
 
-axios.interceptors.request.use((config) => {
-  if (!loginToken) return config;
-  return {
-    ...config,
-    headers: { ...config.headers, Authorization: loginToken },
-  };
-});
+axiosRequest();
+axiosResponse();
 
 export interface UpdateProfile {
   first_name?: string;

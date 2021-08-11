@@ -1,27 +1,10 @@
-import axios from "axios";
-import {
-  BASE_URL,
-  loginToken,
-  LS_LOGIN_TOKEN,
-} from "../../Constants/constants";
+import axios, { CancelToken } from "axios";
+import { BASE_URL } from "../../Constants/constants";
 import { GroupDataStream } from "../../Models/Groups";
+import { axiosRequest, axiosResponse, get } from "../base";
 
-axios.interceptors.request.use((config) => {
-  if (!loginToken) return config;
-
-  return {
-    ...config,
-    headers: { ...config.headers, Authorization: loginToken },
-  };
-});
-
-axios.interceptors.response.use(undefined, (error) => {
-  if ((error.response.data.code = 9101)) {
-    localStorage.removeItem(LS_LOGIN_TOKEN);
-    window.location.href = "/login";
-  }
-  return Promise.reject(error);
-});
+axiosRequest();
+axiosResponse();
 
 export interface GroupResponse {
   data: GroupDataStream[];
@@ -38,12 +21,12 @@ export interface SelectedGroupResponse {
   data: GroupDataStream;
 }
 
-const fetchGroupData = async (data: GroupRequest) => {
+const fetchGroupData = (data: GroupRequest, token?: CancelToken) => {
   try {
-    const response = await axios.get<GroupResponse>(`${BASE_URL}/groups`, {
+    return get<GroupResponse>(`${BASE_URL}/groups`, {
       params: data,
+      cancelToken: token,
     });
-    return response;
   } catch (error) {
     console.log("Not able to fetch groups data");
   }
