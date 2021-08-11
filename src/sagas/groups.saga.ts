@@ -3,7 +3,6 @@ import { AnyAction } from "redux";
 import { GROUP_QUERY_CHANGED } from "../actions/action.constants";
 import { groupsFetchAction } from "../actions/groups.actions";
 import { fetchGroupData } from "../APIs/GroupsData/groupsData";
-import { store } from "../Store/store";
 
 export function* fetchGroups(action: AnyAction): Generator<any> {
   const groups: any = yield call(fetchGroupData, {
@@ -11,9 +10,7 @@ export function* fetchGroups(action: AnyAction): Generator<any> {
     query: action.payload,
   });
 
-  yield put(
-    store.dispatch(groupsFetchAction(groups?.data.data!, action.payload))
-  );
+  yield put(groupsFetchAction(groups?.data.data!, action.payload));
 }
 
 export function* watchGroupQueryChanged() {
