@@ -33,7 +33,6 @@ const EditProfile: React.FC<Props> = () => {
 
   const {
     handleSubmit,
-    resetForm,
     handleReset,
     errors,
     touched,
@@ -165,7 +164,7 @@ const EditProfile: React.FC<Props> = () => {
                       <div>
                         <select
                           {...getFieldProps("birth_year")}
-                          className="w-full p-2 bg-white border border-gray-400 rounded-lg focus:outline-none"
+                          className="w-full p-2 bg-white border border-gray-400 rounded-lg focus:outline-none focus:border-primary focus:shadow-primary"
                         >
                           <option>Year</option>
                           {year.map((number) => {
@@ -210,7 +209,7 @@ const EditProfile: React.FC<Props> = () => {
               submissionInProgress={isSubmitting}
             />
             <Button
-              onClick={handleReset.bind(null, resetForm)}
+              onClick={(event) => handleReset.call(null, event)}
               text="Reset All"
               buttonType="outline"
               type="reset"

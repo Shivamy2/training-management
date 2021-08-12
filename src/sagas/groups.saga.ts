@@ -26,6 +26,5 @@ export function* fetchGroups(action: AnyAction): Generator<any> {
 }
 
 export function* watchGroupQueryChanged() {
-  console.log("WatchGroupQueryChanged Called!");
   yield takeLatest(GROUP_QUERY_CHANGED, fetchGroups);
 }
