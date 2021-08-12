@@ -5,8 +5,6 @@ import Header from "../../Components/Header";
 import NavBar from "../../Components/NavBar";
 import Sidebar from "../../Components/Sidebar";
 import DashboardPage from "./Dashboard.page";
-import MovieGroupPage from "./MovieGroup.page";
-import MovieGroupButtonPage from "./MovieGroupButton.page";
 import RecordingPage from "./Recording.page";
 import EditProfile from "./Profile/EditProfile";
 import { useAppSelector } from "../../Store/store";
@@ -36,12 +34,6 @@ const MainDisplay: React.FC<Props> = () => {
           <Switch>
             <Route path="/dashboard">
               <DashboardPage />
-            </Route>
-            <Route path="/movie-group">
-              <MovieGroupPage />
-            </Route>
-            <Route path="/movie-group-button">
-              <MovieGroupButtonPage />
             </Route>
             <Route exact path="/groups">
               <GroupData />

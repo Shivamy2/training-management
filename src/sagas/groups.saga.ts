@@ -6,15 +6,27 @@ import { fetchGroupData } from "../APIs/GroupsData/groupsData";
 import { store } from "../Store/store";
 
 export function* fetchGroups(action: AnyAction): Generator<any> {
-  yield delay(200);
+  yield delay(300);
+  console.log(delay(500));
+  // yield call(setTimeout, () => console.log("This is timeout"), 5000);
+  // console.log(call(setTimeout, () => console.log("This is timeout"), 5000));
+
   const groupsResponse: any = yield call(fetchGroupData, {
     status: "all-groups",
     query: action.payload,
   });
 
+  console.log(
+    call(fetchGroupData, {
+      status: "all-groups",
+      query: action.payload,
+    })
+  );
+
   yield put(
     store.dispatch(groupsFetchAction(groupsResponse.data.data, action.payload))
   );
+  console.log(put(groupsFetchAction(groupsResponse.data.data, action.payload)));
 }
 
 export function* watchGroupQueryChanged() {
