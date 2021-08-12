@@ -6,11 +6,10 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import { authActions } from "./actions/auth.actions";
-import { me } from "./APIs/Auth/auth";
+import { meFetchUserAction } from "./actions/auth.actions";
 import { loginToken } from "./Constants/constants";
 import { authSelector } from "./selectors/auth.selectors";
-import { useAppSelector } from "./Store/store";
+import { store, useAppSelector } from "./Store/store";
 
 const AuthLazy = lazy(() => import("./Pages/Auth/Auth.page"));
 const MainDisplayLazy = lazy(
@@ -24,10 +23,11 @@ const App: React.FC<Props> = () => {
   useEffect(() => {
     if (!loginToken) return;
 
-    me().then((userResponse) => {
-      console.log(userResponse);
-      authActions.fetch(userResponse);
-    });
+    // me().then((userResponse) => {
+    //   console.log(userResponse);
+    //   authActions.fetch(userResponse);
+    // });
+    store.dispatch(meFetchUserAction());
   }, []); // eslint-disable-line
 
   if (!authUser && loginToken) {

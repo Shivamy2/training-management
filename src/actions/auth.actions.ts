@@ -8,11 +8,15 @@ import {
   ME_LOGIN,
   ME_LOGIN_ERROR_MESSAGE,
   ME_SENDING_DATA,
+  ME_FETCH_USER,
 } from "./action.constants";
 
 export const meFetchAction = (user: User) => ({
   type: ME_FETCH,
   payload: user,
+});
+export const meFetchUserAction = () => ({
+  type: ME_FETCH_USER,
 });
 
 export const meLoginAction = (user: User) => ({

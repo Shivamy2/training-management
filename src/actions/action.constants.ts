@@ -1,5 +1,6 @@
 //auth
 export const ME_FETCH = "me/fetch";
+export const ME_FETCH_USER = "me/fetch_user";
 export const ME_LOGIN = "me/login";
 export const ME_SENDING_DATA = "me/loading_true";
 export const ME_LOGIN_ERROR_MESSAGE = "me/error_message";

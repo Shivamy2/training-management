@@ -42,22 +42,6 @@ const Login: React.FC<Props> = () => {
         .min(6, ({ min }) => `Password must be atleast ${min} chars`),
     }),
     onSubmit: (data) => {
-      // login(data)
-      //   .then((response) => {
-      //     setSubmitting(false);
-      //     if (response?.status === 200) {
-      //       console.log(response);
-      //       authActions.login(response.data.user);
-      //       localStorage.setItem(LS_LOGIN_TOKEN, response.data.token);
-      //       window.location.href = "/dashboard";
-      //     } else {
-      //       console.log("Error", response?.statusText);
-      //       setLoginFailedMessage("User not Found!");
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     console.error("Not able to login", error);
-      //   });
       console.log("sending data");
 
       store.dispatch(meSendingDataAction(data));
