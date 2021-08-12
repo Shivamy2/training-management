@@ -7,7 +7,7 @@ import { axiosRequest, axiosResponse } from "../base";
 axiosRequest();
 axiosResponse();
 
-interface LoginCredentialsRequest {
+export interface LoginCredentialsRequest {
   email: string;
   password: string;
 }

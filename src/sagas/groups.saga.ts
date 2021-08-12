@@ -6,7 +6,6 @@ import { fetchGroupData } from "../APIs/GroupsData/groupsData";
 
 export function* fetchGroups(action: AnyAction): Generator<any> {
   yield delay(300);
-  console.log(delay(500));
   // yield call(setTimeout, () => console.log("This is timeout"), 5000);
   // console.log(call(setTimeout, () => console.log("This is timeout"), 5000));
 

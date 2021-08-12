@@ -8,23 +8,25 @@ import * as yup from "yup";
 import Button from "../../Components/Button/Button";
 import Copyright from "../../Components/Copyright";
 import FormSwitch from "../../Components/FormSwitch";
-import { login } from "../../APIs/Auth/auth";
 import Alert from "../../Components/Alert/Alert";
-import { loginToken, LS_LOGIN_TOKEN } from "../../Constants/constants";
-import { authActions } from "../../actions/auth.actions";
+import { loginToken } from "../../Constants/constants";
+import { meSendingDataAction } from "../../actions/auth.actions";
+import { store, useAppSelector } from "../../Store/store";
+import {
+  authLoginErrorMessageSelector,
+  authLoginLoadingSelector,
+} from "../../selectors/auth.selectors";
 
 interface Props {}
 
 const Login: React.FC<Props> = () => {
-  const [loginFailedMessage, setLoginFailedMessage] = useState("");
+  // const [loginFailedMessage, setLoginFailedMessage] = useState("");
+  const loginFailedMessage = useAppSelector(authLoginErrorMessageSelector);
+  const isSubmitting = useAppSelector(authLoginLoadingSelector);
 
-  const {
-    handleSubmit,
-    errors,
-    touched,
-    isSubmitting,
-    getFieldProps,
-  } = useFormik({
+  // console.log("Login Page is rerendering!!");
+
+  const { handleSubmit, errors, touched, getFieldProps } = useFormik({
     initialValues: {
       email: "",
       password: "",
@@ -39,24 +41,26 @@ const Login: React.FC<Props> = () => {
         .required("Password is required field!")
         .min(6, ({ min }) => `Password must be atleast ${min} chars`),
     }),
-    onSubmit: (data, { setSubmitting }) => {
-      setLoginFailedMessage("");
-      login(data)
-        .then((response) => {
-          setSubmitting(false);
-          if (response?.status === 200) {
-            console.log(response);
-            authActions.login(response.data.user);
-            localStorage.setItem(LS_LOGIN_TOKEN, response.data.token);
-            window.location.href = "/dashboard";
-          } else {
-            console.log("Error", response?.statusText);
-            setLoginFailedMessage("User not Found!");
-          }
-        })
-        .catch((error) => {
-          console.error("Not able to login", error);
-        });
+    onSubmit: (data) => {
+      // login(data)
+      //   .then((response) => {
+      //     setSubmitting(false);
+      //     if (response?.status === 200) {
+      //       console.log(response);
+      //       authActions.login(response.data.user);
+      //       localStorage.setItem(LS_LOGIN_TOKEN, response.data.token);
+      //       window.location.href = "/dashboard";
+      //     } else {
+      //       console.log("Error", response?.statusText);
+      //       setLoginFailedMessage("User not Found!");
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.error("Not able to login", error);
+      //   });
+      console.log("sending data");
+
+      store.dispatch(meSendingDataAction(data));
     },
   });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
