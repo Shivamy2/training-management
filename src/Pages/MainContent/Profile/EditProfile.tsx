@@ -4,9 +4,9 @@ import Avatar from "../../../Components/Avatar/Avatar";
 import Button from "../../../Components/Button/Button";
 import EditInput from "../../../Components/Input/EditInput";
 import * as yup from "yup";
-import { useAppSelector } from "../../../Store/store";
-import updateData from "../../../APIs/Profile/Update";
+import { store, useAppSelector } from "../../../Store/store";
 import { authSelector } from "../../../selectors/auth.selectors";
+import { meUpdate } from "../../../actions/auth.actions";
 
 interface Props {}
 
@@ -75,10 +75,11 @@ const EditProfile: React.FC<Props> = () => {
     }),
     onSubmit: (data) => {
       console.log(data);
-      updateData(data).then((response) => {
-        console.log(response?.data);
-        window.location.href = "/dashboard";
-      });
+      // updateData(data).then((response) => {
+      //   console.log(response?.data);
+      //   window.location.href = "/dashboard";
+      // });
+      store.dispatch(meUpdate(data));
     },
   });
 

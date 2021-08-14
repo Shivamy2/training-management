@@ -1,5 +1,6 @@
 import { bindActionCreators } from "redux";
 import { LoginCredentialsRequest } from "../APIs/Auth/auth";
+import { UpdateProfile } from "../APIs/Profile/Update";
 import { User } from "../Models/User";
 import { store } from "../Store/store";
 import {
@@ -9,6 +10,7 @@ import {
   ME_LOGIN_ERROR_MESSAGE,
   ME_SENDING_DATA,
   ME_FETCH_USER,
+  ME_UPDATE,
 } from "./action.constants";
 
 export const meFetchAction = (user: User) => ({
@@ -22,6 +24,10 @@ export const meFetchUserAction = () => ({
 export const meLoginAction = (user: User) => ({
   type: ME_LOGIN,
   payload: user,
+});
+export const meUpdate = (data: UpdateProfile) => ({
+  type: ME_UPDATE,
+  payload: data,
 });
 export const meSendingDataAction = (data: LoginCredentialsRequest) => ({
   type: ME_SENDING_DATA,
