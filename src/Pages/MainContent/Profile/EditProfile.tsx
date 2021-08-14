@@ -75,10 +75,6 @@ const EditProfile: React.FC<Props> = () => {
     }),
     onSubmit: (data) => {
       console.log(data);
-      // updateData(data).then((response) => {
-      //   console.log(response?.data);
-      //   window.location.href = "/dashboard";
-      // });
       store.dispatch(meUpdate(data));
     },
   });

@@ -6,21 +6,22 @@ import {
   GROUP_SELECTED_ID,
 } from "../actions/action.constants";
 import { GroupDataStream } from "../Models/Groups";
-import { addMany, EntityState, getIds } from "./entity.reducers";
+import {
+  addMany,
+  EntityState,
+  getIds,
+  initialEntityState,
+} from "./entity.reducers";
 
 export interface GroupState extends EntityState<GroupDataStream> {
   query: string;
   mappedData: { [keyword: string]: number[] };
-  selectedId: number;
-  loadingQuery: { [query: string]: boolean };
 }
 
-const initialState = {
-  byId: {},
+const initialState: GroupState = {
+  ...initialEntityState,
   mappedData: {},
   query: "",
-  selectedId: -1,
-  loadingQuery: {},
 };
 
 export const groupsReducer: Reducer<GroupState> = (
@@ -32,10 +33,7 @@ export const groupsReducer: Reducer<GroupState> = (
       return {
         ...state,
         query: action.payload,
-        loadingQuery: {
-          ...state.loadingQuery,
-          [action.payload]: true,
-        },
+        loadingList: true,
       };
 
     case GROUPS_QUERY_COMPLETED:
@@ -51,10 +49,7 @@ export const groupsReducer: Reducer<GroupState> = (
           ...newState.mappedData,
           [action.payload.keyword]: groupIds,
         },
-        loadingQuery: {
-          ...state.loadingQuery,
-          [action.payload.keyword]: false,
-        },
+        loadingList: false,
       };
 
     case GROUP_SELECTED_ID:

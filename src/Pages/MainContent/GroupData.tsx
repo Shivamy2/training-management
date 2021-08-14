@@ -7,7 +7,7 @@ import Search from "../../Components/Search/Search";
 import { store, useAppSelector } from "../../Store/store";
 import {
   groupDataSelector,
-  groupLoadingSelector,
+  groupLoadingStatusSelector,
   groupQuerySelector,
 } from "../../selectors/groups.selectors";
 import { Link, useHistory } from "react-router-dom";
@@ -16,7 +16,7 @@ import { updateQueryAction } from "../../actions/groups.actions";
 interface Props {}
 
 const GroupData: React.FC<Props> = () => {
-  const isLoading = useAppSelector(groupLoadingSelector);
+  const isLoading = useAppSelector(groupLoadingStatusSelector);
   const query = useAppSelector(groupQuerySelector);
   const groupData = useAppSelector(groupDataSelector);
   const history = useHistory();

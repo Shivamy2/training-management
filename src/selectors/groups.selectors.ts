@@ -16,15 +16,15 @@ export const groupIdSelector = createSelector(
 
 export const groupLoadingStatusSelector = createSelector(
   [groupStateSelector],
-  (group) => group.loadingQuery
+  (group) => group.loadingList
 );
 
-export const groupLoadingSelector = createSelector(
-  [groupLoadingStatusSelector, groupQuerySelector],
-  (loadingMap, query) => {
-    return loadingMap[query];
-  }
-);
+// export const groupLoadingSelector = createSelector(
+//   [groupLoadingStatusSelector, groupQuerySelector],
+//   (loadingMap, query) => {
+//     return loadingMap[query];
+//   }
+// );
 
 export const groupDataSelector = createSelector(
   [groupQuerySelector, groupIdSelector, groupMappedData],

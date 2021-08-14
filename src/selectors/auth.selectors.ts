@@ -13,5 +13,5 @@ export const authLoginErrorMessageSelector = createSelector(
 
 export const authLoginLoadingSelector = createSelector(
   [authStateSelector],
-  (auth) => auth.isLoading
+  (auth) => auth.loadingOne
 );

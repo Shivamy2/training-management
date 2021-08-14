@@ -6,16 +6,15 @@ import {
   ME_LOGIN_ERROR_MESSAGE,
   ME_SENDING_DATA,
 } from "../actions/action.constants";
+import { User } from "../Models/User";
+import { EntityState, initialEntityState } from "./entity.reducers";
 
-export interface AuthState {
+export interface AuthState extends EntityState<User> {
   id?: number;
-  isLoading: boolean;
-  errorMessage: string;
 }
 
 const initialValue: AuthState = {
-  isLoading: false,
-  errorMessage: "",
+  ...initialEntityState,
 };
 
 export const authReducer: Reducer<AuthState> = (
@@ -26,11 +25,11 @@ export const authReducer: Reducer<AuthState> = (
     case ME_FETCH:
     case ME_LOGIN:
       const userId: number = action.payload.id;
-      return { ...state, id: userId, isLoading: false };
+      return { ...state, id: userId, loadingOne: false };
     case ME_SENDING_DATA:
-      return { ...state, isLoading: true };
+      return { ...state, loadingOne: true };
     case ME_LOADING_STOP:
-      return { ...state, isLoading: action.payload };
+      return { ...state, loadingOne: action.payload };
 
     case ME_LOGIN_ERROR_MESSAGE:
       return { ...state, errorMessage: action.payload };
