@@ -1,16 +1,20 @@
 import { Reducer } from "redux";
 import {
   GROUPS_QUERY_COMPLETED,
+  GROUP_FETCH_ONE,
+  GROUP_FETCH_ONE_COMPLETED,
   GROUP_QUERY_CHANGED,
-  GROUP_SELECTED,
-  GROUP_SELECTED_ID,
+  GROUP_FETCH_ONE_ERROR,
 } from "../actions/action.constants";
 import { GroupDataStream } from "../Models/Groups";
 import {
   addMany,
+  addOne,
   EntityState,
   getIds,
   initialEntityState,
+  select,
+  setErrorMessage,
 } from "./entity.reducers";
 
 export interface GroupState extends EntityState<GroupDataStream> {
@@ -52,18 +56,17 @@ export const groupsReducer: Reducer<GroupState> = (
         loadingList: false,
       };
 
-    case GROUP_SELECTED_ID:
-      return { ...state, selectedId: action.payload };
+    case GROUP_FETCH_ONE:
+      console.log(action.payload);
 
-    case GROUP_SELECTED:
-      return {
-        ...state,
-        byId: {
-          ...state.byId,
-          [action.payload.id]: action.payload.group,
-        },
-      };
+      return select(state, action.payload) as GroupState;
 
+    case GROUP_FETCH_ONE_COMPLETED:
+      return addOne(state, action.payload, false) as GroupState;
+
+    case GROUP_FETCH_ONE_ERROR:
+      const { id, message } = action.payload;
+      return setErrorMessage(state, id, message) as GroupState;
     default:
       return state;
   }

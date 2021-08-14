@@ -19,6 +19,23 @@ export const initialEntityState = {
 
 export const getIds = (entities: Entity[]) => entities?.map((e) => e.id);
 
+export const setErrorMessage = (
+  state: EntityState,
+  id: number,
+  message: string
+) => {
+  if (state.selectedId !== id) return state;
+  return {
+    ...state,
+    errorMessage: message,
+    loadingOne: false,
+  };
+};
+
+export const select = (state: EntityState, id: number) => {
+  return { ...state, selectedId: id, loadingOne: true };
+};
+
 export const addMany = (state: EntityState, entities: Entity[]) => {
   const entityMap = entities?.reduce((previous, entity) => {
     return { ...previous, [entity.id]: entity };
@@ -26,6 +43,15 @@ export const addMany = (state: EntityState, entities: Entity[]) => {
   return { ...state, byId: { ...state.byId, ...entityMap } };
 };
 
-export const addOne = (state: EntityState, entity: Entity) => {
-  return { ...state, byId: { ...state.byId, [entity.id]: entity } };
+export const addOne = (
+  state: EntityState,
+  entity: Entity,
+  loading?: boolean
+) => {
+  const loadingOneStatus = loading === undefined ? state.loadingOne : loading;
+  return {
+    ...state,
+    byId: { ...state.byId, [entity.id]: entity },
+    loadingOne: loadingOneStatus,
+  };
 };

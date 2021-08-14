@@ -10,8 +10,11 @@ export const ME_UPDATE = "me/update";
 //groups
 export const GROUP_QUERY_CHANGED = "query/change";
 export const GROUPS_QUERY_COMPLETED = "groups/fetch";
-export const GROUP_SELECTED_ID = "groups/selected_id";
-export const GROUP_SELECTED = "groups/selected";
+
+//group one
+export const GROUP_FETCH_ONE = "groups/fetch_one";
+export const GROUP_FETCH_ONE_COMPLETED = "groups/fetch_one_completed";
+export const GROUP_FETCH_ONE_ERROR = "groups/fetch_one_error";
 
 //sidebar
 export const SIDEBAR_STATUS = "sidebar/open";

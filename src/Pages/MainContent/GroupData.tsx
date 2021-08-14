@@ -11,7 +11,7 @@ import {
   groupQuerySelector,
 } from "../../selectors/groups.selectors";
 import { Link, useHistory } from "react-router-dom";
-import { updateQueryAction } from "../../actions/groups.actions";
+import { groupUpdateQueryAction } from "../../actions/groups.actions";
 
 interface Props {}
 
@@ -31,7 +31,7 @@ const GroupData: React.FC<Props> = () => {
             }}
             value={query}
             onChange={(event) => {
-              store.dispatch(updateQueryAction(event.target.value));
+              store.dispatch(groupUpdateQueryAction(event.target.value));
             }}
           />
         </div>

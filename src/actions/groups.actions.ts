@@ -2,8 +2,9 @@ import { GroupDataStream } from "../Models/Groups";
 import {
   GROUPS_QUERY_COMPLETED,
   GROUP_QUERY_CHANGED,
-  GROUP_SELECTED,
-  GROUP_SELECTED_ID,
+  GROUP_FETCH_ONE,
+  GROUP_FETCH_ONE_COMPLETED,
+  GROUP_FETCH_ONE_ERROR,
 } from "./action.constants";
 
 export const groupsFetchAction = (
@@ -14,19 +15,20 @@ export const groupsFetchAction = (
   payload: { groupData, keyword },
 });
 
-export const updateQueryAction = (query: string) => ({
+export const groupUpdateQueryAction = (query: string) => ({
   type: GROUP_QUERY_CHANGED,
   payload: query,
 });
-export const selectedIdAction = (id: number) => ({
-  type: GROUP_SELECTED_ID,
+export const groupfetchOneAction = (id: number) => ({
+  type: GROUP_FETCH_ONE,
   payload: id,
 });
-export const selectedGroupAction = (
-  group: GroupDataStream,
-  id: string,
-  query: string
-) => ({
-  type: GROUP_SELECTED,
-  payload: { group, id, query },
+export const groupFetchOneCompletedAction = (group: GroupDataStream) => ({
+  type: GROUP_FETCH_ONE_COMPLETED,
+  payload: group,
+});
+
+export const groupFetchOneError = (id: number, message: string) => ({
+  type: GROUP_FETCH_ONE_ERROR,
+  payload: { id, message },
 });

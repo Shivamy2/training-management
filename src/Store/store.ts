@@ -15,12 +15,14 @@ const reducer = combineReducers({
   sidebar: sidebarReducer,
 });
 
+const devTools =
+  process.env.NODE_ENV === "production"
+    ? applyMiddleware(sagaMiddleware)
+    : composeWithDevTools(applyMiddleware(sagaMiddleware));
+
 export type AppState = ReturnType<typeof store.getState>;
 
-export const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware))
-);
+export const store = createStore(reducer, devTools);
 
 rootSaga.map((saga) => sagaMiddleware.run(saga));
 

@@ -33,14 +33,10 @@ const fetchGroupData = (data: GroupRequest, token?: CancelToken) => {
 };
 
 const fetchSelectedGroup = async (id: string) => {
-  try {
-    const response = await axios.get<SelectedGroupResponse>(
-      `${BASE_URL}/groups/${id}`
-    );
-    return response;
-  } catch (error) {
-    console.log("Not able to send fetch selected group request");
-  }
+  const response = await axios.get<SelectedGroupResponse>(
+    `${BASE_URL}/groups/${id}`
+  );
+  return response;
 };
 
 export { fetchGroupData, fetchSelectedGroup };

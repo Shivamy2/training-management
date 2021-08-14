@@ -37,6 +37,19 @@ export const groupDataSelector = createSelector(
 
 // 10: {id:, }
 
+export const groupOneLoading = createSelector(
+  [groupStateSelector],
+  (groups) => {
+    return groups.loadingOne;
+  }
+);
+export const groupErrorMessage = createSelector(
+  [groupStateSelector],
+  (groups) => {
+    return groups.errorMessage;
+  }
+);
+
 export const groupSelectedIdSelector = createSelector(
   [groupStateSelector],
   (groups) => {
@@ -47,7 +60,7 @@ export const groupSelectedIdSelector = createSelector(
 export const groupSelectedSelector = createSelector(
   [groupSelectedIdSelector, groupIdSelector],
   (selectedId, idMappedGroups) => {
-    const groupSelected = idMappedGroups[selectedId] || [];
+    const groupSelected = idMappedGroups[selectedId];
     return groupSelected;
   }
 );
