@@ -1,4 +1,3 @@
-import { FaUserFriends } from "react-icons/fa";
 import { createSelector } from "reselect";
 import { authStateSelector, userStateSelector } from "./app.selectors";
 

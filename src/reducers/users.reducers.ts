@@ -6,9 +6,6 @@ import {
 } from "../actions/action.constants";
 import { AuthUser } from "../Models/AuthUser";
 import { User } from "../Models/Users";
-import { authStateSelector } from "../selectors/app.selectors";
-import { authSelector } from "../selectors/auth.selectors";
-import { useAppSelector } from "../Store/store";
 import {
   addMany,
   addOne,
