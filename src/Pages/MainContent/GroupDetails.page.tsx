@@ -44,7 +44,6 @@ const GroupDetailsPage: React.FC<Props> = () => {
   let prevButtonStatus = true,
     nextButtonStatus = true;
   const groupIdsLength = totalGroupIds?.length;
-  console.log("Length of Id Array", groupIdsLength);
 
   if (indexOfCurrentSelectedId >= groupIdsLength - 1) {
     nextButtonStatus = false;
@@ -60,7 +59,6 @@ const GroupDetailsPage: React.FC<Props> = () => {
 
   //extracting the selected group data
   const groupSelected = useAppSelector(groupSelectedSelector);
-  console.log("selected group", groupSelected);
 
   const creatorOfGroup = groupSelected?.creator;
   return (

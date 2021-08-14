@@ -1,7 +1,7 @@
 import { bindActionCreators } from "redux";
 import { LoginCredentialsRequest } from "../APIs/Auth/auth";
 import { UpdateProfile } from "../APIs/Profile/Update";
-import { User } from "../Models/User";
+import { AuthUser } from "../Models/AuthUser";
 import { store } from "../Store/store";
 import {
   ME_FETCH,
@@ -13,7 +13,7 @@ import {
   ME_UPDATE,
 } from "./action.constants";
 
-export const meFetchAction = (user: User) => ({
+export const meFetchAction = (user: AuthUser) => ({
   type: ME_FETCH,
   payload: user,
 });
@@ -21,7 +21,7 @@ export const meFetchUserAction = () => ({
   type: ME_FETCH_USER,
 });
 
-export const meLoginAction = (user: User) => ({
+export const meLoginAction = (user: AuthUser) => ({
   type: ME_LOGIN,
   payload: user,
 });

@@ -1,9 +1,9 @@
 import { createContext } from "react";
-import { User } from "./Models/User";
+import { AuthUser } from "./Models/AuthUser";
 
 interface UserContextData {
-  user?: User;
-  setUser: (user: User) => void;
+  user?: AuthUser;
+  setUser: (user: AuthUser) => void;
 }
 
 const UserContext = createContext<UserContextData>({

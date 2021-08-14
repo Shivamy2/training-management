@@ -9,6 +9,7 @@ import RecordingPage from "./Recording.page";
 import EditProfile from "./Profile/EditProfile";
 import { useAppSelector } from "../../Store/store";
 import GroupDetailsPage from "./GroupDetails.page";
+import { UsersPage } from "./Users.page";
 // import { groupSelectedSelector } from "../../selectors/groups.selectors";
 
 interface Props {}
@@ -44,6 +45,11 @@ const MainDisplay: React.FC<Props> = () => {
             <Route exact path="/profile">
               <EditProfile />
             </Route>
+
+            <Route exact path="/users">
+              <UsersPage />
+            </Route>
+
             <Route path="/batch/:batchNumber/recording/:recordingNumber">
               <RecordingPage />
             </Route>

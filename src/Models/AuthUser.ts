@@ -1,6 +1,6 @@
 import { Entity } from "./Entity";
 
-export interface User extends Entity {
+export interface AuthUser extends Entity {
   __type: string;
   guid: null;
   first_name: string;

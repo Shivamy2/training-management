@@ -6,10 +6,10 @@ import {
   ME_LOGIN_ERROR_MESSAGE,
   ME_SENDING_DATA,
 } from "../actions/action.constants";
-import { User } from "../Models/User";
+import { AuthUser } from "../Models/AuthUser";
 import { EntityState, initialEntityState } from "./entity.reducers";
 
-export interface AuthState extends EntityState<User> {
+export interface AuthState extends EntityState<AuthUser> {
   id?: number;
 }
 

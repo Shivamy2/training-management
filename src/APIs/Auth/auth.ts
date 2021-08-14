@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../../Constants/constants";
 import { LS_LOGIN_TOKEN } from "../../Constants/constants";
-import { User } from "../../Models/User";
+import { AuthUser } from "../../Models/AuthUser";
 import { axiosRequest, axiosResponse } from "../base";
 
 axiosRequest();
@@ -14,7 +14,7 @@ export interface LoginCredentialsRequest {
 
 export interface LoginResponse {
   token: string;
-  user: User;
+  user: AuthUser;
   data: Data;
 }
 
@@ -39,7 +39,7 @@ const logout = () => {
 };
 
 interface MeResponse {
-  data: User;
+  data: AuthUser;
 }
 
 const me = () => {
