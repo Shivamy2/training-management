@@ -35,20 +35,19 @@ const GroupDetailsPage: React.FC<Props> = () => {
 
   // finding the index of current select id
   const groupIds = useAppSelector(groupMappedData);
-  const indexOfCurrentSelectedId = groupIds[searchedQuery]?.indexOf(
-    +selectedGroupId
-  );
+  const indexOfCurrentSelectedId =
+    groupIds && groupIds[searchedQuery]?.indexOf(+selectedGroupId);
 
   // finding the length of total ids found for a particular query for displaying the remaining groups in button text
-  let totalGroupIds = groupIds[searchedQuery];
+  let totalGroupIds = groupIds && groupIds[searchedQuery];
   let prevButtonStatus = true,
     nextButtonStatus = true;
   const groupIdsLength = totalGroupIds?.length;
 
-  if (indexOfCurrentSelectedId >= groupIdsLength - 1) {
+  if (indexOfCurrentSelectedId! >= groupIdsLength! - 1) {
     nextButtonStatus = false;
   }
-  if (indexOfCurrentSelectedId < 1) {
+  if (indexOfCurrentSelectedId! < 1) {
     prevButtonStatus = false;
   }
 
@@ -144,7 +143,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
                   onClick={() => {
                     history.push(
                       `/groups/${searchedQuery}/${
-                        totalGroupIds[indexOfCurrentSelectedId - 1]
+                        totalGroupIds![indexOfCurrentSelectedId! - 1]
                       }`
                     );
                   }}
@@ -157,13 +156,13 @@ const GroupDetailsPage: React.FC<Props> = () => {
                   buttonType="outline"
                   text={`Next ${
                     groupIdsLength
-                      ? `- ${groupIdsLength - indexOfCurrentSelectedId - 1}`
+                      ? `- ${groupIdsLength - indexOfCurrentSelectedId! - 1}`
                       : ""
                   }`}
                   onClick={() =>
                     history.push(
                       `/groups/${searchedQuery}/${
-                        totalGroupIds[indexOfCurrentSelectedId + 1]
+                        totalGroupIds![indexOfCurrentSelectedId! + 1]
                       }`
                     )
                   }

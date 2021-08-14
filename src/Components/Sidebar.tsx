@@ -6,6 +6,7 @@ import {
   GiExplosiveMeeting,
   FaChild,
   BiLogOut,
+  BiUser,
 } from "react-icons/all";
 import { logout } from "../APIs/Auth/auth";
 import { useHistory } from "react-router-dom";
@@ -58,6 +59,12 @@ const Sidebar: React.FC<Props> = () => {
           title="Groups"
         >
           <GrGroup className="w-5 h-5 text-sidebar-elements " />
+        </SideBarElement>
+        <SideBarElement
+          onClick={useCallback(() => history.push("/users"), [])} // eslint-disable-line
+          title="Users"
+        >
+          <BiUser className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
 
         <SideBarElement

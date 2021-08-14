@@ -6,7 +6,7 @@ import { axiosRequest, axiosResponse } from "../base";
 axiosRequest();
 axiosResponse();
 
-export const fetchUser = () => {
+export const fetchUsers = () => {
   return axios
     .get<Users>(`${BASE_URL}/people`)
     .then((response) => response.data.data);

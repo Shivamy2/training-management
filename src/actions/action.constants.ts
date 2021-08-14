@@ -7,6 +7,10 @@ export const ME_LOGIN_ERROR_MESSAGE = "me/error_message";
 export const ME_LOADING_STOP = "me/loading_false";
 export const ME_UPDATE = "me/update";
 
+//users
+export const USERS_FETCHING = "users/fetch";
+export const USERS_FETCHING_COMPLETED = "users/fetch_complete";
+
 //groups
 export const GROUP_QUERY_CHANGED = "query/change";
 export const GROUPS_QUERY_COMPLETED = "groups/fetch";

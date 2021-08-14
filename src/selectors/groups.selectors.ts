@@ -29,7 +29,7 @@ export const groupLoadingStatusSelector = createSelector(
 export const groupDataSelector = createSelector(
   [groupQuerySelector, groupIdSelector, groupMappedData],
   (query, groupMapped, ids) => {
-    const groupIds = ids[query] || [];
+    const groupIds = (ids && ids[query]) || [];
     const mappedData = groupIds.map((id) => groupMapped[id]);
     return mappedData;
   }

@@ -8,6 +8,7 @@ export interface EntityState<T extends Entity = Entity> {
   loadingList: boolean;
   loadingOne: boolean;
   errorMessage?: string;
+  mappedData?: { [keyword: string]: number[] };
 }
 
 export const initialEntityState = {

@@ -1,10 +1,10 @@
 import { Entity } from "./Entity";
 
 export interface Users {
-  data: UserDataStream[];
+  data: User[];
 }
 
-export interface UserDataStream extends Entity {
+export interface User extends Entity {
   __type: DatumType;
   guid: null;
   first_name: string;

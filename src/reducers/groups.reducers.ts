@@ -19,12 +19,10 @@ import {
 
 export interface GroupState extends EntityState<GroupDataStream> {
   query: string;
-  mappedData: { [keyword: string]: number[] };
 }
 
 const initialState: GroupState = {
   ...initialEntityState,
-  mappedData: {},
   query: "",
 };
 
