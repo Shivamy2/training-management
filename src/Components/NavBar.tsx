@@ -110,6 +110,7 @@ const NavBar: React.FC<Props> = () => {
               image={userDP}
               itemsToBeShown={[
                 { name: "Profile", path: "/profile" },
+                { name: "Users", path: "/users" },
                 { name: "Groups", path: "/groups" },
                 { name: "Recordings", path: "/batch/2/recording/15" },
                 { name: "Sign Out", path: "/login" },

@@ -10,7 +10,7 @@ import {
   groupLoadingStatusSelector,
   groupQuerySelector,
 } from "../../selectors/groups.selectors";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { groupUpdateQueryAction } from "../../actions/groups.actions";
 
 interface Props {}
@@ -19,7 +19,6 @@ const GroupData: React.FC<Props> = () => {
   const isLoading = useAppSelector(groupLoadingStatusSelector);
   const query = useAppSelector(groupQuerySelector);
   const groupData = useAppSelector(groupDataSelector);
-  const history = useHistory();
 
   return (
     <div className="w-full h-full">
@@ -71,10 +70,6 @@ const GroupData: React.FC<Props> = () => {
               ) : (
                 <Link to={linkToNextId} key={index}>
                   <ListGroup
-                    onClick={() => {
-                      if (!query) history.push(`/groups/%20/${item.id}`);
-                      else history.push(`/groups/${query}/${item.id}`);
-                    }}
                     className={
                       "hover:bg-gray-100 bg-white hover:shadow-stacked " +
                       listExtraStyling

@@ -19,12 +19,14 @@ export const axiosResponse = () => {
     if (error.response?.data?.code === 9101) {
       localStorage.removeItem(LS_LOGIN_TOKEN);
       window.location.href = "/login";
-    } else if (
-      error.response?.data?.code === 401 ||
-      error.response?.data?.code === 410
-    ) {
-      window.location.href = "/not-found";
     }
+    // else if (
+    //   error.response?.data?.code === 401 ||
+    //   error.response?.data?.code === 410 ||
+    //   error.response?.data?.code === 201
+    // ) {
+    //   window.location.href = "/not-found";
+    // }
     return Promise.reject(error);
   });
 };

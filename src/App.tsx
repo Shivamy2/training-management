@@ -71,6 +71,7 @@ const App: React.FC<Props> = () => {
                 "/profile",
                 "/groups/:searchedQuery/:selectedGroupId",
                 "/users",
+                "/users/:selectedUserId",
               ]}
             >
               {authUser ? <MainDisplayLazy /> : <Redirect to="/login" />}

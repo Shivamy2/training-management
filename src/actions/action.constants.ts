@@ -11,6 +11,10 @@ export const ME_UPDATE = "me/update";
 export const USERS_FETCHING = "users/fetch";
 export const USERS_FETCHING_COMPLETED = "users/fetch_complete";
 
+export const USER_FETCH_ONE = "user/fetch_one";
+export const USER_FETCH_ONE_COMPLETE = "user/fetch_one_complete";
+export const USER_FETCH_ONE_ERROR = "user/fetch_one_error";
+
 //groups
 export const GROUP_QUERY_CHANGED = "query/change";
 export const GROUPS_QUERY_COMPLETED = "groups/fetch";

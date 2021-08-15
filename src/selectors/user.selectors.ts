@@ -15,6 +15,15 @@ export const userMappedDataSelector = createSelector(
   [userStateSelector],
   (user) => user.mappedData
 );
+export const userLoadingOneSelector = createSelector(
+  [userStateSelector],
+  (user) => user.loadingOne
+);
+
+export const userFetchErrorSelector = createSelector(
+  [userStateSelector],
+  (user) => user.errorMessage
+);
 
 export const userMappedFilteredDataSelector = createSelector(
   [userMappedDataSelector, authStateSelector],
@@ -31,4 +40,14 @@ export const userListSelector = createSelector(
     const userData = userIds.map((id) => users[id]);
     return userData;
   }
+);
+
+export const userSelectedIdSelector = createSelector(
+  [userStateSelector],
+  (user) => user.selectedId
+);
+
+export const userSelectedSelector = createSelector(
+  [userSelector, userSelectedIdSelector],
+  (user, selectedId) => user[selectedId]
 );

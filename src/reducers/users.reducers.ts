@@ -3,6 +3,9 @@ import {
   ME_FETCH,
   ME_LOGIN,
   USERS_FETCHING_COMPLETED,
+  USER_FETCH_ONE,
+  USER_FETCH_ONE_COMPLETE,
+  USER_FETCH_ONE_ERROR,
 } from "../actions/action.constants";
 import { AuthUser } from "../Models/AuthUser";
 import { User } from "../Models/Users";
@@ -12,6 +15,8 @@ import {
   EntityState,
   getIds,
   initialEntityState,
+  select,
+  setErrorMessage,
 } from "./entity.reducers";
 
 export interface UserState extends EntityState<AuthUser> {}
@@ -40,6 +45,16 @@ export const userReducer: Reducer<UserState> = (
         loadingList: false,
         mappedData: { ...state.mappedData, all: getUserIds },
       };
+
+    case USER_FETCH_ONE:
+      return select(state, action.payload) as UserState;
+
+    case USER_FETCH_ONE_COMPLETE:
+      return addOne(state, action.payload, false) as UserState;
+
+    case USER_FETCH_ONE_ERROR:
+      const { id, message } = action.payload;
+      return setErrorMessage(state, id, message) as UserState;
     default:
       return state;
   }
