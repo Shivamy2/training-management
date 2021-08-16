@@ -1,17 +1,17 @@
 import React from "react";
 import { ImSpinner9 } from "react-icons/im";
-import Alert from "../../Components/Alert/Alert";
+import Alert from "../../../Components/Alert/Alert";
 
-import ListGroup from "../../Components/ListGroup/ListGroup";
-import Search from "../../Components/Search/Search";
-import { store, useAppSelector } from "../../Store/store";
+import ListGroup from "../../../Components/ListGroup/ListGroup";
+import Search from "../../../Components/Search/Search";
+import { store, useAppSelector } from "../../../Store/store";
 import {
   groupDataSelector,
   groupLoadingStatusSelector,
   groupQuerySelector,
-} from "../../selectors/groups.selectors";
+} from "../../../selectors/groups.selectors";
 import { Link } from "react-router-dom";
-import { groupUpdateQueryAction } from "../../actions/groups.actions";
+import { groupUpdateQueryAction } from "../../../actions/groups.actions";
 
 interface Props {}
 

@@ -4,18 +4,18 @@ import { useHistory, useParams } from "react-router-dom";
 import {
   groupfetchOneAction,
   groupUpdateQueryAction,
-} from "../../actions/groups.actions";
-import Alert from "../../Components/Alert/Alert";
-import Avatar from "../../Components/Avatar/Avatar";
-import Button from "../../Components/Button/Button";
-import { brokenImageReplacement } from "../../Constants/constants";
+} from "../../../actions/groups.actions";
+import Alert from "../../../Components/Alert/Alert";
+import Avatar from "../../../Components/Avatar/Avatar";
+import Button from "../../../Components/Button/Button";
+import { brokenImageReplacement } from "../../../Constants/constants";
 import {
   groupErrorMessage,
   groupMappedData,
   groupOneLoading,
   groupSelectedSelector,
-} from "../../selectors/groups.selectors";
-import { store, useAppSelector } from "../../Store/store";
+} from "../../../selectors/groups.selectors";
+import { store, useAppSelector } from "../../../Store/store";
 
 interface Props {}
 interface Params {

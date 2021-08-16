@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import { Link } from "react-router-dom";
-import { usersFetchAction } from "../../actions/users.actions";
-import ListGroup from "../../Components/ListGroup/ListGroup";
+import { usersFetchAction } from "../../../actions/users.actions";
+import ListGroup from "../../../Components/ListGroup/ListGroup";
 import {
   userListSelector,
   userLoadingSelector,
-} from "../../selectors/user.selectors";
-import { store, useAppSelector } from "../../Store/store";
+} from "../../../selectors/user.selectors";
+import { store, useAppSelector } from "../../../Store/store";
 
 interface Props {}
 

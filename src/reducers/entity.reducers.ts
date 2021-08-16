@@ -4,7 +4,7 @@ export interface EntityState<T extends Entity = Entity> {
   byId: {
     [id: number]: T;
   };
-  selectedId: number;
+  selectedId?: number;
   loadingList: boolean;
   loadingOne: boolean;
   errorMessage?: string;
@@ -13,7 +13,6 @@ export interface EntityState<T extends Entity = Entity> {
 
 export const initialEntityState = {
   byId: {},
-  selectedId: -1,
   loadingList: false,
   loadingOne: false,
 };

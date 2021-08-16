@@ -49,5 +49,6 @@ export const userSelectedIdSelector = createSelector(
 
 export const userSelectedSelector = createSelector(
   [userSelector, userSelectedIdSelector],
-  (user, selectedId) => user[selectedId]
+  (user, selectedId) =>
+    selectedId === undefined ? undefined : user[selectedId]
 );

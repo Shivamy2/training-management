@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import GroupData from "./GroupData";
+import GroupData from "./Groups/GroupData";
 import Header from "../../Components/Header";
 import NavBar from "../../Components/NavBar";
 import Sidebar from "../../Components/Sidebar";
@@ -8,15 +8,16 @@ import DashboardPage from "./Dashboard.page";
 import RecordingPage from "./Recording.page";
 import EditProfile from "./Profile/EditProfile";
 import { useAppSelector } from "../../Store/store";
-import GroupDetailsPage from "./GroupDetails.page";
-import { UsersPage } from "./Users.page";
-import UserDetailPage from "./UserDetail.page";
+import GroupDetailsPage from "./Groups/GroupDetails.page";
+import { UsersPage } from "./Users/Users.page";
+import UserDetailPage from "./Users/UserDetail.page";
+import { uiSidebarStatusSelector } from "../../selectors/ui.selectors";
 // import { groupSelectedSelector } from "../../selectors/groups.selectors";
 
 interface Props {}
 
 const MainDisplay: React.FC<Props> = () => {
-  const isSideBarOpen = useAppSelector((state) => state.sidebar.isSidebarOpen);
+  const isSideBarOpen = useAppSelector(uiSidebarStatusSelector);
   // const selectedGroupId = useAppSelector(groupSelectedSelector);
   return (
     <div>

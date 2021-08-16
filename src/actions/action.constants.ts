@@ -1,3 +1,7 @@
+// UI
+export const UI_SIDEBAR = "ui/sidebar";
+export const UI_SIDEBAR_SELECTED_ITEM = "ui/sidebar_selected_item";
+
 //auth
 export const ME_FETCH = "me/fetch";
 export const ME_FETCH_USER = "me/fetch_user";

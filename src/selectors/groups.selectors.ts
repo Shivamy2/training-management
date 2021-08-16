@@ -60,7 +60,8 @@ export const groupSelectedIdSelector = createSelector(
 export const groupSelectedSelector = createSelector(
   [groupSelectedIdSelector, groupIdSelector],
   (selectedId, idMappedGroups) => {
-    const groupSelected = idMappedGroups[selectedId];
+    const groupSelected =
+      selectedId === undefined ? undefined : idMappedGroups[selectedId];
     return groupSelected;
   }
 );

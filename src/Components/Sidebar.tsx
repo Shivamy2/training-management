@@ -10,23 +10,27 @@ import {
 } from "react-icons/all";
 import { logout } from "../APIs/Auth/auth";
 import { useHistory } from "react-router-dom";
-import { useAppSelector } from "../Store/store";
+import { store, useAppSelector } from "../Store/store";
+import { uiSidebarStatusSelector } from "../selectors/ui.selectors";
+import { uiSidebarSelectedItemAction } from "../actions/ui.actions";
 
 interface Props {}
 
 const Sidebar: React.FC<Props> = () => {
   const history = useHistory();
-  const isSideBarOpen = useAppSelector((state) => state.sidebar.isSidebarOpen);
+  const isSideBarOpen = useAppSelector(uiSidebarStatusSelector);
 
   return (
-    <nav
+    <div
       className={`fixed hidden transition-transform duration-500 ease-in-out min-h-full px-4 text-white transform md-lg:block ${
         isSideBarOpen ? "" : "-translate-x-full"
       }`}
     >
       <div>
         <SideBarElement
-          onClick={useCallback(() => history.push("/dashboard"), [])} // eslint-disable-line
+          onClick={useCallback(() => {
+            history.push("/dashboard");
+          }, [])} // eslint-disable-line
           containsDirection={true}
           title="Dashboard"
           theme="fill"
@@ -49,19 +53,28 @@ const Sidebar: React.FC<Props> = () => {
           </svg>
         </SideBarElement>
         <SideBarElement
-          onClick={useCallback(() => history.push("/batch/1/recording/15"), [])} // eslint-disable-line
+          onClick={useCallback(() => {
+            store.dispatch(
+              uiSidebarSelectedItemAction("/batch/1/recording/12", "recordings")
+            );
+            history.push("/batch/1/recording/12");
+          }, [])} // eslint-disable-line
           title="Recordings"
         >
           <BiVideoRecording className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
         <SideBarElement
-          onClick={useCallback(() => history.push("/groups"), [])} // eslint-disable-line
+          onClick={useCallback(() => {
+            history.push("/groups");
+          }, [])} // eslint-disable-line
           title="Groups"
         >
           <GrGroup className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
         <SideBarElement
-          onClick={useCallback(() => history.push("/users"), [])} // eslint-disable-line
+          onClick={useCallback(() => {
+            history.push("/users");
+          }, [])} // eslint-disable-line
           title="Users"
         >
           <BiUser className="w-5 h-5 text-sidebar-elements " />
@@ -69,13 +82,13 @@ const Sidebar: React.FC<Props> = () => {
 
         <SideBarElement
           title="Meetings"
-          onClick={() => history.push("/meetings")}
+          onClick={() => history.push("/batch/1/recording/12")}
         >
           <GiExplosiveMeeting className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
         <SideBarElement
           title="Student Report"
-          onClick={() => history.push("/report")}
+          onClick={() => history.push("/student/report")}
         >
           <FaChild className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
@@ -89,7 +102,7 @@ const Sidebar: React.FC<Props> = () => {
           <BiLogOut className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
       </div>
-    </nav>
+    </div>
   );
 };
 

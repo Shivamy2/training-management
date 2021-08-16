@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import { useHistory, useParams } from "react-router-dom";
-import { userFetchOne, usersFetchAction } from "../../actions/users.actions";
-import Alert from "../../Components/Alert/Alert";
-import Avatar from "../../Components/Avatar/Avatar";
-import Button from "../../Components/Button/Button";
-import { brokenImageReplacement } from "../../Constants/constants";
+import { userFetchOne, usersFetchAction } from "../../../actions/users.actions";
+import Alert from "../../../Components/Alert/Alert";
+import Avatar from "../../../Components/Avatar/Avatar";
+import Button from "../../../Components/Button/Button";
+import { brokenImageReplacement } from "../../../Constants/constants";
 import {
   userFetchErrorSelector,
   userLoadingOneSelector,
   userMappedDataSelector,
   userSelectedSelector,
-} from "../../selectors/user.selectors";
-import { store, useAppSelector } from "../../Store/store";
+} from "../../../selectors/user.selectors";
+import { store, useAppSelector } from "../../../Store/store";
 
 interface Props {}
 interface Params {

@@ -1,21 +1,20 @@
 import React from "react";
-import { sidebarActions } from "../actions/sidebar.action";
-import { useAppSelector } from "../Store/store";
+import { uiSidebarAction } from "../actions/ui.actions";
+import { uiSidebarStatusSelector } from "../selectors/ui.selectors";
+import { store, useAppSelector } from "../Store/store";
 import DropDown from "./DropDown";
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
-  const sidebarOpenStatus = useAppSelector(
-    (state) => state.sidebar.isSidebarOpen
-  );
+  const sidebarStatus = useAppSelector(uiSidebarStatusSelector);
   return (
     <div className="z-30 w-full bg-header h-header">
       <div className="flex justify-between h-full px-4">
         <div className="flex my-auto">
           <svg
             onClick={() => {
-              sidebarActions.sidebar(!sidebarOpenStatus);
+              store.dispatch(uiSidebarAction(!sidebarStatus));
             }}
             xmlns="http://www.w3.org/2000/svg"
             width="20"
