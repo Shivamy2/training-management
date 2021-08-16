@@ -30,7 +30,7 @@ export const groupDataSelector = createSelector(
   [groupQuerySelector, groupIdSelector, groupMappedData],
   (query, groupMapped, ids) => {
     const groupIds = (ids && ids[query]) || [];
-    const mappedData = groupIds.map((id) => groupMapped[id]);
+    const mappedData = groupIds.map((id) => groupMapped && groupMapped[id]);
     return mappedData;
   }
 );
@@ -61,7 +61,9 @@ export const groupSelectedSelector = createSelector(
   [groupSelectedIdSelector, groupIdSelector],
   (selectedId, idMappedGroups) => {
     const groupSelected =
-      selectedId === undefined ? undefined : idMappedGroups[selectedId];
+      selectedId === undefined
+        ? undefined
+        : idMappedGroups && idMappedGroups[selectedId];
     return groupSelected;
   }
 );

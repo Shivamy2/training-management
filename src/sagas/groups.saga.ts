@@ -16,10 +16,7 @@ import {
   groupFetchOneError,
   groupsFetchAction,
 } from "../actions/groups.actions";
-import {
-  fetchGroupData,
-  fetchSelectedGroup,
-} from "../APIs/GroupsData/groupsData";
+import { fetchGroupData, fetchSelectedGroup } from "../APIs/GroupsData/groups";
 
 function* fetchGroups(action: AnyAction): Generator<any> {
   yield delay(300);

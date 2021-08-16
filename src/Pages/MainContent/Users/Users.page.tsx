@@ -36,7 +36,7 @@ export const UsersPage: React.FC<Props> = () => {
             else if (index === usersData.length - 1) {
               listExtraStyling += " rounded-b-md ";
             }
-            const linkToNextId = `/users/${item.id}`;
+            const linkToNextId = `/users/${item?.id}`;
             return (index & 1) === 1 ? (
               <Link to={linkToNextId} key={index}>
                 <ListGroup
@@ -46,10 +46,10 @@ export const UsersPage: React.FC<Props> = () => {
                   }
                   infoClassName="text-white"
                   key={index}
-                  title={`${item.first_name} ${item.last_name}`}
-                  description={item.phone_number}
+                  title={`${item?.first_name} ${item?.last_name}`}
+                  description={item?.phone_number}
                   url={
-                    item.profile_pic_url
+                    item?.profile_pic_url
                       ? item.profile_pic_url
                       : "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
                   }
@@ -63,10 +63,10 @@ export const UsersPage: React.FC<Props> = () => {
                     listExtraStyling
                   }
                   key={index}
-                  title={`${item.first_name} ${item.last_name}`}
-                  description={item.phone_number}
+                  title={`${item?.first_name} ${item?.last_name}`}
+                  description={item?.phone_number}
                   url={
-                    item.profile_pic_url
+                    item?.profile_pic_url
                       ? item.profile_pic_url
                       : "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
                   }

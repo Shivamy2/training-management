@@ -37,7 +37,7 @@ export const userMappedFilteredDataSelector = createSelector(
 export const userListSelector = createSelector(
   [userMappedFilteredDataSelector, userSelector],
   (userIds, users) => {
-    const userData = userIds.map((id) => users[id]);
+    const userData = userIds.map((id) => users && users[id]);
     return userData;
   }
 );
@@ -50,5 +50,5 @@ export const userSelectedIdSelector = createSelector(
 export const userSelectedSelector = createSelector(
   [userSelector, userSelectedIdSelector],
   (user, selectedId) =>
-    selectedId === undefined ? undefined : user[selectedId]
+    selectedId === undefined ? undefined : user && user[selectedId]
 );

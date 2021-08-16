@@ -47,8 +47,8 @@ const GroupData: React.FC<Props> = () => {
                 listExtraStyling += " rounded-b-md ";
               }
               let linkToNextId;
-              if (!query) linkToNextId = `/groups/%20/${item.id}`;
-              else linkToNextId = `/groups/${query}/${item.id}`;
+              if (!query) linkToNextId = `/groups/%20/${item?.id}`;
+              else linkToNextId = `/groups/${query}/${item?.id}`;
               return (index & 1) === 1 ? (
                 <Link to={linkToNextId} key={index}>
                   <ListGroup
@@ -58,10 +58,10 @@ const GroupData: React.FC<Props> = () => {
                     }
                     infoClassName="text-white"
                     key={index}
-                    title={item.name}
-                    description={item.description}
+                    title={item?.name ? item.name : "Unknown"}
+                    description={item?.description}
                     url={
-                      item.group_image_url
+                      item?.group_image_url
                         ? item.group_image_url
                         : "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
                     }
@@ -75,10 +75,10 @@ const GroupData: React.FC<Props> = () => {
                       listExtraStyling
                     }
                     key={index}
-                    title={item.name}
-                    description={item.description}
+                    title={item?.name ? item.name : "Unknown"}
+                    description={item?.description}
                     url={
-                      item.group_image_url
+                      item?.group_image_url
                         ? item.group_image_url
                         : "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
                     }

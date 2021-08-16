@@ -19,11 +19,15 @@ import {
 
 export interface GroupState extends EntityState<GroupDataStream> {
   query: string;
+  creatorId: { [groupId: number]: number };
+  memberIds: { [groupId: number]: number[] };
 }
 
 const initialState: GroupState = {
   ...initialEntityState,
   query: "",
+  creatorId: {},
+  memberIds: {},
 };
 
 export const groupsReducer: Reducer<GroupState> = (
@@ -60,7 +64,25 @@ export const groupsReducer: Reducer<GroupState> = (
       return select(state, action.payload) as GroupState;
 
     case GROUP_FETCH_ONE_COMPLETED:
-      return addOne(state, action.payload, false) as GroupState;
+      const group = action.payload as GroupDataStream;
+      const currentSelectedGroup = addOne(
+        state,
+        action.payload,
+        false
+      ) as GroupState;
+      const memberIds = getIds(group?.participants);
+      return {
+        ...currentSelectedGroup,
+        ...currentSelectedGroup.byId,
+        creatorId: {
+          ...currentSelectedGroup.creatorId,
+          [group?.id]: group.creator?.id,
+        },
+        memberIds: {
+          ...currentSelectedGroup.memberIds,
+          [group?.id]: memberIds,
+        },
+      };
 
     case GROUP_FETCH_ONE_ERROR:
       const { id, message } = action.payload;

@@ -1,7 +1,7 @@
 import { Entity } from "../Models/Entity";
 
 export interface EntityState<T extends Entity = Entity> {
-  byId: {
+  byId?: {
     [id: number]: T;
   };
   selectedId?: number;
@@ -12,7 +12,6 @@ export interface EntityState<T extends Entity = Entity> {
 }
 
 export const initialEntityState = {
-  byId: {},
   loadingList: false,
   loadingOne: false,
 };
@@ -36,11 +35,20 @@ export const select = (state: EntityState, id: number) => {
   return { ...state, selectedId: id, loadingOne: true };
 };
 
-export const addMany = (state: EntityState, entities: Entity[]) => {
+export const addMany = (
+  state: EntityState,
+  entities: Entity[],
+  loading?: boolean
+) => {
+  const loadingListStatus = loading === undefined ? state.loadingOne : loading;
   const entityMap = entities?.reduce((previous, entity) => {
-    return { ...previous, [entity.id]: entity };
+    return { ...previous, [entity?.id]: entity };
   }, {});
-  return { ...state, byId: { ...state.byId, ...entityMap } };
+  return {
+    ...state,
+    byId: { ...state.byId, ...entityMap },
+    loadingList: loadingListStatus,
+  };
 };
 
 export const addOne = (
@@ -51,7 +59,7 @@ export const addOne = (
   const loadingOneStatus = loading === undefined ? state.loadingOne : loading;
   return {
     ...state,
-    byId: { ...state.byId, [entity.id]: entity },
+    byId: { ...state.byId, [entity?.id]: entity },
     loadingOne: loadingOneStatus,
   };
 };
