@@ -1,5 +1,6 @@
 import { createSelector } from "reselect";
 import { groupStateSelector } from "./app.selectors";
+import { userSelector } from "./user.selectors";
 
 export const groupQuerySelector = createSelector(
   [groupStateSelector],
@@ -19,12 +20,14 @@ export const groupLoadingStatusSelector = createSelector(
   (group) => group.loadingList
 );
 
-// export const groupLoadingSelector = createSelector(
-//   [groupLoadingStatusSelector, groupQuerySelector],
-//   (loadingMap, query) => {
-//     return loadingMap[query];
-//   }
-// );
+export const groupCreatorSelector = createSelector(
+  [groupStateSelector],
+  (group) => group.creatorId
+);
+export const groupMemberIdsSelector = createSelector(
+  [groupStateSelector],
+  (group) => group.memberIds
+);
 
 export const groupDataSelector = createSelector(
   [groupQuerySelector, groupIdSelector, groupMappedData],
@@ -35,7 +38,7 @@ export const groupDataSelector = createSelector(
   }
 );
 
-// 10: {id:, }
+// 10: {id:[10,30]}
 
 export const groupOneLoading = createSelector(
   [groupStateSelector],
@@ -65,5 +68,26 @@ export const groupSelectedSelector = createSelector(
         ? undefined
         : idMappedGroups && idMappedGroups[selectedId];
     return groupSelected;
+  }
+);
+
+export const groupCreatorDetailsSelector = createSelector(
+  [groupSelectedIdSelector, groupCreatorSelector, userSelector],
+  (selectedGroupId, creatorIds, users) => {
+    const creatorId =
+      selectedGroupId === undefined ? undefined : creatorIds[selectedGroupId];
+    const creatorDetails =
+      users && (creatorId === undefined ? undefined : users[creatorId]);
+    return creatorDetails;
+  }
+);
+
+export const groupMembersListSelector = createSelector(
+  [groupSelectedIdSelector, groupMemberIdsSelector, userSelector],
+  (selectedGroupId, memberIds, users) => {
+    const memberId =
+      selectedGroupId === undefined ? undefined : memberIds[selectedGroupId];
+    const membersDetail = memberId && memberId?.map((id) => users && users[id]);
+    return membersDetail;
   }
 );

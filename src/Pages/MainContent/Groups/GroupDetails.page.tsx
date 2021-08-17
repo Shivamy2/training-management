@@ -10,8 +10,10 @@ import Avatar from "../../../Components/Avatar/Avatar";
 import Button from "../../../Components/Button/Button";
 import { brokenImageReplacement } from "../../../Constants/constants";
 import {
+  groupCreatorDetailsSelector,
   groupErrorMessage,
   groupMappedData,
+  groupMembersListSelector,
   groupOneLoading,
   groupSelectedSelector,
 } from "../../../selectors/groups.selectors";
@@ -59,7 +61,9 @@ const GroupDetailsPage: React.FC<Props> = () => {
   //extracting the selected group data
   const groupSelected = useAppSelector(groupSelectedSelector);
 
-  const creatorOfGroup = groupSelected?.creator;
+  const creatorOfGroup = useAppSelector(groupCreatorDetailsSelector);
+
+  const membersList = useAppSelector(groupMembersListSelector);
   return (
     <div className="w-full">
       {isLoading && (
@@ -111,20 +115,22 @@ const GroupDetailsPage: React.FC<Props> = () => {
                     {groupSelected.id ? groupSelected.id : "Unknown"}
                   </div>
                   <div className="space-y-3 md:flex md:flex-col md:flex-1 md:mt-4">
-                    <span className="font-bold">
-                      Creator's Full Name: &nbsp;
-                    </span>
+                    <span className="font-bold">Creator's Name: &nbsp;</span>
                     {creatorOfGroup
-                      ? creatorOfGroup.first_name
-                        ? creatorOfGroup.first_name
-                        : "Unknown"
-                      : "Unknown"}
-                    &nbsp;
-                    {creatorOfGroup
-                      ? creatorOfGroup.last_name
-                        ? creatorOfGroup.last_name
-                        : "Unknown"
-                      : "Unknown"}
+                      ? creatorOfGroup?.first_name +
+                        " " +
+                        creatorOfGroup?.last_name
+                      : "No Details Found"}
+                  </div>
+                  <div className="md:flex pt-3 md:flex-col md:flex-1 md:mt-4">
+                    <span className="font-bold">Members List: &nbsp;</span>
+                    {membersList?.length === 0
+                      ? "No Members"
+                      : membersList?.map((member) => (
+                          <div key={member?.id}>
+                            {member?.first_name} {member?.last_name}
+                          </div>
+                        ))}
                   </div>
                 </div>
               </div>
