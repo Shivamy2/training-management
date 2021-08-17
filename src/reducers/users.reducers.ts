@@ -1,5 +1,6 @@
 import { Reducer } from "redux";
 import {
+  GROUPS_QUERY_COMPLETED,
   GROUP_FETCH_ONE_COMPLETED,
   ME_FETCH,
   ME_LOGIN,
@@ -9,7 +10,7 @@ import {
   USER_FETCH_ONE_ERROR,
 } from "../actions/action.constants";
 import { AuthUser } from "../Models/AuthUser";
-import { GroupDataStream } from "../Models/Groups";
+import { Creator, GroupDataStream } from "../Models/Groups";
 import { User } from "../Models/Users";
 import {
   addMany,
@@ -57,6 +58,16 @@ export const userReducer: Reducer<UserState> = (
     case USER_FETCH_ONE_ERROR:
       const { id, message } = action.payload;
       return setErrorMessage(state, id, message) as UserState;
+
+    case GROUPS_QUERY_COMPLETED: {
+      const groups = action.payload.groupData as GroupDataStream[];
+
+      const users = groups.reduce((users: Creator[], group) => {
+        return [...users, ...group.participants, group.creator];
+      }, []);
+
+      return addMany(state, users);
+    }
 
     case GROUP_FETCH_ONE_COMPLETED:
       const group = action.payload as GroupDataStream;

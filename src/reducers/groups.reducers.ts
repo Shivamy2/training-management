@@ -19,14 +19,14 @@ import {
 
 export interface GroupState extends EntityState<GroupDataStream> {
   query: string;
-  creatorId: { [groupId: number]: number };
+  creatorIds: { [groupId: number]: number };
   memberIds: { [groupId: number]: number[] };
 }
 
 const initialState: GroupState = {
   ...initialEntityState,
   query: "",
-  creatorId: {},
+  creatorIds: {},
   memberIds: {},
 };
 
@@ -43,11 +43,22 @@ export const groupsReducer: Reducer<GroupState> = (
       };
 
     case GROUPS_QUERY_COMPLETED:
-      const groupData: GroupDataStream[] = action.payload.groupData;
-      console.log(groupData);
+      const groups = action.payload.groupData as GroupDataStream[];
+      console.log(groups);
 
-      const groupIds = getIds(groupData);
-      const newState = addMany(state, groupData) as GroupState;
+      const participantIds = groups.reduce((participantIdsById, group) => {
+        const participants = group.participants.map(
+          (participants) => participants?.id
+        );
+        return { ...participantIdsById, [group?.id]: participants };
+      }, {});
+
+      const creatorIds = groups.reduce((creatorIdById, group) => {
+        return { ...creatorIdById, [group?.id]: group?.creator?.id };
+      }, {});
+
+      const groupIds = getIds(groups);
+      const newState = addMany(state, groups, false) as GroupState;
 
       return {
         ...newState,
@@ -55,7 +66,8 @@ export const groupsReducer: Reducer<GroupState> = (
           ...newState.mappedData,
           [action.payload.keyword]: groupIds,
         },
-        loadingList: false,
+        creatorIds: { ...newState.creatorIds, ...creatorIds },
+        memberIds: { ...newState.memberIds, ...participantIds },
       };
 
     case GROUP_FETCH_ONE:
@@ -74,8 +86,8 @@ export const groupsReducer: Reducer<GroupState> = (
       return {
         ...currentSelectedGroup,
         ...currentSelectedGroup.byId,
-        creatorId: {
-          ...currentSelectedGroup.creatorId,
+        creatorIds: {
+          ...currentSelectedGroup.creatorIds,
           [group?.id]: group.creator?.id,
         },
         memberIds: {

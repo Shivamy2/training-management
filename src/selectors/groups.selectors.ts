@@ -22,7 +22,7 @@ export const groupLoadingStatusSelector = createSelector(
 
 export const groupCreatorSelector = createSelector(
   [groupStateSelector],
-  (group) => group.creatorId
+  (group) => group.creatorIds
 );
 export const groupMemberIdsSelector = createSelector(
   [groupStateSelector],
