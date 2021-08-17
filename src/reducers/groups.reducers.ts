@@ -42,7 +42,7 @@ export const groupsReducer: Reducer<GroupState> = (
         loadingList: true,
       };
 
-    case GROUPS_QUERY_COMPLETED:
+    case GROUPS_QUERY_COMPLETED: {
       const groups = action.payload.groupData as GroupDataStream[];
       console.log(groups);
 
@@ -69,6 +69,7 @@ export const groupsReducer: Reducer<GroupState> = (
         creatorIds: { ...newState.creatorIds, ...creatorIds },
         memberIds: { ...newState.memberIds, ...participantIds },
       };
+    }
 
     case GROUP_FETCH_ONE:
       console.log(action.payload);
@@ -77,21 +78,16 @@ export const groupsReducer: Reducer<GroupState> = (
 
     case GROUP_FETCH_ONE_COMPLETED:
       const group = action.payload as GroupDataStream;
-      const currentSelectedGroup = addOne(
-        state,
-        action.payload,
-        false
-      ) as GroupState;
+      const newState = addOne(state, action.payload, false) as GroupState;
       const memberIds = getIds(group?.participants);
       return {
-        ...currentSelectedGroup,
-        ...currentSelectedGroup.byId,
+        ...newState,
         creatorIds: {
-          ...currentSelectedGroup.creatorIds,
+          ...newState.creatorIds,
           [group?.id]: group.creator?.id,
         },
         memberIds: {
-          ...currentSelectedGroup.memberIds,
+          ...newState.memberIds,
           [group?.id]: memberIds,
         },
       };
