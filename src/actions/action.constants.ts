@@ -14,6 +14,7 @@ export const ME_UPDATE = "me/update";
 //users
 export const USERS_FETCHING = "users/fetch";
 export const USERS_FETCHING_COMPLETED = "users/fetch_complete";
+export const USER_LIST_RECEIVED = "user/list_received";
 
 export const USER_FETCH_ONE = "user/fetch_one";
 export const USER_FETCH_ONE_COMPLETE = "user/fetch_one_complete";

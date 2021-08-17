@@ -20,14 +20,14 @@ export const groupLoadingStatusSelector = createSelector(
   (group) => group.loadingList
 );
 
-export const groupCreatorSelector = createSelector(
-  [groupStateSelector],
-  (group) => group.creatorIds
-);
-export const groupMemberIdsSelector = createSelector(
-  [groupStateSelector],
-  (group) => group.memberIds
-);
+// export const groupCreatorSelector = createSelector(
+//   [groupStateSelector],
+//   (group) => group.creatorIds
+// );
+// export const groupMemberIdsSelector = createSelector(
+//   [groupStateSelector],
+//   (group) => group.memberIds
+// );
 
 export const groupDataSelector = createSelector(
   [groupQuerySelector, groupIdSelector, groupMappedData],
@@ -61,33 +61,36 @@ export const groupSelectedIdSelector = createSelector(
 );
 
 export const groupSelectedSelector = createSelector(
-  [groupSelectedIdSelector, groupIdSelector],
-  (selectedId, idMappedGroups) => {
-    const groupSelected =
-      selectedId === undefined
-        ? undefined
-        : idMappedGroups && idMappedGroups[selectedId];
-    return groupSelected;
+  [groupSelectedIdSelector, groupIdSelector, userSelector],
+  (id, byId, usersById) => {
+    if (!id) return undefined;
+
+    const group = byId && byId[id];
+    const creator = usersById && usersById[group?.creator as any];
+    const participants = group?.participants.map(
+      (p: any) => usersById && usersById[p]
+    );
+    return { ...group, participants, creator };
   }
 );
 
-export const groupCreatorDetailsSelector = createSelector(
-  [groupSelectedIdSelector, groupCreatorSelector, userSelector],
-  (selectedGroupId, creatorIds, users) => {
-    const creatorId =
-      selectedGroupId === undefined ? undefined : creatorIds[selectedGroupId];
-    const creatorDetails =
-      users && (creatorId === undefined ? undefined : users[creatorId]);
-    return creatorDetails;
-  }
-);
+// export const groupCreatorDetailsSelector = createSelector(
+//   [groupSelectedIdSelector, groupCreatorSelector, userSelector],
+//   (selectedGroupId, creatorIds, users) => {
+//     const creatorId =
+//       selectedGroupId === undefined ? undefined : creatorIds[selectedGroupId];
+//     const creatorDetails =
+//       users && (creatorId === undefined ? undefined : users[creatorId]);
+//     return creatorDetails;
+//   }
+// );
 
-export const groupMembersListSelector = createSelector(
-  [groupSelectedIdSelector, groupMemberIdsSelector, userSelector],
-  (selectedGroupId, memberIds, users) => {
-    const memberId =
-      selectedGroupId === undefined ? undefined : memberIds[selectedGroupId];
-    const membersDetail = memberId && memberId?.map((id) => users && users[id]);
-    return membersDetail;
-  }
-);
+// export const groupMembersListSelector = createSelector(
+//   [groupSelectedIdSelector, groupMemberIdsSelector, userSelector],
+//   (selectedGroupId, memberIds, users) => {
+//     const memberId =
+//       selectedGroupId === undefined ? undefined : memberIds[selectedGroupId];
+//     const membersDetail = memberId && memberId?.map((id) => users && users[id]);
+//     return membersDetail;
+//   }
+// );

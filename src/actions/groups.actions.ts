@@ -8,11 +8,11 @@ import {
 } from "./action.constants";
 
 export const groupsFetchAction = (
-  groupData: GroupDataStream[],
+  groupDataById: { [id: number]: GroupDataStream },
   keyword: string
 ) => ({
   type: GROUPS_QUERY_COMPLETED,
-  payload: { groupData, keyword },
+  payload: { groupDataById, keyword },
 });
 
 export const groupUpdateQueryAction = (query: string) => ({

@@ -1,16 +1,14 @@
 import { Reducer } from "redux";
 import {
-  GROUPS_QUERY_COMPLETED,
-  GROUP_FETCH_ONE_COMPLETED,
   ME_FETCH,
   ME_LOGIN,
   USERS_FETCHING_COMPLETED,
   USER_FETCH_ONE,
   USER_FETCH_ONE_COMPLETE,
   USER_FETCH_ONE_ERROR,
+  USER_LIST_RECEIVED,
 } from "../actions/action.constants";
 import { AuthUser } from "../Models/AuthUser";
-import { Creator, GroupDataStream } from "../Models/Groups";
 import { User } from "../Models/Users";
 import {
   addMany,
@@ -52,34 +50,15 @@ export const userReducer: Reducer<UserState> = (
     case USER_FETCH_ONE:
       return select(state, action.payload) as UserState;
 
+    case USER_LIST_RECEIVED: {
+      return { ...state, byId: { ...state.byId, ...action.payload } };
+    }
     case USER_FETCH_ONE_COMPLETE:
       return addOne(state, action.payload, false) as UserState;
 
     case USER_FETCH_ONE_ERROR:
       const { id, message } = action.payload;
       return setErrorMessage(state, id, message) as UserState;
-
-    case GROUPS_QUERY_COMPLETED: {
-      const groups = action.payload.groupData as GroupDataStream[];
-
-      const users = groups.reduce((users: Creator[], group) => {
-        return [...users, ...group.participants, group.creator];
-      }, []);
-
-      return addMany(state, users);
-    }
-
-    case GROUP_FETCH_ONE_COMPLETED:
-      const group = action.payload as GroupDataStream;
-      const creator = addOne(state, group?.creator, false) as UserState;
-      const members = addMany(state, group?.participants, false) as UserState;
-      console.log("creator", creator, "members", members);
-
-      return {
-        ...state,
-        byId: { ...state.byId, ...creator.byId, ...members.byId },
-        loadingList: false,
-      };
     default:
       return state;
   }

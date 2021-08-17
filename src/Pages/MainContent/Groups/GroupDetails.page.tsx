@@ -10,10 +10,8 @@ import Avatar from "../../../Components/Avatar/Avatar";
 import Button from "../../../Components/Button/Button";
 import { brokenImageReplacement } from "../../../Constants/constants";
 import {
-  groupCreatorDetailsSelector,
   groupErrorMessage,
   groupMappedData,
-  groupMembersListSelector,
   groupOneLoading,
   groupSelectedSelector,
 } from "../../../selectors/groups.selectors";
@@ -60,10 +58,8 @@ const GroupDetailsPage: React.FC<Props> = () => {
 
   //extracting the selected group data
   const groupSelected = useAppSelector(groupSelectedSelector);
-
-  const creatorOfGroup = useAppSelector(groupCreatorDetailsSelector);
-
-  const membersList = useAppSelector(groupMembersListSelector);
+  const creatorOfGroup = groupSelected?.creator;
+  const membersList = groupSelected?.participants;
   return (
     <div className="w-full">
       {isLoading && (

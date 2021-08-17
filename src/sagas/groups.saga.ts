@@ -17,6 +17,9 @@ import {
   groupsFetchAction,
 } from "../actions/groups.actions";
 import { fetchGroupData, fetchSelectedGroup } from "../APIs/GroupsData/groups";
+import { normalize } from "normalizr";
+import { groupSchema } from "../Models/schemas";
+import { userListReceived } from "../actions/users.actions";
 
 function* fetchGroups(action: AnyAction): Generator<any> {
   yield delay(300);
@@ -33,7 +36,11 @@ function* fetchGroups(action: AnyAction): Generator<any> {
     })
   );
 
-  yield put(groupsFetchAction(groupsResponse.data.data, action.payload));
+  const data = normalize(groupsResponse.data.data, [groupSchema]);
+  console.log(data);
+
+  yield put(groupsFetchAction(data.entities.groups as any, action.payload));
+  yield put(userListReceived(data.entities.users as any));
 }
 
 function* fetchOneGroup(action: AnyAction): Generator<any> {

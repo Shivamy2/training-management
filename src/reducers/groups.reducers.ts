@@ -1,3 +1,4 @@
+import { normalize } from "normalizr";
 import { Reducer } from "redux";
 import {
   GROUPS_QUERY_COMPLETED,
@@ -7,11 +8,9 @@ import {
   GROUP_FETCH_ONE_ERROR,
 } from "../actions/action.constants";
 import { GroupDataStream } from "../Models/Groups";
+import { groupSchema } from "../Models/schemas";
 import {
-  addMany,
-  addOne,
   EntityState,
-  getIds,
   initialEntityState,
   select,
   setErrorMessage,
@@ -19,15 +18,15 @@ import {
 
 export interface GroupState extends EntityState<GroupDataStream> {
   query: string;
-  creatorIds: { [groupId: number]: number };
-  memberIds: { [groupId: number]: number[] };
+  // creatorIds: { [groupId: number]: number };
+  // memberIds: { [groupId: number]: number[] };
 }
 
 const initialState: GroupState = {
   ...initialEntityState,
   query: "",
-  creatorIds: {},
-  memberIds: {},
+  // creatorIds: {},
+  // memberIds: {},
 };
 
 export const groupsReducer: Reducer<GroupState> = (
@@ -43,31 +42,19 @@ export const groupsReducer: Reducer<GroupState> = (
       };
 
     case GROUPS_QUERY_COMPLETED: {
-      const groups = action.payload.groupData as GroupDataStream[];
-      console.log(groups);
+      const groupDataById = action.payload.groupDataById;
+      console.log(groupDataById);
 
-      const participantIds = groups.reduce((participantIdsById, group) => {
-        const participants = group.participants.map(
-          (participants) => participants?.id
-        );
-        return { ...participantIdsById, [group?.id]: participants };
-      }, {});
-
-      const creatorIds = groups.reduce((creatorIdById, group) => {
-        return { ...creatorIdById, [group?.id]: group?.creator?.id };
-      }, {});
-
-      const groupIds = getIds(groups);
-      const newState = addMany(state, groups, false) as GroupState;
-
+      const groupIdsInString = Object.keys(groupDataById);
+      const groupIds = groupIdsInString.map((id) => Number(id));
       return {
-        ...newState,
+        ...state,
         mappedData: {
-          ...newState.mappedData,
+          ...state.mappedData,
           [action.payload.keyword]: groupIds,
         },
-        creatorIds: { ...newState.creatorIds, ...creatorIds },
-        memberIds: { ...newState.memberIds, ...participantIds },
+        byId: { ...state.byId, ...groupDataById },
+        loadingList: false,
       };
     }
 
@@ -78,18 +65,11 @@ export const groupsReducer: Reducer<GroupState> = (
 
     case GROUP_FETCH_ONE_COMPLETED:
       const group = action.payload as GroupDataStream;
-      const newState = addOne(state, action.payload, false) as GroupState;
-      const memberIds = getIds(group?.participants);
+      const data = normalize(group, groupSchema);
       return {
-        ...newState,
-        creatorIds: {
-          ...newState.creatorIds,
-          [group?.id]: group.creator?.id,
-        },
-        memberIds: {
-          ...newState.memberIds,
-          [group?.id]: memberIds,
-        },
+        ...state,
+        byId: { ...state.byId, ...data.entities.groups },
+        loadingOne: false,
       };
 
     case GROUP_FETCH_ONE_ERROR:
