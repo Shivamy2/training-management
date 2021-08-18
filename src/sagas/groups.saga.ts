@@ -36,7 +36,9 @@ function* fetchGroups(action: AnyAction): Generator<any> {
     })
   );
 
-  const data = normalize(groupsResponse.data.data, [groupSchema]);
+  const data: any = yield call(normalize, groupsResponse.data.data, [
+    groupSchema,
+  ]);
   console.log(data);
 
   yield put(groupsFetchAction(data.entities.groups as any, action.payload));

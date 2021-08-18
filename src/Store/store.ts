@@ -24,6 +24,6 @@ export type AppState = ReturnType<typeof store.getState>;
 
 export const store = createStore(reducer, devTools);
 
-rootSaga.map((saga) => sagaMiddleware.run(saga));
+sagaMiddleware.run(rootSaga);
 
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
