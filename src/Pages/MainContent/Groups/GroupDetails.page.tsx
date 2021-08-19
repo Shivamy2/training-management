@@ -122,8 +122,8 @@ const GroupDetailsPage: React.FC<Props> = () => {
                     <span className="font-bold">Members List: &nbsp;</span>
                     {membersList?.length === 0
                       ? "No Members"
-                      : membersList?.map((member) => (
-                          <div key={member?.id}>
+                      : membersList?.map((member, index) => (
+                          <div key={index}>
                             {member?.first_name} {member?.last_name}
                           </div>
                         ))}

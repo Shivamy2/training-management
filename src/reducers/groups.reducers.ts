@@ -45,7 +45,7 @@ export const groupsReducer: Reducer<GroupState> = (
       const groupDataById = action.payload.groupDataById;
       console.log(groupDataById);
 
-      const groupIdsInString = Object.keys(groupDataById);
+      const groupIdsInString = groupDataById ? Object.keys(groupDataById) : [];
       const groupIds = groupIdsInString.map((id) => Number(id));
       return {
         ...state,
