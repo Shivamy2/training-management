@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { all, call, put, takeEvery } from "redux-saga/effects";
+import { all, call, delay, fork, put, takeEvery } from "redux-saga/effects";
 import {
   ME_FETCH_USER,
   USERS_FETCHING,
@@ -18,11 +18,14 @@ import {
 } from "../APIs/Users/user";
 
 function* fetchUser(): Generator<any> {
-  const userResponse: any = yield call(me);
-  if (userResponse) {
-    yield put(meFetchAction(userResponse));
-  } else {
-    console.log("Not able to send data");
+  while (true) {
+    const userResponse: any = yield call(me);
+    if (userResponse) {
+      yield put(meFetchAction(userResponse));
+    } else {
+      console.log("Not able to send data");
+    }
+    yield delay(30000);
   }
 }
 
@@ -49,9 +52,13 @@ function* fetchSelectedUser(action: AnyAction): Generator<any> {
   }
 }
 
+export function* watchMeApiCalling() {
+  yield takeEvery(ME_FETCH_USER, fetchUser);
+}
+
 export function* watchFetchUser() {
   yield all([
-    takeEvery(ME_FETCH_USER, fetchUser),
+    fork(watchMeApiCalling),
     takeEvery(USERS_FETCHING, fetchUsers),
     takeEvery(USER_FETCH_ONE, fetchSelectedUser),
   ]);

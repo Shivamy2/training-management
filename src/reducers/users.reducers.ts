@@ -2,6 +2,7 @@ import { Reducer } from "redux";
 import {
   ME_FETCH,
   ME_LOGIN,
+  USERS_FETCHING,
   USERS_FETCHING_COMPLETED,
   USER_FETCH_ONE,
   USER_FETCH_ONE_COMPLETE,
@@ -34,7 +35,11 @@ export const userReducer: Reducer<UserState> = (
     case ME_FETCH:
     case ME_LOGIN:
       const newState = addOne(state, action.payload) as UserState;
-      return { ...newState, loadingList: true };
+      return { ...newState };
+
+    case USERS_FETCHING: {
+      return { ...state, loadingList: true };
+    }
 
     case USERS_FETCHING_COMPLETED:
       const groups = action.payload as User[];
