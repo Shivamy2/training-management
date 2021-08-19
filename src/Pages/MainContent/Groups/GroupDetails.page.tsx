@@ -58,6 +58,8 @@ const GroupDetailsPage: React.FC<Props> = () => {
 
   //extracting the selected group data
   const groupSelected = useAppSelector(groupSelectedSelector);
+  console.log(groupSelected);
+
   const creatorOfGroup = groupSelected?.creator;
   const membersList = groupSelected?.participants;
   return (
@@ -67,7 +69,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
           <ImSpinner className="animate-spin h-6 w-6 m-auto" />
         </div>
       )}
-      {!groupSelected ? (
+      {!groupSelected?.id ? (
         <div className="mt-5 max-w-420 mx-auto">
           {errorMessage && <Alert title={errorMessage} alertType="error" />}
         </div>
