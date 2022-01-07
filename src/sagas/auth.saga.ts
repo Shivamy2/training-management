@@ -1,30 +1,48 @@
 import { AnyAction } from "redux";
-import { call, put, takeEvery } from "redux-saga/effects";
-import { ME_SENDING_DATA } from "../actions/action.constants";
+import { all, call, put, takeEvery } from "redux-saga/effects";
+import { ME_SENDING_DATA, ME_SIGNUP } from "../actions/action.constants";
 import {
   meIsLoading,
-  meLoginAction,
   meLoginErrorMessageAction,
+  meSignUpError,
+  meSignUpLoading,
 } from "../actions/auth.actions";
-import { login } from "../APIs/Auth/auth";
+import { login, role, signup } from "../APIs/Auth/auth";
 
 function* meSendingData(action: AnyAction): Generator<any> {
-  console.log("sending data is running");
-
   yield put(meLoginErrorMessageAction(""));
-  const userResponse: any = yield call(login, action.payload);
-
-  if (userResponse) {
-    console.log(userResponse);
-    yield put(meLoginAction(userResponse.data.user));
-    window.location.href = "/dashboard";
-  } else {
-    console.error("Error occured while logging in");
+  try {
+    const userResponse: any = yield call(login, action.payload);
+    console.log("User Response while logging in: ", userResponse);
+    window.location.href = "/register";
+  } catch (error) {
     yield put(meIsLoading(false));
-    yield put(meLoginErrorMessageAction("User Not Found"));
+    yield put(meLoginErrorMessageAction("Invalid Credentials"));
+  }
+}
+
+function* meSendingSignupData(action: AnyAction): Generator<any> {
+  yield put(meSignUpError(""));
+  try {
+    let data = action.payload;
+    const response: any = yield call(signup, {
+      email: data.email,
+      username: data.username,
+      password: data.password,
+    });
+    const roleResponse: any = yield call(role, data.roles);
+    console.log(response);
+    console.log(roleResponse);
+    window.location.href = "/login";
+  } catch (error: any) {
+    yield put(meSignUpError(error.response.data.message));
+    yield put(meSignUpLoading(false));
   }
 }
 
 export function* watchMeSendingData() {
-  yield takeEvery(ME_SENDING_DATA, meSendingData);
+  yield all([
+    takeEvery(ME_SENDING_DATA, meSendingData),
+    takeEvery(ME_SIGNUP, meSendingSignupData),
+  ]);
 }

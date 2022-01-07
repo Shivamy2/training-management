@@ -18,3 +18,12 @@ export const uiSidebarSelectedItemNameSelector = createSelector(
   [uiSidebarSelectedItemSelector],
   (selectedItem) => selectedItem.name
 );
+export const detailsStatus = createSelector(
+  [uiStateSelector],
+  (ui) => ui.detailStatus
+);
+
+export const detailResponseReceived = createSelector(
+  [uiStateSelector],
+  (ui) => ui.isDetailReceived
+);

@@ -6,9 +6,14 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import { meFetchUserAction } from "./actions/auth.actions";
+import { checkDetails, meFetchUserAction } from "./actions/auth.actions";
 import { loginToken } from "./Constants/constants";
+import EditProfile from "./Pages/MainContent/Profile/EditProfile";
 import { authSelector } from "./selectors/auth.selectors";
+import {
+  detailResponseReceived,
+  detailsStatus,
+} from "./selectors/ui.selectors";
 import { store, useAppSelector } from "./Store/store";
 
 const AuthLazy = lazy(() => import("./Pages/Auth/Auth.page"));
@@ -20,17 +25,31 @@ interface Props {}
 
 const App: React.FC<Props> = () => {
   const authUser = useAppSelector(authSelector);
+  const checkDetailsStatus = useAppSelector(detailsStatus);
+  const isDetailResponseReceive = useAppSelector(detailResponseReceived);
   useEffect(() => {
+    console.log("checking details");
     if (!loginToken) return;
-
     // me().then((userResponse) => {
     //   console.log(userResponse);
     //   authActions.fetch(userResponse);
     // });
-    store.dispatch(meFetchUserAction());
-  }, []); // eslint-disable-line
+    if (checkDetailsStatus) {
+      store.dispatch(meFetchUserAction());
+    } else {
+      store.dispatch(checkDetails());
+    }
+  }, [checkDetailsStatus, loginToken]); // eslint-disable-line
 
-  if (!authUser && loginToken) {
+  // if (!isDetailResponseReceive) {
+  //   return (
+  //     <div className="w-screen h-screen">
+  //       <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
+  //     </div>
+  //   );
+  // }
+
+  if (loginToken && !authUser && checkDetailsStatus) {
     return (
       <div className="w-screen h-screen">
         <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
@@ -50,15 +69,30 @@ const App: React.FC<Props> = () => {
         <Router>
           <Switch>
             <Route exact path="/">
+              checkDetailsStatus
               {authUser ? (
                 <Redirect to="/dashboard" />
               ) : (
-                <Redirect to="/login" />
+                <Redirect to="/register" />
               )}
             </Route>
             <Route exact path={["/login", "/signup"]}>
               <AuthLazy />
             </Route>
+            <Route exact path="/register">
+              {authUser ? (
+                <Redirect to="/dashboard" />
+              ) : isDetailResponseReceive ? (
+                <EditProfile />
+              ) : !loginToken ? (
+                <Redirect to="/login" />
+              ) : (
+                <div className="w-screen h-screen">
+                  <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
+                </div>
+              )}
+            </Route>
+
             <Route
               exact
               path={[
@@ -74,7 +108,13 @@ const App: React.FC<Props> = () => {
                 "/users/:selectedUserId",
               ]}
             >
-              {authUser ? <MainDisplayLazy /> : <Redirect to="/login" />}
+              {authUser ? (
+                <MainDisplayLazy />
+              ) : !checkDetailsStatus ? (
+                <Redirect to="/register" />
+              ) : (
+                <Redirect to="/login" />
+              )}
             </Route>
             <Route path="/">Page Not Found 404 Error</Route>
           </Switch>

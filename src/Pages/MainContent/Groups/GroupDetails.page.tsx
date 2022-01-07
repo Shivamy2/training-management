@@ -103,11 +103,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
                     {groupSelected.description}
                   </div>
                   <span className="font-bold">Creator's Role: &nbsp;</span>
-                  {creatorOfGroup
-                    ? creatorOfGroup.role
-                      ? creatorOfGroup.role
-                      : "Unknown"
-                    : "Unknown"}
+
                   <div className="col-sm-6">
                     <span className="font-bold">Id: &nbsp;</span>
                     {groupSelected.id ? groupSelected.id : "Unknown"}

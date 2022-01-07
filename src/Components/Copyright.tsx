@@ -8,7 +8,7 @@ const Copyright: React.FC<Props> = ({ className }) => {
   return (
     <div className={`${className}`}>
       <p className="mt-16 font-semibold text-gray-700">
-        &copy; 2020 All Rights Reserved.{" "}
+        &copy; 2022 All Rights Reserved.{" "}
         <span className="text-primary"> PORTAL </span> is a product of
         Designreset.{" "}
         <span className="text-primary">Cookie Preferences, Privacy</span>, and{" "}

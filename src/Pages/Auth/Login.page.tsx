@@ -20,22 +20,19 @@ import {
 interface Props {}
 
 const Login: React.FC<Props> = () => {
-  // const [loginFailedMessage, setLoginFailedMessage] = useState("");
   const loginFailedMessage = useAppSelector(authLoginErrorMessageSelector);
   const isSubmitting = useAppSelector(authLoginLoadingSelector);
 
-  // console.log("Login Page is rerendering!!");
-
   const { handleSubmit, errors, touched, getFieldProps } = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     validationSchema: yup.object().shape({
-      email: yup
+      username: yup
         .string()
-        .required("Email is required field!")
-        .email(() => "Email is invalid"),
+        .required("Username is required field!")
+        .min(3, ({ min }) => `Username must be atleast ${min} chars`),
       password: yup
         .string()
         .required("Password is required field!")
@@ -43,7 +40,6 @@ const Login: React.FC<Props> = () => {
     }),
     onSubmit: (data) => {
       console.log("sending data");
-
       store.dispatch(meSendingDataAction(data));
     },
   });
@@ -55,7 +51,7 @@ const Login: React.FC<Props> = () => {
         <div className="pb-4">
           <p className="tracking-wider font-medium-semi text-4.5xl">
             Log In to
-            <span className="font-bold uppercase text-primary"> Portal</span>
+            <span className="font-bold uppercase text-primary">Portal</span>
           </p>
           <div className="flex mt-2 text-sm font-semibold tracking-wider">
             <p>New Here?&nbsp;</p>
@@ -76,11 +72,11 @@ const Login: React.FC<Props> = () => {
             <div className="w-full mt-12">
               <InputField
                 {...getFieldProps("email")}
-                placeholder="Username or email"
-                name="email"
-                type="email"
-                touched={touched.email}
-                errorMessage={errors.email}
+                placeholder="Username"
+                name="username"
+                type="username"
+                touched={touched.username}
+                errorMessage={errors.username}
                 required
               >
                 <svg

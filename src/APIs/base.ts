@@ -10,16 +10,19 @@ export const axiosRequest = () => {
       return config;
     }
 
-    return { ...config, headers: { ...config.headers, Authorization: token } };
+    return {
+      ...config,
+      headers: { ...config.headers, Authorization: `Bearer ${token}` },
+    };
   });
 };
 
 export const axiosResponse = () => {
   axios.interceptors.response.use(undefined, (error) => {
-    if (error.response?.data?.code === 9101) {
-      localStorage.removeItem(LS_LOGIN_TOKEN);
-      window.location.href = "/login";
-    }
+    // if (error.response?.data?.code === 9101) {
+    //   localStorage.removeItem(LS_LOGIN_TOKEN);
+    //   window.location.href = "/login";
+    // }
     // else if (
     //   error.response?.data?.code === 401 ||
     //   error.response?.data?.code === 410 ||

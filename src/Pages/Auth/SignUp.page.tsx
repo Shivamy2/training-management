@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Copyright from "../../Components/Copyright";
 import Direction from "../../Components/Direction";
 import * as yup from "yup";
@@ -10,12 +10,15 @@ import Button from "../../Components/Button/Button";
 import { IoWarningOutline } from "react-icons/io5";
 import FormSwitch from "../../Components/FormSwitch";
 import { loginToken } from "../../Constants/constants";
+import { store, useAppSelector } from "../../Store/store";
+import { meSignup } from "../../actions/auth.actions";
+import { authLoginErrorMessageSelector } from "../../selectors/auth.selectors";
+import Alert from "../../Components/Alert/Alert";
 
 interface Props {}
 
 const SignUp: React.FC<Props> = () => {
-  const redirectHistory = useHistory();
-
+  const loginFailedMessage = useAppSelector(authLoginErrorMessageSelector);
   const {
     handleSubmit,
     errors,
@@ -27,6 +30,7 @@ const SignUp: React.FC<Props> = () => {
       username: "",
       email: "",
       password: "",
+      role: "ROLE_TRAINEE",
       acceptTerms: false,
     },
     validationSchema: yup.object().shape({
@@ -48,11 +52,16 @@ const SignUp: React.FC<Props> = () => {
         .oneOf([true], "Accept Terms before submit"),
     }),
     onSubmit: (data, { setSubmitting }) => {
-      setTimeout(() => {
-        console.log(data);
-        setSubmitting(false);
-        redirectHistory.push("/login");
-      }, 5000);
+      console.log("Signup data: ", data);
+      setSubmitting(false);
+      store.dispatch(
+        meSignup({
+          username: data.username,
+          email: data.email,
+          password: data.password,
+          roles: { roleName: data.role, username: data.username },
+        })
+      );
     },
   });
   const [isSwitchChecked, setIsSwitchChecked] = useState(false);
@@ -69,9 +78,25 @@ const SignUp: React.FC<Props> = () => {
             <Direction text="Log in" path="/login" />
           </div>
         </div>
+        {loginFailedMessage && (
+          <div className="relative">
+            <Alert
+              className="absolute "
+              title={loginFailedMessage}
+              alertType="error"
+            />
+          </div>
+        )}
         <div className="w-full text-sm tracking-wider">
           <form onSubmit={handleSubmit} method="POST">
-            <div className="w-full mt-12">
+            <div className="w-full mt-20">
+              <select
+                {...getFieldProps("role")}
+                className="w-full border-primary mb-2 bg-white rounded-lg border-2 px-2 py-3 my-auto font-semibold tracking-wider outline-none "
+              >
+                <option value="ROLE_TRAINEE">Trainee</option>
+                <option value="ROLE_TRAINER">Trainer</option>
+              </select>
               <InputField
                 {...getFieldProps("username")}
                 placeholder="Username"
@@ -194,6 +219,7 @@ const SignUp: React.FC<Props> = () => {
               </Switch.Group>
               <div className="flex"></div>
               <Button
+                type="submit"
                 className="mt-3 md:mt-0"
                 buttonType="solid"
                 theme="primary"

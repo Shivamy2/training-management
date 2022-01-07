@@ -96,7 +96,7 @@ const GroupDetailsPage: React.FC<Props> = () => {
                     {userSelected.email}
                   </div>
                   <span className="font-bold">Creator's Role: &nbsp;</span>
-                  {userSelected.role}
+
                   <div className="col-sm-6">
                     <span className="font-bold">Id: &nbsp;</span>
                     {userSelected.id ? userSelected.id : "Unknown"}

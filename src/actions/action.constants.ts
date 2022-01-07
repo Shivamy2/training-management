@@ -2,7 +2,9 @@
 export const UI_SIDEBAR = "ui/sidebar";
 export const UI_SIDEBAR_SELECTED_ITEM = "ui/sidebar_selected_item";
 
-//auth
+//AUTH
+
+//login
 export const ME_FETCH = "me/fetch";
 export const ME_FETCH_USER = "me/fetch_user";
 export const ME_LOGIN = "me/login";
@@ -10,6 +12,16 @@ export const ME_SENDING_DATA = "me/loading_true";
 export const ME_LOGIN_ERROR_MESSAGE = "me/error_message";
 export const ME_LOADING_STOP = "me/loading_false";
 export const ME_UPDATE = "me/update";
+
+//details-check
+export const CHECK_DETAILS = "check/details";
+export const SAVE_CHECK_DETAIL_STATUS = "check/status";
+export const IS_CHECK_RESPONSE_RECEIVED = "check/response_received";
+
+//signup
+export const ME_SIGNUP = "me/signup";
+export const ME_SIGNUP_LOADING = "me/signup_loading";
+export const ME_SIGNUP_ERROR_MESSAGE = "me/signup_message";
 
 //users
 export const USERS_FETCHING = "users/fetch";

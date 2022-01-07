@@ -5,6 +5,9 @@ import {
   ME_LOGIN,
   ME_LOGIN_ERROR_MESSAGE,
   ME_SENDING_DATA,
+  ME_SIGNUP,
+  ME_SIGNUP_LOADING,
+  ME_SIGNUP_ERROR_MESSAGE,
 } from "../actions/action.constants";
 import { AuthUser } from "../Models/AuthUser";
 import { EntityState, initialEntityState } from "./entity.reducers";
@@ -30,6 +33,12 @@ export const authReducer: Reducer<AuthState> = (
       return { ...state, loadingOne: true };
     case ME_LOADING_STOP:
       return { ...state, loadingOne: action.payload };
+    case ME_SIGNUP:
+      return { ...state, loadingOne: true };
+    case ME_SIGNUP_LOADING:
+      return { ...state, loadingOne: action.payload };
+    case ME_SIGNUP_ERROR_MESSAGE:
+      return { ...state, errorMessage: action.payload };
 
     case ME_LOGIN_ERROR_MESSAGE:
       return { ...state, errorMessage: action.payload };

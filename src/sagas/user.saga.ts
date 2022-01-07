@@ -5,7 +5,10 @@ import {
   USERS_FETCHING,
   USER_FETCH_ONE,
 } from "../actions/action.constants";
-import { meFetchAction } from "../actions/auth.actions";
+import {
+  meFetchAction,
+  meLoginErrorMessageAction,
+} from "../actions/auth.actions";
 import {
   userFetchOneCompleted,
   userFetchOneError,
@@ -19,11 +22,11 @@ import {
 
 function* fetchUser(): Generator<any> {
   while (true) {
-    const userResponse: any = yield call(me);
-    if (userResponse) {
-      yield put(meFetchAction(userResponse));
-    } else {
-      console.log("Not able to send data");
+    try {
+      const userResponse: any = yield call(me);
+      yield put(meFetchAction(userResponse.data));
+    } catch (error: any) {
+      yield put(meLoginErrorMessageAction(error?.response?.data?.message));
     }
     yield delay(30000);
   }
@@ -44,7 +47,7 @@ function* fetchSelectedUser(action: AnyAction): Generator<any> {
   try {
     const user: any = yield call(fetchSelectedUserAPI, action.payload);
     yield put(userFetchOneCompleted(user));
-  } catch (error) {
+  } catch (error: any) {
     console.log("Not able to fetch selected user");
     const errorMessage =
       error.response.data?.message || "Something Wrong Happened";

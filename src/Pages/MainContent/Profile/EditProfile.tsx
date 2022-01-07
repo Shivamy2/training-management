@@ -5,12 +5,18 @@ import Button from "../../../Components/Button/Button";
 import EditInput from "../../../Components/Input/EditInput";
 import * as yup from "yup";
 import { store, useAppSelector } from "../../../Store/store";
-import { authSelector } from "../../../selectors/auth.selectors";
+import {
+  authLoginErrorMessageSelector,
+  authSelector,
+} from "../../../selectors/auth.selectors";
 import { meUpdate } from "../../../actions/auth.actions";
+import Alert from "../../../Components/Alert/Alert";
 
 interface Props {}
 
 const EditProfile: React.FC<Props> = () => {
+  const loginFailedMessage = useAppSelector(authLoginErrorMessageSelector);
+
   const user = useAppSelector(authSelector);
   let date: string[] = [];
   for (let index = 1; index <= 31; index++) {
@@ -40,41 +46,38 @@ const EditProfile: React.FC<Props> = () => {
     isSubmitting,
   } = useFormik({
     initialValues: {
+      gender: user?.gender ? user.gender : "Gender",
       birth_date: user?.birth_date ? user.birth_date : "Day",
       birth_month: user?.birth_month ? user.birth_month : "Month",
       birth_year: user?.birth_year ? user.birth_year : "Year",
       first_name: user?.first_name ? user.first_name : "",
-      middle_name: user?.middle_name ? user.middle_name : "",
       last_name: user?.last_name ? user.last_name : "",
-      email: user?.email ? user.email : "",
-      education: user?.education ? user.education : "",
+      area: user?.area ? user.area : "",
+      district: user?.district ? user.district : "",
+      city: user?.city ? user.city : "",
+      pin_code: user?.pin_code ? user.pin_code : "",
+      mobile_number: user?.mobile_number ? user.mobile_number : "",
     },
     validationSchema: yup.object().shape({
-      email: yup
-        .string()
-        .required("Email is required field!")
-        .email(() => "Email is invalid"),
       first_name: yup
         .string()
         .required("First Name is required Field!")
         .max(20, ({ max }) => `First Name must be of ${max} chars`)
         .min(3, ({ min }) => `Must be more than ${min} chars`),
-      middle_name: yup
-        .string()
-        .max(20, ({ max }) => `Middle Name must be of ${max} chars`)
-        .min(3, ({ min }) => `Must be more than ${min} chars`),
-      education: yup
-        .string()
-        .required()
-        .max(40, ({ max }) => `School/College name must be of ${max} chars`),
+
       last_name: yup
         .string()
         .required("Last Name is required Field!")
         .max(20, ({ max }) => `Last Name must be of ${max} chars`)
         .min(3, ({ min }) => `Must be more than ${min} chars`),
+      // area: yup.string().required("Area is required field"),
+      // city: yup.string().required("City is required field"),
+      // district: yup.string().required("District is required field"),
+      // pin_code: yup.number().required("Pin code is required field"),
+      gender: yup.string().required("Gender is required field"),
     }),
     onSubmit: (data) => {
-      console.log(data);
+      console.log("Data for details is: ", data);
       store.dispatch(meUpdate(data));
     },
   });
@@ -83,6 +86,11 @@ const EditProfile: React.FC<Props> = () => {
     <div className="w-full h-full p-5 pb-20">
       <form method="POST" onSubmit={handleSubmit}>
         <div className="bg-white border border-gray-300 rounded-t-md">
+          {loginFailedMessage && (
+            <div className="">
+              <Alert title={loginFailedMessage} alertType="error" />
+            </div>
+          )}
           <div className="p-4">
             <div className="mt-1 mb-10 ml-2">
               <h2 className="text-base font-bold tracking-wider uppercase text-input">
@@ -107,15 +115,6 @@ const EditProfile: React.FC<Props> = () => {
                     errorMessage={errors.first_name}
                     placeholder="First Name"
                   />
-                  <EditInput
-                    {...getFieldProps("middle_name")}
-                    className="mt-6 md:ml-3 md-lg:mt-0 md:flex-1 md:mt-9"
-                    type="text"
-                    labelText="Middle Name"
-                    touched={touched.middle_name}
-                    errorMessage={errors.middle_name}
-                    placeholder="Middle Name"
-                  />
                 </div>
                 <EditInput
                   {...getFieldProps("last_name")}
@@ -129,7 +128,7 @@ const EditProfile: React.FC<Props> = () => {
               </div>
             </div>
             <div>
-              <div className="space-y-3 md:flex">
+              <div className="space-y-3 md-lg:flex">
                 <div className="mt-6 md:flex-1 md:mr-3">
                   <div className="col-sm-6">
                     <label className="mt-3 text-sm font-medium tracking-wide text-gray-500">
@@ -172,24 +171,72 @@ const EditProfile: React.FC<Props> = () => {
                     </div>
                   </div>
                 </div>
+
                 <div className="justify-between space-y-3 md:flex md:flex-col md:flex-1 md:mt-4 md:ml-3">
+                  <div className="mt-3 md-lg:flex md-lg:space-y-0">
+                    <EditInput
+                      {...getFieldProps("area")}
+                      className="mt-9 md-lg:mt-0 md:flex-1"
+                      labelText="Area"
+                      type="text"
+                      touched={touched.area}
+                      errorMessage={errors.area}
+                      placeholder="Area"
+                    />
+                  </div>
                   <EditInput
-                    className="md:mt-4"
-                    type="email"
-                    labelText="Email*"
-                    touched={touched.email}
-                    errorMessage={errors.email}
-                    placeholder="Email"
-                    {...getFieldProps("email")}
+                    {...getFieldProps("city")}
+                    className="pt-3 md-lg:pt-6"
+                    type="text"
+                    labelText="City"
+                    touched={touched.city}
+                    errorMessage={errors.city}
+                    placeholder="City"
                   />
+                </div>
+              </div>
+              <div className="md-lg:flex md-lg:space-x-6 space-y-3">
+                <div className="flex-1 space-y-3 md-lg:space-y-0">
                   <EditInput
+                    {...getFieldProps("district")}
                     className="pt-3"
                     type="text"
-                    labelText="Education*"
-                    touched={touched.education}
-                    errorMessage={errors.education}
-                    placeholder="Education"
-                    {...getFieldProps("education")}
+                    labelText="District"
+                    touched={touched.district}
+                    errorMessage={errors.district}
+                    placeholder="District"
+                  />
+                  <EditInput
+                    {...getFieldProps("pin_code")}
+                    className="pt-3"
+                    type="text"
+                    labelText="Pin Code"
+                    touched={touched.pin_code}
+                    errorMessage={errors.pin_code}
+                    placeholder="Pin code"
+                  />
+                </div>
+                <div className="flex-1 space-y-3 md-lg:space-y-0">
+                  <div>
+                    <label className="text-sm font-medium tracking-wide text-gray-500">
+                      Gender*
+                    </label>
+                    <select
+                      {...getFieldProps("gender")}
+                      className="w-full border-gray-400 mt-1 bg-white rounded-lg border px-2 py-2 my-auto tracking-wider outline-none "
+                    >
+                      <option value="ROLE_TRAINEE">Male</option>
+                      <option value="ROLE_TRAINER">Female</option>
+                    </select>
+                  </div>
+                  <EditInput
+                    {...getFieldProps("mobile_number")}
+                    className="pt-3"
+                    type="text"
+                    labelText="Mobile Number"
+                    touched={touched.mobile_number}
+                    errorMessage={errors.mobile_number}
+                    placeholder="Mobile Number"
                   />
                 </div>
               </div>

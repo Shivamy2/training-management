@@ -2,11 +2,18 @@ import { Entity } from "./Entity";
 
 export interface AuthUser extends Entity {
   __type: string;
+  username: string;
   guid: null;
   first_name: string;
   middle_name: string;
   last_name: string;
-  role: string;
+  area: string;
+  city: string;
+  district: string;
+  mobile_number: string;
+  gender: "male" | "female";
+  pin_code: string;
+  roles: Role[];
   status: string;
   profile_pic_url: string;
   email: string;
@@ -15,7 +22,6 @@ export interface AuthUser extends Entity {
   job_type: null;
   phone_number: string;
   alternate_phone_number: string;
-  gender: null;
   birth_year: string;
   birth_month: string;
   birth_date: string;
@@ -40,6 +46,10 @@ export interface AuthUser extends Entity {
   blockedUsers: any[];
   memberToAdvocatePages: any[];
   ownerToAdvocatePages: any[];
+}
+
+export interface Role extends Entity {
+  name: string;
 }
 
 export interface Education extends Entity {
