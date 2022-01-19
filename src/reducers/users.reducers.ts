@@ -2,6 +2,7 @@ import { Reducer } from "redux";
 import {
   ME_FETCH,
   ME_LOGIN,
+  TRAINEE_FETCH_DATA,
   USERS_FETCHING,
   USERS_FETCHING_COMPLETED,
   USER_FETCH_ONE,
@@ -9,6 +10,7 @@ import {
   USER_FETCH_ONE_ERROR,
   USER_LIST_RECEIVED,
 } from "../actions/action.constants";
+import { BulkTraineeResponse } from "../APIs/Trainee/trainee";
 import { AuthUser } from "../Models/AuthUser";
 import { User } from "../Models/Users";
 import {
@@ -64,6 +66,14 @@ export const userReducer: Reducer<UserState> = (
     case USER_FETCH_ONE_ERROR:
       const { id, message } = action.payload;
       return setErrorMessage(state, id, message) as UserState;
+
+    case TRAINEE_FETCH_DATA: {
+      const trainees = action.payload as BulkTraineeResponse;
+      const traineeMappedData = trainees?.data?.reduce((prev, trainee) => {
+        return { ...prev, [trainee.id]: trainee };
+      }, {});
+      return { ...state, byId: { ...state.byId, ...traineeMappedData } };
+    }
     default:
       return state;
   }

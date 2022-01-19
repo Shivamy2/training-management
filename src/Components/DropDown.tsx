@@ -2,13 +2,18 @@ import { Menu, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { logout } from "../APIs/Auth/auth";
+import { avatarImage } from "../Constants/constants";
 import Avatar from "./Avatar/Avatar";
 
 interface Props {
   title?: string;
   containsImage?: boolean;
   image?: string;
-  itemsToBeShown: { name: string; path?: string }[];
+  itemsToBeShown: {
+    name: string;
+    path?: string;
+    isHiddenOnDesktop?: boolean;
+  }[];
   initialButtonValue?: number;
   className?: string;
 }
@@ -29,17 +34,10 @@ const DropDown: React.FC<Props> = ({
       <div>
         {containsImage ? (
           <Menu.Button className="pt-2 focus:outline-none">
-            <Avatar
-              size="small"
-              src={
-                "https://images.unsplash.com/photo-1558898479-33c0057a5d12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80" &&
-                image
-              }
-              circular={false}
-            />
+            <Avatar size="small" src={avatarImage} circular={false} />
           </Menu.Button>
         ) : (
-          <Menu.Button className="relative flex bg-white border rounded-lg focus:outline-none pt-10px pb-9px pl-15px pr-35px w-115 border-button-border">
+          <Menu.Button className="relative flex bg-white border rounded-lg focus:outline-none pt-10px pb-9px pl-15px pr-35px w-40 border-button-border">
             <div>
               <p className="mr-5 text-13">
                 {title ? title : itemsToBeShown[selectedDropdown!].name}
@@ -71,7 +69,7 @@ const DropDown: React.FC<Props> = ({
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items
-            className={`absolute z-20 w-40 bg-white rounded-md shadow-xl mt-dropdown ring-2 ring-black ring-opacity-5 leading-0 right-5 focus:outline-none ${className}`}
+            className={`absolute z-20 w-40 bg-white rounded-md shadow-xl mt-dropdown ring-2 ring-black ring-opacity-5 leading-0 inset-x-auto md-lg:right-5 focus:outline-none ${className}`}
           >
             <div className="py-1">
               {itemsToBeShown.map((item, index) => (
@@ -83,7 +81,9 @@ const DropDown: React.FC<Props> = ({
                         logout();
                       } else item.path && history.push(item.path);
                     }}
-                    className="flex items-center w-full px-2 py-2 text-sm hover:text-blue-500 hover:bg-gray-50"
+                    className={`flex items-center w-full px-2 py-2 text-sm hover:text-blue-500 hover:bg-gray-50 ${
+                      item.isHiddenOnDesktop && "md-lg:hidden"
+                    }`}
                   >
                     <p>{item.name}</p>
                   </button>

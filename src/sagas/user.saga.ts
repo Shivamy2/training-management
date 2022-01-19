@@ -28,7 +28,7 @@ function* fetchUser(): Generator<any> {
     } catch (error: any) {
       yield put(meLoginErrorMessageAction(error?.response?.data?.message));
     }
-    yield delay(30000);
+    yield delay(100000);
   }
 }
 

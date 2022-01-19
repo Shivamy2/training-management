@@ -46,8 +46,8 @@ export const UsersPage: React.FC<Props> = () => {
                   }
                   infoClassName="text-white"
                   key={index}
-                  title={`${item?.first_name} ${item?.last_name}`}
-                  description={item?.phone_number}
+                  name={`${item?.first_name} ${item?.last_name}`}
+                  id={item?.phone_number}
                   url={
                     item?.profile_pic_url
                       ? item.profile_pic_url
@@ -63,8 +63,8 @@ export const UsersPage: React.FC<Props> = () => {
                     listExtraStyling
                   }
                   key={index}
-                  title={`${item?.first_name} ${item?.last_name}`}
-                  description={item?.phone_number}
+                  name={`${item?.first_name} ${item?.last_name}`}
+                  id={item?.phone_number}
                   url={
                     item?.profile_pic_url
                       ? item.profile_pic_url

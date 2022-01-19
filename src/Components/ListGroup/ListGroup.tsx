@@ -1,17 +1,19 @@
 import React from "react";
 interface Props {
-  title: string;
-  description?: string;
+  name: string;
+  id?: number | string;
   url: string;
   className?: string;
   infoClassName?: string;
+  username?: string;
   onClick?: () => void;
 }
 
 const ListGroup: React.FC<Props> = ({
   onClick,
-  title,
-  description,
+  name,
+  username,
+  id,
   url,
   className,
   infoClassName,
@@ -24,7 +26,10 @@ const ListGroup: React.FC<Props> = ({
   return (
     <div
       onClick={onClick}
-      className={"min-h-16 ring-1 ring-gray-200 cursor-pointer " + className}
+      className={
+        "min-h-16 ring-1 ring-gray-200 cursor-pointer md-lg:w-96 bg-primary rounded-lg text-white hover:text-black  " +
+        className
+      }
     >
       <div className="py-2.5 flex px-3">
         <div className="mr-3 w-list-group">
@@ -35,9 +40,19 @@ const ListGroup: React.FC<Props> = ({
             className="object-cover max-w-full rounded-full w-list-group h-list-group"
           />
         </div>
-        <div className={infoClassName}>
-          <h6 className="font-bold">{title}</h6>
-          <p className="text-xs font-medium">{description}</p>
+        <div className={`flex space-x-4 ${infoClassName}`}>
+          <div>
+            <h6 className="font-medium text-sm">Id</h6>
+            <p className="font-bold italic">{id}</p>
+          </div>
+          <div>
+            <h6 className="font-medium text-sm">Name</h6>
+            <p className="font-bold italic">{name}</p>
+          </div>
+          <div>
+            <h6 className="font-medium text-sm">Username</h6>
+            <p className="font-bold italic">{username}</p>
+          </div>
         </div>
       </div>
     </div>

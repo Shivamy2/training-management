@@ -41,13 +41,13 @@ const App: React.FC<Props> = () => {
     }
   }, [checkDetailsStatus, loginToken]); // eslint-disable-line
 
-  // if (!isDetailResponseReceive) {
-  //   return (
-  //     <div className="w-screen h-screen">
-  //       <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
-  //     </div>
-  //   );
-  // }
+  if (loginToken && !isDetailResponseReceive) {
+    return (
+      <div className="w-screen h-screen">
+        <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
+      </div>
+    );
+  }
 
   if (loginToken && !authUser && checkDetailsStatus) {
     return (
@@ -97,6 +97,9 @@ const App: React.FC<Props> = () => {
               exact
               path={[
                 "/dashboard",
+                "/assignment/upload",
+                "/your-trainees",
+                "/add-trainees",
                 "/batch/:batchNumber/recording/:recordingNumber",
                 "/movie-group",
                 "/movie-group-button",

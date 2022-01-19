@@ -31,9 +31,13 @@ function* meSendingSignupData(action: AnyAction): Generator<any> {
       password: data.password,
     });
     const roleResponse: any = yield call(role, data.roles);
+    yield call(login, {
+      username: data.username,
+      password: data.password,
+    });
     console.log(response);
     console.log(roleResponse);
-    window.location.href = "/login";
+    window.location.href = "/register";
   } catch (error: any) {
     yield put(meSignUpError(error.response.data.message));
     yield put(meSignUpLoading(false));

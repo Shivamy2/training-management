@@ -3,6 +3,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { authReducer } from "../reducers/auth.reducers";
 import { groupsReducer } from "../reducers/groups.reducers";
+import { traineeReducer } from "../reducers/trainee.reducers";
 import { uiReducer } from "../reducers/ui.reducers";
 import { userReducer } from "../reducers/users.reducers";
 import { sagaMiddleware } from "../sagas";
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   groups: groupsReducer,
   auth: authReducer,
   ui: uiReducer,
+  trainee: traineeReducer,
 });
 
 const devTools =

@@ -30,14 +30,14 @@ const SignUp: React.FC<Props> = () => {
       username: "",
       email: "",
       password: "",
-      role: "ROLE_TRAINEE",
+      role: "ROLE_TRAINER",
       acceptTerms: false,
     },
     validationSchema: yup.object().shape({
       username: yup
         .string()
         .required("Username is required field!")
-        .min(8, ({ min }) => `Username must be ${min} chars`),
+        .min(3, ({ min }) => `Username must be ${min} chars`),
       email: yup
         .string()
         .required("Email is required field!")
@@ -94,7 +94,6 @@ const SignUp: React.FC<Props> = () => {
                 {...getFieldProps("role")}
                 className="w-full border-primary mb-2 bg-white rounded-lg border-2 px-2 py-3 my-auto font-semibold tracking-wider outline-none "
               >
-                <option value="ROLE_TRAINEE">Trainee</option>
                 <option value="ROLE_TRAINER">Trainer</option>
               </select>
               <InputField

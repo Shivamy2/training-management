@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import GroupData from "./Groups/GroupData";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "../../Components/Header";
 import NavBar from "../../Components/NavBar";
 import Sidebar from "../../Components/Sidebar";
@@ -9,16 +8,18 @@ import RecordingPage from "./Recording.page";
 import EditProfile from "./Profile/EditProfile";
 import { useAppSelector } from "../../Store/store";
 import GroupDetailsPage from "./Groups/GroupDetails.page";
-import { UsersPage } from "./Users/Users.page";
 import UserDetailPage from "./Users/UserDetail.page";
 import { uiSidebarStatusSelector } from "../../selectors/ui.selectors";
-// import { groupSelectedSelector } from "../../selectors/groups.selectors";
+import AddTraineesPage from "./AddTrainees/AddTrainees.page";
+import YourTraineesComponent from "../../Components/Trainee/YourTrainees.component";
+import { authSelector } from "../../selectors/auth.selectors";
+import AssignmentUpload from "../Assignment/AssignmentUpload";
 
 interface Props {}
 
 const MainDisplay: React.FC<Props> = () => {
+  const role = useAppSelector(authSelector)?.roles[0].name;
   const isSideBarOpen = useAppSelector(uiSidebarStatusSelector);
-  // const selectedGroupId = useAppSelector(groupSelectedSelector);
   return (
     <div>
       <div className="sticky top-0 z-20">
@@ -33,24 +34,42 @@ const MainDisplay: React.FC<Props> = () => {
         >
           <Sidebar />
         </div>
-        <div className={"flex flex-1 minimum__height"}>
+        <div className={"flex flex-1 minimum__height justify-center"}>
           <Switch>
             <Route path="/dashboard">
               <DashboardPage />
             </Route>
-            <Route exact path="/groups">
-              <GroupData />
+            <Route path="/add-trainees">
+              {role === "ROLE_TRAINER" ? (
+                <AddTraineesPage />
+              ) : (
+                <Redirect to={"/dashboard"} />
+              )}
             </Route>
+            {/* <Route exact path="/groups">
+              <GroupData />
+            </Route> */}
             <Route exact path="/groups/:searchedQuery/:selectedGroupId">
               <GroupDetailsPage />
             </Route>
             <Route exact path="/profile">
               <EditProfile />
             </Route>
-
-            <Route exact path="/users">
-              <UsersPage />
+            <Route exact path="/assignment/upload">
+              <AssignmentUpload />
             </Route>
+
+            <Route exact path="/your-trainees">
+              {role === "ROLE_TRAINER" ? (
+                <YourTraineesComponent />
+              ) : (
+                <Redirect to={"/dashboard"} />
+              )}
+            </Route>
+
+            {/* <Route exact path="/users">
+              <UsersPage />
+            </Route> */}
 
             <Route exact path="/users/:selectedUserId">
               <UserDetailPage />

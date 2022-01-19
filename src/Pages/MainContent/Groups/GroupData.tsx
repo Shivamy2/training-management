@@ -58,8 +58,8 @@ const GroupData: React.FC<Props> = () => {
                     }
                     infoClassName="text-white"
                     key={index}
-                    title={item?.name ? item.name : "Unknown"}
-                    description={item?.description}
+                    name={item?.name ? item.name : "Unknown"}
+                    id={item?.description}
                     url={
                       item?.group_image_url
                         ? item.group_image_url
@@ -75,8 +75,8 @@ const GroupData: React.FC<Props> = () => {
                       listExtraStyling
                     }
                     key={index}
-                    title={item?.name ? item.name : "Unknown"}
-                    description={item?.description}
+                    name={item?.name ? item.name : "Unknown"}
+                    id={item?.description}
                     url={
                       item?.group_image_url
                         ? item.group_image_url

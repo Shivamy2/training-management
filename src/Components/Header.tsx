@@ -25,30 +25,47 @@ const Header: React.FC<Props> = () => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="rounded-full cursor-pointer text-hamburger hover:bg-gray-200"
+            className="rounded-full hidden md-lg:block cursor-pointer text-hamburger hover:bg-gray-200"
           >
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
-          <h2 className="ml-3 font-bold tracking-wider sm-md:hidden text-15 text-hamburger">
-            Sales
-          </h2>
-          <h2 className="hidden ml-6 tracking-wider sm-md:block text-14 text-hamburger">
-            {window.location.href !== "/profile" ? (
-              <div>
-                Dashboard <span className="font-bold"> / Sales</span>
-              </div>
-            ) : (
-              <span className="font-bold">Account Settings</span>
-            )}
+          <h2 className="hidden ml-6 tracking-wider md-lg:block text-14 text-hamburger">
+            <div className="font-bold">Dashboard</div>
           </h2>
         </div>
-
-        <div className="hidden my-auto md-lg:block">
+        {/* <h2 className="m-auto tracking-wider md-lg:hidden text-14 text-hamburger">
+          <div className="font-bold md:text-lg">Dashboard</div>
+        </h2> */}
+        <div className="my-auto md-lg:block mx-auto md-lg:mx-0">
           <DropDown
             initialButtonValue={0}
-            itemsToBeShown={[{ name: "Settings" }, { name: "Share" }]}
+            itemsToBeShown={[
+              { name: "Edit Profile", path: "/profile" },
+              {
+                name: "Dashboard",
+                path: "/dashboard",
+                isHiddenOnDesktop: true,
+              },
+              {
+                name: "Assignment",
+                path: "/assignment/upload",
+                isHiddenOnDesktop: true,
+              },
+              {
+                name: "Add Trainees",
+                path: "/add-trainees",
+                isHiddenOnDesktop: true,
+              },
+              {
+                name: "Enrolled",
+                path: "/your-trainees",
+                isHiddenOnDesktop: true,
+              },
+              { name: "Settings" },
+              { name: "Sign Out", path: "/login" },
+            ]}
           />
         </div>
       </div>

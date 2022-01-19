@@ -7,6 +7,8 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   touched?: boolean;
   errorMessage?: string;
+  innerClass?: string;
+  outerClass?: string;
 }
 
 const InputField: React.FC<Props> = ({
@@ -15,12 +17,14 @@ const InputField: React.FC<Props> = ({
   name,
   touched,
   errorMessage,
+  innerClass,
+  outerClass,
   ...rest
 }) => {
   const [isInputFieldClicked, setIsInputFieldClicked] = useState(false);
 
   return (
-    <div className="w-full pt-6 pb-6">
+    <div className={"w-full pt-6 pb-6 " + outerClass}>
       <div className={`flex relative w-full ${className}`}>
         {children}
         <label htmlFor={name}>
@@ -33,14 +37,14 @@ const InputField: React.FC<Props> = ({
             type={rest.type}
             name={name}
             placeholder={rest.placeholder}
-            className="w-full pt-1 pb-4 my-auto font-semibold tracking-wider placeholder-gray-300 border-white border-none outline-none pl-9 "
+            className={`w-full pt-1 pb-4 my-auto font-semibold tracking-wider placeholder-gray-400 border-white border-none outline-none pl-9 ${innerClass}`}
           />
         </label>
       </div>
       <hr
         className={
           "w-full " +
-          (isInputFieldClicked ? "border-primary" : "border-gray-200")
+          (isInputFieldClicked ? "border-primary" : "border-gray-300")
         }
       />
       {touched && (
@@ -55,6 +59,8 @@ const InputField: React.FC<Props> = ({
   );
 };
 
-InputField.defaultProps = {};
+InputField.defaultProps = {
+  innerClass: "pl-9",
+};
 
 export default React.memo(InputField);

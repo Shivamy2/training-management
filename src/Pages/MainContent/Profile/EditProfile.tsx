@@ -46,7 +46,7 @@ const EditProfile: React.FC<Props> = () => {
     isSubmitting,
   } = useFormik({
     initialValues: {
-      gender: user?.gender ? user.gender : "Gender",
+      gender: user?.gender ? user.gender : "Male",
       birth_date: user?.birth_date ? user.birth_date : "Day",
       birth_month: user?.birth_month ? user.birth_month : "Month",
       birth_year: user?.birth_year ? user.birth_year : "Year",
@@ -64,17 +64,32 @@ const EditProfile: React.FC<Props> = () => {
         .required("First Name is required Field!")
         .max(20, ({ max }) => `First Name must be of ${max} chars`)
         .min(3, ({ min }) => `Must be more than ${min} chars`),
-
       last_name: yup
         .string()
         .required("Last Name is required Field!")
         .max(20, ({ max }) => `Last Name must be of ${max} chars`)
         .min(3, ({ min }) => `Must be more than ${min} chars`),
-      // area: yup.string().required("Area is required field"),
-      // city: yup.string().required("City is required field"),
-      // district: yup.string().required("District is required field"),
-      // pin_code: yup.number().required("Pin code is required field"),
+      area: yup
+        .string()
+        .required("Area is required field")
+        .min(3, ({ min }) => `Area should be of ${min} chars`),
+      city: yup
+        .string()
+        .required("City is required field")
+        .min(3, ({ min }) => `City should be of ${min} chars`),
+      district: yup
+        .string()
+        .required("District is required field")
+        .min(3, ({ min }) => `District should be of ${min} chars`),
+      pin_code: yup
+        .number()
+        .required("Pin code is required field")
+        .min(6, ({ min }) => `Pin Code should be of ${min} chars`),
       gender: yup.string().required("Gender is required field"),
+      mobile_number: yup
+        .string()
+        .max(10, ({ max }) => `Gender should be maximum ${max} chars`)
+        .min(10, ({ min }) => `Gender should be minimum ${min} chars`),
     }),
     onSubmit: (data) => {
       console.log("Data for details is: ", data);
@@ -225,8 +240,8 @@ const EditProfile: React.FC<Props> = () => {
                       {...getFieldProps("gender")}
                       className="w-full border-gray-400 mt-1 bg-white rounded-lg border px-2 py-2 my-auto tracking-wider outline-none "
                     >
-                      <option value="ROLE_TRAINEE">Male</option>
-                      <option value="ROLE_TRAINER">Female</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
                     </select>
                   </div>
                   <EditInput

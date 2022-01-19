@@ -4,28 +4,34 @@ interface Props {
   title: string;
   alertType?: "primary" | "success" | "warning" | "error";
   className?: string;
+  typeMessage?: boolean;
 }
 
-const Alert: React.FC<Props> = ({ title, alertType, className }) => {
+const Alert: React.FC<Props> = ({
+  title,
+  alertType,
+  className,
+  typeMessage,
+}) => {
   const [isHidden, setIsHidden] = useState(false);
-  let alertTypeText = "Primary!";
+  let alertTypeText = "";
   let extraClassOnAlertButton = "";
   let extraClassOnOuterBox = "";
 
   if (alertType === "primary") {
-    alertTypeText = "Primary!";
+    typeMessage && (alertTypeText = "Alert!");
     extraClassOnAlertButton += " text-primary ";
     extraClassOnOuterBox += " text-primary bg-primary-lite ";
   } else if (alertType === "success") {
-    alertTypeText = "Success!";
+    typeMessage && (alertTypeText = "Success!");
     extraClassOnAlertButton += " text-online-status ";
     extraClassOnOuterBox += " text-online-status bg-success-light ";
   } else if (alertType === "error") {
-    alertTypeText = "Failed!";
+    typeMessage && (alertTypeText = "Failed!");
     extraClassOnAlertButton += " text-red-500 ";
     extraClassOnOuterBox += " text-red-500 bg-red-50 ";
   } else {
-    alertTypeText = "Warning!";
+    typeMessage && (alertTypeText = "Warning!");
     extraClassOnAlertButton += " text-warning ";
     extraClassOnOuterBox += " text-warning bg-warning-light ";
   }
@@ -40,7 +46,7 @@ const Alert: React.FC<Props> = ({ title, alertType, className }) => {
         className
       }
     >
-      <div className="flex justify-between w-full px-4">
+      <div className="flex justify-evenly px-4">
         <p className="my-4 mb-4 font-medium text-14">
           <span className="font-semibold">{alertTypeText}&nbsp;</span>
           {title}

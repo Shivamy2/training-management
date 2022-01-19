@@ -13,12 +13,14 @@ import { useHistory } from "react-router-dom";
 import { store, useAppSelector } from "../Store/store";
 import { uiSidebarStatusSelector } from "../selectors/ui.selectors";
 import { uiSidebarSelectedItemAction } from "../actions/ui.actions";
+import { authSelector } from "../selectors/auth.selectors";
 
 interface Props {}
 
 const Sidebar: React.FC<Props> = () => {
   const history = useHistory();
   const isSideBarOpen = useAppSelector(uiSidebarStatusSelector);
+  const role = useAppSelector(authSelector)?.roles[0]?.name;
 
   return (
     <div
@@ -71,14 +73,15 @@ const Sidebar: React.FC<Props> = () => {
         >
           <GrGroup className="w-5 h-5 text-sidebar-elements " />
         </SideBarElement>
-        <SideBarElement
-          onClick={useCallback(() => {
-            history.push("/users");
-          }, [])} // eslint-disable-line
-          title="Users"
-        >
-          <BiUser className="w-5 h-5 text-sidebar-elements " />
-        </SideBarElement>
+        {role === "ROLE_TRAINER" && (
+          <SideBarElement
+            className="bg-gray-300"
+            onClick={() => history.push("/add-trainees")} // eslint-disable-line
+            title="Add Trainees"
+          >
+            <BiUser className="w-5 h-5 text-sidebar-elements " />
+          </SideBarElement>
+        )}
 
         <SideBarElement
           title="Meetings"

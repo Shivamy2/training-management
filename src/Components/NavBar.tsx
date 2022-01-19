@@ -1,19 +1,20 @@
 import React from "react";
+import { avatarImage } from "../Constants/constants";
 import CanadaFlag from "../Images/canada.png";
 import { authSelector } from "../selectors/auth.selectors";
 import { useAppSelector } from "../Store/store";
-import DropDown from "./DropDown";
+import Avatar from "./Avatar/Avatar";
 import Search from "./Search/Search";
 
 interface Props {}
 
 const NavBar: React.FC<Props> = () => {
-  const userDP = useAppSelector(authSelector)?.profile_pic_url;
+  const role = useAppSelector(authSelector)?.roles[0]?.name;
 
   return (
     <div className="bg-navBar h-navbar">
       <div className="flex justify-between w-full h-full">
-        <ul className="pl-3 my-auto">
+        <ul className="pl-3 my-auto flex">
           <li className="flex">
             <svg
               className="w-9 h-9"
@@ -39,7 +40,7 @@ const NavBar: React.FC<Props> = () => {
               </g>
             </svg>
             <h1 className="hidden my-auto ml-3 text-2xl font-semibold tracking-wider uppercase md:block text-navBar-light">
-              portal
+              trainica
             </h1>
           </li>
         </ul>
@@ -60,7 +61,12 @@ const NavBar: React.FC<Props> = () => {
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <Search className="hidden ml-12 md:block" />
+            <div className="flex">
+              <Search className="hidden flex-1 ml-12 md:block" />
+              <div className="hidden md:block flex-1 uppercase text-center text-2xl my-auto tracking-widest font-extrabold text-white">
+                {role === "ROLE_TRAINER" ? "trainer" : "trainee"}
+              </div>
+            </div>
           </li>
         </ul>
         <ul className="flex my-auto justify-evenly w-180">
@@ -105,17 +111,14 @@ const NavBar: React.FC<Props> = () => {
             <span className="absolute rounded-full right-online-right -top-1 h-online-status w-online-status bg-online-status"></span>
           </li>
           <li className="my-auto">
-            <DropDown
-              containsImage={true}
-              image={userDP}
-              itemsToBeShown={[
-                { name: "Profile", path: "/profile" },
-                { name: "Users", path: "/users" },
-                { name: "Groups", path: "/groups" },
-                { name: "Recordings", path: "/batch/2/recording/15" },
-                { name: "Sign Out", path: "/login" },
-              ]}
-            />
+            <div className="focus:outline-none">
+              <Avatar
+                size="small"
+                className="h-10 w-10"
+                src={avatarImage}
+                circular={false}
+              />
+            </div>
           </li>
         </ul>
       </div>

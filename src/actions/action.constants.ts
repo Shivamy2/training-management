@@ -43,3 +43,12 @@ export const GROUP_FETCH_ONE_ERROR = "groups/fetch_one_error";
 
 //sidebar
 export const SIDEBAR_STATUS = "sidebar/open";
+
+// trainee
+export const BULK_TRAINEE_SEND = "trainee/bulk_send";
+export const BULK_TRAINEE_LOADING = "trainee/bulk_loading";
+export const BULK_TRAINEE_ERROR_MESSAGE = "trainee/bulk_error_message";
+export const TRAINEE_FETCH = "trainee/fetch";
+export const TRAINEE_LOAD_DATA_LOADING = "trainee/load_data_loading";
+export const TRAINEE_LOAD_DATA_ERROR = "trainee/load_data_error";
+export const TRAINEE_FETCH_DATA = "trainee/fetch_data";
