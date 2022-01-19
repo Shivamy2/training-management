@@ -46,7 +46,7 @@ const Alert: React.FC<Props> = ({
         className
       }
     >
-      <div className="flex justify-evenly px-4">
+      <div className="flex justify-between px-4">
         <p className="my-4 mb-4 font-medium text-14">
           <span className="font-semibold">{alertTypeText}&nbsp;</span>
           {title}

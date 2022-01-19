@@ -56,7 +56,11 @@ const MainDisplay: React.FC<Props> = () => {
               <EditProfile />
             </Route>
             <Route exact path="/assignment/upload">
-              <AssignmentUpload />
+              {role === "ROLE_TRAINER" ? (
+                <AssignmentUpload />
+              ) : (
+                <Redirect to={"/dashboard"} />
+              )}
             </Route>
 
             <Route exact path="/your-trainees">

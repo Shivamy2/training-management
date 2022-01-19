@@ -1,4 +1,5 @@
 import { all, fork } from "redux-saga/effects";
+import { watchAssignment } from "./assignment.saga";
 import { watchMeSendingData } from "./auth.saga";
 import { watchGroupQueryChanged } from "./groups.saga";
 import { watchTrainee } from "./trainee.saga";
@@ -14,6 +15,7 @@ export function* rootSaga() {
     fork(watchMeUpdating),
     fork(watchUI),
     fork(watchTrainee),
+    fork(watchAssignment),
   ]);
 }
 

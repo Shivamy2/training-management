@@ -49,6 +49,7 @@ module.exports = {
             },
             backgroundImage: (theme) => ({
                 authHero: "url('./Images/AuthHero.webp')",
+                authHero2: "url('./Images/bodyImage.jpeg')",
             }),
             backgroundSize: {
                 heroSize: "75%",

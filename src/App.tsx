@@ -98,6 +98,7 @@ const App: React.FC<Props> = () => {
               path={[
                 "/dashboard",
                 "/assignment/upload",
+                "/assignment/submit",
                 "/your-trainees",
                 "/add-trainees",
                 "/batch/:batchNumber/recording/:recordingNumber",

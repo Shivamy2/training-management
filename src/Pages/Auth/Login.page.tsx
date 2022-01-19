@@ -49,9 +49,11 @@ const Login: React.FC<Props> = () => {
     <div className="w-screen min-h-screen bg-white md:w-1/2">
       <div className="max-w-md min-h-full px-10 py-4 mx-auto">
         <div className="pb-4">
-          <p className="tracking-wider font-medium-semi text-4.5xl">
+          <p className="tracking-wider font-medium-semi text-4xl">
             Log In to
-            <span className="font-bold uppercase text-primary">Portal</span>
+            <span className="font-bold uppercase text-4.5xl text-primary">
+              TRAINICA
+            </span>
           </p>
           <div className="flex mt-2 text-sm font-semibold tracking-wider">
             <p>New Here?&nbsp;</p>

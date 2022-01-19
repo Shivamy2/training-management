@@ -82,6 +82,25 @@ const Sidebar: React.FC<Props> = () => {
             <BiUser className="w-5 h-5 text-sidebar-elements " />
           </SideBarElement>
         )}
+        {role === "ROLE_TRAINER" && (
+          <SideBarElement
+            className="bg-gray-200"
+            onClick={() => history.push("/assignment/upload")} // eslint-disable-line
+            title="Assignment"
+          >
+            <BiUser className="w-5 h-5 text-sidebar-elements " />
+          </SideBarElement>
+        )}
+
+        {role === "ROLE_TRAINEE" && (
+          <SideBarElement
+            className="bg-gray-200"
+            onClick={() => history.push("/assignment/submit")} // eslint-disable-line
+            title="Assignment"
+          >
+            <BiUser className="w-5 h-5 text-sidebar-elements " />
+          </SideBarElement>
+        )}
 
         <SideBarElement
           title="Meetings"

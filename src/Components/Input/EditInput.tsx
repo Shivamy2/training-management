@@ -6,6 +6,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   labelText: string;
   errorMessage?: string;
   touched?: boolean;
+  labelClassName?: string;
 }
 
 const EditInput: React.FC<Props> = ({
@@ -13,13 +14,16 @@ const EditInput: React.FC<Props> = ({
   labelText,
   touched,
   errorMessage,
+  labelClassName,
   ...rest
 }) => {
   return (
     <div className={className + " flex flex-col"}>
       <label
         htmlFor={rest.name}
-        className="text-sm font-medium tracking-wide text-gray-500"
+        className={
+          "text-sm font-medium tracking-wide text-gray-500 " + labelClassName
+        }
       >
         {labelText}
       </label>

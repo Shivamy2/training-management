@@ -1,6 +1,7 @@
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { assignmentReducer } from "../reducers/assignment.reducer";
 import { authReducer } from "../reducers/auth.reducers";
 import { groupsReducer } from "../reducers/groups.reducers";
 import { traineeReducer } from "../reducers/trainee.reducers";
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   auth: authReducer,
   ui: uiReducer,
   trainee: traineeReducer,
+  assignmentReducer: assignmentReducer,
 });
 
 const devTools =
