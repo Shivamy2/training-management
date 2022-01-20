@@ -9,6 +9,21 @@ export interface AssignmentUpload {
   due_date: Date;
 }
 
+export interface AssignmentResponse {
+  id: number;
+  trainerId: number;
+  title: string;
+  description: string;
+  totalCredit: number;
+  scoredCredit: number;
+  dueDate: string;
+  available: boolean;
+  name?: string;
+  url?: string;
+  type?: string;
+  size?: number;
+}
+
 const uploadAssignment = async (values: AssignmentUpload) => {
   const datas = new FormData();
   datas.append("file", values.file);

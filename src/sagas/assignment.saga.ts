@@ -2,6 +2,7 @@ import { AnyAction } from "redux";
 import { all, call, put, takeEvery } from "redux-saga/effects";
 import { ASSIGNMENT_UPLOAD } from "../actions/action.constants";
 import {
+  assignmentFetch,
   assignmentUploadError,
   assignmentUploadLoading,
 } from "../actions/assignment.action";
@@ -11,7 +12,8 @@ export function* uploadAssignmentSaga(action: AnyAction): Generator<any> {
   yield put(assignmentUploadError(""));
   try {
     const response: any = yield call(uploadAssignment, action.payload);
-    yield put(assignmentUploadError(response.data.message));
+    yield put(assignmentFetch(response));
+    // yield put(assignmentUploadError(response.data.message));
     // yield put(assignmentUploadLoading(false));
   } catch {
     yield put(

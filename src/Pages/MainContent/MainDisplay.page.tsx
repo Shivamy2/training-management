@@ -13,7 +13,7 @@ import { uiSidebarStatusSelector } from "../../selectors/ui.selectors";
 import AddTraineesPage from "./AddTrainees/AddTrainees.page";
 import YourTraineesComponent from "../../Components/Trainee/YourTrainees.component";
 import { authSelector } from "../../selectors/auth.selectors";
-import AssignmentUpload from "../Assignment/AssignmentUpload";
+import AssignmentUpload from "../Assignment/Assignment";
 
 interface Props {}
 

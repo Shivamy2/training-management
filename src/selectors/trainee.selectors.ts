@@ -18,6 +18,11 @@ export const traineeIdsSelector = createSelector(
   (trainee) => trainee.traineeIds
 );
 
+export const traineeDataLoadingSelector = createSelector(
+  [traineeSelector],
+  (trainee) => trainee.loading
+);
+
 export const traineeDetailsSelector = createSelector(
   [traineeIdsSelector, userSelector],
   (ids, mappedDetails) => {
