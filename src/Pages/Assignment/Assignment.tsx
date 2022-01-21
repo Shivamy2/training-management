@@ -44,11 +44,11 @@ const Assignment: React.FC<Props> = () => {
           />
         </div>
       )}
-      <div className="font-extrabold my-6 tracking-wider text-2xl md-lg:text-3xl text-center text-primary">
+      <div className="font-extrabold my-6 tracking-wider text-2xl md-lg:text-3xl text-center text-warning">
         Upload Assignment
       </div>
       <AssignmentUpload />
-      <div className="font-extrabold my-10 tracking-wider text-2xl md-lg:text-3xl text-center text-primary">
+      <div className="font-extrabold my-10 tracking-wider text-2xl md-lg:text-3xl text-center text-warning">
         Saved Assignments
       </div>
       <div className="mx-auto">

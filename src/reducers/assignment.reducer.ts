@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import {
-  ASSIGNMENT_FETCH,
+  ASSIGNMENT_SAVE,
   ASSIGNMENT_UPLOAD,
   ASSIGNMENT_UPLOAD_ERROR,
   ASSIGNMENT_UPLOAD_LOADING,
@@ -36,7 +36,7 @@ export const assignmentReducer: Reducer<AssignmentState> = (
       return { ...state, loading: action.payload };
     }
 
-    case ASSIGNMENT_FETCH: {
+    case ASSIGNMENT_SAVE: {
       const assignment = action.payload.data as AssignmentResponse;
       return {
         ...state,

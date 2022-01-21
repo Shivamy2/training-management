@@ -109,7 +109,8 @@ const AssignmentUpload: React.FC<Props> = () => {
                       startDate={values.due_date}
                       name="due_date"
                       selected={
-                        (values.due_date && new Date(values.due_date)) || null
+                        (values.due_date && new Date(values.due_date)) ||
+                        "dd/mm/yyy"
                       }
                       onChange={(val) => {
                         setFieldValue("due_date", val);
@@ -165,7 +166,7 @@ const AssignmentUpload: React.FC<Props> = () => {
             <Button
               type="submit"
               buttonType="solid"
-              theme="primary"
+              theme="warning"
               text="Upload"
               className="mx-auto"
               submissionInProgress={loading}

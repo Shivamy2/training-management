@@ -57,6 +57,7 @@ export const TRAINEE_FETCH_DATA = "trainee/fetch_data";
 export const ASSIGNMENT_UPLOAD = "assignment/upload";
 export const ASSIGNMENT_UPLOAD_LOADING = "assignment/upload_loading";
 export const ASSIGNMENT_UPLOAD_ERROR = "assignment/upload_error";
+export const ASSIGNMENT_SAVE = "assignment/save";
 export const ASSIGNMENT_FETCH = "assignment/fetch";
 export const ASSIGNMENT_FETCH_LOADING = "assignment/fetch_loading";
 export const ASSIGNMENT_FETCH_ERROR = "assignment/fetch_error";

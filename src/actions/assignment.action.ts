@@ -1,8 +1,12 @@
-import { AssignmentUpload } from "../APIs/Assignment/assignment";
+import {
+  AssignmentResponse,
+  AssignmentUpload,
+} from "../APIs/Assignment/assignment";
 import {
   ASSIGNMENT_FETCH,
   ASSIGNMENT_FETCH_ERROR,
   ASSIGNMENT_FETCH_LOADING,
+  ASSIGNMENT_SAVE,
   ASSIGNMENT_UPLOAD,
   ASSIGNMENT_UPLOAD_ERROR,
   ASSIGNMENT_UPLOAD_LOADING,
@@ -22,7 +26,11 @@ const assignmentUploadError = (message: string) => ({
   type: ASSIGNMENT_UPLOAD_ERROR,
   payload: message,
 });
-const assignmentFetch = (data: any) => ({
+const assignmentSave = (data: AssignmentResponse) => ({
+  type: ASSIGNMENT_SAVE,
+  payload: data,
+});
+const assignmentFetch = (data: AssignmentResponse[]) => ({
   type: ASSIGNMENT_FETCH,
   payload: data,
 });
@@ -42,4 +50,5 @@ export {
   assignmentFetch,
   assignmentFetchLoading,
   assignmentFetchError,
+  assignmentSave,
 };

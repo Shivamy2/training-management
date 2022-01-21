@@ -7,12 +7,17 @@ interface Props {
 
 const AssignmentCard: React.FC<Props> = ({ assignmentDetails }) => {
   const date = new Date(JSON.parse(assignmentDetails.dueDate));
-  const due_date = `Due Date: ${date.getDate()}/${date.getDay()}/${date.getFullYear()} 11:59:00`;
+  const due_date = `${date.getDate()}/${date.getDay()}/${date.getFullYear()} 11:59:00 PM`;
   return (
-    <div className="border border-black text-black shadow-xl cursor-pointer hover:shadow-none rounded-xl h-56 bg-warning p-4 flex flex-col justify-between leading-normal">
+    <div className="border text-black shadow-xl cursor-pointer hover:shadow-none rounded-xl h-56 bg-warning p-4 flex flex-col justify-between leading-normal">
       <div className="mb-8">
-        <p className="text-sm flex items-center">{due_date}</p>
-        <div className="font-bold text-xl mb-2">{assignmentDetails.title}</div>
+        <p className="text-xs flex font-bold items-center">
+          Due Date:{" "}
+          <span className="text-sm font-normal">&nbsp;{due_date}</span>
+        </p>
+        <div className="font-extrabold text-xl mb-2">
+          {assignmentDetails.title}
+        </div>
         <p className="text-base">{assignmentDetails.description}</p>
       </div>
       <div className="flex items-center">
