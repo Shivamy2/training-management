@@ -55,9 +55,18 @@ export const TRAINEE_FETCH_DATA = "trainee/fetch_data";
 
 // assignment
 export const ASSIGNMENT_UPLOAD = "assignment/upload";
-export const ASSIGNMENT_UPLOAD_LOADING = "assignment/upload_loading";
+export const ASSIGNMENT_UPLOAD_LOADING_ONE = "assignment/upload_loading_one";
 export const ASSIGNMENT_UPLOAD_ERROR = "assignment/upload_error";
 export const ASSIGNMENT_SAVE = "assignment/save";
 export const ASSIGNMENT_FETCH = "assignment/fetch";
-export const ASSIGNMENT_FETCH_LOADING = "assignment/fetch_loading";
+export const ASSIGNMENT_FETCH_SAVE = "assignment/fetch_save";
+export const ASSIGNMENT_FETCH_LOADING_LIST = "assignment/fetch_loading_list";
 export const ASSIGNMENT_FETCH_ERROR = "assignment/fetch_error";
+export const ASSIGNMENT_FETCH_AVAILABLE = "assignment/fetch_available";
+export const ASSIGNMENT_SUBMIT = "assignment/submit";
+export const ASSIGNMENT_SUBMIT_LOADING = "assignment/submit_loading";
+export const ASSIGNMENT_SUBMIT_ERROR = "assignment/submit_error";
+export const ASSIGNMENT_SUBMIT_FETCH = "assignment/fetch";
+export const ASSIGNMENT_SUBMIT_DATA = "assignment/fetch_data";
+export const ASSIGNMENT_SUBMIT_FETCH_LOADING = "assignment/fetch_loading";
+export const ASSIGNMENT_SUBMIT_FETCH_ERROR = "assignment/fetcg_error";

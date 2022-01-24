@@ -99,6 +99,7 @@ const App: React.FC<Props> = () => {
                 "/dashboard",
                 "/assignment/upload",
                 "/assignment/submit",
+                "/assignment/submitted/all",
                 "/your-trainees",
                 "/add-trainees",
                 "/batch/:batchNumber/recording/:recordingNumber",

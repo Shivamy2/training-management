@@ -71,6 +71,7 @@ module.exports = {
             minHeight: {
                 "16": "16px",
                 "51": "51px",
+                "56": "256px"
             },
             spacing: {
                 "online-status": "5px",

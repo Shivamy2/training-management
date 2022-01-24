@@ -52,8 +52,8 @@ const Button: React.FC<Props> = ({
   return (
     <div>
       <button
-        {...rest}
         disabled={submissionInProgress}
+        {...rest}
         className={`px-5 py-2 relative duration-500 ease-in-out rounded-md focus:outline-none text-sm font-semibold text-center  ${className} ${extraClassesOnButton} `}
       >
         <ImSpinner9

@@ -1,23 +1,27 @@
 import { Formik } from "formik";
-import { assignmentLoading } from "../../selectors/assignment.selectors";
+import { assignmentLoadingOne } from "../../selectors/assignment.selectors";
 import { store, useAppSelector } from "../../Store/store";
 import * as yup from "yup";
 import { assignmentUpload } from "../../actions/assignment.action";
 import EditInput from "../../Components/Input/EditInput";
 import DatePicker from "react-datepicker";
 import Button from "../../Components/Button/Button";
-import React from "react";
+import React, { useRef } from "react";
+import { addDays } from "date-fns";
+import TextArea from "../../Components/Input/TextArea";
 
 interface Props {}
 
 const AssignmentUpload: React.FC<Props> = () => {
+  const fileRef = useRef<HTMLInputElement>(null);
+
   const validationSchema = yup.object().shape({
     title: yup.string().required("Title is required field"),
     description: yup.string().required("Description is required field"),
     total_credits: yup.string().required("Total credit is a required field"),
   });
 
-  const loading = useAppSelector(assignmentLoading);
+  const loading = useAppSelector(assignmentLoadingOne);
   return (
     <Formik
       initialValues={{
@@ -31,6 +35,7 @@ const AssignmentUpload: React.FC<Props> = () => {
       onSubmit={(values, helpers) => {
         store.dispatch(assignmentUpload(values));
         helpers.resetForm();
+        fileRef.current!.value = "";
       }}
     >
       {({
@@ -51,7 +56,7 @@ const AssignmentUpload: React.FC<Props> = () => {
                   placeholder="Enter here"
                   touched={touched.title}
                   errorMessage={errors.title}
-                  labelText="Title"
+                  labelText="Title*"
                   type="text"
                   onChange={handleChange}
                   value={values.title}
@@ -59,17 +64,17 @@ const AssignmentUpload: React.FC<Props> = () => {
                   labelClassName="font-semibold text-base text-black"
                 />
               </div>
-              <div className="flex md-lg:flex-1 md-lg:justify-start space-x-2">
+              <div className="md:flex md-lg:flex-1 md-lg:justify-start md:space-x-2 space-y-6 md:space-y-0">
                 <div className="md-lg:mx-auto">
                   <EditInput
                     placeholder="Enter here"
-                    touched={touched.description}
-                    errorMessage={errors.description}
+                    touched={touched.total_credits}
+                    errorMessage={errors.total_credits}
                     type="number"
                     onChange={handleChange}
                     value={values.total_credits}
                     name={`total_credits`}
-                    labelText="Total Credits"
+                    labelText="Total Credits*"
                     labelClassName="font-semibold text-base text-black"
                   />
                 </div>
@@ -80,7 +85,7 @@ const AssignmentUpload: React.FC<Props> = () => {
                       "font-semibold mb-6 tracking-wide text-gray-500 "
                     }
                   >
-                    {"Due Date"}
+                    {"Due Date*"}
                   </label>
                   <div className="relative top-1.5">
                     <div className="flex absolute z-50 inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -106,6 +111,9 @@ const AssignmentUpload: React.FC<Props> = () => {
                     <DatePicker
                       className="pl-10 py-2 mt-0.5 border border-gray-400 rounded-lg"
                       selectsStart
+                      minDate={new Date()}
+                      closeOnScroll={true}
+                      maxDate={addDays(new Date(), 30)}
                       startDate={values.due_date}
                       name="due_date"
                       selected={
@@ -121,25 +129,15 @@ const AssignmentUpload: React.FC<Props> = () => {
               </div>
             </div>
             <div className="md-lg:flex space-y-6">
-              <div className="mb-3">
-                <label
-                  htmlFor="exampleFormControlTextarea1"
-                  className="form-label font-semibold inline-block mb-2 text-gray-500"
-                >
-                  Summary
-                </label>
-                <textarea
-                  className="form-control w-full px-3 py-1.5 text-base font-medium bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
-                  id="exampleFormControlTextarea1"
-                  rows={3}
-                  cols={40}
-                  name="description"
-                  onChange={handleChange}
-                  value={values.description}
-                  placeholder="What to do in assignment?"
-                ></textarea>
-              </div>
-
+              <TextArea
+                rows={3}
+                cols={40}
+                onChange={handleChange}
+                value={values.description}
+                name={"description"}
+                placeholder="What to do in assignment?"
+                labelText="Summary*"
+              />
               <div className="mb-3 flex text-left md-lg:ml-6 flex-1 flex-col">
                 <label
                   htmlFor="formFile"
@@ -148,6 +146,7 @@ const AssignmentUpload: React.FC<Props> = () => {
                   Document (optional)
                 </label>
                 <input
+                  ref={fileRef!}
                   className="form-control px-3 py-1.5 text-sm max-w-max font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   type="file"
                   name="file"
@@ -161,7 +160,6 @@ const AssignmentUpload: React.FC<Props> = () => {
               </div>
             </div>
           </div>
-
           <div className="text-center my-8">
             <Button
               type="submit"

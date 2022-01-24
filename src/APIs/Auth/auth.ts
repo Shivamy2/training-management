@@ -35,7 +35,7 @@ export interface RoleRequest {
 }
 
 const login = async (data: LoginCredentialsRequest) => {
-  let url = `${BASE_URL}/api/auth/login`;
+  let url = `${BASE_URL}/auth/login`;
   const response = await axios.post<LoginResponse>(url, qs.stringify(data), {
     headers: { "content-type": "application/x-www-form-urlencoded" },
   });
@@ -45,14 +45,14 @@ const login = async (data: LoginCredentialsRequest) => {
 };
 
 const signup = async (data: SignUpCredential) => {
-  let url = `${BASE_URL}/api/auth/signup`;
+  let url = `${BASE_URL}/auth/signup`;
   const response = await axios.post(url, data);
   console.log(response);
   return response;
 };
 
 const role = async (data: RoleRequest) => {
-  let url = `${BASE_URL}/api/role/addToUser`;
+  let url = `${BASE_URL}/role/addToUser`;
   const response = await axios.post(url, data);
   console.log(response);
   return response;
@@ -82,17 +82,17 @@ export interface MeResponse {
 }
 
 const checkUserDetails = async () => {
-  const response = await axios.get(`${BASE_URL}/api/register/check`);
+  const response = await axios.get(`${BASE_URL}/register/check`);
   return response;
 };
 
 const me = async () => {
-  const response = await axios.get<MeResponse>(`${BASE_URL}/api/me`);
+  const response = await axios.get<MeResponse>(`${BASE_URL}/me`);
   return response;
 };
 
 const meSendData = async (data: MeRequest) => {
-  const response = await axios.post<MeResponse>(`${BASE_URL}/api/me`, data);
+  const response = await axios.post<MeResponse>(`${BASE_URL}/me`, data);
   return response;
 };
 

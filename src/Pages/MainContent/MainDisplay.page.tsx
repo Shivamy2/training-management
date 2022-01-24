@@ -14,6 +14,8 @@ import AddTraineesPage from "./AddTrainees/AddTrainees.page";
 import YourTraineesComponent from "../../Components/Trainee/YourTrainees.component";
 import { authSelector } from "../../selectors/auth.selectors";
 import AssignmentUpload from "../Assignment/Assignment";
+import AssignmentSubmit from "../Assignment/AssignmentSubmit";
+import AssignmentSubmitted from "../Assignment/AssignmentSubmitted";
 
 interface Props {}
 
@@ -59,7 +61,23 @@ const MainDisplay: React.FC<Props> = () => {
               {role === "ROLE_TRAINER" ? (
                 <AssignmentUpload />
               ) : (
-                <Redirect to={"/dashboard"} />
+                <Redirect to={"/assignment/submit"} />
+              )}
+            </Route>
+
+            <Route exact path="/assignment/submit">
+              {role === "ROLE_TRAINEE" ? (
+                <AssignmentSubmit />
+              ) : (
+                <Redirect to={"/assignment/upload"} />
+              )}
+            </Route>
+
+            <Route exact path="/assignment/submitted/all">
+              {role === "ROLE_TRAINEE" ? (
+                <AssignmentSubmitted />
+              ) : (
+                <Redirect to={"/assignment/upload"} />
               )}
             </Route>
 

@@ -22,6 +22,42 @@ export interface AssignmentResponse {
   url?: string;
   type?: string;
   size?: number;
+  isActive?: boolean;
+}
+
+export interface AssignmentSubmitRequest {
+  link?: string;
+  assignment_id: number;
+  description: string;
+  file?: string;
+}
+
+export interface AssignmentSubmitResponse {
+  id: number;
+  assignmentId: number;
+  link: null;
+  description: string;
+  name: string;
+  url: string;
+  type: string;
+  size: number;
+}
+
+export interface AssignmentDetailSubmitDetailResponse {
+  id: number;
+  trainerId: number;
+  title: string;
+  description: string;
+  solution: string;
+  totalCredit: number;
+  scoredCredit: number;
+  dueDate: string;
+  available: boolean;
+  name: string;
+  url: string;
+  type: string;
+  size: number;
+  link: string;
 }
 
 const uploadAssignment = async (values: AssignmentUpload) => {
@@ -33,10 +69,43 @@ const uploadAssignment = async (values: AssignmentUpload) => {
   datas.append("due_date", JSON.stringify(values.due_date));
   const response = await axios({
     method: "post",
-    url: `${BASE_URL}/api/assignment/upload`,
+    url: `${BASE_URL}/assignment/upload`,
     data: datas,
   });
   return response;
 };
 
-export { uploadAssignment };
+const fetchAssignment = async () => {
+  const response = await axios.get<AssignmentResponse[]>(
+    `${BASE_URL}/assignment/all`
+  );
+  return response;
+};
+
+const fetchAvailableAssignments = async () => {
+  const response = await axios.get<AssignmentResponse[]>(
+    `${BASE_URL}/assignment/trainee/all`
+  );
+  return response;
+};
+
+const submitAssignment = async (data: AssignmentSubmitRequest) => {
+  const formData = new FormData();
+  formData.append("description", data.description.trim());
+  formData.append("assignment_id", data.assignment_id.toString());
+  data.link?.length && formData.append("link", data.link.trim());
+  data.file && formData.append("file", data.file);
+  const response = await axios({
+    method: "POST",
+    url: `${BASE_URL}/assignment/trainee/submit`,
+    data: formData,
+  });
+  return response;
+};
+
+export {
+  uploadAssignment,
+  fetchAssignment,
+  fetchAvailableAssignments,
+  submitAssignment,
+};

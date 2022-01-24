@@ -1,10 +1,15 @@
 import { createSelector } from "reselect";
 import { AssignmentResponse } from "../APIs/Assignment/assignment";
-import { assignmentSelector } from "./app.selectors";
+import { assignmentSelector, assignmentSubmitSelector } from "./app.selectors";
 
-export const assignmentLoading = createSelector(
+export const assignmentLoadingOne = createSelector(
   [assignmentSelector],
-  (assignment) => assignment.loading
+  (assignment) => assignment.loadingOne
+);
+
+export const assignmentLoadingList = createSelector(
+  [assignmentSelector],
+  (assignment) => assignment.loadingList
 );
 
 export const assignmentError = createSelector(
@@ -22,11 +27,22 @@ export const assignmentIdsSelector = createSelector(
   (assignment) => assignment.assignments
 );
 
+export const assignmentSubmitLoadingSelector = createSelector(
+  [assignmentSubmitSelector],
+  (assignment) => assignment.loadingOne
+);
+
 export const assignmentMapDataSelector = createSelector(
   [assignmentIdsSelector, assignmentDetailsSelector],
   (ids, details) => {
-    const assignmentsData: AssignmentResponse[] = [];
-    ids.map((id) => assignmentsData.push(details[id]));
-    return assignmentsData;
+    const data: AssignmentResponse[] = [];
+    const helper: number[] = [];
+    ids.forEach((id) => {
+      if (!helper.includes(id)) {
+        details && data.push(details[id]);
+        helper.push(id);
+      }
+    });
+    return data;
   }
 );
