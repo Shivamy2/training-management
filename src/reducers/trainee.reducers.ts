@@ -5,19 +5,20 @@ import {
   BULK_TRAINEE_SEND,
   TRAINEE_FETCH,
   TRAINEE_FETCH_DATA,
+  TRAINEE_LOAD_DATA_LOADING,
 } from "../actions/action.constants";
 import { BulkTraineeResponse } from "../APIs/Trainee/trainee";
+import { EntityState } from "./entity.reducers";
 
-export interface TraineeState {
+export interface TraineeState extends EntityState {
   traineeIds: number[];
-  loading: boolean;
-  error: string;
 }
 
 const initialState: TraineeState = {
+  loadingOne: false,
+  loadingList: false,
   traineeIds: [],
-  loading: false,
-  error: "",
+  errorMessage: "",
 };
 
 export const traineeReducer: Reducer<TraineeState> = (
@@ -30,15 +31,19 @@ export const traineeReducer: Reducer<TraineeState> = (
     }
 
     case BULK_TRAINEE_LOADING: {
-      return { ...state, loading: action.payload };
+      return { ...state, loadingOne: action.payload };
     }
 
     case BULK_TRAINEE_ERROR_MESSAGE: {
-      return { ...state, error: action.payload };
+      return { ...state, errorMessage: action.payload };
     }
 
     case TRAINEE_FETCH: {
-      return { ...state, loading: true };
+      return { ...state, loadingList: true };
+    }
+
+    case TRAINEE_LOAD_DATA_LOADING: {
+      return { ...state, loadingList: action.payload };
     }
 
     case TRAINEE_FETCH_DATA: {
@@ -51,7 +56,8 @@ export const traineeReducer: Reducer<TraineeState> = (
       return {
         ...state,
         traineeIds: [...state.traineeIds, ...traineeIds],
-        loading: false,
+        loadingList: false,
+        loadingOne: false,
       };
     }
 

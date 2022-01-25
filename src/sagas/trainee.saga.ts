@@ -14,6 +14,7 @@ function* bulkTraineeData(action: AnyAction): Generator<any> {
   console.log("Bulk Trainee Data Sending Saga is running");
   yield put(bulkTraineeErrorMessage(""));
   try {
+    yield put(bulkTraineeLoading(true));
     const response: any = yield call(addBulkTrainee, action.payload);
     console.log("Trainees response ", response);
 

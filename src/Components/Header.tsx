@@ -38,32 +38,40 @@ const Header: React.FC<Props> = () => {
         {/* <h2 className="m-auto tracking-wider md-lg:hidden text-14 text-hamburger">
           <div className="font-bold md:text-lg">Dashboard</div>
         </h2> */}
-        <div className="my-auto md-lg:block mx-auto md-lg:mx-0">
+        <div className="my-auto md-lg:hidden mx-auto md-lg:mx-0">
           <DropDown
             initialButtonValue={0}
             itemsToBeShown={[
-              { name: "Edit Profile", path: "/profile" },
               {
                 name: "Dashboard",
                 path: "/dashboard",
-                isHiddenOnDesktop: true,
               },
+              { name: "Edit Profile", path: "/profile" },
               {
                 name: "Assignment",
                 path: "/assignment/upload",
-                isHiddenOnDesktop: true,
+              },
+              { name: "Sign Out", path: "/login" },
+            ]}
+          />
+        </div>
+        <div className="my-auto md-lg:block hidden mx-auto md-lg:mx-0">
+          <DropDown
+            initialButtonValue={0}
+            itemsToBeShown={[
+              {
+                name: "Dashboard",
+                path: "/dashboard",
+              },
+              { name: "Edit Profile", path: "/profile" },
+              {
+                name: "Assignment",
+                path: "/assignment/upload",
               },
               {
                 name: "Add Trainees",
                 path: "/add-trainees",
-                isHiddenOnDesktop: true,
               },
-              {
-                name: "Enrolled",
-                path: "/your-trainees",
-                isHiddenOnDesktop: true,
-              },
-              { name: "Settings" },
               { name: "Sign Out", path: "/login" },
             ]}
           />

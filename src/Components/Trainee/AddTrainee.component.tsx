@@ -34,8 +34,9 @@ const AddTrainee: React.FC<Props> = () => {
     <Formik
       validationSchema={validationSchema}
       initialValues={initialValues}
-      onSubmit={(values) => {
+      onSubmit={(values, helper) => {
         store.dispatch(bulkTraineeSendData(values));
+        helper.resetForm();
       }}
     >
       {({ values, handleChange, handleSubmit }) => (

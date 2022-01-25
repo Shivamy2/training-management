@@ -1,22 +1,24 @@
 import React from "react";
 import { avatarImage } from "../Constants/constants";
-import CanadaFlag from "../Images/canada.png";
 import { authSelector } from "../selectors/auth.selectors";
 import { useAppSelector } from "../Store/store";
 import Avatar from "./Avatar/Avatar";
 import Search from "./Search/Search";
+import logo from "../Images/logo.png";
 
 interface Props {}
 
 const NavBar: React.FC<Props> = () => {
   const role = useAppSelector(authSelector)?.roles[0]?.name;
+  const firstName = useAppSelector(authSelector)?.first_name;
 
   return (
     <div className="bg-navBar h-navbar">
       <div className="flex justify-between w-full h-full">
         <ul className="pl-3 my-auto flex">
           <li className="flex">
-            <svg
+            <img src={logo} alt="Logo" className="w-9 h-9" />
+            {/* <svg
               className="w-9 h-9"
               version="1.1"
               id="Layer_1"
@@ -38,7 +40,7 @@ const NavBar: React.FC<Props> = () => {
                 </g>
                 <circle fill="#FFBB44" cx="375.4" cy="322.9" r="100" />
               </g>
-            </svg>
+            </svg> */}
             <h1 className="hidden my-auto ml-3 text-2xl font-semibold tracking-wider uppercase md:block text-navBar-light">
               trainica
             </h1>
@@ -69,29 +71,7 @@ const NavBar: React.FC<Props> = () => {
             </div>
           </li>
         </ul>
-        <ul className="flex my-auto justify-evenly w-180">
-          <li className="my-auto">
-            <img src={CanadaFlag} className="h-5" alt="flag" />
-          </li>
-
-          <li className="my-auto">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-navBar-light"
-            >
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-          </li>
-
+        <ul className="flex my-auto justify-evenly w-28 md:w-64">
           <li className="relative my-auto">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +90,7 @@ const NavBar: React.FC<Props> = () => {
             </svg>
             <span className="absolute rounded-full right-online-right -top-1 h-online-status w-online-status bg-online-status"></span>
           </li>
-          <li className="my-auto">
+          <li className="my-auto flex justify-between">
             <div className="focus:outline-none">
               <Avatar
                 size="small"
@@ -118,6 +98,9 @@ const NavBar: React.FC<Props> = () => {
                 src={avatarImage}
                 circular={false}
               />
+            </div>
+            <div className="hidden ml-3 md:block uppercase font-semibold text-center my-auto text-white">
+              {firstName || "Shivam"}
             </div>
           </li>
         </ul>

@@ -24,16 +24,13 @@ const Assignment: React.FC<Props> = () => {
     store.dispatch(traineeLoadData());
   }, []);
 
-  if (traineeDataLoading) {
-    return (
-      <div className="">
-        <ImSpinner9 className="w-12 h-12 mx-auto animate-spin" />
-      </div>
-    );
-  }
-
   return trainees?.length > 0 ? (
     <div className="p-6">
+      {traineeDataLoading && (
+        <div>
+          <ImSpinner9 className="w-12 h-12 mx-auto animate-spin" />
+        </div>
+      )}
       {error && (
         <div className="mb-5 mt-2">
           <Alert

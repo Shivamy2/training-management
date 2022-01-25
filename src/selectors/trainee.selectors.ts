@@ -5,12 +5,12 @@ import { userSelector } from "./user.selectors";
 
 export const bulkTraineeLoadingSelector = createSelector(
   [traineeSelector],
-  (trainee) => trainee.loading
+  (trainee) => trainee.loadingOne
 );
 
 export const bulkTraineeErrorMessageSelector = createSelector(
   [traineeSelector],
-  (trainee) => trainee.error
+  (trainee) => trainee.errorMessage
 );
 
 export const traineeIdsSelector = createSelector(
@@ -20,7 +20,7 @@ export const traineeIdsSelector = createSelector(
 
 export const traineeDataLoadingSelector = createSelector(
   [traineeSelector],
-  (trainee) => trainee.loading
+  (trainee) => trainee.loadingList
 );
 
 export const traineeDetailsSelector = createSelector(

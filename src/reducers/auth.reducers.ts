@@ -14,10 +14,14 @@ import { EntityState, initialEntityState } from "./entity.reducers";
 
 export interface AuthState extends EntityState<AuthUser> {
   id?: number;
+  signupError: string;
+  signupLoading: boolean;
 }
 
 const initialValue: AuthState = {
   ...initialEntityState,
+  signupError: "",
+  signupLoading: false,
 };
 
 export const authReducer: Reducer<AuthState> = (
@@ -34,11 +38,11 @@ export const authReducer: Reducer<AuthState> = (
     case ME_LOADING_STOP:
       return { ...state, loadingOne: action.payload };
     case ME_SIGNUP:
-      return { ...state, loadingOne: true };
+      return { ...state, signupLoading: true };
     case ME_SIGNUP_LOADING:
-      return { ...state, loadingOne: action.payload };
+      return { ...state, signupLoading: action.payload };
     case ME_SIGNUP_ERROR_MESSAGE:
-      return { ...state, errorMessage: action.payload };
+      return { ...state, signupError: action.payload };
 
     case ME_LOGIN_ERROR_MESSAGE:
       return { ...state, errorMessage: action.payload };

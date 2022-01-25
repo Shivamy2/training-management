@@ -16,3 +16,13 @@ export const authLoginLoadingSelector = createSelector(
   [authStateSelector],
   (auth) => auth.loadingOne
 );
+
+export const authSignupErrorSelector = createSelector(
+  [authStateSelector],
+  (auth) => auth.signupError
+);
+
+export const authSignupLoadingSelector = createSelector(
+  [authStateSelector],
+  (auth) => auth.signupLoading
+);

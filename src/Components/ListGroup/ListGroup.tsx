@@ -27,7 +27,7 @@ const ListGroup: React.FC<Props> = ({
     <div
       onClick={onClick}
       className={
-        "min-h-16 ring-1 ring-gray-200 cursor-pointer md-lg:w-96 bg-primary rounded-lg text-white hover:text-black  " +
+        "h-16 ring-1 ring-gray-200 cursor-pointer md-lg:w-96 bg-primary rounded-lg text-white hover:text-black " +
         className
       }
     >

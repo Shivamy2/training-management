@@ -12,20 +12,18 @@ import FormSwitch from "../../Components/FormSwitch";
 import { loginToken } from "../../Constants/constants";
 import { store, useAppSelector } from "../../Store/store";
 import { meSignup } from "../../actions/auth.actions";
-import { authLoginErrorMessageSelector } from "../../selectors/auth.selectors";
+import {
+  authSignupErrorSelector,
+  authSignupLoadingSelector,
+} from "../../selectors/auth.selectors";
 import Alert from "../../Components/Alert/Alert";
 
 interface Props {}
 
 const SignUp: React.FC<Props> = () => {
-  const loginFailedMessage = useAppSelector(authLoginErrorMessageSelector);
-  const {
-    handleSubmit,
-    errors,
-    touched,
-    isSubmitting,
-    getFieldProps,
-  } = useFormik({
+  const signupFailedMessage = useAppSelector(authSignupErrorSelector);
+  const signupLoading = useAppSelector(authSignupLoadingSelector);
+  const { handleSubmit, errors, touched, getFieldProps } = useFormik({
     initialValues: {
       username: "",
       email: "",
@@ -78,11 +76,11 @@ const SignUp: React.FC<Props> = () => {
             <Direction text="Log in" path="/login" />
           </div>
         </div>
-        {loginFailedMessage && (
+        {signupFailedMessage && (
           <div className="relative">
             <Alert
               className="absolute "
-              title={loginFailedMessage}
+              title={signupFailedMessage && "Invalid Data Entry"}
               alertType="error"
             />
           </div>
@@ -223,7 +221,7 @@ const SignUp: React.FC<Props> = () => {
                 buttonType="solid"
                 theme="primary"
                 text="Get Started!"
-                submissionInProgress={isSubmitting}
+                submissionInProgress={signupLoading}
               />
             </div>
           </form>
