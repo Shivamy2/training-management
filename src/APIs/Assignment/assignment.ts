@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../../Constants/constants";
+import { AuthUser } from "../../Models/AuthUser";
 
 export interface AssignmentUpload {
   title: string;
@@ -58,6 +59,21 @@ export interface AssignmentDetailSubmitDetailResponse {
   type: string;
   size: number;
   link: string;
+}
+
+export interface AssignmentSubmittedTrainerModal {
+  assignment: AssignmentResponse;
+  assignmentSubmitted: AssignmentSubmitResponse;
+  trainee: AuthUser;
+  assignmentFile?: ResponseFile;
+  solutionFile?: ResponseFile;
+}
+
+export interface ResponseFile {
+  name: string;
+  size: number;
+  type: string;
+  url: string;
 }
 
 const uploadAssignment = async (values: AssignmentUpload) => {

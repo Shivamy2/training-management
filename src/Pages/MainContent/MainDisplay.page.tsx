@@ -38,10 +38,14 @@ const MainDisplay: React.FC<Props> = () => {
         </div>
         <div className={"flex flex-1 minimum__height justify-center"}>
           <Switch>
-            <Route path="/dashboard">
-              <DashboardPage />
+            <Route exact path="/dashboard">
+              {role === "ROLE_TRAINER" ? (
+                <DashboardPage />
+              ) : (
+                <Redirect to={"/assignment/submit"} />
+              )}
             </Route>
-            <Route path="/add-trainees">
+            <Route exact path="/add-trainees">
               {role === "ROLE_TRAINER" ? (
                 <AddTraineesPage />
               ) : (

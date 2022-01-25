@@ -119,7 +119,7 @@ export const assignmentReducer: Reducer<AssignmentState> = (
       const date = new Date(JSON.parse(assignment.dueDate));
       const due_date = `${date.getDate()}/${
         date.getMonth() + 1
-      }/${date.getFullYear()} 11:59:00 PM`;
+      }/${date.getFullYear()} 11:59:59 PM`;
       return {
         ...state,
         byId: {
@@ -144,7 +144,7 @@ export const assignmentReducer: Reducer<AssignmentState> = (
         const date = new Date(JSON.parse(assignment.dueDate));
         const due_date = `${date.getDate()}/${
           date.getMonth() + 1
-        }/${date.getFullYear()} 11:59:00 PM`;
+        }/${date.getFullYear()} 11:59:59 PM`;
         const today = new Date();
         const isActiveCheck =
           date.getDate() >= today.getDate()
