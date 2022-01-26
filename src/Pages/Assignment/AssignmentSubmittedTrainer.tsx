@@ -5,6 +5,7 @@ import { AssignmentSubmittedTrainerModal } from "../../APIs/Assignment/assignmen
 import Button from "../../Components/Button/Button";
 import EditInput from "../../Components/Input/EditInput";
 import TextArea from "../../Components/Input/TextArea";
+import { MdArrowUpward } from "react-icons/all";
 import { BASE_URL } from "../../Constants/constants";
 
 interface Props {}
@@ -14,10 +15,28 @@ const AssignmentSubmittedTrainer: React.FC<Props> = () => {
     AssignmentSubmittedTrainerModal[]
   >();
   const [error, setError] = useState("");
-  const [scoredCredit, setScoredCredit] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [loadUpdate, setLoadUpdate] = useState(false);
   const [messageUpdate, setMessageUpdate] = useState("");
+  const [scoredCredit, setScoredCredit] = useState<string[][]>([
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+  ]);
   useEffect(() => {
     async function submittedAssignmentsFetch() {
       try {
@@ -28,7 +47,7 @@ const AssignmentSubmittedTrainer: React.FC<Props> = () => {
         setLoading(false);
         setResponseData(response.data);
       } catch (error: any) {
-        setError(error.response.data.message);
+        setError(error.response?.data.message);
       }
     }
     submittedAssignmentsFetch();
@@ -51,81 +70,19 @@ const AssignmentSubmittedTrainer: React.FC<Props> = () => {
       )}
       {!responseData?.length && (
         <div className="text-center text-primary text-lg font-bold">
-          {error || "You haven't submitted any assignment"}
+          {error || "Nobody submitted assignment"}
         </div>
       )}
-      {responseData?.map((data, index) => (
+      {responseData?.map((data, outerIndex) => (
         <div
-          key={index}
+          key={outerIndex}
           className="border min-h-56 space-y-6 text-black shadow-xl rounded-xl bg-white p-4 leading-normal"
         >
           <div className="mb-8">
-            <div className="flex flex-col md-lg:flex-row justify-between">
-              <p className="text-xs flex font-bold md-lg:text-base items-center">
-                {"Trainee: "}
-                <span className="text-sm font-normal md-lg:text-base italic">
-                  &nbsp;
-                  {`${data.trainee.first_name} ${data.trainee.last_name}`}
-                </span>
-                <span className="text-sm font-semibold text-online-status md-lg:text-base italic">
-                  &nbsp;
-                  {`(Id: ${data.trainee.id})`}
-                </span>
-              </p>
-              <p className="text-xs flex font-bold md-lg:text-base items-center">
-                {"Score: "}
-                &nbsp;
-                <input
-                  type="text"
-                  name="scoredCredit"
-                  onChange={(event) => setScoredCredit(event.target.value)}
-                  placeholder={
-                    data.assignment.scoredCredit === 0
-                      ? "NA"
-                      : data.assignment.scoredCredit.toString()
-                  }
-                  value={scoredCredit}
-                  className="w-8 border rounded-md text-center"
-                  inputMode="numeric"
-                />
-                &nbsp;
-                <span className="text-sm font-normal md-lg:text-base italic">
-                  {`/ ${data.assignment.totalCredit}`}
-                </span>
-              </p>
-            </div>
             <div className="flex justify-between mt-3">
               <div className="font-extrabold text-xl my-2 text-primary">
                 {data.assignment.title}
               </div>
-              <Button
-                text="Update"
-                submissionInProgress={loadUpdate}
-                onClick={async (event) => {
-                  event.preventDefault();
-                  if (
-                    window.confirm(
-                      `Are you sure? Score Credit for ${data.assignment.title} will be updated as: ${scoredCredit}`
-                    )
-                  ) {
-                    try {
-                      setLoadUpdate(true);
-                      const formData = new FormData();
-                      formData.append("scored_credit", scoredCredit);
-                      await axios.post(
-                        `${BASE_URL}/assignment/submit/update/score_credit/${data.assignment.id}`,
-                        formData
-                      );
-                      setLoadUpdate(false);
-                      setMessageUpdate("Successfully updated");
-                    } catch (error) {
-                      setLoadUpdate(false);
-                      setMessageUpdate("Please try again!");
-                    }
-                  }
-                  console.log(scoredCredit);
-                }}
-              />
             </div>
             <p className="text-sm">{data.assignment.description}</p>
           </div>
@@ -155,63 +112,157 @@ const AssignmentSubmittedTrainer: React.FC<Props> = () => {
               )}
             </p>
           </div>
-          <div className="space-y-4">
-            <div className="text-xl text-warning font-bold">Submission</div>
-            {data.assignmentSubmitted?.link && (
-              <div>
-                <a
-                  href={data.assignmentSubmitted.link || "nothing"}
-                  target={"_blank"}
-                  rel="noreferrer"
-                  className="cursor-pointer"
+          <div className="space-y-4 pt-8">
+            <div className="flex justify-between">
+              <div className="text-xl text-warning font-bold">Submissions</div>
+              <MdArrowUpward className="bg-gray-200 h-8 w-8 p-2 rounded-full cursor-pointer ring-2" />
+            </div>
+            <div className="space-y-4">
+              {data.assignmentSubmittedDetails.map((details, innerIndex) => (
+                <div
+                  key={innerIndex}
+                  className="space-y-6 py-6 bg-gray-100 shadow-primary rounded-2xl px-4"
                 >
-                  <EditInput
-                    value={data.assignmentSubmitted.link || "Absent"}
-                    disabled={true}
-                    name="link"
-                    labelText="Link"
-                    placeholder="Github/Drive/Website link"
-                    labelClassName="text-base font-bold"
+                  <div className="flex flex-col md-lg:flex-row justify-between space-y-2 md-lg:space-y-0">
+                    <p className="text-sm flex font-bold md-lg:text-base items-center">
+                      {"Trainee: "}
+                      <span className="text-sm font-normal md-lg:text-base italic">
+                        &nbsp;
+                        {`${details.trainee.first_name} ${details.trainee.last_name}`}
+                      </span>
+                      <span className="text-sm font-semibold text-online-status md-lg:text-base italic">
+                        &nbsp;
+                        {`(Id: ${details.trainee.id})`}
+                      </span>
+                    </p>
+                    <div className="space-y-2 md-lg:space-y-0 md-lg:space-x-6 md-lg:flex">
+                      <p className="text-sm flex font-bold md-lg:text-base items-center">
+                        {"Score: "}
+                        &nbsp;
+                        <input
+                          type="text"
+                          name={`scoredCredit[${outerIndex}][${innerIndex}]`}
+                          onChange={(event) =>
+                            setScoredCredit((prev) => {
+                              const newScoredCredit = [...prev];
+                              newScoredCredit[outerIndex][innerIndex] =
+                                event.target.value;
+                              return newScoredCredit;
+                            })
+                          }
+                          placeholder={
+                            details.assignmentSubmitted.scoredCredit === 0
+                              ? "NA"
+                              : details.assignmentSubmitted.scoredCredit.toString()
+                          }
+                          value={scoredCredit[outerIndex][innerIndex]}
+                          className="w-8 border rounded-md text-center"
+                          inputMode="numeric"
+                        />
+                        &nbsp;
+                        <span className="text-sm font-normal md-lg:text-base italic">
+                          {`/ ${data.assignment.totalCredit}`}
+                        </span>
+                      </p>
+                      <Button
+                        text="Update"
+                        submissionInProgress={loadUpdate}
+                        onClick={async (event) => {
+                          event.preventDefault();
+                          if (
+                            +scoredCredit[outerIndex][innerIndex] >
+                            data.assignment.totalCredit
+                          )
+                            alert("Score should not increase total score");
+                          else if (
+                            window.confirm(
+                              `Are you sure? Score Credit for ${data.assignment.title} will be updated as: ${scoredCredit[outerIndex][innerIndex]}`
+                            )
+                          ) {
+                            try {
+                              setLoadUpdate(true);
+                              const formData = new FormData();
+                              formData.append(
+                                "scored_credit",
+                                scoredCredit[outerIndex][innerIndex]
+                              );
+                              await axios.post(
+                                `${BASE_URL}/assignment/submit/update/score_credit/${details.assignmentSubmitted.id}`,
+                                formData
+                              );
+                              setLoadUpdate(false);
+                              setMessageUpdate("Successfully updated");
+                            } catch (error) {
+                              setLoadUpdate(false);
+                              setMessageUpdate("Please try again!");
+                            }
+                          }
+                          console.log(scoredCredit);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  {details.assignmentSubmitted?.link && (
+                    <div>
+                      <a
+                        href={details.assignmentSubmitted.link || "nothing"}
+                        target={"_blank"}
+                        rel="noreferrer"
+                        className="cursor-pointer"
+                      >
+                        <EditInput
+                          value={details.assignmentSubmitted.link || "Absent"}
+                          disabled={true}
+                          name="link"
+                          labelText="Link"
+                          placeholder="Github/Drive/Website link"
+                          labelClassName="text-base font-bold"
+                        />
+                      </a>
+                    </div>
+                  )}
+                  <TextArea
+                    value={details.assignmentSubmitted.description}
+                    className=""
+                    name="description"
+                    draggable={false}
+                    placeholder="Any comments or message regarding assignment solution"
+                    labelText="Solution"
+                    rows={4}
+                    cols={40}
                   />
-                </a>
-              </div>
-            )}
-            <TextArea
-              value={data.assignmentSubmitted.description}
-              disabled={true}
-              className=""
-              name="description"
-              placeholder="Any comments or message regarding assignment solution"
-              labelText="Solution"
-              rows={4}
-              cols={40}
-            />
-          </div>
-          <div className="text-sm">
-            <p className="leading-none text-primary text-center">
-              {data?.solutionFile?.name ? (
-                <a
-                  href={data.solutionFile.url}
-                  target={"_blank"}
-                  rel="noreferrer"
-                >
-                  <button className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                    <svg
-                      className="fill-current w-4 h-4 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                    </svg>
-                    <span>Download Solution</span>
-                  </button>
-                </a>
-              ) : (
-                <div className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                  {"No Document"}
+                  <div className="text-sm">
+                    <p className="leading-none text-primary text-center">
+                      {details?.solutionFile?.name ? (
+                        <a
+                          href={details.solutionFile.url}
+                          target={"_blank"}
+                          rel="noreferrer"
+                        >
+                          <button className="bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                            <svg
+                              className="fill-current w-4 h-4 mr-2"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                            </svg>
+                            <span>Download Solution</span>
+                          </button>
+                        </a>
+                      ) : (
+                        <div className="bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                          {"No Document"}
+                        </div>
+                      )}
+                    </p>
+                  </div>
+                  {/* {index < data.assignmentSubmittedDetails.length - 1 && (
+                  <hr className="w-full border- border-" />
+                )} */}
                 </div>
-              )}
-            </p>
+              ))}
+            </div>
           </div>
         </div>
       ))}

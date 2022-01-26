@@ -40,7 +40,7 @@ const AssignmentSubmitCards: React.FC<Props> = ({ data }) => {
               <p className="text-xs flex font-bold md-lg:text-base items-center">
                 {"Credits: "}
                 <span className="text-sm font-normal md-lg:text-base italic">
-                  &nbsp;{`${data.scoredCredit || "_"}/${data.totalCredit}`}
+                  &nbsp;{`_/${data.totalCredit}`}
                 </span>
               </p>
             </div>

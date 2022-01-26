@@ -73,6 +73,9 @@ module.exports = {
                 "51": "51px",
                 "56": "256px"
             },
+            border: {
+                "0.5": "2px",
+            },
             spacing: {
                 "online-status": "5px",
                 "online-right": "2px",
