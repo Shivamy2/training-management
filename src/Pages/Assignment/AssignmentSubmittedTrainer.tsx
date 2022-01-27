@@ -8,6 +8,7 @@ import TextArea from "../../Components/Input/TextArea";
 import { MdArrowUpward } from "react-icons/all";
 import { BASE_URL } from "../../Constants/constants";
 import { Disclosure } from "@headlessui/react";
+import { saveAs } from "file-saver";
 
 interface Props {}
 
@@ -90,22 +91,22 @@ const AssignmentSubmittedTrainer: React.FC<Props> = () => {
           <div className="text-sm">
             <p className="leading-none text-primary text-center">
               {data?.assignmentFile?.name ? (
-                <a
-                  href={data?.assignmentFile.url}
-                  target={"_blank"}
-                  rel="noreferrer"
+                <button
+                  onClick={() =>
+                    data.assignmentFile?.url &&
+                    saveAs(data.assignmentFile.url, data.assignmentFile?.name)
+                  }
+                  className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center"
                 >
-                  <button className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                    <svg
-                      className="fill-current w-4 h-4 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                    </svg>
-                    <span>Download Question</span>
-                  </button>
-                </a>
+                  <svg
+                    className="fill-current w-4 h-4 mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                  </svg>
+                  <span>Download Question</span>
+                </button>
               ) : (
                 <div className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center">
                   {"No Document"}
@@ -261,22 +262,25 @@ const AssignmentSubmittedTrainer: React.FC<Props> = () => {
                           <div className="text-sm">
                             <p className="leading-none text-primary text-center">
                               {details?.solutionFile?.name ? (
-                                <a
-                                  href={details.solutionFile.url}
-                                  target={"_blank"}
-                                  rel="noreferrer"
+                                <button
+                                  onClick={() =>
+                                    details.solutionFile?.url &&
+                                    saveAs(
+                                      details.solutionFile.url,
+                                      details.solutionFile?.name
+                                    )
+                                  }
+                                  className="bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center"
                                 >
-                                  <button className="bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                                    <svg
-                                      className="fill-current w-4 h-4 mr-2"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 20 20"
-                                    >
-                                      <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                                    </svg>
-                                    <span>Download Solution</span>
-                                  </button>
-                                </a>
+                                  <svg
+                                    className="fill-current w-4 h-4 mr-2"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                  >
+                                    <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                                  </svg>
+                                  <span>Download Solution</span>
+                                </button>
                               ) : (
                                 <div className="bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
                                   {"No Document"}
