@@ -55,7 +55,7 @@ const AssignmentSubmitted: React.FC<Props> = () => {
               <p className="text-xs flex font-bold md-lg:text-base items-center">
                 {"Score: "}
                 <span className="text-sm font-normal md-lg:text-base italic">
-                  &nbsp;{`${data.scoredCredit || "_"}/${data.totalCredit}`}
+                  &nbsp;{`${data.scoreCredit || "_"}/${data.totalCredit}`}
                 </span>
               </p>
               <div className="font-extrabold text-xl my-2 text-primary">

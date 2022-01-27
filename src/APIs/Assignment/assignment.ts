@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../../Constants/constants";
+import { AuthUser } from "../../Models/AuthUser";
 
 export interface AssignmentUpload {
   title: string;
@@ -15,7 +16,6 @@ export interface AssignmentResponse {
   title: string;
   description: string;
   totalCredit: number;
-  scoredCredit: number;
   dueDate: string;
   available: boolean;
   name?: string;
@@ -36,6 +36,7 @@ export interface AssignmentSubmitResponse {
   id: number;
   assignmentId: number;
   link: null;
+  scoredCredit: number;
   description: string;
   name: string;
   url: string;
@@ -50,7 +51,7 @@ export interface AssignmentDetailSubmitDetailResponse {
   description: string;
   solution: string;
   totalCredit: number;
-  scoredCredit: number;
+  scoreCredit: number;
   dueDate: string;
   available: boolean;
   name: string;
@@ -58,6 +59,25 @@ export interface AssignmentDetailSubmitDetailResponse {
   type: string;
   size: number;
   link: string;
+}
+
+export interface AssignmentSubmittedTrainerModal {
+  assignment: AssignmentResponse;
+  assignmentFile?: ResponseFile;
+  assignmentSubmittedDetails: AssignmentSubmittedDetails[];
+}
+
+export interface AssignmentSubmittedDetails {
+  assignmentSubmitted: AssignmentSubmitResponse;
+  trainee: AuthUser;
+  solutionFile?: ResponseFile;
+}
+
+export interface ResponseFile {
+  name: string;
+  size: number;
+  type: string;
+  url: string;
 }
 
 const uploadAssignment = async (values: AssignmentUpload) => {
