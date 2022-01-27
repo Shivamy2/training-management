@@ -1,5 +1,12 @@
-// export const BASE_URL = "https://trainica.herokuapp.com/api";
-export const BASE_URL = "http://localhost:8080/api";
+export let BASE_URL: string;
+switch (process.env.NODE_ENV) {
+  case "production":
+    BASE_URL = "https://trainica.herokuapp.com/api";
+    break;
+  case "development":
+    BASE_URL = "http://localhost:8080/api";
+  // default:
+}
 export const LS_LOGIN_TOKEN = "access_token";
 export const loginToken = localStorage.getItem(LS_LOGIN_TOKEN);
 export const brokenImageReplacement =
