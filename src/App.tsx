@@ -7,7 +7,7 @@ import {
   Switch,
 } from "react-router-dom";
 import { checkDetails, meFetchUserAction } from "./actions/auth.actions";
-import { loginToken } from "./Constants/constants";
+import { loginToken, LOGO } from "./Constants/constants";
 import EditProfile from "./Pages/MainContent/Profile/EditProfile";
 import { authSelector } from "./selectors/auth.selectors";
 import {
@@ -43,16 +43,24 @@ const App: React.FC<Props> = () => {
 
   if (loginToken && !isDetailResponseReceive) {
     return (
-      <div className="w-screen h-screen">
-        <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
+      <div className="flex h-screen items-center">
+        <img
+          src={LOGO}
+          alt="website-logo"
+          className="w-16 h-16 mx-auto animate-pulse"
+        />
       </div>
     );
   }
 
   if (loginToken && !authUser && checkDetailsStatus) {
     return (
-      <div className="w-screen h-screen">
-        <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
+      <div className="flex h-screen items-center">
+        <img
+          src={LOGO}
+          alt="website-logo"
+          className="w-16 h-16 mx-auto animate-pulse"
+        />
       </div>
     );
   }
@@ -60,8 +68,12 @@ const App: React.FC<Props> = () => {
   return (
     <Suspense
       fallback={
-        <div className="w-screen h-screen">
-          <ImSpinner9 className="w-full h-12 m-auto animate-spin" />
+        <div className="flex h-screen items-center">
+          <img
+            src={LOGO}
+            alt="website-logo"
+            className="w-16 h-16 mx-auto animate-pulse"
+          />
         </div>
       }
     >
