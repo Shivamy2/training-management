@@ -1,4 +1,5 @@
 import axios from "axios";
+import saveAs from "file-saver";
 import React, { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import { AssignmentDetailSubmitDetailResponse } from "../../APIs/Assignment/assignment";
@@ -67,18 +68,19 @@ const AssignmentSubmitted: React.FC<Props> = () => {
           <div className="text-sm">
             <p className="leading-none text-primary text-center">
               {data.name ? (
-                <a href={data?.url} target={"_blank"} rel="noreferrer">
-                  <button className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                    <svg
-                      className="fill-current w-4 h-4 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                    </svg>
-                    <span>Download Question</span>
-                  </button>
-                </a>
+                <button
+                  onClick={() => data?.url && saveAs(data?.url, data?.name)}
+                  className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center"
+                >
+                  <svg
+                    className="fill-current w-4 h-4 mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                  </svg>
+                  <span>Download Question</span>
+                </button>
               ) : (
                 <div className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center">
                   {"No Document"}
@@ -121,18 +123,19 @@ const AssignmentSubmitted: React.FC<Props> = () => {
           <div className="text-sm">
             <p className="leading-none text-primary text-center">
               {data.name ? (
-                <a href={data?.url} target={"_blank"} rel="noreferrer">
-                  <button className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                    <svg
-                      className="fill-current w-4 h-4 mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                    </svg>
-                    <span>Download Solution</span>
-                  </button>
-                </a>
+                <button
+                  onClick={() => data?.url && saveAs(data?.url, data?.name)}
+                  className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center"
+                >
+                  <svg
+                    className="fill-current w-4 h-4 mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                  </svg>
+                  <span>Download Solution</span>
+                </button>
               ) : (
                 <div className="hover:bg-primary bg-primary-lite text-black hover:text-white font-bold py-2 px-4 rounded inline-flex items-center">
                   {"No Document"}

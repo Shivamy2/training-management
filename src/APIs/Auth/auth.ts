@@ -96,4 +96,24 @@ const meSendData = async (data: MeRequest) => {
   return response;
 };
 
-export { login, logout, me, signup, role, meSendData, checkUserDetails };
+const meDpUpload = async (data: string) => {
+  const formData = new FormData();
+  formData.append("dp", data);
+  const response = axios({
+    method: "post",
+    url: `${BASE_URL}/file/dp`,
+    data: formData,
+  });
+  return response;
+};
+
+export {
+  login,
+  logout,
+  me,
+  signup,
+  role,
+  meSendData,
+  checkUserDetails,
+  meDpUpload,
+};

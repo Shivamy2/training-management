@@ -20,6 +20,7 @@ import {
   CHECK_DETAILS,
   SAVE_CHECK_DETAIL_STATUS,
   IS_CHECK_RESPONSE_RECEIVED,
+  ME_UPDATE_LOADING,
 } from "./action.constants";
 
 export const meSignup = (data: SignUpCredential) => ({
@@ -63,9 +64,9 @@ export const meLoginAction = (user: AuthUser) => ({
   type: ME_LOGIN,
   payload: user,
 });
-export const meUpdate = (data: MeRequest) => ({
+export const meUpdate = (data: MeRequest, dp: String) => ({
   type: ME_UPDATE,
-  payload: data,
+  payload: { data: data, dp: dp },
 });
 export const meSendingDataAction = (data: LoginCredentialsRequest) => ({
   type: ME_SENDING_DATA,
@@ -78,6 +79,11 @@ export const meLoginErrorMessageAction = (message: string) => ({
 
 export const meIsLoading = (status: boolean) => ({
   type: ME_LOADING_STOP,
+  payload: status,
+});
+
+export const meUpdateLoading = (status: boolean) => ({
+  type: ME_UPDATE_LOADING,
   payload: status,
 });
 

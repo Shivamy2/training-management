@@ -1,5 +1,6 @@
 import React from "react";
 import { uiSidebarAction } from "../actions/ui.actions";
+import { authSelector } from "../selectors/auth.selectors";
 import { uiSidebarStatusSelector } from "../selectors/ui.selectors";
 import { store, useAppSelector } from "../Store/store";
 import DropDown from "./DropDown";
@@ -8,6 +9,8 @@ interface Props {}
 
 const Header: React.FC<Props> = () => {
   const sidebarStatus = useAppSelector(uiSidebarStatusSelector);
+  const role = useAppSelector(authSelector)?.roles[0]?.name;
+
   return (
     <div className="z-30 w-full bg-header h-header">
       <div className="flex justify-between h-full px-4">
@@ -47,6 +50,14 @@ const Header: React.FC<Props> = () => {
                 path: "/dashboard",
               },
               { name: "Edit Profile", path: "/profile" },
+              ...(role === "ROLE_TRAINER"
+                ? [
+                    {
+                      name: "Add Trainees",
+                      path: "/add-trainees",
+                    },
+                  ]
+                : []),
               {
                 name: "Assignment",
                 path: "/assignment/upload",
@@ -68,10 +79,14 @@ const Header: React.FC<Props> = () => {
                 name: "Assignment",
                 path: "/assignment/upload",
               },
-              {
-                name: "Add Trainees",
-                path: "/add-trainees",
-              },
+              ...(role === "ROLE_TRAINER"
+                ? [
+                    {
+                      name: "Add Trainees",
+                      path: "/add-trainees",
+                    },
+                  ]
+                : []),
               { name: "Sign Out", path: "/login" },
             ]}
           />

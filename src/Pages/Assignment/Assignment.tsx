@@ -24,8 +24,8 @@ const Assignment: React.FC<Props> = () => {
     store.dispatch(traineeLoadData());
   }, []);
 
-  return trainees?.length > 0 ? (
-    <div className="p-6">
+  return (
+    <div>
       {traineeDataLoading && (
         <div>
           <ImSpinner9 className="w-12 h-12 mx-auto animate-spin" />
@@ -41,28 +41,33 @@ const Assignment: React.FC<Props> = () => {
           />
         </div>
       )}
-      <div className="font-extrabold my-6 tracking-wider text-2xl md-lg:text-3xl text-center text-warning">
-        Upload Assignment
-      </div>
-      <AssignmentUpload />
-      <div className="font-extrabold my-10 tracking-wider text-2xl md-lg:text-3xl text-center text-warning">
-        Saved Assignments
-      </div>
-      <div className="mx-auto">
-        <AssignmentDetails />
-      </div>
-    </div>
-  ) : (
-    <div className="p-4">
-      <div className="text-center mt-6 text-warning text-lg font-bold">
-        You have no trainees till now. You are not allowed to upload
-        assignments. Click below to add trainees.
-      </div>
-      <div className="text-center mt-2">
-        <Link className="underline text-primary" to={"/add-trainees"}>
-          Add Trainees
-        </Link>
-      </div>
+      {!trainees?.length && !traineeDataLoading && (
+        <div className="p-4">
+          <div className="text-center mt-6 text-warning text-lg font-bold">
+            You have no trainees till now. You are not allowed to upload
+            assignments. Click below to add trainees.
+          </div>
+          <div className="text-center mt-2">
+            <Link className="underline text-primary" to={"/add-trainees"}>
+              Add Trainees
+            </Link>
+          </div>
+        </div>
+      )}
+      {trainees?.length && (
+        <div className="p-6">
+          <div className="font-extrabold my-6 tracking-wider text-2xl md-lg:text-3xl text-center text-warning">
+            Upload Assignment
+          </div>
+          <AssignmentUpload />
+          <div className="font-extrabold my-10 tracking-wider text-2xl md-lg:text-3xl text-center text-warning">
+            Saved Assignments
+          </div>
+          <div className="mx-auto">
+            <AssignmentDetails />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

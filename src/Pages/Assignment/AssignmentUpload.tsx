@@ -147,7 +147,7 @@ const AssignmentUpload: React.FC<Props> = () => {
                 </label>
                 <input
                   ref={fileRef!}
-                  className="form-control px-3 py-1.5 text-sm max-w-max font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  className="form-control px-3 py-1.5 text-sm w-64 font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   type="file"
                   name="file"
                   onChange={(event: any) => {

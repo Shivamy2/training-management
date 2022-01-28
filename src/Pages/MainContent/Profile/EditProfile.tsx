@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "../../../Components/Avatar/Avatar";
 import Button from "../../../Components/Button/Button";
 import EditInput from "../../../Components/Input/EditInput";
@@ -11,6 +11,7 @@ import {
 } from "../../../selectors/auth.selectors";
 import { meUpdate } from "../../../actions/auth.actions";
 import Alert from "../../../Components/Alert/Alert";
+import { avatarImage } from "../../../Constants/constants";
 
 interface Props {}
 
@@ -37,6 +38,8 @@ const EditProfile: React.FC<Props> = () => {
     } else year.push("0" + index);
   }
 
+  const [dpUrl, setDpUrl] = useState<any>(avatarImage);
+
   const {
     handleSubmit,
     handleReset,
@@ -44,6 +47,9 @@ const EditProfile: React.FC<Props> = () => {
     touched,
     getFieldProps,
     isSubmitting,
+    setSubmitting,
+    values,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       gender: user?.gender ? user.gender : "Male",
@@ -57,6 +63,7 @@ const EditProfile: React.FC<Props> = () => {
       city: user?.city ? user.city : "",
       pin_code: user?.pin_code ? user.pin_code : "",
       mobile_number: user?.mobile_number ? user.mobile_number : "",
+      dp: user?.profile_pic_url ? user.profile_pic_url : "",
     },
     validationSchema: yup.object().shape({
       first_name: yup
@@ -90,10 +97,15 @@ const EditProfile: React.FC<Props> = () => {
         .string()
         .max(10, ({ max }) => `Gender should be maximum ${max} chars`)
         .min(10, ({ min }) => `Gender should be minimum ${min} chars`),
+      // dp: yup.string().required("Upload Image"),
     }),
     onSubmit: (data) => {
+      setSubmitting(true);
       console.log("Data for details is: ", data);
-      store.dispatch(meUpdate(data));
+      const finalData = (({ dp, ...result }) => result)(data);
+      console.log("Dp", values.dp);
+      store.dispatch(meUpdate(finalData, values.dp));
+      setSubmitting(false);
     },
   });
 
@@ -114,8 +126,33 @@ const EditProfile: React.FC<Props> = () => {
             </div>
             <div className="md-lg:flex md-lg:px-6 md-lg:space-x-10">
               <div className="pt-6 pr-6 md-lg:border-r md-lg:border-gray-300">
-                <Avatar size="large" src={user?.profile_pic_url} />
-                <p className="py-3 text-sm font-semibold tracking-wider text-primary">
+                <Avatar
+                  size="large"
+                  src={user?.profile_pic_url || dpUrl}
+                  className="mx-auto"
+                />
+                <input
+                  accept=".png, .jpg, .jpeg"
+                  onChange={(event: any) => {
+                    const reader = new FileReader();
+                    const file = event.target.files[0];
+                    if (file) {
+                      reader.onloadend = () => {
+                        setFieldValue("dp", file);
+                        setDpUrl(reader.result);
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                  type="file"
+                  name="file"
+                  id="dp-file"
+                  className="hidden"
+                />
+                <p
+                  onClick={() => document.getElementById("dp-file")?.click()}
+                  className="py-3 max-w-max text-sm cursor-pointer mx-auto font-semibold tracking-wider text-primary"
+                >
                   Upload Picture
                 </p>
               </div>

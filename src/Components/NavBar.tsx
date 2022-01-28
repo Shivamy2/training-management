@@ -74,7 +74,7 @@ const NavBar: React.FC<Props> = () => {
               <Avatar
                 size="small"
                 className="h-10 w-10"
-                src={avatarImage}
+                src={authDetails?.profile_pic_url || avatarImage}
                 circular={false}
               />
             </div>

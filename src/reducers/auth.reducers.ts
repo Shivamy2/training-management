@@ -43,7 +43,6 @@ export const authReducer: Reducer<AuthState> = (
       return { ...state, signupLoading: action.payload };
     case ME_SIGNUP_ERROR_MESSAGE:
       return { ...state, signupError: action.payload };
-
     case ME_LOGIN_ERROR_MESSAGE:
       return { ...state, errorMessage: action.payload };
     default:
