@@ -109,6 +109,7 @@ const AssignmentUpload: React.FC<Props> = () => {
                     placeholder="Select date"
                   /> */}
                     <DatePicker
+                      onChangeRaw={(event) => event.preventDefault()}
                       className="pl-10 py-2 mt-0.5 border border-gray-400 rounded-lg"
                       selectsStart
                       minDate={new Date()}

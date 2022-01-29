@@ -36,7 +36,7 @@ const Assignment: React.FC<Props> = () => {
           <Alert
             typeMessage={false}
             className=""
-            title={error}
+            title={error || "kh"}
             alertType="warning"
           />
         </div>
