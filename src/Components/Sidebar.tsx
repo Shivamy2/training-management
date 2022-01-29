@@ -116,7 +116,9 @@ const Sidebar: React.FC<Props> = () => {
 
         <SideBarElement
           onClick={() => {
-            logout();
+            if (window.confirm("Are you sure? You will be logout")) {
+              logout();
+            }
           }}
           title="Logout"
         >

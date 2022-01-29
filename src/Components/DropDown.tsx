@@ -78,7 +78,8 @@ const DropDown: React.FC<Props> = ({
                     onClick={() => {
                       setSelectedDropdown(index);
                       if (item.name === "Sign Out") {
-                        logout();
+                        window.confirm("Are you sure? You will be logout") &&
+                          logout();
                       } else item.path && history.push(item.path);
                     }}
                     className={`flex items-center w-full px-2 py-2 text-sm hover:text-blue-500 hover:bg-gray-50 ${

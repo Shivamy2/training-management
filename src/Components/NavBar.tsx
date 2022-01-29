@@ -27,7 +27,7 @@ const NavBar: React.FC<Props> = () => {
         </ul>
         <ul className="flex-1 my-auto">
           <li className="mx-auto mr-3">
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -41,10 +41,10 @@ const NavBar: React.FC<Props> = () => {
             >
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
+            </svg> */}
             <div className="flex">
               <Search className="hidden flex-1 ml-12 md:block" />
-              <div className="hidden md:block flex-1 uppercase text-center text-2xl my-auto tracking-widest font-extrabold text-white">
+              <div className="text-xl flex-1 uppercase text-center md:text-2xl my-auto tracking-widest font-extrabold text-white">
                 {role === "ROLE_TRAINER" ? "trainer" : "trainee"}
               </div>
             </div>
