@@ -8,10 +8,10 @@ import { store, useAppSelector } from "../../../Store/store";
 import {
   authLoginErrorMessageSelector,
   authSelector,
+  updateLoading,
 } from "../../../selectors/auth.selectors";
 import { meUpdate } from "../../../actions/auth.actions";
 import Alert from "../../../Components/Alert/Alert";
-import { avatarImage } from "../../../Constants/constants";
 
 interface Props {}
 
@@ -38,7 +38,8 @@ const EditProfile: React.FC<Props> = () => {
     } else year.push("0" + index);
   }
 
-  const [dpUrl, setDpUrl] = useState<any>(avatarImage);
+  const [dpUrl, setDpUrl] = useState<any>(user?.profile_pic_url);
+  const loading = useAppSelector(updateLoading);
 
   const {
     handleSubmit,
@@ -46,8 +47,6 @@ const EditProfile: React.FC<Props> = () => {
     errors,
     touched,
     getFieldProps,
-    isSubmitting,
-    setSubmitting,
     values,
     setFieldValue,
   } = useFormik({
@@ -100,12 +99,10 @@ const EditProfile: React.FC<Props> = () => {
       // dp: yup.string().required("Upload Image"),
     }),
     onSubmit: (data) => {
-      setSubmitting(true);
       console.log("Data for details is: ", data);
       const finalData = (({ dp, ...result }) => result)(data);
       console.log("Dp", values.dp);
       store.dispatch(meUpdate(finalData, values.dp));
-      setSubmitting(false);
     },
   });
 
@@ -126,11 +123,7 @@ const EditProfile: React.FC<Props> = () => {
             </div>
             <div className="md-lg:flex md-lg:px-6 md-lg:space-x-10">
               <div className="pt-6 pr-6 md-lg:border-r md-lg:border-gray-300">
-                <Avatar
-                  size="large"
-                  src={user?.profile_pic_url || dpUrl}
-                  className="mx-auto"
-                />
+                <Avatar size="large" src={dpUrl} className="mx-auto" />
                 <input
                   accept=".png, .jpg, .jpeg"
                   onChange={(event: any) => {
@@ -302,7 +295,7 @@ const EditProfile: React.FC<Props> = () => {
               theme="success"
               type="submit"
               buttonType="outline"
-              submissionInProgress={isSubmitting}
+              submissionInProgress={loading}
             />
             <Button
               onClick={(event) => handleReset.call(null, event)}

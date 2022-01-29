@@ -8,6 +8,8 @@ import {
   ME_SIGNUP,
   ME_SIGNUP_LOADING,
   ME_SIGNUP_ERROR_MESSAGE,
+  ME_UPDATE,
+  ME_UPDATE_LOADING,
 } from "../actions/action.constants";
 import { AuthUser } from "../Models/AuthUser";
 import { EntityState, initialEntityState } from "./entity.reducers";
@@ -16,12 +18,14 @@ export interface AuthState extends EntityState<AuthUser> {
   id?: number;
   signupError: string;
   signupLoading: boolean;
+  loadingUpdate: boolean;
 }
 
 const initialValue: AuthState = {
   ...initialEntityState,
   signupError: "",
   signupLoading: false,
+  loadingUpdate: false,
 };
 
 export const authReducer: Reducer<AuthState> = (
@@ -45,6 +49,12 @@ export const authReducer: Reducer<AuthState> = (
       return { ...state, signupError: action.payload };
     case ME_LOGIN_ERROR_MESSAGE:
       return { ...state, errorMessage: action.payload };
+    case ME_UPDATE: {
+      return { ...state, loadingUpdate: true };
+    }
+    case ME_UPDATE_LOADING: {
+      return { ...state, loadingUpdate: action.payload };
+    }
     default:
       return state;
   }

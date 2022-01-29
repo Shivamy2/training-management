@@ -26,3 +26,8 @@ export const authSignupLoadingSelector = createSelector(
   [authStateSelector],
   (auth) => auth.signupLoading
 );
+
+export const updateLoading = createSelector(
+  [authStateSelector],
+  (auth) => auth.loadingUpdate
+);
