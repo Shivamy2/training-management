@@ -66,31 +66,6 @@ const Header: React.FC<Props> = () => {
             ]}
           />
         </div>
-        <div className="my-auto md-lg:block hidden mx-auto md-lg:mx-0">
-          <DropDown
-            initialButtonValue={0}
-            itemsToBeShown={[
-              {
-                name: "Dashboard",
-                path: "/dashboard",
-              },
-              { name: "Edit Profile", path: "/profile" },
-              {
-                name: "Assignment",
-                path: "/assignment/upload",
-              },
-              ...(role === "ROLE_TRAINER"
-                ? [
-                    {
-                      name: "Add Trainees",
-                      path: "/add-trainees",
-                    },
-                  ]
-                : []),
-              { name: "Sign Out", path: "/login" },
-            ]}
-          />
-        </div>
       </div>
     </div>
   );
